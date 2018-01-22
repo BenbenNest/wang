@@ -11,7 +11,7 @@
         android:background="@drawable/account_login_phone_number_icon" />
 
     <EditText
-        android:id="@+id/account_login_phone_edit"
+        android:id="@+id/input_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@null"

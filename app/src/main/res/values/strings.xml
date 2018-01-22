@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">APP Name</string>
 
+
+
     <!--   account -->
+    <string name="ID">身份证</string>
+    <string name="password">密码</string>
+
+
+
     <string name="account_login_phone_num_tv">手机号</string>
-    <string name="account_login_pw_tv">密码</string>
     <string name="account_login_btn_tv">登陆</string>
     <string name="account_logout_btn_tv">退出登陆</string>
     <string name="account_login_phone_edit_error">请输入正确的手机号</string>
