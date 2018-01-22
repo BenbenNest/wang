@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/account_login_edit_height"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/account_login_phone_number_icon" />
+
+    <EditText
+        android:id="@+id/account_login_phone_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:digits="1234567890"
+        android:gravity="center_vertical"
+        android:hint="@string/account_login_phone_num_tv"
+        android:inputType="number"
+        android:maxLength="11"
+        android:maxLines="1"
+        android:textColor="@color/public_black_color"
+        android:textColorHint="@color/account_login_edit_hint_color"
+        android:textSize="@dimen/account_login_edit_tx_size" />
+
+</LinearLayout>

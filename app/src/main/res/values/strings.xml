@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">APP Name</string>
+
+    <!--   account -->
+    <string name="account_login_phone_num_tv">手机号</string>
+    <string name="account_login_pw_tv">密码</string>
+    <string name="account_login_btn_tv">登陆</string>
+    <string name="account_logout_btn_tv">退出登陆</string>
+    <string name="account_login_phone_edit_error">请输入正确的手机号</string>
+    <string name="account_login_password_edit_error">请输入密码</string>
+    <string name="account_send_verify_code_tv">发送验证码</string>
+
+    <!--  public -->
+    <string name="public_retrofit_error_generic">请求失败</string>
+    <string name="public_default_nick_name">蔚来用户</string>
+    <string name="public_default_hi_tv">HI,%s</string>
+    <string name="public_new_contact_name_hint_tv">名字</string>
+    <string name="public_new_contact_phone_hint_tv">电话号码</string>
+    <string name="public_new_contact_save_tv">保存</string>
+    <string name="public_fellow_check_update_tv">检查更新</string>
+    <string name="public_fellow_ver_tv">版本</string>
+    <string name="public_fellow_logout_tv">退出登陆</string>
+    <string name="public_fellow_logout_tip">您确定要退出登录吗?</string>
+    <string name="public_confirm_tv">确定</string>
+    <string name="public_cancel_tv">取消</string>
+    <string name="public_open_tv">打开</string>
+
+    <string name="public_fellow_sev_test_tv">(test)</string>
+    <string name="public_fellow_sev_dev_tv">(dev)</string>
+    <string name="public_fellow_sev_staging_tv">(staging)</string>
+    <string name="public_fellow_sev_unknown_tv">(unknown)</string>
+    <string name="public_fellow_ver_prefix_tv">V</string>
+
+    <!-- update -->
+    <string name="app_update">版本更新</string>
+    <string name="the_latest_version">已是最新版本</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="no_tip_next">不再提示</string>
+    <string name="downloading">下载中…</string>
+    <string name="load_error">刷新</string>
+    <string name="empty_message">您还没有收到任何消息。</string>
+    <string name="rebase_login">由于您长时间未登录,请重新登录</string>
+    <string name="app_update_tip">升级提示</string>
+    <string name="app_update_immediate">立即升级</string>
+
+    <!-- permission -->  //TODO zhaochangqing appname需要改
+    <string name="permissions">权限</string>
+    <string name="permissions_need">“蔚来”已被禁止使用部分权限，请在设置中开启权限</string>
+    <string name="camera_permission_need">“蔚来”已被禁止使用相机权限，请在设置中开启权限</string>
+    <string name="camera_external_storage_permission_need">“蔚来”已被禁止使用权限，请在设置中开启权限</string>
+    <string name="permission_reminder">提示</string>
+    <string name="camera_permission_forbidden_reminder">无法获取摄像头数据，请检查是否已经打开摄像头权限。</string>
+
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jeremy.wang.activity.LoginActivity">
+
+    <com.jeremy.wang.view.CommonInputLayout
+        android:id="@+id/account_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.jeremy.wang.view.CommonInputLayout
+        android:id="@+id/password_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

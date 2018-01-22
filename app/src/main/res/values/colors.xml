@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--  account -->
+    <color name="account_login_edit_hint_color">#B0BBC0</color>
+
+    <!--  public -->
+    <color name="public_white_color">#ffffff</color>
+    <color name="public_black_color">#000000</color>
+    <color name="public_trans_color">#00000000</color>
+    <color name="public_common_btn_selected_bg_color">#FF079FB9</color>
+    <color name="public_common_btn_normal_bg_color">#FF09bcc7</color>
+    <color name="public_common_btn_disable_bg_color">#E1E6E9</color>
+    <color name="public_main_title_bar_bg_color">#CCCCCC</color>
+    <color name="public_swipe_refresh_color">#09BCC7</color>
+    <color name="public_edit_view_hint_color">#B0BBC0</color>
+    <color name="public_contact_grid_item_bg_color">#B0BBC0</color>
+    <color name="public_info_option_color">#E8EDEF</color>
+    <color name="public_info_option_tv_color">#56666D</color>
+    <color name="public_info_option_ver_tv_color">#b0bbc0</color>
+    <color name="public_info_name_color">#777777</color>
+    <color name="public_common_item_color_divider">#E8EDEF</color>
+
+</resources>
