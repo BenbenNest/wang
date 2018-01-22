@@ -2,11 +2,9 @@
     <string name="app_name">APP Name</string>
 
 
-
     <!--   account -->
     <string name="ID">身份证</string>
     <string name="password">密码</string>
-
 
 
     <string name="account_login_phone_num_tv">手机号</string>
