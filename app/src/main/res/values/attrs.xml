@@ -10,4 +10,9 @@
         <attr name="icon" format="reference" />
         <attr name="text" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="PersonalInfoRow">
+        <attr name="icon" format="reference" />
+        <attr name="text" format="string" />
+    </declare-styleable>
 </resources>
