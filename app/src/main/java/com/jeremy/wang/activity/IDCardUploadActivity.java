@@ -2,6 +2,7 @@ package com.jeremy.wang.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 import com.jeremy.wang.R;
@@ -18,17 +19,16 @@ public class IDCardUploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idcard_upload);
 
-//        mCameraSurfaceView = (CameraSurfaceView) findViewById(R.id.cameraSurfaceView);
-//        button = (Button) findViewById(R.id.takePic);
+        mCameraSurfaceView = findViewById(R.id.cameraSurfaceView);
+        button = (Button) findViewById(R.id.takePic);
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mCameraSurfaceView.takePicture();
-//            }
-//        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCameraSurfaceView.takePicture();
+            }
+        });
     }
-
 
 
 }

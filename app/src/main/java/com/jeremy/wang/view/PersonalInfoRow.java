@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.jeremy.wang.R;
 
@@ -13,7 +13,7 @@ import com.jeremy.wang.R;
  * Created by changqing on 2018/1/23.
  */
 
-public class PersonalInfoRow extends LinearLayout {
+public class PersonalInfoRow extends RelativeLayout {
 
     public PersonalInfoRow(Context context) {
         super(context);

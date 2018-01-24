@@ -40,7 +40,8 @@
         <activity
             android:name=".activity.IDCardUploadActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.PersonalInfoActivity"></activity>
+        <activity android:name=".activity.PersonalInfoActivity" />
+        <activity android:name=".activity.AddCardActivity"></activity>
     </application>
 
 </manifest>

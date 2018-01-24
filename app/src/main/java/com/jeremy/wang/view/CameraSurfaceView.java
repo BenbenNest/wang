@@ -234,7 +234,7 @@ public class CameraSurfaceView  extends SurfaceView implements SurfaceHolder.Cal
                 bm = BitmapFactory.decodeByteArray(data, 0, data.length);
 
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                    String filePath = "/sdcard/dyk"+System.currentTimeMillis()+".JPEG";//照片保存路径
+                    String filePath = "/sdcard/wang/wang"+System.currentTimeMillis()+".JPEG";//照片保存路径
 
 //                    //图片存储前旋转
                     Matrix m = new Matrix();
@@ -244,8 +244,6 @@ public class CameraSurfaceView  extends SurfaceView implements SurfaceHolder.Cal
                     //旋转后的图片
                     bitmap = Bitmap.createBitmap(bm, 0, 0, width, height, m, true);
 
-
-                    System.out.println("执行了吗+3");
                     File file = new File(filePath);
                     if (!file.exists()){
                         file.createNewFile();
