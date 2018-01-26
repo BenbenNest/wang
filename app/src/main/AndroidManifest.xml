@@ -23,6 +23,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.HomeActivity" />
         <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -41,7 +52,8 @@
             android:name=".activity.IDCardUploadActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.PersonalInfoActivity" />
-        <activity android:name=".activity.AddCardActivity"></activity>
+        <activity android:name=".activity.AddCardActivity" />
+        <activity android:name=".activity.BankCardScanActivity"></activity>
     </application>
 
 </manifest>

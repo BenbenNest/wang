@@ -1,6 +1,7 @@
 package com.jeremy.wang.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ public class IDCardUploadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idcard_upload);
-
+        init();
         mCameraSurfaceView = findViewById(R.id.cameraSurfaceView);
         button = (Button) findViewById(R.id.takePic);
 
@@ -28,6 +29,13 @@ public class IDCardUploadActivity extends AppCompatActivity {
                 mCameraSurfaceView.takePicture();
             }
         });
+    }
+
+    private void init() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.IDScan);
+        }
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,31 +16,38 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/app_name" />
 
     </LinearLayout>
 
     <com.jeremy.wang.view.CommonInputLayout
         android:id="@+id/id_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:input_hint="拍摄身份证" />
+
 
     <com.jeremy.wang.view.CommonInputLayout
         android:id="@+id/password_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:input_hint="密码" />
 
     <com.jeremy.wang.view.CommonInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:input_hint="确认密码" />
 
     <com.jeremy.wang.view.CommonInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:input_hint="输入手机号" />
 
     <com.jeremy.wang.view.CommonInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:input_hint="输入验证码" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,11 +59,13 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="已经阅读并且同意《XX银行开户须知》" />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="注册" />
 </LinearLayout>
