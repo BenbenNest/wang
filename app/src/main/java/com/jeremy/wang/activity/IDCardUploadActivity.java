@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.thread.NoLeakHandler;
 import com.jeremy.wang.view.CameraSurfaceView;
 
 public class IDCardUploadActivity extends AppCompatActivity {
@@ -20,29 +21,39 @@ public class IDCardUploadActivity extends AppCompatActivity {
 
     private Button button;
     private CameraSurfaceView mCameraSurfaceView;
-//    private RectOnCamera rectOnCamera;
+    //    private RectOnCamera rectOnCamera;
+    NoLeakHandler noLeakHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idcard_upload);
         init();
-        mCameraSurfaceView = findViewById(R.id.cameraSurfaceView);
+
+    }
+
+    private void init() {
+        noLeakHandler = new NoLeakHandler(this);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.IDScan);
+        }
+        mCameraSurfaceView = (CameraSurfaceView) findViewById(R.id.cameraSurfaceView);
         button = (Button) findViewById(R.id.takePic);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCameraSurfaceView.takePicture();
+                noLeakHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        EditPersonalInfoActivity.setCurrentStep(EditPersonalInfoActivity.STEP_SECOND);
+                        EditPersonalInfoActivity.startActivity(IDCardUploadActivity.this);
+                    }
+                }, 1000);
             }
         });
-    }
-
-    private void init() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.IDScan);
-        }
     }
 
 

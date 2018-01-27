@@ -29,7 +29,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_personal_info);
 
-        CommonButton btNext = findViewById(R.id.bt_next);
+        CommonButton btNext = (CommonButton) findViewById(R.id.bt_next);
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

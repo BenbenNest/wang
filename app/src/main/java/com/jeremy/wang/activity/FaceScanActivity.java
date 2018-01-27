@@ -21,7 +21,7 @@ public class FaceScanActivity extends AppCompatActivity {
 
 
     private void init() {
-        Button bt_pic = findViewById(R.id.bt_pic);
+        Button bt_pic = (Button) findViewById(R.id.bt_pic);
         bt_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

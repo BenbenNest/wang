@@ -25,7 +25,7 @@
     <declare-styleable name="BankListItemView">
         <attr name="bank_name" format="string" />
         <attr name="card_num" format="string" />
-        <attr name="icon" format="reference" />c
+        <attr name="icon" />c
 
     </declare-styleable>
 </resources>

@@ -21,8 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        bt_register = findViewById(R.id.bt_register);
-        bt_login = findViewById(R.id.bt_login);
+        bt_register = (TextView)findViewById(R.id.bt_register);
+        bt_login = (TextView)findViewById(R.id.bt_login);
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -55,7 +55,10 @@
         <activity android:name=".activity.AddCardActivity" />
         <activity android:name=".activity.BankCardScanActivity" />
         <activity android:name=".activity.FaceScanActivity" />
-        <activity android:name=".activity.EditPersonalInfoActivity" />
+        <activity
+            android:name=".activity.EditPersonalInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.BankCardListActivity"></activity>
     </application>
 

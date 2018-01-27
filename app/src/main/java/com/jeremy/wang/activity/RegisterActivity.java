@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mIdInputLayout = findViewById(R.id.id_input_layout);
+        mIdInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         mIdInputLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
