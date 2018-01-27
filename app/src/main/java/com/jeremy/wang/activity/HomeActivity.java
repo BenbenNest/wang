@@ -3,6 +3,7 @@ package com.jeremy.wang.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +26,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        TextView btMyBank = (TextView) findViewById(R.id.bt_mybank);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("首页");
+        final TextView btMyBank = (TextView) findViewById(R.id.bt_mybank);
         btMyBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

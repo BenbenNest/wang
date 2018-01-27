@@ -47,14 +47,28 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.IDCardUploadActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.PersonalInfoActivity" />
-        <activity android:name=".activity.AddCardActivity" />
-        <activity android:name=".activity.BankCardScanActivity" />
-        <activity android:name=".activity.FaceScanActivity" />
+        <activity
+            android:name=".activity.PersonalInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddCardActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BankCardScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FaceScanActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.EditPersonalInfoActivity"
             android:launchMode="singleTask"

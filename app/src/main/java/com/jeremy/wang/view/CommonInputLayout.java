@@ -3,6 +3,7 @@ package com.jeremy.wang.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -35,11 +36,27 @@ public class CommonInputLayout extends LinearLayout {
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.CommonInputLayout);
             String hint = typedArray.getString(R.styleable.CommonInputLayout_input_hint);
+            boolean isPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_input_pwd, false);
             if (mInputText != null) {
-                mInputText.setText(hint);
+                mInputText.setHint(hint);
+            }
+            if (isPwd) {
+                mInputText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
     }
 
+    public String getText() {
+        if (mInputText != null) {
+            return mInputText.getText().toString();
+        }
+        return "";
+    }
+
+    public void setText(String text) {
+        if (mInputText != null) {
+            mInputText.setText(text);
+        }
+    }
 
 }

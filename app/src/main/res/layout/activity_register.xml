@@ -5,21 +5,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name" />
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/login" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.jeremy.wang.view.CommonInputLayout
         android:id="@+id/id_input_layout"
@@ -32,19 +35,24 @@
         android:id="@+id/password_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:input_hint="密码" />
+        my:input_hint="密码"
+        my:input_pwd="true" />
 
     <com.jeremy.wang.view.CommonInputLayout
+        android:id="@+id/password_again_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:input_hint="确认密码" />
+        my:input_hint="确认密码"
+        my:input_pwd="true" />
 
     <com.jeremy.wang.view.CommonInputLayout
+        android:id="@+id/phone_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:input_hint="输入手机号" />
 
     <com.jeremy.wang.view.CommonInputLayout
+        android:id="@+id/verify_code_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:input_hint="输入验证码" />
@@ -54,6 +62,7 @@
         android:layout_height="wrap_content">
 
         <CheckBox
+            android:id="@+id/chk_contract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -64,8 +73,12 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.jeremy.wang.view.CommonButton
+        android:id="@+id/bt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="注册" />
 </LinearLayout>

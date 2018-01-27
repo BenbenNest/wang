@@ -9,6 +9,7 @@
     <string name="title_personal_info">填写个人资料</string>
     <string name="next">下一步</string>
     <string name="title_card_list">绑定银行卡</string>
+    <string name="login">登录</string>
 
 
     <string name="account_login_phone_num_tv">手机号</string>

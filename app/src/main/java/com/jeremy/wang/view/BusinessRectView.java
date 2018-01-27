@@ -26,7 +26,7 @@ public class BusinessRectView extends LinearLayout {
 
     public BusinessRectView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, null);
+        init(context, attrs);
     }
 
 
@@ -37,10 +37,10 @@ public class BusinessRectView extends LinearLayout {
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.BusinessRectView);
             int icon = typedArray.getResourceId(R.styleable.BusinessRectView_icon, 0);
-            if (mIvIcon != null) {
+            if (mIvIcon != null && icon > 0) {
                 mIvIcon.setImageResource(icon);
             }
-            String title = typedArray.getString(R.styleable.BusinessRectView_text);
+            String title = typedArray.getString(R.styleable.BusinessRectView_business_text);
             if (mTvTitle != null) {
                 mTvTitle.setText(title);
             }

@@ -5,12 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo" />
+
 
     <com.jeremy.wang.view.CommonInputLayout
-        android:id="@+id/account_input_layout"
+        android:id="@+id/id_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:input_drawable="@drawable/account_login_phone_number_icon"
@@ -21,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:input_drawable="@drawable/account_login_phone_number_icon"
-        my:input_hint="@string/password" />
+        my:input_hint="@string/password"
+        my:input_pwd="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,11 +47,17 @@
         android:id="@+id/bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="登录" />
 
     <TextView
         android:id="@+id/bt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="新用户注册" />
 </LinearLayout>

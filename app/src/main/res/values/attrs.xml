@@ -4,11 +4,12 @@
     <declare-styleable name="CommonInputLayout">
         <attr name="input_drawable" format="reference" />
         <attr name="input_hint" format="string" />
+        <attr name="input_pwd" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="BusinessRectView">
         <attr name="icon" format="reference" />
-        <attr name="text" format="string" />
+        <attr name="business_text" format="string" />
     </declare-styleable>
 
     <declare-styleable name="PersonalInfoRow">

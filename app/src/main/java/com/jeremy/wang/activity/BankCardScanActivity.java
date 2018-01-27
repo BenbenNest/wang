@@ -25,11 +25,11 @@ public class BankCardScanActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Button btPic = (Button)findViewById(R.id.bt_pic);
+        Button btPic = (Button) findViewById(R.id.bt_pic);
         btPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HomeActivity.startActivity(BankCardScanActivity.this);
             }
         });
     }
