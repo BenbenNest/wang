@@ -1,5 +1,7 @@
 package com.jeremy.wang.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,11 @@ import com.jeremy.wang.R;
 import com.jeremy.wang.view.CameraSurfaceView;
 
 public class IDCardUploadActivity extends AppCompatActivity {
+
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, IDCardUploadActivity.class);
+        context.startActivity(intent);
+    }
 
     private Button button;
     private CameraSurfaceView mCameraSurfaceView;

@@ -30,6 +30,19 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        bt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean logined = false;
+                if (logined) {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, FaceScanActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
 

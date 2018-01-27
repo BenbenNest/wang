@@ -1,6 +1,5 @@
 package com.jeremy.wang.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,27 +8,25 @@ import android.widget.Button;
 
 import com.jeremy.wang.R;
 
-public class BankCardScanActivity extends AppCompatActivity {
+public class FaceScanActivity extends AppCompatActivity {
 
-    public static void startActivity(Context context) {
-        Intent intent = new Intent(context, BankCardScanActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bank_card_scan);
+        setContentView(R.layout.activity_face_scan);
 
         init();
     }
 
+
     private void init() {
-        Button btPic = findViewById(R.id.bt_pic);
-        btPic.setOnClickListener(new View.OnClickListener() {
+        Button bt_pic = findViewById(R.id.bt_pic);
+        bt_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(FaceScanActivity.this, EditPersonalInfoActivity.class);
+                startActivity(intent);
             }
         });
     }

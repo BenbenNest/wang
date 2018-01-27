@@ -16,4 +16,16 @@
         <attr name="title" format="string" />
         <attr name="action" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="CommonButton">
+        <!--<attr name=""-->
+
+    </declare-styleable>
+
+    <declare-styleable name="BankListItemView">
+        <attr name="bank_name" format="string" />
+        <attr name="card_num" format="string" />
+        <attr name="icon" format="reference" />c
+
+    </declare-styleable>
 </resources>
