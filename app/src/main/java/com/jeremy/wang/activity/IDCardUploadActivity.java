@@ -28,16 +28,20 @@ public class IDCardUploadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idcard_upload);
+        initActionBar();
         init();
-
     }
 
-    private void init() {
-        noLeakHandler = new NoLeakHandler(this);
+    private void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.IDScan);
         }
+    }
+
+    private void init() {
+        noLeakHandler = new NoLeakHandler(this);
+
         mCameraSurfaceView = (CameraSurfaceView) findViewById(R.id.cameraSurfaceView);
         button = (Button) findViewById(R.id.takePic);
 

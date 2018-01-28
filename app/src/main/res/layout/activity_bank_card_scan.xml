@@ -32,6 +32,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.jeremy.wang.view.CameraTopRectView
+        android:id="@+id/rectOnCamera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"

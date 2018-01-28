@@ -42,7 +42,7 @@ public class CameraTopRectView extends View {
 
     private static final int LEFT_PADDING = 10;
     private static final int RIGHT_PADDING = 10;
-    private static final String TIPS = "请将身份证放入到方框中";
+    private static String title = "请将身份证放入到方框中";
 
     private Paint linePaint;
     private Paint wordPaint;
@@ -123,7 +123,7 @@ public class CameraTopRectView extends View {
         //重制rect  并画文字  吧文字置于rect中间
         rect = new Rect(rectLeft, rectTop - 80, rectRight, rectTop - 10);
         wordPaint.setColor(Color.WHITE);
-        canvas.drawText(TIPS, rect.centerX(), baseline, wordPaint);
+        canvas.drawText(title, rect.centerX(), baseline, wordPaint);
         canvas.drawLine(rectLeft, rectTop, rectLeft + lineLen, rectTop,
                 linePaint);
         canvas.drawLine(rectRight - lineLen, rectTop, rectRight, rectTop,
@@ -140,6 +140,10 @@ public class CameraTopRectView extends View {
                 linePaint);
         canvas.drawLine(rectRight, rectBottom - lineLen, rectRight, rectBottom,
                 linePaint);
+    }
+
+    public void setTitle(String s) {
+        title = s;
     }
 
     public int getRectLeft() {

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.adapter.BankCardListAdapter;
@@ -37,7 +38,6 @@ public class BankCardListActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRececyclerView.setLayoutManager(mLinearLayoutManager);
 
-        //添加分隔线
         mRececyclerView.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
@@ -46,13 +46,19 @@ public class BankCardListActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.bt_action).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FaceScanActivity.startActivity(BankCardListActivity.this);
+            }
+        });
+
     }
 
-    //每次上拉加载的时候，就加载十条数据到RecyclerView中
     private void loadMoreData() {
-        for (int i = 0; i < 10; i++) {
-            mAdapter.notifyDataSetChanged();
-        }
+
+        mAdapter.notifyDataSetChanged();
+
     }
 
 
