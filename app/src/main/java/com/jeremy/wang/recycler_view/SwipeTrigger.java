@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity.recycler_view;
+package com.jeremy.wang.recycler_view;
 
 public interface SwipeTrigger {
     void onPrepare();

@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity.recycler_view;
+package com.jeremy.wang.recycler_view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 /**
  * Created by benbennest on 16/8/24.
  */
-public class BaseRvAdapter extends RecyclerView.Adapter {
+public class CommonAdapter extends RecyclerView.Adapter {
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -22,6 +24,4 @@ public class BaseRvAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return 0;
     }
-
-
 }

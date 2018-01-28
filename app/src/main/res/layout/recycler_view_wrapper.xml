@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jeremy.library.recycler_view.MySwipeRefreshLayout
+    <com.jeremy.wang.recycler_view.MySwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.jeremy.library.recycler_view.LoadMoreRecyclerView
+        <com.jeremy.wang.recycler_view.LoadMoreRecyclerView
             android:id="@+id/load_more_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.jeremy.library.recycler_view.MySwipeRefreshLayout>
+    </com.jeremy.wang.recycler_view.MySwipeRefreshLayout>
 
     <ViewStub
         android:id="@+id/error_view_stub"

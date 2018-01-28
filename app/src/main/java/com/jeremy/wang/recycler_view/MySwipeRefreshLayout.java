@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity.recycler_view;
+package com.jeremy.wang.recycler_view;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;

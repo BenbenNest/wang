@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity;
+package com.jeremy.wang.recycler_view;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,11 +12,6 @@ import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 import com.jeremy.wang.R;
-import com.jeremy.wang.activity.recycler_view.LoadMoreRecyclerView;
-import com.jeremy.wang.activity.recycler_view.MySwipeRefreshLayout;
-import com.jeremy.wang.activity.recycler_view.OnLoadMoreListener;
-import com.jeremy.wang.activity.recycler_view.OnRefreshListener;
-import com.jeremy.wang.activity.recycler_view.RecyclerOnScrollListener;
 
 
 /**
@@ -27,6 +22,7 @@ public class CommonRecyclerView extends FrameLayout {
     MySwipeRefreshLayout swipeRefreshLayout;
     LoadMoreRecyclerView mLoadMoreRecyclerView;
     LinearLayoutManager layoutManager;
+
     private int mActivePointerId;
     private static final int INVALID_POINTER = -1;
     private static final int INVALID_COORDINATE = -1;

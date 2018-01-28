@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity.recycler_view;
+package com.jeremy.wang.recycler_view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.jeremy.wang.R;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,11 +28,10 @@ public class HomeActivity extends AppCompatActivity {
     private void init() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("首页");
-        final TextView btMyBank = (TextView) findViewById(R.id.bt_mybank);
-        btMyBank.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.financial_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                BankCardListActivity.startActivity(HomeActivity.this);
             }
         });
     }

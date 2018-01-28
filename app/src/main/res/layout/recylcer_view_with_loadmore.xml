@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.jeremy.library.recycler_view.RecyclerViewFooter
+    <com.jeremy.wang.recycler_view.RecyclerViewFooter
         android:id="@+id/recycler_view_footer"
         android:layout_width="match_parent"
         android:layout_height="50dp" />

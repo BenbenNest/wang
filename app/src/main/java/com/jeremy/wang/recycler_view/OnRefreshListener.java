@@ -1,4 +1,4 @@
-package com.jeremy.wang.activity.recycler_view;
+package com.jeremy.wang.recycler_view;
 
 /**
  * Created by Aspsine on 2015/8/13.
