@@ -3,10 +3,13 @@ package com.jeremy.wang.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jeremy.wang.R;
@@ -17,6 +20,8 @@ import com.jeremy.wang.R;
 
 public class CommonInputLayout extends LinearLayout {
     EditText mInputText;
+
+    private static boolean pwdStatus = false;
 
     public CommonInputLayout(Context context) {
         super(context);
@@ -37,12 +42,31 @@ public class CommonInputLayout extends LinearLayout {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.CommonInputLayout);
             String hint = typedArray.getString(R.styleable.CommonInputLayout_input_hint);
             boolean isPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_input_pwd, false);
+//            boolean isShowPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_show_pwd, false);
             if (mInputText != null) {
                 mInputText.setHint(hint);
             }
             if (isPwd) {
+                pwdStatus = true;
                 mInputText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                ImageView iv_pwd = (ImageView) findViewById(R.id.bt_action);
+                iv_pwd.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        togglePwdState();
+                    }
+                });
             }
+        }
+    }
+
+    private void togglePwdState() {
+        if (pwdStatus) {
+            pwdStatus = false;
+            mInputText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        } else {
+            pwdStatus = true;
+            mInputText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
     }
 
