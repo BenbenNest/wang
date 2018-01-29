@@ -3,7 +3,6 @@ package com.jeremy.wang.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.ToastUtils;
 import com.jeremy.wang.view.CommonInputLayout;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     TextView bt_register;
     TextView bt_login;
     CommonInputLayout idInputLayout;

@@ -73,7 +73,8 @@
             android:name=".activity.EditPersonalInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.BankCardListActivity"></activity>
+        <activity android:name=".activity.BankCardListActivity" />
+        <activity android:name=".activity.BaseActivity"></activity>
     </application>
 
 </manifest>
