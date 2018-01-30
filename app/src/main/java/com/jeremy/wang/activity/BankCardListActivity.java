@@ -54,7 +54,8 @@ public class BankCardListActivity extends AppCompatActivity {
         findViewById(R.id.bt_action).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FaceScanActivity.startActivity(BankCardListActivity.this);
+//                FaceScanActivity.startActivity(BankCardListActivity.this);
+                ChooseBankActivity.startActivity(BankCardListActivity.this);
             }
         });
         test();

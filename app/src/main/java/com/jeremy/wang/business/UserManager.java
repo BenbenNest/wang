@@ -16,7 +16,7 @@ public class UserManager {
         boolean flag = false;
         String id = PreferenceUtils.getData(context, Constant.PREFERENCE_ACCOUNT_ID, "").toString();
         String pwd = PreferenceUtils.getData(context, Constant.PREFERENCE_ACCOUNT_PWD, "").toString();
-        if (!TextUtils.isEmpty(id) && TextUtils.isEmpty(pwd)) {
+        if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(pwd)) {
             flag = true;
         }
         return flag;
