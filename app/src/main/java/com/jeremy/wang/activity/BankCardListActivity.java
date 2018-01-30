@@ -11,8 +11,13 @@ import android.view.View;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.adapter.BankCardListAdapter;
+import com.jeremy.wang.model.BankInfo;
 import com.jeremy.wang.recyclerview.EndLessOnScrollListener;
 import com.jeremy.wang.recyclerview.MyDecoration;
+import com.jeremy.wang.utils.Constant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankCardListActivity extends AppCompatActivity {
     RecyclerView mRececyclerView;
@@ -52,7 +57,29 @@ public class BankCardListActivity extends AppCompatActivity {
                 FaceScanActivity.startActivity(BankCardListActivity.this);
             }
         });
+        test();
+    }
 
+    private void test() {
+        List<BankInfo> list = new ArrayList<BankInfo>();
+        BankInfo bankInfo = new BankInfo();
+        bankInfo.setName("中国银行");
+        bankInfo.setStatus(Constant.BANK_STATUS_NO);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setName("工商银行");
+        bankInfo.setStatus(Constant.BANK_STATUS_APPLYING);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setName("建设银行");
+        bankInfo.setStatus(Constant.BANK_STATUS_OK);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setName("农业银行");
+        bankInfo.setStatus(Constant.BANK_STATUS_REJECT);
+        list.add(bankInfo);
+        mAdapter = new BankCardListAdapter(BankCardListActivity.this, list);
+        mRececyclerView.setAdapter(mAdapter);
     }
 
     private void loadMoreData() {

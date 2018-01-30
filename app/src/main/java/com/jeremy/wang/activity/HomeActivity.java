@@ -3,14 +3,16 @@ package com.jeremy.wang.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.business.UserManager;
+import com.jeremy.wang.view.BusinessRectView;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
+
+    BusinessRectView financial_view;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -26,12 +28,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("首页");
-        findViewById(R.id.financial_view).setOnClickListener(new View.OnClickListener() {
+        setTitle("首页");
+        financial_view = (BusinessRectView) findViewById(R.id.financial_view);
+        financial_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BankCardListActivity.startActivity(HomeActivity.this);
+                if (UserManager.checkLogin(HomeActivity.this)) {
+                    BankCardListActivity.startActivity(HomeActivity.this);
+                } else {
+                    LoginActivity.startActivity(HomeActivity.this);
+                }
             }
         });
     }

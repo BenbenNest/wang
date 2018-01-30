@@ -32,7 +32,6 @@ public class BankListItemView extends RelativeLayout {
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.bank_list_item_layout, this, true);
         TextView tvBankName = findViewById(R.id.bank_name);
-        TextView tvCardNum = findViewById(R.id.card_num);
         ImageView btAction = findViewById(R.id.bt_action);
         btAction.setOnClickListener(new OnClickListener() {
             @Override
@@ -48,9 +47,9 @@ public class BankListItemView extends RelativeLayout {
             if (!TextUtils.isEmpty(bankName)) {
                 tvBankName.setText(bankName);
             }
-            if (!TextUtils.isEmpty(cardNum)) {
-                tvCardNum.setText(cardNum);
-            }
+//            if (!TextUtils.isEmpty(cardNum)) {
+//                tvCardNum.setText(cardNum);
+//            }
             if (resId > 0) {
                 btAction.setImageResource(resId);
             }

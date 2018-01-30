@@ -66,14 +66,6 @@ public class LoginActivity extends BaseActivity {
                 }
                 HomeActivity.startActivity(LoginActivity.this);
 
-//                boolean logined = false;
-//                if (logined) {
-//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(LoginActivity.this, FaceScanActivity.class);
-//                    startActivity(intent);
-//                }
             }
         });
     }
