@@ -16,8 +16,10 @@
             android:text="开户银行" />
 
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_bank"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -32,28 +34,36 @@
             android:text="银行网点" />
 
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_address"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <com.jeremy.wang.view.CommonButton
         android:id="@+id/bt_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="确定" />
 
     <CheckBox
         android:id="@+id/chk_contract"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="同意开户协议" />
+
 
     <TextView
         android:id="@+id/tv_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="银行介绍" />
 </LinearLayout>

@@ -12,7 +12,7 @@ import com.jeremy.wang.view.BusinessRectView;
 
 public class HomeActivity extends BaseActivity {
 
-    BusinessRectView financial_view;
+    BusinessRectView accountRectView;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -29,8 +29,8 @@ public class HomeActivity extends BaseActivity {
 
     private void init() {
         setTitle("首页");
-        financial_view = (BusinessRectView) findViewById(R.id.financial_view);
-        financial_view.setOnClickListener(new View.OnClickListener() {
+        accountRectView = (BusinessRectView) findViewById(R.id.create_account);
+        accountRectView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (UserManager.checkLogin(HomeActivity.this)) {

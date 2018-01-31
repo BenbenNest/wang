@@ -22,17 +22,17 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimaryDark" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="5dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="@color/colorPrimaryDark" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="您当前的状态是..." />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="您当前的状态是..." />-->
 
 
     <LinearLayout
@@ -47,17 +47,17 @@
             android:orientation="horizontal">
 
             <com.jeremy.wang.view.BusinessRectView
-                android:id="@+id/financial_view"
+                android:id="@+id/create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                my:business_text="理财业务" />
+                my:business_text="我要开户" />
 
             <com.jeremy.wang.view.BusinessRectView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                my:business_text="查看积分" />
+                my:business_text="理财产品" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,13 +69,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                my:business_text="缴费业务" />
+                my:business_text="商品" />
 
             <com.jeremy.wang.view.BusinessRectView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                my:business_text="商家活动" />
+                my:business_text="我的订单" />
         </LinearLayout>
     </LinearLayout>
 

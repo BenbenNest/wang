@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="已经绑定的银行卡列表如下：" />
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:gravity="center"-->
+    <!--android:text="已经绑定的银行卡列表如下：" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -19,10 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <TextView
+    <com.jeremy.wang.view.CommonButton
         android:id="@+id/bt_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="添加银行卡" />
+        android:text="开户" />
 </LinearLayout>
