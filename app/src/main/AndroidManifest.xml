@@ -67,7 +67,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.BankCardListActivity" />
         <activity android:name=".activity.ChooseBankActivity" />
-        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.CreateAccountActivity"></activity>
     </application>
 
 </manifest>

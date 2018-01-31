@@ -32,7 +32,8 @@ public class ChooseBankActivity extends BaseActivity {
         findViewById(R.id.bt_action).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FaceScanActivity.startActivity(ChooseBankActivity.this);
+//                FaceScanActivity.startActivity(ChooseBankActivity.this);
+                startActivity(ChooseBankActivity.this, CreateAccountActivity.class);
             }
         });
         spinnerBank = (AppCompatSpinner) findViewById(R.id.spinner_bank);
