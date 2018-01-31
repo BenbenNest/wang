@@ -66,7 +66,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.BankCardListActivity" />
-        <activity android:name=".activity.ChooseBankActivity"></activity>
+        <activity android:name=".activity.ChooseBankActivity" />
+        <activity android:name=".activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if (!RegexUtils.isIDCard(id)) {
                     ToastUtils.showCenter(RegisterActivity.this, "身份证号码错误");
-                return;
+                    return;
                 }
                 if (!RegexUtils.isMobile(phone)) {
                     ToastUtils.showCenter(RegisterActivity.this, "手机号码不正确");

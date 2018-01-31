@@ -40,5 +40,11 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
+        findViewById(R.id.iv_head).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(HomeActivity.this, PersonalInfoActivity.class);
+            }
+        });
     }
 }

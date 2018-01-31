@@ -5,7 +5,9 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jeremy.wang.R;
 
@@ -30,8 +32,18 @@ public class PersonalInfoRow extends RelativeLayout {
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.PersonalInfoRow);
             int icon = typedArray.getResourceId(R.styleable.PersonalInfoRow_icon, 0);
+            ImageView imageView = (ImageView) findViewById(R.id.icon);
+            imageView.setImageResource(icon);
+            TextView title = (TextView) findViewById(R.id.title);
+            TextView action = (TextView) findViewById(R.id.action);
+            String sTitle = typedArray.getString(R.styleable.PersonalInfoRow_title);
+            title.setText(sTitle);
+            String sAction = typedArray.getString(R.styleable.PersonalInfoRow_action);
+            action.setText(sAction);
         }
     }
+
+
 
 
 }
