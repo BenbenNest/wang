@@ -11,11 +11,12 @@ import com.jeremy.wang.R;
 import com.jeremy.wang.utils.Constant;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.ToastUtils;
+import com.jeremy.wang.view.CommonButton;
 import com.jeremy.wang.view.CommonInputLayout;
 
 public class LoginActivity extends BaseActivity {
     TextView bt_register;
-    TextView bt_login;
+    CommonButton bt_login;
     CommonInputLayout idInputLayout;
     CommonInputLayout pwdInputLayout;
 
@@ -34,7 +35,7 @@ public class LoginActivity extends BaseActivity {
 
     private void initView() {
         bt_register = (TextView) findViewById(R.id.bt_register);
-        bt_login = (TextView) findViewById(R.id.bt_login);
+        bt_login = (CommonButton) findViewById(R.id.bt_login);
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
