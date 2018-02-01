@@ -27,6 +27,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -68,7 +69,11 @@
         <activity android:name=".activity.BankCardListActivity" />
         <activity android:name=".activity.ChooseBankActivity" />
         <activity android:name=".activity.WebViewActivity" />
-        <activity android:name=".activity.CreateAccountActivity"></activity>
+        <activity android:name=".activity.CreateAccountActivity" />
+        <activity android:name=".activity.BankIntroActivity" />
+        <activity android:name=".activity.BankContractActivity" />
+        <activity android:name=".activity.IDCardActivity" />
+        <activity android:name=".activity.FlowActivity"></activity>
     </application>
 
 </manifest>

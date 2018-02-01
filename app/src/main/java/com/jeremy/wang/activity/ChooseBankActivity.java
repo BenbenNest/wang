@@ -29,13 +29,6 @@ public class ChooseBankActivity extends BaseActivity {
 
     private void init() {
         setTitle("选择开户银行");
-        findViewById(R.id.bt_action).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FaceScanActivity.startActivity(ChooseBankActivity.this);
-                startActivity(ChooseBankActivity.this, CreateAccountActivity.class);
-            }
-        });
         spinnerBank = (AppCompatSpinner) findViewById(R.id.spinner_bank);
         spinnerAddress = (AppCompatSpinner) findViewById(R.id.spinner_address);
         String[] name = {"中国银行", "工商银行", "建设银行", "农业银行", "北京银行"};
@@ -52,7 +45,22 @@ public class ChooseBankActivity extends BaseActivity {
         spinnerBank.setOnItemSelectedListener(new SpinnerSelectedListener());
 
         ArrayAdapter<String> adapterAddress = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, address);
+        adapterAddress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinnerAddress.setAdapter(adapterAddress);
+
+        findViewById(R.id.tv_intro).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ChooseBankActivity.this, BankIntroActivity.class);
+            }
+        });
+        findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ChooseBankActivity.this, BankContractActivity.class);
+            }
+        });
     }
 
     //使用数组形式操作

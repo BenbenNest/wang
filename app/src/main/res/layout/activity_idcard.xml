@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jeremy.wang.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        my:title="填写个人资料" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/head_view"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/id_direct"
+            android:layout_width="144dp"
+            android:layout_height="90dp"
+            android:background="@drawable/id_direct" />
+
+        <ImageView
+            android:id="@+id/id_direct_no"
+            android:layout_width="144dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/id_direct_no" />
+
+    </LinearLayout>
+
+    <com.jeremy.wang.view.CommonButton
+        android:id="@+id/bt_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        my:title="@string/next" />
+</RelativeLayout>

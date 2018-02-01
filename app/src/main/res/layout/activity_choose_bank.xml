@@ -5,11 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.jeremy.wang.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        my:title="选择开户银行" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,9 +31,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,14 +47,32 @@
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="银行介绍" />
+
+    </RelativeLayout>
+
+
     <com.jeremy.wang.view.CommonButton
-        android:id="@+id/bt_action"
+        android:id="@+id/bt_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        my:title="确定" />
+        my:title="下一步" />
 
     <CheckBox
         android:id="@+id/chk_contract"
@@ -56,15 +80,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="同意开户协议" />
+        android:text="同意开户协议"
+        android:visibility="gone" />
 
 
-    <TextView
-        android:id="@+id/tv_intro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="银行介绍" />
 </LinearLayout>

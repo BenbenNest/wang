@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.activity.FlowActivity;
 
 /**
  * Created by changqing on 2018/2/1.
@@ -34,7 +35,7 @@ public class CommonHeadView extends RelativeLayout {
         onBackListener = listener;
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void init(final Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.common_head_layout, this, true);
         mTitleView = (TextView) findViewById(R.id.tv_title);
         mBackView = (ImageView) findViewById(R.id.iv_back);
@@ -48,6 +49,12 @@ public class CommonHeadView extends RelativeLayout {
                     if (onBackListener != null) {
                         onBackListener.onBack();
                     }
+                }
+            });
+            mTitleView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlowActivity.startActivity(context);
                 }
             });
         }

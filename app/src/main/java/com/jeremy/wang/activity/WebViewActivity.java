@@ -10,7 +10,7 @@ import com.jeremy.wang.R;
 
 public class WebViewActivity extends AppCompatActivity {
 
-    public static void startActivity(Context context, String url) {
+    public static void startActivity(Context context, String title, String url) {
         Intent intent = new Intent();
         intent.putExtra("url", url);
         context.startActivity(intent);
