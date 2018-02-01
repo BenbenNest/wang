@@ -19,15 +19,20 @@
         <attr name="action" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="CommonButton">
-        <!--<attr name=""-->
-
-    </declare-styleable>
-
     <declare-styleable name="BankListItemView">
         <attr name="bank_name" format="string" />
         <attr name="card_num" format="string" />
-        <attr name="icon" />c
+        <attr name="icon" />
 
+    </declare-styleable>
+
+    <declare-styleable name="CommonHeadView">
+        <attr name="title" />
+
+    </declare-styleable>
+
+    <declare-styleable name="CommonButton">
+
+        <attr name="title" />
     </declare-styleable>
 </resources>

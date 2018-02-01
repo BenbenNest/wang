@@ -28,7 +28,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
-        setTitle("首页");
+        initListener();
         accountRectView = (BusinessRectView) findViewById(R.id.create_account);
         accountRectView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,5 +46,48 @@ public class HomeActivity extends BaseActivity {
                 startActivity(HomeActivity.this, PersonalInfoActivity.class);
             }
         });
+    }
+
+    private void initListener() {
+        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserManager.checkLogin(HomeActivity.this)) {
+                    BankCardListActivity.startActivity(HomeActivity.this);
+                } else {
+                    LoginActivity.startActivity(HomeActivity.this);
+                }
+            }
+        });
+//        findViewById(R.id.iv_goods).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (UserManager.checkLogin(HomeActivity.this)) {
+//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                } else {
+//                    LoginActivity.startActivity(HomeActivity.this);
+//                }
+//            }
+//        });
+//        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (UserManager.checkLogin(HomeActivity.this)) {
+//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                } else {
+//                    LoginActivity.startActivity(HomeActivity.this);
+//                }
+//            }
+//        });
+//        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (UserManager.checkLogin(HomeActivity.this)) {
+//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                } else {
+//                    LoginActivity.startActivity(HomeActivity.this);
+//                }
+//            }
+//        });
     }
 }

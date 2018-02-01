@@ -54,6 +54,7 @@ public class CommonInputLayout extends LinearLayout {
                 pwdStatus = true;
                 mInputText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 ImageView iv_pwd = (ImageView) findViewById(R.id.bt_action);
+                iv_pwd.setBackgroundResource(R.drawable.pwd_control);
                 iv_pwd.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {

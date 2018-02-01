@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/public_white_color"
     android:orientation="vertical">
 
     <!--<TextView-->
@@ -13,6 +14,12 @@
     <!--android:gravity="center"-->
     <!--android:text="已经绑定的银行卡列表如下：" />-->
 
+    <com.jeremy.wang.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        my:title="@string/title_card_list" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="wrap_content"
@@ -20,10 +27,9 @@
         android:layout_marginTop="20dp" />
 
     <com.jeremy.wang.view.CommonButton
-        android:id="@+id/bt_action"
-        android:layout_width="wrap_content"
+        android:id="@+id/bt_create"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="开户" />
+        my:title="我要开户" />
 </LinearLayout>
