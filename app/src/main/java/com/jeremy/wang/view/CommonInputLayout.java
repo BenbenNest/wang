@@ -19,6 +19,7 @@ import com.jeremy.wang.R;
  */
 
 public class CommonInputLayout extends LinearLayout {
+    ImageView mIcon;
     EditText mInputText;
 
     private static boolean pwdStatus = false;
@@ -37,9 +38,12 @@ public class CommonInputLayout extends LinearLayout {
 
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.common_input_layout, this, true);
+        mIcon = findViewById(R.id.iv_icon);
         mInputText = findViewById(R.id.input_edit);
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.CommonInputLayout);
+            int resId = typedArray.getResourceId(R.styleable.CommonInputLayout_input_drawable, 0);
+            mIcon.setBackgroundResource(resId);
             String hint = typedArray.getString(R.styleable.CommonInputLayout_input_hint);
             boolean isPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_input_pwd, false);
 //            boolean isShowPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_show_pwd, false);

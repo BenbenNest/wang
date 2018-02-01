@@ -1,6 +1,7 @@
 <resources>
 
-
+    <dimen name="public_common_padding">35dp</dimen>
+    <dimen name="public_common_layout_height">52dp</dimen>
 
     <!--  account -->
     <dimen name="account_login_edit_height">32dp</dimen>

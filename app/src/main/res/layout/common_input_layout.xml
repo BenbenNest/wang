@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/account_login_edit_height"
-    android:orientation="horizontal">
+    android:layout_height="@dimen/public_common_layout_height">
 
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/account_login_phone_number_icon" />
+        android:layout_centerVertical="true" />
 
     <EditText
         android:id="@+id/input_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/iv_icon"
         android:background="@null"
-        android:gravity="center_vertical"
         android:maxLines="1"
         android:textColor="@color/public_black_color"
         android:textColorHint="@color/account_login_edit_hint_color"
@@ -29,5 +27,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/account_login_phone_number_icon" />
+        android:layout_centerVertical="true" />
 </RelativeLayout>

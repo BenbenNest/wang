@@ -1,12 +1,16 @@
 package com.jeremy.wang.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.thread.NoLeakHandler;
@@ -16,7 +20,7 @@ import com.jeremy.wang.utils.RegexUtils;
 import com.jeremy.wang.utils.ToastUtils;
 import com.jeremy.wang.view.CommonInputLayout;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
     CommonInputLayout mIdInputLayout;
     CommonInputLayout mPasswordInputLayout;
     CommonInputLayout mPasswordAgainInputLayout;
@@ -41,7 +45,18 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
         mVerifyCodeInputLayout = (CommonInputLayout) findViewById(R.id.verify_code_input_layout);
+        TextView tv_Contract = (TextView) findViewById(R.id.tv_contract);
+        String contract = getResources().getString(R.string.contract);
+        SpannableStringBuilder style = new SpannableStringBuilder(getResources().getString(R.string.contract));
+        int start = contract.lastIndexOf("《");
+        int end = contract.length();
+        style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_contract)), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv_Contract.setText(style);
+        initRegisterButton();
 
+    }
+
+    private void initRegisterButton() {
         findViewById(R.id.bt_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
         String pwd = mPasswordInputLayout.getText();
         PreferenceUtils.saveData(this, Constant.PREFERENCE_ACCOUNT_ID, id);
         PreferenceUtils.saveData(this, Constant.PREFERENCE_ACCOUNT_PWD, pwd);
+    }
+
+    public void login(View view) {
+        LoginActivity.startActivity(RegisterActivity.this);
     }
 
 
