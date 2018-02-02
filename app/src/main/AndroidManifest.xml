@@ -66,14 +66,38 @@
             android:name=".activity.EditPersonalInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.BankCardListActivity" />
-        <activity android:name=".activity.ChooseBankActivity" />
-        <activity android:name=".activity.WebViewActivity" />
-        <activity android:name=".activity.CreateAccountActivity" />
-        <activity android:name=".activity.BankIntroActivity" />
-        <activity android:name=".activity.BankContractActivity" />
-        <activity android:name=".activity.IDCardActivity" />
-        <activity android:name=".activity.FlowActivity"></activity>
+        <activity
+            android:name=".activity.BankCardListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChooseBankActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CreateAccountActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BankIntroActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BankContractActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IDCardActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FlowActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
