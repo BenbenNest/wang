@@ -16,7 +16,7 @@
             android:id="@+id/head_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            my:title="填写开户信息" />
+            my:title="填写预留手机号" />
 
     </LinearLayout>
 
@@ -31,15 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            my:input_drawable="@drawable/idcard"
-            my:input_hint="身份证号" />
+            my:input_drawable="@drawable/phone"
+            my:input_hint="手机号：" />
 
         <com.jeremy.wang.view.CommonInputLayout
             android:id="@+id/address_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            my:input_drawable="@drawable/address"
-            my:input_hint="邮寄地址" />
+            my:input_drawable="@drawable/password"
+            my:input_hint="验证码：" />
     </LinearLayout>
 
 

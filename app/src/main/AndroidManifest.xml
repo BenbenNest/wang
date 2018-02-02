@@ -98,7 +98,8 @@
             android:name=".activity.FlowActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.FillAccountInfoActivity"></activity>
+        <activity android:name=".activity.FillAccountInfoActivity" />
+        <activity android:name=".activity.FillMobileActivity"></activity>
     </application>
 
 </manifest>
