@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jeremy.wang.activity.FillAccountInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/head_bg">
+
+        <com.jeremy.wang.view.CommonHeadView
+            android:id="@+id/head_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            my:title="填写开户信息" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.jeremy.wang.view.CommonInputLayout
+            android:id="@+id/contact_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            my:input_drawable="@drawable/idcard"
+            my:input_hint="身份证号" />
+
+        <com.jeremy.wang.view.CommonInputLayout
+            android:id="@+id/address_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            my:input_drawable="@drawable/address"
+            my:input_hint="邮寄地址" />
+    </LinearLayout>
+
+
+    <com.jeremy.wang.view.CommonButton
+        android:id="@+id/bt_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        my:title="@string/next" />
+
+</LinearLayout>

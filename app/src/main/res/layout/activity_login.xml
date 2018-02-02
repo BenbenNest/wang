@@ -60,15 +60,11 @@
 
         <com.jeremy.wang.view.CommonButton
             android:id="@+id/bt_login"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="#a72b26"
-            android:gravity="center"
-            android:text="登录"
-            android:textColor="@color/public_white_color"
-            android:textSize="17dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            my:title="登录" />
+
 
         <TextView
             android:id="@+id/bt_register"

@@ -19,7 +19,6 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:onClick="login"
             android:layout_width="58dp"
             android:layout_height="29dp"
             android:layout_alignParentRight="true"
@@ -27,6 +26,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/round_rect_shape"
             android:gravity="center"
+            android:onClick="login"
             android:text="@string/login"
             android:textColor="@color/public_white_color" />
 
@@ -39,8 +39,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical"
+            android:paddingBottom="50dp"
             android:paddingLeft="@dimen/public_common_padding"
             android:paddingRight="@dimen/public_common_padding">
 
@@ -116,15 +116,10 @@
 
             <com.jeremy.wang.view.CommonButton
                 android:id="@+id/bt_register"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="#a72b26"
-                android:gravity="center"
-                android:text="注册"
-                android:textColor="@color/public_white_color"
-                android:textSize="17dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                my:title="注册" />
 
         </LinearLayout>
     </ScrollView>
