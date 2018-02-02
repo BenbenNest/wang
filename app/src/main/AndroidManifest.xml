@@ -100,7 +100,10 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.FillAccountInfoActivity" />
         <activity android:name=".activity.FillMobileActivity" />
-        <activity android:name=".activity.BindBankCardActivity"></activity>
+        <activity android:name=".activity.BindBankCardActivity" />
+        <activity android:name=".activity.ChooseBankTypeActivity" />
+        <activity android:name=".activity.VerifyCodeActivity" />
+        <activity android:name=".activity.DynamicRecognizeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
 package com.jeremy.wang.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.jeremy.wang.R;
 
-public class BindBankCardActivity extends AppCompatActivity {
+public class BindBankCardActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,12 @@ public class BindBankCardActivity extends AppCompatActivity {
 
 
     private void init() {
-
+        findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(BindBankCardActivity.this, ChooseBankTypeActivity.class);
+            }
+        });
     }
 
 }
