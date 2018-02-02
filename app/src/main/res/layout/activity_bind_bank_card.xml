@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             my:bg="@color/public_trans_color"
-            my:title="填写预留手机号" />
+            my:title="绑定银行卡" />
 
     </LinearLayout>
 
@@ -31,14 +31,14 @@
             android:layout_height="wrap_content"
 
             my:input_drawable="@drawable/phone"
-            my:input_hint="手机号：" />
+            my:input_hint="持卡人姓名：" />
 
         <com.jeremy.wang.view.CommonInputLayout
             android:id="@+id/address_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             my:input_drawable="@drawable/password"
-            my:input_hint="验证码：" />
+            my:input_hint="银行卡号：" />
     </LinearLayout>
 
 

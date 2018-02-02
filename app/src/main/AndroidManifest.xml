@@ -99,7 +99,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.FillAccountInfoActivity" />
-        <activity android:name=".activity.FillMobileActivity"></activity>
+        <activity android:name=".activity.FillMobileActivity" />
+        <activity android:name=".activity.BindBankCardActivity"></activity>
     </application>
 
 </manifest>

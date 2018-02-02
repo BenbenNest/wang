@@ -28,7 +28,7 @@
 
     <declare-styleable name="CommonHeadView">
         <attr name="title" />
-
+        <attr name="bg" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="CommonButton">

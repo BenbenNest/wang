@@ -1,0 +1,22 @@
+package com.jeremy.wang.activity;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.jeremy.wang.R;
+
+public class BindBankCardActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bind_bank_card);
+        init();
+    }
+
+
+    private void init() {
+
+    }
+
+}

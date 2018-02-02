@@ -37,10 +37,15 @@ public class CommonHeadView extends RelativeLayout {
 
     private void init(final Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.common_head_layout, this, true);
+        RelativeLayout root = (RelativeLayout) findViewById(R.id.root);
         mTitleView = (TextView) findViewById(R.id.tv_title);
         mBackView = (ImageView) findViewById(R.id.iv_back);
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.CommonHeadView);
+            int bgResId = typedArray.getResourceId(R.styleable.CommonHeadView_bg, 0);
+            if (root != null && bgResId > 0) {
+                root.setBackgroundResource(bgResId);
+            }
             String title = typedArray.getString(R.styleable.CommonHeadView_title);
             mTitleView.setText(title);
             mBackView.setOnClickListener(new OnClickListener() {
