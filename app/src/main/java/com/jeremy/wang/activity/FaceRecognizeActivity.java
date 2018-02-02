@@ -5,16 +5,16 @@ import android.view.View;
 
 import com.jeremy.wang.R;
 
-public class DynamicRecognizeActivity extends BaseActivity {
+public class FaceRecognizeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_recognize);
+        setContentView(R.layout.activity_face_recognize);
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(DynamicRecognizeActivity.this, FaceRecognizeActivity.class);
+                startActivity(FaceRecognizeActivity.this, SubmitApplyActivity.class);
             }
         });
     }

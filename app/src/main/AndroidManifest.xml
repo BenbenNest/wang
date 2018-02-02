@@ -98,12 +98,38 @@
             android:name=".activity.FlowActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.FillAccountInfoActivity" />
-        <activity android:name=".activity.FillMobileActivity" />
-        <activity android:name=".activity.BindBankCardActivity" />
-        <activity android:name=".activity.ChooseBankTypeActivity" />
-        <activity android:name=".activity.VerifyCodeActivity" />
-        <activity android:name=".activity.DynamicRecognizeActivity"></activity>
+        <activity
+            android:name=".activity.FillAccountInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FillMobileActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BindBankCardActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChooseBankTypeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VerifyCodeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DynamicRecognizeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FaceRecognizeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SubmitApplyActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
