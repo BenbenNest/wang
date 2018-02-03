@@ -1,18 +1,20 @@
 package com.jeremy.wang.activity;
 
+import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.api.OnBooleanListener;
 import com.jeremy.wang.thread.NoLeakHandler;
 import com.jeremy.wang.view.CameraSurfaceView;
 
-public class IDCardUploadActivity extends AppCompatActivity {
+public class IDCardUploadActivity extends BaseActivity {
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, IDCardUploadActivity.class);
@@ -33,7 +35,7 @@ public class IDCardUploadActivity extends AppCompatActivity {
     }
 
     private void initActionBar() {
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.IDScan);
         }
@@ -48,16 +50,26 @@ public class IDCardUploadActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCameraSurfaceView.takePicture();
-                noLeakHandler.postDelayed(new Runnable() {
+                onPermissionRequests(Manifest.permission.WRITE_EXTERNAL_STORAGE, new OnBooleanListener() {
                     @Override
-                    public void run() {
-                        EditPersonalInfoActivity.setCurrentStep(EditPersonalInfoActivity.STEP_SECOND);
-                        EditPersonalInfoActivity.startActivity(IDCardUploadActivity.this);
+                    public void onClick(boolean bln) {
+                        if (bln) {
+                            mCameraSurfaceView.takePicture();
+                            noLeakHandler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(IDCardUploadActivity.this, IDCardActivity.class);
+                                }
+                            }, 1000);
+                        } else {
+                            Toast.makeText(IDCardUploadActivity.this, "文件读写或无法正常使用", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }, 1000);
+                });
             }
         });
+
+
     }
 
 
