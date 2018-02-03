@@ -3,7 +3,7 @@ package com.jeremy.wang.business;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.jeremy.wang.utils.Constant;
+import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.utils.PreferenceUtils;
 
 /**

@@ -9,10 +9,10 @@ import android.view.View;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.adapter.BankCardListAdapter;
+import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.model.BankInfo;
 import com.jeremy.wang.recyclerview.EndLessOnScrollListener;
 import com.jeremy.wang.recyclerview.MyDecoration;
-import com.jeremy.wang.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;

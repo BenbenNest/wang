@@ -2,6 +2,7 @@ package com.jeremy.wang.app;
 
 import android.app.Application;
 
+import com.jeremy.wang.http.AppInfo;
 import com.jeremy.wang.utils.CrashHandler;
 
 /**
@@ -14,6 +15,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CrashHandler.getInstance(getApplicationContext()).init();
+        AppGlobal.setAppContext(this);
+        AppInfo.init(this);
     }
 
 

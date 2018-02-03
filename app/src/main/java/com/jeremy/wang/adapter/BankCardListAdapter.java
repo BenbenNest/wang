@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.model.BankInfo;
-import com.jeremy.wang.utils.Constant;
 
 import java.util.List;
 

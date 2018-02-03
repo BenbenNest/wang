@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.jeremy.wang.R;
-import com.jeremy.wang.utils.Constant;
+import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.ToastUtils;
 

@@ -13,8 +13,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.thread.NoLeakHandler;
-import com.jeremy.wang.utils.Constant;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.RegexUtils;
 import com.jeremy.wang.utils.ToastUtils;

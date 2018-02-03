@@ -1,7 +1,7 @@
-package com.jeremy.wang.utils;
+package com.jeremy.wang.constant;
 
 /**
- * Created by changqing on 2018/1/27.
+ * Created by jeremy
  */
 
 public class Constant {
@@ -17,7 +17,10 @@ public class Constant {
     public static final String BANK_STATUS_REJECT_ACTION = "已拒绝";
     public static final String BANK_STATUS_NO_ACTION = "未申请";
     public static final String BANK_STATUS_OK_ACTION = "已开户";
-    public static final String BANK_STATUS_APPLYING_ACTION  = "审核";
+    public static final String BANK_STATUS_APPLYING_ACTION = "审核";
 
+    public static final String COUNTRY_CODE = "86";
+    public static final String APPID = "10018";
 
+    public static final String APPSERICT = "9a429afaf2044c51b0cc3cda8cfd5a89";
 }
