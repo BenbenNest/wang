@@ -21,34 +21,104 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        <com.jeremy.wang.view.CommonInputLayout
-            android:id="@+id/contact_input_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            my:input_drawable="@drawable/idcard"
-            my:input_hint="身份证号" />
+            <com.jeremy.wang.view.CommonInputLayout
+                android:id="@+id/contact_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="身份证号" />
 
-        <com.jeremy.wang.view.CommonInputLayout
-            android:id="@+id/address_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            my:input_drawable="@drawable/address"
-            my:input_hint="邮寄地址" />
-    </LinearLayout>
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="姓名" />
 
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="性别" />
 
-    <com.jeremy.wang.view.CommonButton
-        android:id="@+id/bt_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:title="@string/next" />
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="年龄" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="国籍" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="籍贯" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="联系电话" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="Email" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="家庭电话" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="开户用途" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="邮编" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="职业" />
+
+            <com.jeremy.wang.view.CommonInputLayout
+                android:id="@+id/address_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/address"
+                my:input_hint="住址" />
+
+            <com.jeremy.wang.view.CommonButton
+                android:id="@+id/bt_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:title="@string/next" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

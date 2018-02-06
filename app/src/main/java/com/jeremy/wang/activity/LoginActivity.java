@@ -4,15 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.constant.Constant;
+import com.jeremy.wang.http.APIInterface;
+import com.jeremy.wang.http.RetrofitService;
+import com.jeremy.wang.model.BaseModel;
+import com.jeremy.wang.model.UserLoginData;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.ToastUtils;
 import com.jeremy.wang.view.CommonButton;
 import com.jeremy.wang.view.CommonInputLayout;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends BaseActivity {
     TextView bt_register;
@@ -67,8 +80,46 @@ public class LoginActivity extends BaseActivity {
                 }
                 HomeActivity.startActivity(LoginActivity.this);
 
+                login();
+
             }
         });
+    }
+
+
+    private void login() {
+        Map<String, String> para = new HashMap<>();
+        para.put("app_id", Constant.APPID);
+        para.put("country_code", Constant.COUNTRY_CODE);
+        para.put("password", pwdInputLayout.getText());
+//        para.put("mobile", phone.toString());
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+        Call<BaseModel<UserLoginData>> call = api.login(para);
+        call.enqueue(new Callback<BaseModel<UserLoginData>>() {
+            @Override
+            public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
+                try {
+                    if (response == null || response.body() == null || response.body().data == null) {
+
+                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
+                        String token = response.body().data.access_token;
+//                        getUserMessage(response.body().data, token, uiCallback);
+//                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+                    }
+                } catch (Exception e) {
+                    Log.d("", e.getMessage());
+                }
+                HomeActivity.startActivity(LoginActivity.this);
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<UserLoginData>> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
 
