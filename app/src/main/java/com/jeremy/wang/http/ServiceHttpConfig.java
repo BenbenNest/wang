@@ -17,10 +17,8 @@ public class ServiceHttpConfig {
     private static final String SERVER_AWS_DEV = "https://app-dev.nextev.com";
     private static final String SERVER_AWS_STAGING = "https://app-staging.nextev.com";
 
-
     public static final String NEXTEV_APP_STORE_HOST_TEST = "http://10.110.1.55:8081";//APPStore域名未备好之前使用
     public static final String NEXTEV_APP_STORE_HOST = "http://nextevapp.chinacloudapp.cn";//暂时用这个域名，以后改为https://api.nextevapp.com
-
 
     public static String getHost() {
         switch (SERVER_TYPE) {

@@ -6,23 +6,38 @@ package com.jeremy.wang.model;
 
 public class BankInfo {
 
-    private String mName;
-    private int mStatus;
 
+    /**
+     * BandId :
+     * BankName :
+     * state : 0
+     */
 
-    public String getName() {
-        return mName;
+    private String BandId;
+    private String BankName;
+    private int state;
+
+    public String getBandId() {
+        return BandId;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setBandId(String BandId) {
+        this.BandId = BandId;
     }
 
-    public int getStatus() {
-        return mStatus;
+    public String getBankName() {
+        return BankName;
     }
 
-    public void setStatus(int mStatus) {
-        this.mStatus = mStatus;
+    public void setBankName(String BankName) {
+        this.BankName = BankName;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

@@ -16,8 +16,11 @@ import retrofit2.http.POST;
 
 public interface APIInterface {
 
+
+//    ip:8080/web/user/login
+
     @FormUrlEncoded
-    @POST("/api/1/account/user/login")
+    @POST("/web/user/login")
     Call<BaseModel<UserLoginData>> login(@FieldMap Map<String, String> bodyPara);
 
 
