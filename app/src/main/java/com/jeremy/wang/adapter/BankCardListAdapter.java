@@ -42,9 +42,9 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
-            final String itemText = mList.get(position).getName();
+            final String itemText = mList.get(position).getBankName();
             ((MyHolder) holder).tv.setText(position + "." + itemText);
-            switch (mList.get(position).getStatus()) {
+            switch (mList.get(position).getState()) {
                 case Constant.BANK_STATUS_NO:
                     ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
                     break;

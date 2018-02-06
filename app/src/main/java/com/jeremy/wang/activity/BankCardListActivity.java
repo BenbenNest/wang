@@ -61,20 +61,20 @@ public class BankCardListActivity extends BaseActivity {
     private void test() {
         List<BankInfo> list = new ArrayList<BankInfo>();
         BankInfo bankInfo = new BankInfo();
-        bankInfo.setName("中国银行");
-        bankInfo.setStatus(Constant.BANK_STATUS_OK);
+        bankInfo.setBankName("中国银行");
+        bankInfo.setState(Constant.BANK_STATUS_OK);
         list.add(bankInfo);
         bankInfo = new BankInfo();
-        bankInfo.setName("工商银行");
-        bankInfo.setStatus(Constant.BANK_STATUS_OK);
+        bankInfo.setBankName("工商银行");
+        bankInfo.setState(Constant.BANK_STATUS_OK);
         list.add(bankInfo);
         bankInfo = new BankInfo();
-        bankInfo.setName("建设银行");
-        bankInfo.setStatus(Constant.BANK_STATUS_APPLYING);
+        bankInfo.setBankName("建设银行");
+        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
         list.add(bankInfo);
         bankInfo = new BankInfo();
-        bankInfo.setName("农业银行");
-        bankInfo.setStatus(Constant.BANK_STATUS_APPLYING);
+        bankInfo.setBankName("农业银行");
+        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
         list.add(bankInfo);
         mAdapter = new BankCardListAdapter(BankCardListActivity.this, list);
         mRececyclerView.setAdapter(mAdapter);

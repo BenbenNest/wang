@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.showCenter(LoginActivity.this, "身份证号码或者密码错误");
                     return;
                 }
-                HomeActivity.startActivity(LoginActivity.this);
+//                HomeActivity.startActivity(LoginActivity.this);
 
                 login();
 
@@ -93,6 +93,7 @@ public class LoginActivity extends BaseActivity {
         para.put("country_code", Constant.COUNTRY_CODE);
         para.put("password", pwdInputLayout.getText());
 //        para.put("mobile", phone.toString());
+        para.put("IDNum", idInputLayout.getText());
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
         Call<BaseModel<UserLoginData>> call = api.login(para);
