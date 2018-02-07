@@ -1,12 +1,12 @@
 package com.jeremy.wang.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -14,13 +14,26 @@ import android.widget.TextView;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.constant.Constant;
+import com.jeremy.wang.http.APIInterface;
+import com.jeremy.wang.http.RetrofitService;
+import com.jeremy.wang.model.BaseModel;
+import com.jeremy.wang.model.UserLoginData;
 import com.jeremy.wang.thread.NoLeakHandler;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.RegexUtils;
+import com.jeremy.wang.utils.StringUtil;
 import com.jeremy.wang.utils.ToastUtils;
 import com.jeremy.wang.view.CommonInputLayout;
 
-public class RegisterActivity extends Activity {
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class RegisterActivity extends BaseActivity {
     CommonInputLayout mIdInputLayout;
     CommonInputLayout mPasswordInputLayout;
     CommonInputLayout mPasswordAgainInputLayout;
@@ -87,6 +100,7 @@ public class RegisterActivity extends Activity {
                     return;
                 }
                 saveAccountInfo();
+                register();
                 ToastUtils.showCenter(RegisterActivity.this, "注册成功！");
                 noLeakHandler.postDelayed(new Runnable() {
                     @Override
@@ -95,6 +109,46 @@ public class RegisterActivity extends Activity {
                         startActivity(intent);
                     }
                 }, 1000);
+
+            }
+        });
+    }
+
+    private void register() {
+        Map<String, String> para = new HashMap<>();
+        para.put("app_id", Constant.APPID);
+        para.put("country_code", Constant.COUNTRY_CODE);
+
+        para.put("password", StringUtil.shaEncrypt(mPasswordInputLayout.getText()));
+        para.put("id", phone.toString());
+        para.put("headSculpture", "");
+        para.put("phoneNumber", "");
+        para.put("address", "");
+        para.put("idNumber", "");
+
+
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+        Call<BaseModel<UserLoginData>> call = api.register(para);
+        call.enqueue(new Callback<BaseModel<UserLoginData>>() {
+            @Override
+            public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
+                try {
+                    if (response == null || response.body() == null || response.body().data == null) {
+
+                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
+                        String token = response.body().data.access_token;
+//                        getUserMessage(response.body().data, token, uiCallback);
+//                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+                    }
+                } catch (Exception e) {
+                    Log.d("", e.getMessage());
+                }
+                startActivity(RegisterActivity.this, LoginActivity.class);
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<UserLoginData>> call, Throwable t) {
 
             }
         });

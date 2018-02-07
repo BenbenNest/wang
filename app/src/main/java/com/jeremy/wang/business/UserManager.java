@@ -13,6 +13,7 @@ import com.jeremy.wang.utils.PreferenceUtils;
 public class UserManager {
 
     public static boolean checkLogin(Context context) {
+        //全局静态变量保存登录信息，一旦应用被杀死，需要重新登录
         boolean flag = false;
         String id = PreferenceUtils.getData(context, Constant.PREFERENCE_ACCOUNT_ID, "").toString();
         String pwd = PreferenceUtils.getData(context, Constant.PREFERENCE_ACCOUNT_PWD, "").toString();

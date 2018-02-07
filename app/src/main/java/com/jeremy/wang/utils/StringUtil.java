@@ -1,7 +1,7 @@
 package com.jeremy.wang.utils;
 
-import android.text.TextUtils;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,30 +15,6 @@ public class StringUtil {
 
     public static final int INDEX_NOT_FOUND = -1;
 
-    /**
-     * 检测是否有emoji表情 * @param source * @return
-     */
-    public static boolean containsEmoji(String source) {
-        int len = source.length();
-        for (int i = 0; i < len; i++) {
-            char codePoint = source.charAt(i);
-            if (!isEmojiCharacter(codePoint)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断是否是Emoji * @param codePoint 比较的单个字符 * @return
-     */
-    private static boolean isEmojiCharacter(char codePoint) {
-        return (codePoint == 0x0) || (codePoint == 0x9) || (codePoint == 0xA) || (codePoint == 0xD)
-                || ((codePoint >= 0x20) && (codePoint <= 0xD7FF))
-                || ((codePoint >= 0xE000) && (codePoint <= 0xFFFD))
-                || ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF));
-    }
-
     public static boolean isEmpty(final CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
@@ -46,22 +22,6 @@ public class StringUtil {
     public static boolean isNotEmpty(final CharSequence cs) {
         return !isEmpty(cs);
     }
-
-//    public static boolean equals(final CharSequence cs1, final CharSequence cs2) {
-//        if (cs1 == cs2) {
-//            return true;
-//        }
-//        if (cs1 == null || cs2 == null) {
-//            return false;
-//        }
-//        if (cs1.length() != cs2.length()) {
-//            return false;
-//        }
-//        if (cs1 instanceof String && cs2 instanceof String) {
-//            return cs1.equals(cs2);
-//        }
-//        return CharSequenceUtils.regionMatches(cs1, false, 0, cs2, 0, cs1.length());
-//    }
 
     public static String removeStart(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -139,19 +99,6 @@ public class StringUtil {
         return str;
     }
 
-//    public static boolean startsWith(final CharSequence str, final CharSequence prefix) {
-//        return startsWith(str, prefix, false);
-//    }
-
-//    private static boolean startsWith(final CharSequence str, final CharSequence prefix, final boolean ignoreCase) {
-//        if (str == null || prefix == null) {
-//            return str == null && prefix == null;
-//        }
-//        if (prefix.length() > str.length()) {
-//            return false;
-//        }
-//        return CharSequenceUtils.regionMatches(str, ignoreCase, 0, prefix, 0, prefix.length());
-//    }
 
     public static String replaceCR(String str) {
         String dest = "";
@@ -164,30 +111,42 @@ public class StringUtil {
     }
 
     /**
-     * emoij表情过滤
-     * @param text
-     * @return
+     * SHA加密
+     *
+     * @param strSrc 明文
+     * @return 加密之后的密文
      */
-    public static String filterEmoij(String text) {
-        if(TextUtils.isEmpty(text)) {
-            return "";
+    public static String shaEncrypt(String strSrc) {
+        MessageDigest md = null;
+        String strDes = null;
+        byte[] bt = strSrc.getBytes();
+        try {
+            md = MessageDigest.getInstance("SHA-256");// 将此换成SHA-1、SHA-512、SHA-384等参数
+            md.update(bt);
+            strDes = bytes2Hex(md.digest()); // to HexString
+        } catch (NoSuchAlgorithmException e) {
+            return null;
         }
-
-        Pattern emoji = Pattern.compile(
-                "[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
-                Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
-        Matcher matcher = emoji.matcher(text);
-        StringBuffer sb = new StringBuffer();
-        // 使用 find() 方法查找第一个匹配的对象
-        boolean result = matcher.find();
-        // 使用循环将句子里所有的表情找出并替换再将内容加到 sb 里
-        while(result) {
-            matcher.appendReplacement(sb, "");
-            // 继续查找下一个匹配对象
-            result = matcher.find();
-        }
-        // 最后调用 appendTail() 方法将最后一次匹配后的剩余字符串加到 sb 里；
-        matcher.appendTail(sb);
-        return sb.toString();
+        return strDes;
     }
+
+    /**
+     * byte数组转换为16进制字符串
+     *
+     * @param bts 数据源
+     * @return 16进制字符串
+     */
+    public static String bytes2Hex(byte[] bts) {
+        String des = "";
+        String tmp = null;
+        for (int i = 0; i < bts.length; i++) {
+            tmp = (Integer.toHexString(bts[i] & 0xFF));
+            if (tmp.length() == 1) {
+                des += "0";
+            }
+            des += tmp;
+        }
+        return des;
+    }
+
 }

@@ -15,6 +15,7 @@ import com.jeremy.wang.http.RetrofitService;
 import com.jeremy.wang.model.BaseModel;
 import com.jeremy.wang.model.UserLoginData;
 import com.jeremy.wang.utils.PreferenceUtils;
+import com.jeremy.wang.utils.StringUtil;
 import com.jeremy.wang.utils.ToastUtils;
 import com.jeremy.wang.view.CommonButton;
 import com.jeremy.wang.view.CommonInputLayout;
@@ -59,7 +60,6 @@ public class LoginActivity extends BaseActivity {
 
         idInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         pwdInputLayout = (CommonInputLayout) findViewById(R.id.password_input_layout);
-
         String id = PreferenceUtils.getData(LoginActivity.this, Constant.PREFERENCE_ACCOUNT_ID, "").toString();
         String pwd = PreferenceUtils.getData(LoginActivity.this, Constant.PREFERENCE_ACCOUNT_PWD, "").toString();
         idInputLayout.setText(id);
@@ -67,7 +67,6 @@ public class LoginActivity extends BaseActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String id = idInputLayout.getText();
                 String pwd = pwdInputLayout.getText();
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(pwd)) {
@@ -79,7 +78,6 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
 //                HomeActivity.startActivity(LoginActivity.this);
-
                 login();
 
             }
@@ -91,9 +89,9 @@ public class LoginActivity extends BaseActivity {
         Map<String, String> para = new HashMap<>();
         para.put("app_id", Constant.APPID);
         para.put("country_code", Constant.COUNTRY_CODE);
-        para.put("password", pwdInputLayout.getText());
+        para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
 //        para.put("mobile", phone.toString());
-        para.put("IDNum", idInputLayout.getText());
+        para.put("name", idInputLayout.getText());
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
         Call<BaseModel<UserLoginData>> call = api.login(para);
