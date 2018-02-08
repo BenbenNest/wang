@@ -122,9 +122,9 @@ public class RegisterActivity extends BaseActivity {
         para.put("password", StringUtil.shaEncrypt(mPasswordInputLayout.getText()));
         para.put("id", phone.toString());
         para.put("headSculpture", "");
-        para.put("phoneNumber", "");
+        para.put("phoneNumber", mPhoneInputLayout.getText());
         para.put("address", "");
-        para.put("idNumber", "");
+        para.put("idNumber", mIdInputLayout.getText());
 
 
         Retrofit retrofit = new RetrofitService().getRetrofit();

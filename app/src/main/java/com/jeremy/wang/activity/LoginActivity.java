@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.app.AppGlobal;
 import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.http.APIInterface;
 import com.jeremy.wang.http.RetrofitService;
 import com.jeremy.wang.model.BaseModel;
 import com.jeremy.wang.model.UserLoginData;
+import com.jeremy.wang.utils.NetUtil;
 import com.jeremy.wang.utils.PreferenceUtils;
 import com.jeremy.wang.utils.StringUtil;
 import com.jeremy.wang.utils.ToastUtils;
@@ -86,6 +88,10 @@ public class LoginActivity extends BaseActivity {
 
 
     private void login() {
+        if (!NetUtil.isNetworkConnectionActive(LoginActivity.this)) {
+            ToastUtils.showCenter(LoginActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
         Map<String, String> para = new HashMap<>();
         para.put("app_id", Constant.APPID);
         para.put("country_code", Constant.COUNTRY_CODE);
@@ -100,16 +106,22 @@ public class LoginActivity extends BaseActivity {
             public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
                 try {
                     if (response == null || response.body() == null || response.body().data == null) {
-
-                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
-                        String token = response.body().data.access_token;
+                        ToastUtils.showCenter(LoginActivity.this, "登录失败，请稍后重试");
+                    } else if (response.code() == 200) {
+                        if (BaseModel.SUCCESS.equals(response.body().result_code)) {
+                            String token = response.body().data.access_token;
+                            AppGlobal.mUserLoginData = response.body().data;
+                            HomeActivity.startActivity(LoginActivity.this);
 //                        getUserMessage(response.body().data, token, uiCallback);
 //                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+                        } else {
+                            ToastUtils.showCenter(LoginActivity.this, response.body().msg);
+                        }
                     }
                 } catch (Exception e) {
                     Log.d("", e.getMessage());
                 }
-                HomeActivity.startActivity(LoginActivity.this);
+
             }
 
             @Override
