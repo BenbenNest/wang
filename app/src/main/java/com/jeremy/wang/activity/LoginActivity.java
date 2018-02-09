@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.jeremy.wang.R;
@@ -114,6 +115,7 @@ public class LoginActivity extends BaseActivity {
                             HomeActivity.startActivity(LoginActivity.this);
 //                        getUserMessage(response.body().data, token, uiCallback);
 //                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+
                         } else {
                             ToastUtils.showCenter(LoginActivity.this, response.body().msg);
                         }
@@ -131,6 +133,13 @@ public class LoginActivity extends BaseActivity {
         });
 
 
+    }
+
+    private void rememberUser() {
+        CheckBox chkRemember = (CheckBox) findViewById(R.id.chk_remember);
+        if (chkRemember.isChecked()) {
+
+        }
     }
 
 
