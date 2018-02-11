@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jeremy.wang.R;
@@ -26,14 +29,16 @@ public class SearchView extends LinearLayout {
     private void init(Context context, AttributeSet attrs) {
 
         LayoutInflater.from(context).inflate(R.layout.search_view_layout, this, true);
-//        TextView tvBankName = findViewById(R.id.bank_name);
-//        ImageView btAction = findViewById(R.id.bt_action);
-//        btAction.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        EditText etContent = (EditText) findViewById(R.id.et_content);
+        ImageView ivSearch = (ImageView) findViewById(R.id.iv_search);
+
+        ivSearch.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 //        if (attrs != null) {
 //            TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.BankListItemView);
 //            String bankName = typedArray.getString(R.styleable.BankListItemView_bank_name);

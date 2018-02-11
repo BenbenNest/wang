@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.activity.bank.BankListActivity;
+import com.jeremy.wang.activity.bank.BranchListActivity;
 
 public class ChooseBankActivity extends BaseActivity {
 
@@ -38,6 +39,13 @@ public class ChooseBankActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(ChooseBankActivity.this, BankListActivity.class);
+            }
+        });
+        EditText mEditBranchView = (EditText) findViewById(R.id.et_branch);
+        mEditBranchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ChooseBankActivity.this, BranchListActivity.class);
             }
         });
     }

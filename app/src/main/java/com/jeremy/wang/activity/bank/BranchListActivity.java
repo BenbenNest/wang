@@ -7,7 +7,7 @@ import com.jeremy.wang.R;
 import com.jeremy.wang.activity.BaseActivity;
 import com.jeremy.wang.adapter.BankListAdapter;
 
-public class BankListActivity extends BaseActivity {
+public class BranchListActivity extends BaseActivity {
 
     RecyclerView recyclerView;
     BankListAdapter bankListAdapter;
