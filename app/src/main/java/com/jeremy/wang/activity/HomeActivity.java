@@ -36,7 +36,8 @@ public class HomeActivity extends BaseActivity {
                 if (UserManager.checkLogin(HomeActivity.this)) {
                     BankCardListActivity.startActivity(HomeActivity.this);
                 } else {
-                    LoginActivity.startActivity(HomeActivity.this);
+//                    LoginActivity.startActivity(HomeActivity.this);
+                    BankCardListActivity.startActivity(HomeActivity.this);
                 }
             }
         });
@@ -55,7 +56,9 @@ public class HomeActivity extends BaseActivity {
                 if (UserManager.checkLogin(HomeActivity.this)) {
                     BankCardListActivity.startActivity(HomeActivity.this);
                 } else {
-                    LoginActivity.startActivity(HomeActivity.this);
+                    //TODO test
+//                    LoginActivity.startActivity(HomeActivity.this);
+                    BankCardListActivity.startActivity(HomeActivity.this);
                 }
             }
         });

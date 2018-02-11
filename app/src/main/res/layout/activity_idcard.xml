@@ -9,7 +9,7 @@
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        my:title="填写个人资料" />
+        my:title="@string/title_id_card" />
 
     <LinearLayout
         android:layout_width="match_parent"

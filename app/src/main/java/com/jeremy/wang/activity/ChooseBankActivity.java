@@ -7,13 +7,16 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.jeremy.wang.R;
+import com.jeremy.wang.activity.bank.BankListActivity;
 
 public class ChooseBankActivity extends BaseActivity {
 
     private AppCompatSpinner spinnerBank;
     private AppCompatSpinner spinnerAddress;
+    private EditText mEditBankView;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ChooseBankActivity.class);
@@ -29,6 +32,17 @@ public class ChooseBankActivity extends BaseActivity {
 
     private void init() {
         setTitle("选择开户银行");
+//        testSpinner();
+        mEditBankView = (EditText) findViewById(R.id.et_bank);
+        mEditBankView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ChooseBankActivity.this, BankListActivity.class);
+            }
+        });
+    }
+
+    private void testSpinner() {
         spinnerBank = (AppCompatSpinner) findViewById(R.id.spinner_bank);
         spinnerAddress = (AppCompatSpinner) findViewById(R.id.spinner_address);
         String[] name = {"中国银行", "工商银行", "建设银行", "农业银行", "北京银行"};

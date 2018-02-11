@@ -1,14 +1,21 @@
 <resources>
     <string name="app_name">龙吟</string>
 
+    <!--   title -->
+    <string name="title_personal_info">填写个人资料</string>
+    <string name="title_card_list">绑定银行卡</string>
+    <string name="title_id_card">身份证正反面识别</string>
+    <string name="title_bank_list">选择银行</string>
+
+    <!--   common -->
+    <string name="next">下一步</string>
+
 
     <!--   account -->
     <string name="ID">身份证</string>
     <string name="IDScan">身份证扫描</string>
     <string name="password">密码</string>
-    <string name="title_personal_info">填写个人资料</string>
-    <string name="next">下一步</string>
-    <string name="title_card_list">绑定银行卡</string>
+
     <string name="login">登录</string>
     <string name="contract">已经阅读并且同意《XX银行开户须知》</string>
     <string name="net_not_connect">请检查网络连接信息</string>

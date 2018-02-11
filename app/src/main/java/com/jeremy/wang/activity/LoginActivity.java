@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jeremy.wang.R;
 import com.jeremy.wang.app.AppGlobal;
+import com.jeremy.wang.app.AppPreference;
 import com.jeremy.wang.constant.Constant;
 import com.jeremy.wang.http.APIInterface;
 import com.jeremy.wang.http.RetrofitService;
@@ -99,6 +100,7 @@ public class LoginActivity extends BaseActivity {
         para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
 //        para.put("mobile", phone.toString());
         para.put("name", idInputLayout.getText());
+//        para=Urlb
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
         Call<BaseModel<UserLoginData>> call = api.login(para);
@@ -112,10 +114,8 @@ public class LoginActivity extends BaseActivity {
                         if (BaseModel.SUCCESS.equals(response.body().result_code)) {
                             String token = response.body().data.access_token;
                             AppGlobal.mUserLoginData = response.body().data;
+                            rememberUser();
                             HomeActivity.startActivity(LoginActivity.this);
-//                        getUserMessage(response.body().data, token, uiCallback);
-//                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
-
                         } else {
                             ToastUtils.showCenter(LoginActivity.this, response.body().msg);
                         }
@@ -123,12 +123,12 @@ public class LoginActivity extends BaseActivity {
                 } catch (Exception e) {
                     Log.d("", e.getMessage());
                 }
-
+                HomeActivity.startActivity(LoginActivity.this);
             }
 
             @Override
             public void onFailure(Call<BaseModel<UserLoginData>> call, Throwable t) {
-
+                HomeActivity.startActivity(LoginActivity.this);
             }
         });
 
@@ -138,7 +138,9 @@ public class LoginActivity extends BaseActivity {
     private void rememberUser() {
         CheckBox chkRemember = (CheckBox) findViewById(R.id.chk_remember);
         if (chkRemember.isChecked()) {
-
+            AppPreference.setRememberUserName(LoginActivity.this, true);
+        } else {
+            AppPreference.setRememberUserName(LoginActivity.this, false);
         }
     }
 

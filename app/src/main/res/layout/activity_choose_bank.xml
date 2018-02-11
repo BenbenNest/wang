@@ -11,23 +11,39 @@
         android:layout_height="wrap_content"
         my:title="选择开户银行" />
 
-    <RelativeLayout
+    <!--<com.jeremy.wang.view.CommonInputLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="20dp"-->
+    <!--my/>-->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开户银行" />
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="开户银行：" />
+
+        <EditText
+            android:id="@+id/et_bank"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:editable="false"
+            android:gravity="center_vertical" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
