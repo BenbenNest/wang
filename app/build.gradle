@@ -20,6 +20,10 @@ android {
 
         }
     }
+
+    sourceSets.main{
+        jniLibs.srcDirs = ['libs']
+    }
 }
 
 dependencies {
@@ -34,9 +38,19 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 //    implementation 'com.jakewharton:butterknife:8.8.1'
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.github.FacePlusPlus:MegviiIDCard-Android:0.3.0'
-    compile 'com.github.FacePlusPlus:MegviiLicMgr-Android-SDK:0.3.0'
-    compile 'com.loopj.android:android-async-http:1.4.9'
+
+
+
+//    compile 'com.github.FacePlusPlus:MegviiIDCard-Android:0.3.0'
+//    compile 'com.github.FacePlusPlus:MegviiLicMgr-Android-SDK:0.3.0'
+//    compile 'com.loopj.android:android-async-http:1.4.9'
+
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    compile files('libs/megvii-idcard-0.2.0.jar')
+//    compile files('libs/android-async-http-1.4.6.jar')
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

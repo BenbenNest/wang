@@ -28,22 +28,21 @@ public class AuthManager {
 
         String errorStr = licenseManager.getLastError();
         Log.w("ceshi", "getContent++++errorStr===" + errorStr);
-
+        licenseManager.setAuthTimeBufferMillis(0);
         licenseManager.takeLicenseFromNetwork(uuid, KeyUtil.API_KEY, KeyUtil.API_SECRET, apiName,
-                1, "IDCard", "1", true, new LicenseManager.TakeLicenseCallback() {
+                LicenseManager.DURATION_30DAYS, "IDCard", "1", true, new LicenseManager.TakeLicenseCallback() {
                     @Override
                     public void onSuccess() {
-                        Log.d(TAG,"IDCard onSuccess");
+                        Log.d(TAG, "IDCard onSuccess");
                         authCallBack.authState(true);
                     }
 
                     @Override
                     public void onFailed(int i, byte[] bytes) {
-                        Log.d(TAG,"IDCard onFailed :"+new String(bytes));
+                        Log.d(TAG, "IDCard onFailed :" + new String(bytes));
                         authCallBack.authState(false);
                     }
                 });
-
 
     }
 
