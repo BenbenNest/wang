@@ -24,14 +24,14 @@
         android:orientation="vertical"
         android:padding="25dp">
 
-        <com.jeremy.wang.view.CommonInputLayout
+        <com.nine.finance.view.CommonInputLayout
             android:id="@+id/id_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             my:input_drawable="@drawable/idcard"
             my:input_hint="@string/ID" />
 
-        <com.jeremy.wang.view.CommonInputLayout
+        <com.nine.finance.view.CommonInputLayout
             android:id="@+id/password_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:text="忘记密码" />
         </RelativeLayout>
 
-        <com.jeremy.wang.view.CommonButton
+        <com.nine.finance.view.CommonButton
             android:id="@+id/bt_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

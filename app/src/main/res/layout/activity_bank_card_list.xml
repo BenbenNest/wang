@@ -14,7 +14,7 @@
     <!--android:gravity="center"-->
     <!--android:text="已经绑定的银行卡列表如下：" />-->
 
-    <com.jeremy.wang.view.CommonHeadView
+    <com.nine.finance.view.CommonHeadView
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <com.jeremy.wang.view.CommonButton
+    <com.nine.finance.view.CommonButton
         android:id="@+id/bt_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

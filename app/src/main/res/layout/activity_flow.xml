@@ -6,7 +6,7 @@
     android:background="@drawable/bg_login_pic"
     android:orientation="vertical">
 
-    <com.jeremy.wang.view.CommonHeadView
+    <com.nine.finance.view.CommonHeadView
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

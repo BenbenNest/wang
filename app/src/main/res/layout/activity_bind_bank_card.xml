@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/head_bg">
 
-        <com.jeremy.wang.view.CommonHeadView
+        <com.nine.finance.view.CommonHeadView
             android:id="@+id/head_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <com.jeremy.wang.view.CommonInputLayout
+        <com.nine.finance.view.CommonInputLayout
             android:id="@+id/contact_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             my:input_drawable="@drawable/phone"
             my:input_hint="持卡人姓名：" />
 
-        <com.jeremy.wang.view.CommonInputLayout
+        <com.nine.finance.view.CommonInputLayout
             android:id="@+id/address_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
     </LinearLayout>
 
 
-    <com.jeremy.wang.view.CommonButton
+    <com.nine.finance.view.CommonButton
         android:id="@+id/bt_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

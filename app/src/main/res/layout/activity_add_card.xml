@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jeremy.wang.activity.AddCardActivity">
+    tools:context="com.nine.finance.activity.AddCardActivity">
 
 </android.support.constraint.ConstraintLayout>

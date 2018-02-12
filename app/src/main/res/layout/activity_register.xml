@@ -44,7 +44,7 @@
             android:paddingLeft="@dimen/public_common_padding"
             android:paddingRight="@dimen/public_common_padding">
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/id_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 my:input_hint="拍摄身份证" />
 
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 my:input_hint="密码"
                 my:input_pwd="true" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/password_again_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,28 +68,28 @@
                 my:input_hint="确认密码"
                 my:input_pwd="true" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/mobile"
                 my:input_hint="输入手机号" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/verify_code_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/password"
                 my:input_hint="输入验证码" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/contact_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/phone"
                 my:input_hint="联系方式" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/address_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 
             </LinearLayout>
 
-            <com.jeremy.wang.view.CommonButton
+            <com.nine.finance.view.CommonButton
                 android:id="@+id/bt_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

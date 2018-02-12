@@ -97,14 +97,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.jeremy.wang.view.BusinessRectView
+            <com.nine.finance.view.BusinessRectView
                 android:id="@+id/create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 my:business_text="我要开户" />
 
-            <com.jeremy.wang.view.BusinessRectView
+            <com.nine.finance.view.BusinessRectView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,13 +116,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.jeremy.wang.view.BusinessRectView
+            <com.nine.finance.view.BusinessRectView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 my:business_text="商品" />
 
-            <com.jeremy.wang.view.BusinessRectView
+            <com.nine.finance.view.BusinessRectView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

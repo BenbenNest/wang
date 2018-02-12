@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo" />
 
-    <com.jeremy.wang.view.PersonalInfoRow
+    <com.nine.finance.view.PersonalInfoRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -18,7 +18,7 @@
         my:icon="@drawable/account_login_phone_number_icon"
         my:title="头像" />
 
-    <com.jeremy.wang.view.PersonalInfoRow
+    <com.nine.finance.view.PersonalInfoRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -26,7 +26,7 @@
         my:icon="@drawable/account_login_phone_number_icon"
         my:title="身份证号" />
 
-    <com.jeremy.wang.view.PersonalInfoRow
+    <com.nine.finance.view.PersonalInfoRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,7 +34,7 @@
         my:icon="@drawable/account_login_phone_number_icon"
         my:title="绑定银行卡" />
 
-    <com.jeremy.wang.view.PersonalInfoRow
+    <com.nine.finance.view.PersonalInfoRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

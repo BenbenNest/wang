@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jeremy.wang.activity.FillAccountInfoActivity">
+    tools:context="com.nine.finance.activity.FillAccountInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/head_bg">
 
-        <com.jeremy.wang.view.CommonHeadView
+        <com.nine.finance.view.CommonHeadView
             android:id="@+id/head_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,87 +31,87 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/contact_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="身份证号" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="姓名" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="性别" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="年龄" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="国籍" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="籍贯" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="联系电话" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="Email" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="家庭电话" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="开户用途" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="邮编" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="职业" />
 
-            <com.jeremy.wang.view.CommonInputLayout
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/address_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/address"
                 my:input_hint="住址" />
 
-            <com.jeremy.wang.view.CommonButton
+            <com.nine.finance.view.CommonButton
                 android:id="@+id/bt_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
