@@ -38,5 +38,6 @@
     <dimen name="public_fellow_option_margin_top">60dp</dimen>
     <dimen name="public_fellow_contact_name_margin_top">6dp</dimen>
     <dimen name="public_fellow_contact_phone_margin_top">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

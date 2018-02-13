@@ -10,21 +10,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name="com.nine.finance.app.MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/logo_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.nine.finance.MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity
-            android:name="com.nine.finance.activity.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,113 +36,117 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nine.finance.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.IDCardUploadActivity"
+            android:name=".activity.IDCardUploadActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.PersonalInfoActivity"
+            android:name=".activity.PersonalInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.AddCardActivity"
+            android:name=".activity.AddCardActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.BankCardScanActivity"
+            android:name=".activity.BankCardScanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.FaceScanActivity"
+            android:name=".activity.FaceScanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.EditPersonalInfoActivity"
+            android:name=".activity.EditPersonalInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.BankCardListActivity"
+            android:name=".activity.BankCardListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.ChooseBankActivity"
+            android:name=".activity.ChooseBankActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.WebViewActivity"
+            android:name=".activity.WebViewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.CreateAccountActivity"
+            android:name=".activity.CreateAccountActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.BankIntroActivity"
+            android:name=".activity.BankIntroActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.BankContractActivity"
+            android:name=".activity.BankContractActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.IDCardActivity"
+            android:name=".activity.IDCardActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.FlowActivity"
+            android:name=".activity.FlowActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.FillAccountInfoActivity"
+            android:name=".activity.FillAccountInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.FillMobileActivity"
+            android:name=".activity.FillMobileActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.BindBankCardActivity"
+            android:name=".activity.BindBankCardActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.ChooseBankTypeActivity"
+            android:name=".activity.ChooseBankTypeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.VerifyCodeActivity"
+            android:name=".activity.VerifyCodeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.DynamicRecognizeActivity"
+            android:name=".activity.DynamicRecognizeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.FaceRecognizeActivity"
+            android:name=".activity.FaceRecognizeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.SubmitApplyActivity"
+            android:name=".activity.SubmitApplyActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.bank.BankListActivity"
+            android:name=".activity.bank.BankListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.nine.finance.activity.bank.BranchListActivity"
+            android:name=".activity.bank.BranchListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".idcard.IDCardScanActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/title_activity_idcard_scan"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -150,8 +157,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
     </application>
 
 </manifest>

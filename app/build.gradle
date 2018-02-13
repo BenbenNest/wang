@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.nine.finance"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,7 +21,7 @@ android {
         }
     }
 
-    sourceSets.main{
+    sourceSets.main {
         jniLibs.srcDirs = ['libs']
     }
 }
@@ -39,13 +39,12 @@ dependencies {
 //    implementation 'com.jakewharton:butterknife:8.8.1'
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-
-
 //    compile 'com.github.FacePlusPlus:MegviiIDCard-Android:0.3.0'
 //    compile 'com.github.FacePlusPlus:MegviiLicMgr-Android-SDK:0.3.0'
 //    compile 'com.loopj.android:android-async-http:1.4.9'
 
 
+    implementation 'com.android.support:design:26.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
 //    compile files('libs/megvii-idcard-0.2.0.jar')

@@ -80,4 +80,5 @@
     <string name="photo_too_lage">图片太大！</string>
     <string name="no_sdcard">无sdcard！</string>
     <string name="takephoto_fail">拍照失败</string>
+    <string name="title_activity_idcard_scan">IDCardScanActivity</string>
 </resources>
