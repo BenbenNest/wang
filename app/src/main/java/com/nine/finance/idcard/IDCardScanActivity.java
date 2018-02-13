@@ -288,6 +288,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
         });
 //        Intent intent = new Intent(this, IDCardActivity.class);
         Intent intent = new Intent(this, IDCardResultActivity.class);
+//        Intent intent =new Intent();
         intent.putExtra("iCardQuality", iCardQuality);
         intent.putExtra("path", path);
         intent.putExtra("clear", clear);
@@ -296,7 +297,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
         intent.putExtra("isClearShadow", isClearShadow);
         intent.putExtra("isTextDetect", isTextDetect);
         startActivity(intent);
-        //setResult(RESULT_OK, intent);
+//        setResult(RESULT_OK, intent);
         finish();
     }
 

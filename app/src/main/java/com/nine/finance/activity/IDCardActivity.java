@@ -2,11 +2,14 @@ package com.nine.finance.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nine.finance.R;
@@ -17,6 +20,8 @@ import com.nine.finance.idcard.util.Screen;
 
 public class IDCardActivity extends BaseActivity implements AuthManager.AuthCallBack {
 
+    private ImageView mIvDirect;
+    private ImageView mIvNonDirect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,18 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
         init();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String path = getIntent().getStringExtra("path");
+        boolean direct = getIntent().getBooleanExtra("direct", true);
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        if (direct) {
+            mIvDirect.setImageBitmap(bitmap);
+        } else {
+            mIvNonDirect.setImageBitmap(bitmap);
+        }
+    }
 
     private void init() {
         findViewById(R.id.id_direct).setOnClickListener(onClickListener);
