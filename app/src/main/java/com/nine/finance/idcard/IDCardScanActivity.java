@@ -23,7 +23,6 @@ import com.megvii.idcard.sdk.IDCard.IDCardConfig;
 import com.megvii.idcard.sdk.IDCard.IDCardDetect;
 import com.megvii.idcard.sdk.IDCard.IDCardQuality;
 import com.nine.finance.R;
-import com.nine.finance.activity.IDCardActivity;
 import com.nine.finance.idcard.util.ConUtil;
 import com.nine.finance.idcard.util.DialogUtil;
 import com.nine.finance.idcard.util.ICamera;
@@ -287,8 +286,8 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
                 verticalType.setText("");
             }
         });
-        Intent intent = new Intent(this, IDCardActivity.class);
-//        Intent intent = new Intent(this, IDCardResultActivity.class);
+//        Intent intent = new Intent(this, IDCardActivity.class);
+        Intent intent = new Intent(this, IDCardResultActivity.class);
         intent.putExtra("iCardQuality", iCardQuality);
         intent.putExtra("path", path);
         intent.putExtra("clear", clear);

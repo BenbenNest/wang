@@ -147,6 +147,7 @@
             android:hardwareAccelerated="true"
             android:label="@string/title_activity_idcard_scan"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".idcard.IDCardResultActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
