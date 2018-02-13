@@ -21,10 +21,10 @@ public interface APIInterface {
 //    ip:8080/web/user/login
 
     @FormUrlEncoded
-    @POST("/web/user/login")
+    @POST("/account/user/login")
     Call<BaseModel<UserLoginData>> login(@FieldMap Map<String, String> params);
 
-    @GET("/web/user/login")
+    @GET("/account/user/logout")
     Call<BaseModel<String>> logOut();
 
     @FormUrlEncoded
