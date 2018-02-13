@@ -5,10 +5,13 @@ import com.nine.finance.model.UserLoginData;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -20,9 +23,10 @@ public interface APIInterface {
 
 //    ip:8080/web/user/login
 
-    @FormUrlEncoded
-    @POST("/account/user/login")
-    Call<BaseModel<UserLoginData>> login(@FieldMap Map<String, String> params);
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+//    @FormUrlEncoded
+    @POST("/account/rest/user/login")
+    Call<BaseModel<UserLoginData>> login(@Body RequestBody body);
 
     @GET("/account/user/logout")
     Call<BaseModel<String>> logOut();
@@ -48,7 +52,6 @@ public interface APIInterface {
 //    String phoneNumber;
 //    String address;
 //    String idNumber;
-
 
 
 //5、GET:user/productGoodMap/countByGood 某商品当前共关联了多少理财产品

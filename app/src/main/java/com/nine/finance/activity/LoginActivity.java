@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.app.AppPreference;
+import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
@@ -19,7 +21,6 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserLoginData;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
-import com.nine.finance.utils.StringUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonButton;
 import com.nine.finance.view.CommonInputLayout;
@@ -27,6 +28,7 @@ import com.nine.finance.view.CommonInputLayout;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,35 +97,44 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         Map<String, String> para = new HashMap<>();
-        para.put("app_id", Constant.APPID);
-        para.put("country_code", Constant.COUNTRY_CODE);
-        para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
+//        para.put("app_id", Constant.APPID);
+//        para.put("country_code", Constant.COUNTRY_CODE);
+//        para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
 //        para.put("mobile", phone.toString());
         para.put("name", idInputLayout.getText());
+        para.put("password", pwdInputLayout.getText().toString().trim());
 //        para=Urlb
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
-        Call<BaseModel<UserLoginData>> call = api.login(para);
+
+        Gson gson = new Gson();
+        String strEntity = gson.toJson(para);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+        Call<BaseModel<UserLoginData>> call = api.login(body);
         call.enqueue(new Callback<BaseModel<UserLoginData>>() {
             @Override
             public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
                 try {
-                    if (response == null || response.body() == null || response.body().data == null) {
+                    if (response == null || response.body() == null || response.body().content == null) {
                         ToastUtils.showCenter(LoginActivity.this, "登录失败，请稍后重试");
                     } else if (response.code() == 200) {
-                        if (BaseModel.SUCCESS.equals(response.body().result_code)) {
-                            String token = response.body().data.access_token;
-                            AppGlobal.mUserLoginData = response.body().data;
+                        if (BaseModel.SUCCESS.equals(response.body().status)) {
+                            UserLoginData loginData = response.body().content;
+                            loginData.setUsername(idInputLayout.getText().toString().trim());
+                            String token = loginData.getToken();
+                            AppGlobal.mUserLoginData = loginData;
                             rememberUser();
+                            UserManager.saveUserData(getApplicationContext(), loginData);
                             HomeActivity.startActivity(LoginActivity.this);
                         } else {
-                            ToastUtils.showCenter(LoginActivity.this, response.body().msg);
+                            ToastUtils.showCenter(LoginActivity.this, response.message());
                         }
-                    }
+                    }//http://39.106.173.14:8088/account/rest/account/user/login
                 } catch (Exception e) {
                     Log.d("", e.getMessage());
                 }
-                HomeActivity.startActivity(LoginActivity.this);
+//                HomeActivity.startActivity(LoginActivity.this);
             }
 
             @Override

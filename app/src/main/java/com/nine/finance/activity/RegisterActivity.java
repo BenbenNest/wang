@@ -134,13 +134,13 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
                 try {
-                    if (response == null || response.body() == null || response.body().data == null) {
-
-                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
-                        String token = response.body().data.access_token;
-//                        getUserMessage(response.body().data, token, uiCallback);
-//                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
-                    }
+//                    if (response == null || response.body() == null || response.body().data == null) {
+//
+//                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
+////                        String token = response.body().data.access_token;
+////                        getUserMessage(response.body().data, token, uiCallback);
+////                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+//                    }
                 } catch (Exception e) {
                     Log.d("", e.getMessage());
                 }

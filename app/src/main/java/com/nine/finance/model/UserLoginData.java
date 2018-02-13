@@ -3,15 +3,28 @@ package com.nine.finance.model;
 import java.io.Serializable;
 
 public class UserLoginData implements Serializable {
-    public String access_token = "";
+    /**
+     * username : admin
+     * password : 123456
+     * token : F4EA8B5BEEC14DC8872116195CFDFBB2
+     */
 
-    public String token_type = "";
+    private String username;
+    private String token;
 
-    public String created_at = "";
+    public String getUsername() {
+        return username;
+    }
 
-    public String expires_in = "";
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public String user_id = "";
+    public String getToken() {
+        return token;
+    }
 
-    public int credit = 0;
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

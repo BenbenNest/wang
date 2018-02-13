@@ -18,4 +18,6 @@ public class AppPreference {
         PreferenceUtils.saveData(context, KEY_REMEMBER_USER_NAME, flag);
     }
 
+
+
 }

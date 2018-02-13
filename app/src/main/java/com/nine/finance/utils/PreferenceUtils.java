@@ -27,6 +27,8 @@ public class PreferenceUtils {
             editor.putFloat(key, (Float) data);
         } else if ("Long".equals(type)) {
             editor.putLong(key, (Long) data);
+        } else {
+
         }
 
         editor.commit();
@@ -52,8 +54,6 @@ public class PreferenceUtils {
 
         return null;
     }
-
-
 
 
 }

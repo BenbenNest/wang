@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 /**
  * {@code Gson}工具类
  *
- * @author jeremy
  */
 public class GsonCore {
     /**
@@ -44,7 +43,7 @@ public class GsonCore {
 
     public static <T> T fromJson(String json, Type typeOfT) {
         if (typeOfT == null) {
-            throw new IllegalStateException("Gson解析所需的 NextEVModel TypeToken 不可为空");
+            throw new IllegalStateException("Gson解析所需的 Model TypeToken 不可为空");
         }
 
         Gson gson = new GsonBuilder()
