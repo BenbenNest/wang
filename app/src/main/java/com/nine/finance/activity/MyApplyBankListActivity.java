@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -32,9 +33,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MyApplyBankListActivity extends BaseActivity {
+    private String TAG = MyApplyBankListActivity.class.getSimpleName();
     RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
+    private boolean loading = false;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, MyApplyBankListActivity.class);
@@ -57,7 +60,11 @@ public class MyApplyBankListActivity extends BaseActivity {
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                loadMoreData();
+                Log.d(TAG, "onLoadMore");
+                if (!loading) {
+                    loading = true;
+                    loadMoreData();
+                }
             }
         });
 
@@ -94,10 +101,31 @@ public class MyApplyBankListActivity extends BaseActivity {
         mRececyclerView.setAdapter(mAdapter);
     }
 
+    private List<BankInfo> getData() {
+        List<BankInfo> list = new ArrayList<BankInfo>();
+        BankInfo bankInfo = new BankInfo();
+        bankInfo.setBankName("中国银行");
+        bankInfo.setState(Constant.BANK_STATUS_OK);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setBankName("工商银行");
+        bankInfo.setState(Constant.BANK_STATUS_OK);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setBankName("建设银行");
+        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
+        list.add(bankInfo);
+        bankInfo = new BankInfo();
+        bankInfo.setBankName("农业银行");
+        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
+        list.add(bankInfo);
+        return list;
+    }
+
     private void loadMoreData() {
-
+        mAdapter.addData(getData());
         mAdapter.notifyDataSetChanged();
-
+        loading = false;
     }
 
     private void requestData(int page) {

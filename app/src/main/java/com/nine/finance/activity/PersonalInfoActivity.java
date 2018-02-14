@@ -26,9 +26,7 @@ public class PersonalInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
         init();
-
     }
-
 
     private void init() {
         btLogout = (CommonButton) findViewById(R.id.bt_logout);
@@ -38,7 +36,6 @@ public class PersonalInfoActivity extends BaseActivity {
                 logOut();
             }
         });
-
     }
 
     public void logOut() {
