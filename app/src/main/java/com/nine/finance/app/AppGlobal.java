@@ -5,6 +5,8 @@ import android.content.Context;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 
+import org.json.JSONObject;
+
 /**
  * Created by jeremy
  */
@@ -24,5 +26,9 @@ public class AppGlobal {
     public static volatile UserInfo mUserInfo;
 
     public static volatile UserLoginData mUserLoginData;
+
+    public static JSONObject mIDCardFront;
+
+    public static JSONObject mIDCardBack;
 
 }

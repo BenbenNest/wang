@@ -32,37 +32,42 @@
             android:padding="20dp">
 
             <com.nine.finance.view.CommonInputLayout
-                android:id="@+id/contact_input_layout"
+                android:id="@+id/id_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="身份证号" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="姓名" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/sex_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="性别" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/age_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="年龄" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/nation_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="国籍" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/home_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"

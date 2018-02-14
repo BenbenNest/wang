@@ -15,19 +15,32 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.megvii.idcard.sdk.IDCard;
 import com.megvii.idcard.sdk.IDCard.IDCardConfig;
 import com.megvii.idcard.sdk.IDCard.IDCardDetect;
 import com.megvii.idcard.sdk.IDCard.IDCardQuality;
 import com.nine.finance.R;
+import com.nine.finance.activity.IDCardActivity;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.idcard.util.ConUtil;
 import com.nine.finance.idcard.util.DialogUtil;
 import com.nine.finance.idcard.util.ICamera;
 import com.nine.finance.idcard.util.IDCardIndicator;
 import com.nine.finance.idcard.util.Util;
+import com.nine.finance.utils.KeyUtil;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class IDCardScanActivity extends Activity implements TextureView.SurfaceTextureListener, Camera.PreviewCallback {
 
@@ -45,6 +58,8 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
     private ImageView image;
     private float setClear = 0.8f, setIdcard = -1f, setBound = 0.8f;
     private RelativeLayout barRel;
+    private ProgressBar mBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +104,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
         errorType = (TextView) findViewById(R.id.idcardscan_layout_error_type);
         verticalType = (TextView) findViewById(R.id.idcardscan_layout_verticalerror_type);
         mIndicatorView = (IDCardIndicator) findViewById(R.id.idcardscan_layout_indicator);
-
+        mBar = (ProgressBar) findViewById(R.id.result_bar);
         if (mIsVertical) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             verticalType.setVisibility(View.VISIBLE);
@@ -237,7 +252,8 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
                         Bitmap bitmap = ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
                                 mIsVertical);
                         String path = ConUtil.saveBitmap(IDCardScanActivity.this, bitmap);
-                        enterToResult(path, idCardQuality, clear, is_idcard, in_bound);
+//                        enterToResult(path, idCardQuality, clear, is_idcard, in_bound);
+                        doOCR(path);
                     } else
                         isSuccess = false;
                 } else {
@@ -287,7 +303,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
             }
         });
 //        Intent intent = new Intent(this, IDCardResultActivity.class);
-        Intent intent =new Intent();
+        Intent intent = new Intent();
         intent.putExtra("iCardQuality", iCardQuality);
         intent.putExtra("path", path);
         intent.putExtra("clear", clear);
@@ -298,6 +314,108 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
 //        startActivity(intent);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void enterToResult(String path, String info) {
+        Intent intent = new Intent();
+        intent.putExtra("path", path);
+        intent.putExtra("info", info);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    /**
+     * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
+     */
+    public void doOCR(final String path) {
+        mBar.setVisibility(View.VISIBLE);
+        try {
+            String url = "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard";
+            RequestParams rParams = new RequestParams();
+            Log.w("ceshi", "Util.API_OCRKEY===" + Util.API_SECRET + ", Util.API_OCRSECRET===" + Util.API_SECRET);
+            rParams.put("api_key", KeyUtil.API_KEY);
+            rParams.put("api_secret", KeyUtil.API_SECRET);
+            rParams.put("image_file", new File(path));
+            rParams.put("legality", 1 + "");
+            AsyncHttpClient asyncHttpclient = new AsyncHttpClient();
+            asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
+                    mBar.setVisibility(View.GONE);
+
+                    try {
+                        String successStr = new String(responseByte);
+                        Log.w("ceshi", "ocr  onSuccess: " + successStr);
+                        String info = "";
+                        JSONObject jObject = new JSONObject(successStr).getJSONArray("cards").getJSONObject(0);
+                        if ("back".equals(jObject.getString("side"))) {
+                            IDCardActivity.mIsDirect = false;
+                            AppGlobal.mIDCardBack = jObject;
+                            String officeAdress = jObject.getString("issued_by");
+                            String useful_life = jObject.getString("valid_date");
+                            info = info + "officeAdress:  " + officeAdress + "\nuseful_life:  " + useful_life;
+                        } else {
+                            IDCardActivity.mIsDirect = false;
+                            AppGlobal.mIDCardFront = jObject;
+                            String address = jObject.getString("address");
+                            String birthday = jObject.getString("birthday");
+                            String gender = jObject.getString("gender");
+                            String id_card_number = jObject.getString("id_card_number");
+                            String name = jObject.getString("name");
+                            Log.w("ceshi", "doOCR+++idCardBean.id_card_number===" + id_card_number + ", idCardBean.name===" + name);
+                            String race = jObject.getString("race");
+                            String side = jObject.getString("side");
+                            JSONObject legalityObject = jObject.getJSONObject("legality");
+
+                            info = info + "name:  " + name
+                                    + "\nid_card_number:  " + id_card_number
+                                    + "\ngender:  " + gender + "\nrace:  "
+                                    + race + "\nbirthday:  " + birthday
+                                    + "\naddress:  " + address;
+
+                            String checkError = "\n";
+                            try {
+                                float edited = Float.parseFloat(legalityObject.getString("Edited"));
+                                float ID_Photo = Float.parseFloat(legalityObject
+                                        .getString("ID Photo"));
+                                float Photocopy = Float.parseFloat(legalityObject.getString("Photocopy"));
+                                float Screen = Float.parseFloat(legalityObject.getString("Screen"));
+                                float Temporary_ID_Photo = Float.parseFloat(legalityObject.getString("Temporary ID Photo"));
+                                checkError = checkError + "\nedited:  "
+                                        + edited + "\nID_Photo:  " + ID_Photo
+                                        + "\nPhotocopy:  " + Photocopy
+                                        + "\nScreen:  " + Screen
+                                        + "\nTemporary_ID_Photo:  "
+                                        + Temporary_ID_Photo;
+                            } catch (Exception e) {
+                            }
+                            info = info + checkError;
+                        }
+                        enterToResult(path, successStr);
+//                        contentText.setText(contentText.getText().toString() + info);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        mBar.setVisibility(View.GONE);
+                        ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers,
+                                      byte[] responseBody, Throwable error) {
+                    if (responseBody != null) {
+                        Log.w("ceshi", "responseBody==="
+                                + new String(responseBody));
+                    }
+                    mBar.setVisibility(View.GONE);
+                    ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
+                }
+            });
+        } catch (FileNotFoundException e1) {
+            mBar.setVisibility(View.GONE);
+            e1.printStackTrace();
+            ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
+        }
     }
 
     public boolean isEven01(int num) {

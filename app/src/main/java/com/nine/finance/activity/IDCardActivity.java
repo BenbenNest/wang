@@ -14,15 +14,17 @@ import android.widget.Toast;
 
 import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.idcard.AuthManager;
 import com.nine.finance.idcard.IDCardScanActivity;
 import com.nine.finance.idcard.util.Screen;
+import com.nine.finance.utils.ToastUtils;
 
 public class IDCardActivity extends BaseActivity implements AuthManager.AuthCallBack {
 
     private ImageView mIvDirect;
     private ImageView mIvNonDirect;
-    private static boolean mIsDirect = true;
+    public static boolean mIsDirect = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String path = data.getStringExtra("path");
+        String IDCardInfo = data.getStringExtra("info");
         Bitmap bitmap = BitmapFactory.decodeFile(path);
         if (mIsDirect) {
             mIvDirect.setImageBitmap(bitmap);
@@ -52,7 +55,11 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
+                if (AppGlobal.mIDCardFront == null || AppGlobal.mIDCardBack == null) {
+                    ToastUtils.showCenter(IDCardActivity.this, "请完成身份证扫描");
+                } else {
+                    startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
+                }
             }
         });
     }
@@ -71,7 +78,6 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                     public void onClick(boolean bln) {
                         if (bln) {
                             AuthManager.checkIDCardAuthState(IDCardActivity.this, IDCardActivity.this);
-
                         } else {
                             Toast.makeText(IDCardActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
                             ActivityCompat.requestPermissions(IDCardActivity.this,
@@ -84,32 +90,6 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             }
         }
     }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // N以上的申请权限实例
-                Log.d("MainActivity", "进入权限");
-                onPermissionRequests(Manifest.permission.CAMERA, new OnBooleanListener() {
-                    @Override
-                    public void onClick(boolean bln) {
-                        if (bln) {
-                            AuthManager.checkIDCardAuthState(IDCardActivity.this, IDCardActivity.this);
-
-                        } else {
-                            Toast.makeText(IDCardActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
-                            ActivityCompat.requestPermissions(IDCardActivity.this,
-                                    new String[]{Manifest.permission.CAMERA}, 10);
-                        }
-                    }
-                });
-            } else {
-                startActivity(IDCardActivity.this, IDCardUploadActivity.class);
-            }
-
-
-        }
-    };
 
     private static final int REQUEST_IDCARDSCAN_CODE = 100;
 
