@@ -1,15 +1,14 @@
 package com.nine.finance.http;
 
+import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserLoginData;
 
-import java.util.Map;
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -35,9 +34,15 @@ public interface APIInterface {
     @POST("/account/rest/user/creating")
     Call<BaseModel<UserLoginData>> register(@Body RequestBody body);
 
-    @FormUrlEncoded
-    @POST("/web/user/update")
-    Call<BaseModel<UserLoginData>> updateUserInfo(@FieldMap Map<String, String> params);
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/byAll")
+    Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/byAll")
+    Call<BaseModel<List<BankInfo>>> getApplyBankList(@Body RequestBody body);
+
+
 //    Integer id；(可以为null)
 //    String name;（必须有）
 //    String password;(传输前sha1加密)

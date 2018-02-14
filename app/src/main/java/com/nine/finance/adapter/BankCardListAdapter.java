@@ -28,6 +28,16 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mList = list;
     }
 
+    public void resetData(List<BankInfo> list) {
+        mList = list;
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<BankInfo> list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mList.size();

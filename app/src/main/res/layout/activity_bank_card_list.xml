@@ -6,14 +6,6 @@
     android:background="@color/public_white_color"
     android:orientation="vertical">
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:gravity="center"-->
-    <!--android:text="已经绑定的银行卡列表如下：" />-->
-
     <com.nine.finance.view.CommonHeadView
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
