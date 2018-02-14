@@ -51,34 +51,13 @@
             my:icon="@drawable/account_login_phone_number_icon"
             my:title="身份证号" />
 
-        <com.nine.finance.view.PersonalInfoRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            my:action="已经选择银行卡>"
-            my:icon="@drawable/account_login_phone_number_icon"
-            my:title="绑定银行卡" />
-
-        <com.nine.finance.view.PersonalInfoRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            my:action="请选择银行>"
-            my:icon="@drawable/account_login_phone_number_icon"
-            my:title="选择开户银行" />
     </LinearLayout>
 
-    <!--<com.jeremy.wang.view.PersonalInfoRow-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--my:icon="@drawable/account_login_phone_number_icon"-->
-    <!--my:title="通讯地址" />-->
+    <com.nine.finance.view.CommonButton
+        android:id="@+id/bt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        my:title="退出" />
 
-    <!--<com.jeremy.wang.view.PersonalInfoRow-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--my:icon="@drawable/account_login_phone_number_icon"-->
-    <!--my:title="联系电话" />-->
 </LinearLayout>

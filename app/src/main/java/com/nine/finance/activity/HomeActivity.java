@@ -33,10 +33,10 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (UserManager.checkLogin(HomeActivity.this)) {
-                    BankCardListActivity.startActivity(HomeActivity.this);
+                    MyApplyBankListActivity.startActivity(HomeActivity.this);
                 } else {
                     LoginActivity.startActivity(HomeActivity.this);
-//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
                 }
             }
         });
@@ -53,11 +53,11 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (UserManager.checkLogin(HomeActivity.this)) {
-                    BankCardListActivity.startActivity(HomeActivity.this);
+                    MyApplyBankListActivity.startActivity(HomeActivity.this);
                 } else {
                     //TODO test
                     LoginActivity.startActivity(HomeActivity.this);
-//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
                 }
             }
         });
@@ -65,7 +65,7 @@ public class HomeActivity extends BaseActivity {
 //            @Override
 //            public void onClick(View v) {
 //                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
 //                } else {
 //                    LoginActivity.startActivity(HomeActivity.this);
 //                }
@@ -75,7 +75,7 @@ public class HomeActivity extends BaseActivity {
 //            @Override
 //            public void onClick(View v) {
 //                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
 //                } else {
 //                    LoginActivity.startActivity(HomeActivity.this);
 //                }
@@ -85,7 +85,7 @@ public class HomeActivity extends BaseActivity {
 //            @Override
 //            public void onClick(View v) {
 //                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    BankCardListActivity.startActivity(HomeActivity.this);
+//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
 //                } else {
 //                    LoginActivity.startActivity(HomeActivity.this);
 //                }

@@ -71,7 +71,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.BankCardListActivity"
+            android:name=".activity.MyApplyBankListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

@@ -31,13 +31,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class BankCardListActivity extends BaseActivity {
+public class MyApplyBankListActivity extends BaseActivity {
     RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
 
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context, BankCardListActivity.class);
+        Intent intent = new Intent(context, MyApplyBankListActivity.class);
         context.startActivity(intent);
     }
 
@@ -64,8 +64,8 @@ public class BankCardListActivity extends BaseActivity {
         findViewById(R.id.bt_create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FaceScanActivity.startActivity(BankCardListActivity.this);
-                ChooseBankActivity.startActivity(BankCardListActivity.this);
+//                FaceScanActivity.startActivity(MyApplyBankListActivity.this);
+                ChooseBankActivity.startActivity(MyApplyBankListActivity.this);
             }
         });
         test();
@@ -90,7 +90,7 @@ public class BankCardListActivity extends BaseActivity {
         bankInfo.setBankName("农业银行");
         bankInfo.setState(Constant.BANK_STATUS_APPLYING);
         list.add(bankInfo);
-        mAdapter = new BankCardListAdapter(BankCardListActivity.this, list);
+        mAdapter = new BankCardListAdapter(MyApplyBankListActivity.this, list);
         mRececyclerView.setAdapter(mAdapter);
     }
 
@@ -101,8 +101,8 @@ public class BankCardListActivity extends BaseActivity {
     }
 
     private void requestData(int page) {
-        if (!NetUtil.isNetworkConnectionActive(BankCardListActivity.this)) {
-            ToastUtils.showCenter(BankCardListActivity.this, getResources().getString(R.string.net_not_connect));
+        if (!NetUtil.isNetworkConnectionActive(MyApplyBankListActivity.this)) {
+            ToastUtils.showCenter(MyApplyBankListActivity.this, getResources().getString(R.string.net_not_connect));
             return;
         }
         Map<String, String> para = new HashMap<>();
