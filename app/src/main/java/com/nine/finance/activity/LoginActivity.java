@@ -146,6 +146,31 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    public void logOut() {
+        if (!NetUtil.isNetworkConnectionActive(LoginActivity.this)) {
+            ToastUtils.showCenter(LoginActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+        Call<BaseModel<Boolean>> call = api.logOut();
+        call.enqueue(new Callback<BaseModel<Boolean>>() {
+            @Override
+            public void onResponse(Call<BaseModel<Boolean>> call, Response<BaseModel<Boolean>> response) {
+                if (response != null || response.body() != null && response.body().content) {
+                    UserManager.logOut(LoginActivity.this);
+                } else {
+                    ToastUtils.showCenter(LoginActivity.this, response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<Boolean>> call, Throwable t) {
+                ToastUtils.showCenter(LoginActivity.this, t.getMessage());
+            }
+        });
+    }
+
     private void rememberUser() {
         CheckBox chkRemember = (CheckBox) findViewById(R.id.chk_remember);
         if (chkRemember.isChecked()) {

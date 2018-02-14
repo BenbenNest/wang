@@ -1,6 +1,7 @@
 package com.nine.finance.business;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
 import com.nine.finance.app.AppGlobal;
@@ -19,7 +20,7 @@ public class UserManager {
         boolean flag = false;
         if (context != null) {
             UserLoginData loginData = UserManager.getUserData(context);
-            if (loginData != null) {
+            if (loginData != null && !TextUtils.isEmpty(loginData.getToken())) {
                 AppGlobal.mUserLoginData = loginData;
                 flag = true;
             }
@@ -42,6 +43,11 @@ public class UserManager {
             }.getType());
         }
         return data;
+    }
+
+    public static void logOut(Context context) {
+        AppGlobal.mUserLoginData.setToken(null);
+        saveUserData(context, AppGlobal.mUserLoginData);
     }
 
     public static void updageLoginInfo() {

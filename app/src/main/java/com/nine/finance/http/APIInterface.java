@@ -28,19 +28,12 @@ public interface APIInterface {
     @POST("/account/rest/user/login")
     Call<BaseModel<UserLoginData>> login(@Body RequestBody body);
 
-    @GET("/account/user/logout")
-    Call<BaseModel<String>> logOut();
+    @GET("/account/rest/user/logout")
+    Call<BaseModel<Boolean>> logOut();
 
-    @FormUrlEncoded
-    @POST("/web/user/register")
-    Call<BaseModel<UserLoginData>> register(@FieldMap Map<String, String> params);
-//    Integer id；(可以为null)
-//    String name;（必须有）
-//    String password;(传输前sha1加密)
-//    String headSculpture;
-//    String phoneNumber;
-//    String address;
-//    String idNumber;
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/user/creating")
+    Call<BaseModel<UserLoginData>> register(@Body RequestBody body);
 
     @FormUrlEncoded
     @POST("/web/user/update")

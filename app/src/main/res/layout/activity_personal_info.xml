@@ -5,55 +5,80 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo" />
+        android:background="@drawable/head_bg">
 
-    <com.nine.finance.view.PersonalInfoRow
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@color/public_white_color"
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo" />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:action="已完成"
-        my:icon="@drawable/account_login_phone_number_icon"
-        my:title="头像" />
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <com.nine.finance.view.PersonalInfoRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:action="14401-43180401-4"
-        my:icon="@drawable/account_login_phone_number_icon"
-        my:title="身份证号" />
+        <com.nine.finance.view.PersonalInfoRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            my:action="已完成"
+            my:icon="@drawable/account_login_phone_number_icon"
+            my:title="头像" />
 
-    <com.nine.finance.view.PersonalInfoRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:action="已经选择银行卡>"
-        my:icon="@drawable/account_login_phone_number_icon"
-        my:title="绑定银行卡" />
+        <com.nine.finance.view.PersonalInfoRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            my:action="14401-43180401-4"
+            my:icon="@drawable/account_login_phone_number_icon"
+            my:title="身份证号" />
 
-    <com.nine.finance.view.PersonalInfoRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:action="请选择银行>"
-        my:icon="@drawable/account_login_phone_number_icon"
-        my:title="选择开户银行" />
+        <com.nine.finance.view.PersonalInfoRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            my:action="已经选择银行卡>"
+            my:icon="@drawable/account_login_phone_number_icon"
+            my:title="绑定银行卡" />
 
+        <com.nine.finance.view.PersonalInfoRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            my:action="请选择银行>"
+            my:icon="@drawable/account_login_phone_number_icon"
+            my:title="选择开户银行" />
+    </LinearLayout>
 
     <!--<com.jeremy.wang.view.PersonalInfoRow-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--my:icon="@drawable/account_login_phone_number_icon"-->
-        <!--my:title="通讯地址" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--my:icon="@drawable/account_login_phone_number_icon"-->
+    <!--my:title="通讯地址" />-->
 
     <!--<com.jeremy.wang.view.PersonalInfoRow-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--my:icon="@drawable/account_login_phone_number_icon"-->
-        <!--my:title="联系电话" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--my:icon="@drawable/account_login_phone_number_icon"-->
+    <!--my:title="联系电话" />-->
 </LinearLayout>

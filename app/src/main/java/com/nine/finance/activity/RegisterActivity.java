@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.nine.finance.R;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
@@ -19,15 +20,16 @@ import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserLoginData;
 import com.nine.finance.thread.NoLeakHandler;
+import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
 import com.nine.finance.utils.RegexUtils;
-import com.nine.finance.utils.StringUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +41,8 @@ public class RegisterActivity extends BaseActivity {
     CommonInputLayout mPasswordAgainInputLayout;
     CommonInputLayout mPhoneInputLayout;
     CommonInputLayout mVerifyCodeInputLayout;
+    CommonInputLayout mContactInputLayout;
+    CommonInputLayout mAddressInputLayout;
 
     String id, pwd, pwdAgain, phone, verifyCode;
     NoLeakHandler noLeakHandler;
@@ -58,6 +62,9 @@ public class RegisterActivity extends BaseActivity {
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
         mVerifyCodeInputLayout = (CommonInputLayout) findViewById(R.id.verify_code_input_layout);
+        mContactInputLayout = (CommonInputLayout) findViewById(R.id.contact_input_layout);
+        mAddressInputLayout = (CommonInputLayout) findViewById(R.id.address_input_layout);
+
         TextView tv_Contract = (TextView) findViewById(R.id.tv_contract);
         String contract = getResources().getString(R.string.contract);
         SpannableStringBuilder style = new SpannableStringBuilder(getResources().getString(R.string.contract));
@@ -115,21 +122,25 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void register() {
+        if (!NetUtil.isNetworkConnectionActive(RegisterActivity.this)) {
+            ToastUtils.showCenter(RegisterActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
         Map<String, String> para = new HashMap<>();
-        para.put("app_id", Constant.APPID);
-        para.put("country_code", Constant.COUNTRY_CODE);
 
-        para.put("password", StringUtil.shaEncrypt(mPasswordInputLayout.getText()));
-        para.put("id", phone.toString());
-        para.put("headSculpture", "");
-        para.put("phoneNumber", mPhoneInputLayout.getText());
-        para.put("address", "");
-        para.put("idNumber", mIdInputLayout.getText());
-
-
+//        para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
+//        para.put("mobile", phone.toString());
+        para.put("name", mIdInputLayout.getText());
+        para.put("password", mPasswordInputLayout.getText());
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
-        Call<BaseModel<UserLoginData>> call = api.register(para);
+
+        Gson gson = new Gson();
+        String strEntity = gson.toJson(para);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+
+        Call<BaseModel<UserLoginData>> call = api.register(body);
         call.enqueue(new Callback<BaseModel<UserLoginData>>() {
             @Override
             public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
