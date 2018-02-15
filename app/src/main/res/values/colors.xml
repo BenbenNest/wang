@@ -6,8 +6,10 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="color_contract">#983127</color>
 
-    <!--  account -->
     <color name="account_login_edit_hint_color">#B0BBC0</color>
+    <color name="colorGreen">#3cda38</color>
+    <color name="colorRed">#ec0909</color>
+    <color name="colorYellow">#ff8800</color>
 
     <!--  public -->
     <color name="public_white_color">#ffffff</color>

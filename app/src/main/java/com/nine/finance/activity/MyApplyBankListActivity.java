@@ -3,9 +3,9 @@ package com.nine.finance.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -32,12 +32,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MyApplyBankListActivity extends BaseActivity {
+public class MyApplyBankListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private String TAG = MyApplyBankListActivity.class.getSimpleName();
-    RecyclerView mRececyclerView;
+    private SwipeRefreshLayout mRefreshLayout;
+    private RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
-    private boolean loading = false;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, MyApplyBankListActivity.class);
@@ -52,6 +52,14 @@ public class MyApplyBankListActivity extends BaseActivity {
     }
 
     private void init() {
+        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
+        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setColorSchemeResources(
+                R.color.colorRed,
+                R.color.colorYellow,
+                R.color.colorGreen
+        );
+
         mRececyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRececyclerView.setLayoutManager(mLinearLayoutManager);
@@ -60,13 +68,10 @@ public class MyApplyBankListActivity extends BaseActivity {
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                Log.d(TAG, "onLoadMore");
-                if (!loading) {
-                    loading = true;
-                    loadMoreData();
-                }
+                requestData(currentPage);
             }
         });
+
 
         findViewById(R.id.bt_create).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +81,6 @@ public class MyApplyBankListActivity extends BaseActivity {
             }
         });
         test();
-        requestData(0);
     }
 
     private void test() {
@@ -84,19 +88,9 @@ public class MyApplyBankListActivity extends BaseActivity {
         BankInfo bankInfo = new BankInfo();
         bankInfo.setBankName("中国银行");
         bankInfo.setState(Constant.BANK_STATUS_OK);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("工商银行");
-        bankInfo.setState(Constant.BANK_STATUS_OK);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("建设银行");
-        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("农业银行");
-        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
-        list.add(bankInfo);
+        for (int i = 0; i < 15; i++) {
+            list.add(bankInfo);
+        }
         mAdapter = new BankCardListAdapter(MyApplyBankListActivity.this, list);
         mRececyclerView.setAdapter(mAdapter);
     }
@@ -106,29 +100,13 @@ public class MyApplyBankListActivity extends BaseActivity {
         BankInfo bankInfo = new BankInfo();
         bankInfo.setBankName("中国银行");
         bankInfo.setState(Constant.BANK_STATUS_OK);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("工商银行");
-        bankInfo.setState(Constant.BANK_STATUS_OK);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("建设银行");
-        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
-        list.add(bankInfo);
-        bankInfo = new BankInfo();
-        bankInfo.setBankName("农业银行");
-        bankInfo.setState(Constant.BANK_STATUS_APPLYING);
-        list.add(bankInfo);
+        for (int i = 0; i < 15; i++) {
+            list.add(bankInfo);
+        }
         return list;
     }
 
-    private void loadMoreData() {
-        mAdapter.addData(getData());
-        mAdapter.notifyDataSetChanged();
-        loading = false;
-    }
-
-    private void requestData(int page) {
+    private void requestData(final int page) {
         if (!NetUtil.isNetworkConnectionActive(MyApplyBankListActivity.this)) {
             ToastUtils.showCenter(MyApplyBankListActivity.this, getResources().getString(R.string.net_not_connect));
             return;
@@ -146,7 +124,15 @@ public class MyApplyBankListActivity extends BaseActivity {
         call.enqueue(new Callback<BaseModel<List<BankInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {
-
+                if (response != null && response.code() == 200) {
+                    List<BankInfo> list = response.body().content;
+                    if (page == 0) {
+                        mAdapter.resetData(list);
+                    } else {
+                        mAdapter.addData(getData());
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -154,8 +140,13 @@ public class MyApplyBankListActivity extends BaseActivity {
 
             }
         });
+    }
 
 
+    @Override
+    public void onRefresh() {
+        requestData(0);
+        mRefreshLayout.setRefreshing(false);
     }
 
 
