@@ -9,9 +9,21 @@ public class ApplyModel {
     public BankInfo mBank;
     public BankInfo mBankBranch;
     public String mIDCardFront;
-    public String mIDCardBank;
+    public String mIDCardBack;
 
-
+    public String mIDCardNum;
+    public String mName;
+    public int mGender;
+    public int mAge;
+    public String mNation;
+    public String mHomeTown;
+    public String mPhoneNum;
+    public String mEmail;
+    public String mTelNum;
+    public String mAccountUse;
+    public String mPostCode;
+    public String mCareer;
+    public String mAddress;
 
 
 }

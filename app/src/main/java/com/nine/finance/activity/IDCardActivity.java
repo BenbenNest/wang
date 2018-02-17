@@ -41,8 +41,10 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
         String IDCardInfo = data.getStringExtra("info");
         Bitmap bitmap = BitmapFactory.decodeFile(path);
         if (mIsDirect) {
+            AppGlobal.getApplyModel().mIDCardFront = path;
             mIvDirect.setImageBitmap(bitmap);
         } else {
+            AppGlobal.getApplyModel().mIDCardBack = path;
             mIvNonDirect.setImageBitmap(bitmap);
         }
     }

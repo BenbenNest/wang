@@ -74,36 +74,42 @@
                 my:input_hint="籍贯" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="联系电话" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/email_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="Email" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/tel_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="家庭电话" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/use_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="开户用途" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/postcode_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="邮编" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/career_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"

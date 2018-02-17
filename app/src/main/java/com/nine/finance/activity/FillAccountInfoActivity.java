@@ -15,6 +15,13 @@ public class FillAccountInfoActivity extends BaseActivity {
     CommonInputLayout ageInputLayout;
     CommonInputLayout nationInputLayout;
     CommonInputLayout homeInputLayout;
+    CommonInputLayout phoneInputLayout;
+    CommonInputLayout emailInputLayout;
+    CommonInputLayout telInputLayout;
+    CommonInputLayout useInputLayout;
+    CommonInputLayout postCodeInputLayout;
+    CommonInputLayout careerInputLayout;
+    CommonInputLayout addressInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +38,38 @@ public class FillAccountInfoActivity extends BaseActivity {
         ageInputLayout = (CommonInputLayout) findViewById(R.id.age_input_layout);
         nationInputLayout = (CommonInputLayout) findViewById(R.id.nation_input_layout);
         homeInputLayout = (CommonInputLayout) findViewById(R.id.home_input_layout);
+
+        phoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
+        emailInputLayout = (CommonInputLayout) findViewById(R.id.email_input_layout);
+        telInputLayout = (CommonInputLayout) findViewById(R.id.tel_input_layout);
+        useInputLayout = (CommonInputLayout) findViewById(R.id.use_input_layout);
+        postCodeInputLayout = (CommonInputLayout) findViewById(R.id.postcode_input_layout);
+        careerInputLayout = (CommonInputLayout) findViewById(R.id.career_input_layout);
+        addressInputLayout = (CommonInputLayout) findViewById(R.id.address_input_layout);
+
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fillApplyInfo();
                 startActivity(FillAccountInfoActivity.this, FillMobileActivity.class);
             }
         });
+    }
+
+    private void fillApplyInfo() {
+        AppGlobal.getApplyModel().mIDCardNum = idInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mName = nameInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mGender = (sexInputLayout.getText().toString().trim().equals("男")) ? 1 : 2;
+        AppGlobal.getApplyModel().mAge = Integer.valueOf(ageInputLayout.getText().toString().trim());
+        AppGlobal.getApplyModel().mNation = nationInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mHomeTown = homeInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mPhoneNum = phoneInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mEmail = emailInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mTelNum = telInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mAccountUse = useInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mPostCode = postCodeInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mCareer = careerInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().mAddress = addressInputLayout.getText().toString().trim();
     }
 
     private void init() {
