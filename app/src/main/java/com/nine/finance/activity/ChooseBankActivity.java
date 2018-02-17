@@ -12,12 +12,17 @@ import android.widget.EditText;
 import com.nine.finance.R;
 import com.nine.finance.activity.bank.BankListActivity;
 import com.nine.finance.activity.bank.BranchListActivity;
+import com.nine.finance.model.BankInfo;
 
 public class ChooseBankActivity extends BaseActivity {
 
     private AppCompatSpinner spinnerBank;
     private AppCompatSpinner spinnerAddress;
     private EditText mEditBankView;
+    private EditText mEditBranchView;
+
+    private static final int REQUEST_CODE_BANK = 1001;
+    private static final int REQUEST_CODE_BRANCH = 1002;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ChooseBankActivity.class);
@@ -32,16 +37,16 @@ public class ChooseBankActivity extends BaseActivity {
     }
 
     private void init() {
-        setTitle("选择开户银行");
 //        testSpinner();
         mEditBankView = (EditText) findViewById(R.id.et_bank);
         mEditBankView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ChooseBankActivity.this, BankListActivity.class);
+                Intent intent = new Intent(ChooseBankActivity.this, BankListActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_BANK);
             }
         });
-        EditText mEditBranchView = (EditText) findViewById(R.id.et_branch);
+        mEditBranchView = (EditText) findViewById(R.id.et_branch);
         mEditBranchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +66,28 @@ public class ChooseBankActivity extends BaseActivity {
                 startActivity(ChooseBankActivity.this, BankContractActivity.class);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_BANK) {
+                if (data != null) {
+                    BankInfo bankInfo = (BankInfo) data.getSerializableExtra("bank");
+                    if (bankInfo != null && mEditBankView != null) {
+                        mEditBankView.setText(bankInfo.getBankName());
+                    }
+                }
+            } else if (requestCode == REQUEST_CODE_BRANCH) {
+                if (data != null) {
+                    BankInfo bankInfo = (BankInfo) data.getSerializableExtra("branch");
+                    if (bankInfo != null && mEditBankView != null) {
+                        mEditBankView.setText(bankInfo.getBankName());
+                    }
+                }
+            }
+        }
     }
 
     private void testSpinner() {

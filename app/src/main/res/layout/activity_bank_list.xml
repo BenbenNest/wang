@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.nine.finance.view.CommonHeadView
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        my:title="选择网点" />
+        my:title="选择银行" />
 
     <com.nine.finance.view.SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/layout_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

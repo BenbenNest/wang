@@ -1,6 +1,8 @@
 package com.nine.finance.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nine.finance.R;
-import com.nine.finance.constant.Constant;
 import com.nine.finance.model.BankInfo;
 
 import java.util.List;
@@ -18,14 +19,22 @@ import java.util.List;
  */
 public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
-    //定义一个集合，接收从Activity中传递过来的数据和上下文
     private List<BankInfo> mList;
     private Context mContext;
 
     public BankListAdapter(Context context, List<BankInfo> list) {
         this.mContext = context;
         this.mList = list;
+    }
+
+    public void resetData(List<BankInfo> list) {
+        mList = list;
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<BankInfo> list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -40,24 +49,35 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyHolder) {
             final String itemText = mList.get(position).getBankName();
-            ((MyHolder) holder).tv.setText(position + "." + itemText);
-            switch (mList.get(position).getState()) {
-                case Constant.BANK_STATUS_NO:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
-                    break;
-                case Constant.BANK_STATUS_OK:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_OK_ACTION);
-                    break;
-                case Constant.BANK_STATUS_APPLYING:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_APPLYING_ACTION);
-                    break;
-                case Constant.BANK_STATUS_REJECT:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
-                    break;
-            }
+            MyHolder myHolder = (MyHolder) holder;
+//            ((MyHolder) holder).tv.setText(position + "." + itemText);
+//            switch (mList.get(position).getState()) {
+//                case Constant.BANK_STATUS_NO:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_OK:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_OK_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_APPLYING:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_APPLYING_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_REJECT:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
+//                    break;
+//            }
+            myHolder.action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("binkinfo", mList.get(position));
+                    ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
+                    ((Activity) mContext).finish();
+                }
+            });
+
         }
     }
 

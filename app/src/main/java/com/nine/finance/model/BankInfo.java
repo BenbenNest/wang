@@ -1,10 +1,12 @@
 package com.nine.finance.model;
 
+import java.io.Serializable;
+
 /**
  * Created by changqing on 2018/1/30.
  */
 
-public class BankInfo {
+public class BankInfo implements Serializable {
 
 
     /**

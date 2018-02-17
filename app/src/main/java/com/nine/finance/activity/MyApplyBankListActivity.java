@@ -38,6 +38,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
     private RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
+    private int lastId=0;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, MyApplyBankListActivity.class);
@@ -129,7 +130,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                     if (page == 0) {
                         mAdapter.resetData(list);
                     } else {
-                        mAdapter.addData(getData());
+                        mAdapter.addData(list);
                     }
                     mAdapter.notifyDataSetChanged();
                 }

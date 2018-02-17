@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +15,9 @@ import com.nine.finance.R;
  */
 
 public class SearchView extends LinearLayout {
+    private ImageView ivSearch;
+    private EditText etContent;
+
     public SearchView(Context context) {
         super(context);
         init(context, null);
@@ -29,15 +31,8 @@ public class SearchView extends LinearLayout {
     private void init(Context context, AttributeSet attrs) {
 
         LayoutInflater.from(context).inflate(R.layout.search_view_layout, this, true);
-        EditText etContent = (EditText) findViewById(R.id.et_content);
-        ImageView ivSearch = (ImageView) findViewById(R.id.iv_search);
-
-        ivSearch.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        etContent = (EditText) findViewById(R.id.et_content);
+        ivSearch = (ImageView) findViewById(R.id.iv_search);
 
 //        if (attrs != null) {
 //            TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.BankListItemView);
@@ -54,6 +49,20 @@ public class SearchView extends LinearLayout {
 //                btAction.setImageResource(resId);
 //            }
 //        }
+    }
+
+    public void setSearchListener(OnClickListener onClickListener) {
+        if (ivSearch != null) {
+            ivSearch.setOnClickListener(onClickListener);
+        }
+    }
+
+    public String getKey() {
+        String key = "";
+        if (etContent != null) {
+            key = etContent.getText().toString().trim();
+        }
+        return key;
     }
 
 
