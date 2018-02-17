@@ -53,7 +53,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof MyHolder) {
             final String itemText = mList.get(position).getBankName();
             MyHolder myHolder = (MyHolder) holder;
-//            ((MyHolder) holder).tv.setText(position + "." + itemText);
+            ((MyHolder) holder).tv.setText(itemText);
 //            switch (mList.get(position).getState()) {
 //                case Constant.BANK_STATUS_NO:
 //                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
@@ -68,7 +68,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
 //                    break;
 //            }
-            myHolder.action.setOnClickListener(new View.OnClickListener() {
+            myHolder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
@@ -82,7 +82,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-
+        View root;
         TextView tv;
         TextView action;
 

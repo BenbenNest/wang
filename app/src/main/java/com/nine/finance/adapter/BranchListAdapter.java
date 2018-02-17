@@ -53,7 +53,7 @@ public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof MyHolder) {
             final String itemText = mList.get(position).getBankName();
             MyHolder myHolder = (MyHolder) holder;
-//            ((MyHolder) holder).tv.setText(position + "." + itemText);
+            ((MyHolder) holder).tv.setText(itemText);
 //            switch (mList.get(position).getState()) {
 //                case Constant.BANK_STATUS_NO:
 //                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
@@ -68,7 +68,7 @@ public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
 //                    break;
 //            }
-            myHolder.action.setOnClickListener(new View.OnClickListener() {
+            myHolder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
@@ -82,12 +82,13 @@ public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-
+        View root;
         TextView tv;
         TextView action;
 
         public MyHolder(View itemView) {
             super(itemView);
+            root = itemView.findViewById(R.id.root);
             tv = (TextView) itemView.findViewById(R.id.bank_name);
             action = (TextView) itemView.findViewById(R.id.bt_action);
         }
