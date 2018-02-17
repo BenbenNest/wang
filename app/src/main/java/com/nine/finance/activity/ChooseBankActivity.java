@@ -50,7 +50,8 @@ public class ChooseBankActivity extends BaseActivity {
         mEditBranchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ChooseBankActivity.this, BranchListActivity.class);
+                Intent intent = new Intent(ChooseBankActivity.this, BranchListActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_BRANCH);
             }
         });
 
@@ -83,7 +84,7 @@ public class ChooseBankActivity extends BaseActivity {
                 if (data != null) {
                     BankInfo bankInfo = (BankInfo) data.getSerializableExtra("branch");
                     if (bankInfo != null && mEditBankView != null) {
-                        mEditBankView.setText(bankInfo.getBankName());
+                        mEditBranchView.setText(bankInfo.getBankName());
                     }
                 }
             }

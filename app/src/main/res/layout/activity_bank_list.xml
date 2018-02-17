@@ -9,7 +9,7 @@
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        my:title="选择银行" />
+        my:title="选择网点" />
 
     <com.nine.finance.view.SearchView
         android:id="@+id/search_view"
