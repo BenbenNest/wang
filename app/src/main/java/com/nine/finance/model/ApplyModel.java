@@ -25,5 +25,8 @@ public class ApplyModel {
     public String mCareer;
     public String mAddress;
 
+    public String mBankCardNum;
+    public int mBankType;
+    public String mPassword;
 
 }
