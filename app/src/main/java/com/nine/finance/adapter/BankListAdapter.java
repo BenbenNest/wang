@@ -72,7 +72,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra("binkinfo", mList.get(position));
+                    intent.putExtra("bank", mList.get(position));
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
                     ((Activity) mContext).finish();
                 }
@@ -88,6 +88,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public MyHolder(View itemView) {
             super(itemView);
+            root = itemView.findViewById(R.id.root);
             tv = (TextView) itemView.findViewById(R.id.bank_name);
             action = (TextView) itemView.findViewById(R.id.bt_action);
         }

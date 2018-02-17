@@ -72,7 +72,7 @@ public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra("binkinfo", mList.get(position));
+                    intent.putExtra("branch", mList.get(position));
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
                     ((Activity) mContext).finish();
                 }
