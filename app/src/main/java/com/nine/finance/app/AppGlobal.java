@@ -2,6 +2,7 @@ package com.nine.finance.app;
 
 import android.content.Context;
 
+import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 
@@ -30,5 +31,14 @@ public class AppGlobal {
     public static JSONObject mIDCardFront;
 
     public static JSONObject mIDCardBack;
+
+    public static ApplyModel mApplyModel;
+
+    public static ApplyModel getApplyModel() {
+        if (mApplyModel == null) {
+            mApplyModel = new ApplyModel();
+        }
+        return mApplyModel;
+    }
 
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nine.finance.R;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
 
 import java.util.List;
@@ -71,6 +72,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myHolder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AppGlobal.getApplyModel().mBank = mList.get(position);
                     Intent intent = new Intent();
                     intent.putExtra("bank", mList.get(position));
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);

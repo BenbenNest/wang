@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.nine.finance.R;
 import com.nine.finance.activity.bank.BankListActivity;
 import com.nine.finance.activity.bank.BranchListActivity;
+import com.nine.finance.app.AppGlobal;
+import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.BankInfo;
 
 public class ChooseBankActivity extends BaseActivity {
@@ -37,6 +39,7 @@ public class ChooseBankActivity extends BaseActivity {
     }
 
     private void init() {
+        AppGlobal.mApplyModel = new ApplyModel();
 //        testSpinner();
         mEditBankView = (EditText) findViewById(R.id.et_bank);
         mEditBankView.setOnClickListener(new View.OnClickListener() {
