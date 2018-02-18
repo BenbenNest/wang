@@ -148,6 +148,7 @@
             android:label="@string/title_activity_idcard_scan"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".idcard.IDCardResultActivity" />
+        <activity android:name=".activity.bank.BankCardScanActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -69,7 +69,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
 
     class IDCardOnclickListener implements View.OnClickListener {
         public IDCardOnclickListener(boolean direct) {
-            mIsDirect = direct;
+//            mIsDirect = direct;
         }
 
         @Override
@@ -89,7 +89,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                     }
                 });
             } else {
-                startActivity(IDCardActivity.this, IDCardUploadActivity.class);
+                startActivity(IDCardActivity.this, IDCardScanActivity.class);
             }
         }
     }
