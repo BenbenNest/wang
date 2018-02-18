@@ -15,7 +15,7 @@ public class WebViewActivity extends BaseActivity {
 
 
     public static void startActivity(Context context, String title, String url) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra("url", url);
         context.startActivity(intent);
     }
@@ -29,6 +29,16 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         init();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if (webView != null) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+            }
+        }
     }
 
     private void init() {

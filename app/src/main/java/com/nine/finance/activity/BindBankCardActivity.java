@@ -73,9 +73,14 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String path = data.getStringExtra("path");
-        String IDCardInfo = data.getStringExtra("info");
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_SCAN_CODE && data != null) {
+                String path = data.getStringExtra("path");
+                String IDCardInfo = data.getStringExtra("info");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+            }
+        }
+
 
     }
 

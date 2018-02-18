@@ -33,12 +33,25 @@
             my:input_drawable="@drawable/phone"
             my:input_hint="持卡人姓名：" />
 
-        <com.nine.finance.view.CommonInputLayout
-            android:id="@+id/bankcard_input_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            my:input_drawable="@drawable/password"
-            my:input_hint="银行卡号：" />
+            android:layout_height="wrap_content">
+
+            <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/bankcard_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/password"
+                my:input_hint="银行卡号：" />
+
+            <TextView
+                android:id="@+id/bt_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="扫描银行卡" />
+        </RelativeLayout>
     </LinearLayout>
 
 

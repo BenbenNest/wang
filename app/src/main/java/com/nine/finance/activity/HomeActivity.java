@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.nine.finance.R;
 import com.nine.finance.business.UserManager;
+import com.nine.finance.constant.Constant;
 import com.nine.finance.view.BusinessRectView;
 
 
@@ -61,35 +62,27 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-//        findViewById(R.id.iv_goods).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
-//                } else {
-//                    LoginActivity.startActivity(HomeActivity.this);
-//                }
-//            }
-//        });
-//        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
-//                } else {
-//                    LoginActivity.startActivity(HomeActivity.this);
-//                }
-//            }
-//        });
-//        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (UserManager.checkLogin(HomeActivity.this)) {
-//                    MyApplyBankListActivity.startActivity(HomeActivity.this);
-//                } else {
-//                    LoginActivity.startActivity(HomeActivity.this);
-//                }
-//            }
-//        });
+        findViewById(R.id.iv_goods).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewActivity.startActivity(HomeActivity.this, "商品", Constant.GOODS);
+            }
+        });
+        findViewById(R.id.iv_product).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewActivity.startActivity(HomeActivity.this, "理财产品", Constant.FINANCE_PRODUCT);
+            }
+        });
+        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserManager.checkLogin(HomeActivity.this)) {
+                    WebViewActivity.startActivity(HomeActivity.this, "我的订单", Constant.MY_ORDRE);
+                } else {
+                    LoginActivity.startActivity(HomeActivity.this);
+                }
+            }
+        });
     }
 }

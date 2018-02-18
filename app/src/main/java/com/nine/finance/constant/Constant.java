@@ -23,4 +23,29 @@ public class Constant {
     public static final String APPID = "10018";
 
     public static final String APPSERICT = "9a429afaf2044c51b0cc3cda8cfd5a89";
+
+
+    //    银行条款协议
+    public static final String BANK_CONTRACT = "http://39.106.173.14:8088/apph5/bank_agreement.html";
+    //    开户银行介绍
+    public static final String BANK_INTRO = "http://39.106.173.14:8088/apph5/bank_introduce.html";
+    //    龙吟注册协议
+    public static final String CONTRACT = "http://39.106.173.14:8088/apph5/longling_agreement.html";
+
+    //    商品
+    public static final String GOODS = "http://39.106.173.14:8088/apph5/goods.html";
+    //    商品详情
+    public static final String GOODS_DETAIL = "http://39.106.173.14:8088/apph5/goods_detail.html";
+
+    //    我的订单
+    public static final String MY_ORDRE = "http://39.106.173.14:8088/apph5/myorder.html";
+    //    订单详情（下订单）
+    public static final String ORDER_DETAIL = "http://39.106.173.14:8088/apph5/submitorder.html";
+
+    //    理财产品
+    public static final String FINANCE_PRODUCT = "http://39.106.173.14:8088/apph5/product.html";
+
+    //    产品详情
+    public static final String FINANCE_PRODUCT_DETAIL = "http://39.106.173.14:8088/apph5/product_detail.html";
+
 }
