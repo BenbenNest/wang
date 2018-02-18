@@ -74,7 +74,7 @@ public class HomeActivity extends BaseActivity {
                 WebViewActivity.startActivity(HomeActivity.this, "理财产品", Constant.FINANCE_PRODUCT);
             }
         });
-        findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (UserManager.checkLogin(HomeActivity.this)) {

@@ -13,6 +13,7 @@ import com.nine.finance.R;
 import com.nine.finance.activity.bank.BankListActivity;
 import com.nine.finance.activity.bank.BranchListActivity;
 import com.nine.finance.app.AppGlobal;
+import com.nine.finance.constant.Constant;
 import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.BankInfo;
 
@@ -61,7 +62,8 @@ public class ChooseBankActivity extends BaseActivity {
         findViewById(R.id.tv_intro).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ChooseBankActivity.this, BankIntroActivity.class);
+//                startActivity(ChooseBankActivity.this, BankIntroActivity.class);
+                WebViewActivity.startActivity(ChooseBankActivity.this, "银行介绍", Constant.BANK_INTRO);
             }
         });
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {

@@ -33,11 +33,10 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-        if (webView != null) {
-            if (webView.canGoBack()) {
-                webView.goBack();
-            }
+        if (webView != null && webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
         }
     }
 

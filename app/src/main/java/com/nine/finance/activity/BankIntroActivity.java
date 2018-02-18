@@ -6,6 +6,8 @@ import com.nine.finance.R;
 
 public class BankIntroActivity extends BaseActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
