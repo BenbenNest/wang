@@ -19,15 +19,27 @@ public class UserInfo implements Serializable {
      * state : 1
      */
 
+//    {
+//        "token": null,
+//            "name": "string",
+//            "nickName": "string",
+//            "mobile": "string",
+//            "tel": null,
+//            "address": "string",
+//            "head": null,
+//            "state": null,
+//            "idnum": "string"
+//    }
+
     private String token;
-    private String IDNum;
+    private String idnum;
     private String name;
     private String nickName;
     private String mobile;
     private String tel;
     private String address;
     private String head;
-    private int state;
+    private String state;
 
     public String getToken() {
         return token;
@@ -38,11 +50,11 @@ public class UserInfo implements Serializable {
     }
 
     public String getIDNum() {
-        return IDNum;
+        return idnum;
     }
 
     public void setIDNum(String IDNum) {
-        this.IDNum = IDNum;
+        this.idnum = IDNum;
     }
 
     public String getName() {
@@ -93,11 +105,11 @@ public class UserInfo implements Serializable {
         this.head = head;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 
