@@ -1,10 +1,12 @@
 package com.nine.finance.model;
 
+import java.io.Serializable;
+
 /**
  * Created by changqing on 2018/2/6.
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable {
     /**
      * token :
      * IDNum :

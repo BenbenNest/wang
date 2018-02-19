@@ -18,6 +18,7 @@ import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
@@ -111,17 +112,17 @@ public class LoginActivity extends BaseActivity {
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<UserLoginData>> call = api.login(body);
-        call.enqueue(new Callback<BaseModel<UserLoginData>>() {
+        Call<BaseModel<UserInfo>> call = api.login(body);
+        call.enqueue(new Callback<BaseModel<UserInfo>>() {
             @Override
-            public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
+            public void onResponse(Call<BaseModel<UserInfo>> call, Response<BaseModel<UserInfo>> response) {
                 try {
                     if (response == null || response.body() == null || response.body().content == null) {
                         ToastUtils.showCenter(LoginActivity.this, "登录失败，请稍后重试");
                     } else if (response.code() == 200) {
                         if (BaseModel.SUCCESS.equals(response.body().status)) {
-                            UserLoginData loginData = response.body().content;
-                            loginData.setUsername(idInputLayout.getText().toString().trim());
+                            UserInfo loginData = response.body().content;
+                            loginData.setIDNum(idInputLayout.getText().toString().trim());
                             String token = loginData.getToken();
                             AppGlobal.mUserLoginData = loginData;
                             rememberUser();
@@ -138,8 +139,9 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseModel<UserLoginData>> call, Throwable t) {
-                HomeActivity.startActivity(LoginActivity.this);
+            public void onFailure(Call<BaseModel<UserInfo>> call, Throwable t) {
+                ToastUtils.showCenter(LoginActivity.this, t.getMessage());
+//                HomeActivity.startActivity(LoginActivity.this);
             }
         });
 

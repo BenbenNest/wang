@@ -3,6 +3,7 @@ package com.nine.finance.http;
 import com.nine.finance.model.ApplyBankModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 
 import java.util.List;
@@ -26,14 +27,14 @@ public interface APIInterface {
     @Headers({"Content-type:application/json;charset=UTF-8"})
 //    @FormUrlEncoded
     @POST("/account/rest/user/login")
-    Call<BaseModel<UserLoginData>> login(@Body RequestBody body);
+    Call<BaseModel<UserInfo>> login(@Body RequestBody body);
 
     @GET("/account/rest/user/logout")
     Call<BaseModel<Boolean>> logOut();
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/user/creating")
-    Call<BaseModel<UserLoginData>> register(@Body RequestBody body);
+    Call<BaseModel<UserInfo>> register(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")

@@ -18,7 +18,7 @@ import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
-import com.nine.finance.model.UserLoginData;
+import com.nine.finance.model.UserInfo;
 import com.nine.finance.thread.NoLeakHandler;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
@@ -152,27 +152,30 @@ public class RegisterActivity extends BaseActivity {
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
 
-        Call<BaseModel<UserLoginData>> call = api.register(body);
-        call.enqueue(new Callback<BaseModel<UserLoginData>>() {
+        Call<BaseModel<UserInfo>> call = api.register(body);
+        call.enqueue(new Callback<BaseModel<UserInfo>>() {
             @Override
-            public void onResponse(Call<BaseModel<UserLoginData>> call, Response<BaseModel<UserLoginData>> response) {
+            public void onResponse(Call<BaseModel<UserInfo>> call, Response<BaseModel<UserInfo>> response) {
                 try {
-//                    if (response == null || response.body() == null || response.body().data == null) {
-//
-//                    } else if (BaseModel.SUCCESS.equals(response.body().result_code)) {
-////                        String token = response.body().data.access_token;
-////                        getUserMessage(response.body().data, token, uiCallback);
-////                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
-//                    }
+                    if (response != null || response.body() != null) {
+                        if (BaseModel.SUCCESS.equals(response.body().status)) {
+                            startActivity(RegisterActivity.this, LoginActivity.class);
+//                        String token = response.body().data.access_token;
+//                        getUserMessage(response.body().data, token, uiCallback);
+//                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
+                        }
+                    }
                 } catch (Exception e) {
                     Log.d("", e.getMessage());
+                    ToastUtils.showCenter(RegisterActivity.this, e.getMessage());
                 }
-                startActivity(RegisterActivity.this, LoginActivity.class);
+
             }
 
             @Override
-            public void onFailure(Call<BaseModel<UserLoginData>> call, Throwable t) {
-
+            public void onFailure(Call<BaseModel<UserInfo>> call, Throwable t) {
+                Log.d("", t.getMessage());
+                ToastUtils.showCenter(RegisterActivity.this, t.getMessage());
             }
         });
     }
