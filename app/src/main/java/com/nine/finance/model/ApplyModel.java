@@ -7,7 +7,7 @@ package com.nine.finance.model;
 public class ApplyModel {
 
     public BankInfo mBank;
-    public BankInfo mBankBranch;
+    public BranchInfo mBankBranch;
     public String mIDCardFront;
     public String mIDCardBack;
 

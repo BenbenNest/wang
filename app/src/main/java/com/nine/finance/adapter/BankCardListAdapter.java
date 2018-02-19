@@ -52,22 +52,24 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
-            final String itemText = mList.get(position).getBankName();
-            ((MyHolder) holder).tv.setText(position + "." + itemText);
-            switch (mList.get(position).getState()) {
-                case Constant.BANK_STATUS_NO:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
-                    break;
-                case Constant.BANK_STATUS_OK:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_OK_ACTION);
-                    break;
-                case Constant.BANK_STATUS_APPLYING:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_APPLYING_ACTION);
-                    break;
-                case Constant.BANK_STATUS_REJECT:
-                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
-                    break;
-            }
+            BankInfo bankInfo = mList.get(position);
+            final String itemText = bankInfo.getBankName();
+//            ((MyHolder) holder).tv.setText(position + "." + itemText);
+            ((MyHolder) holder).action.setText(bankInfo.getState());
+//            switch (mList.get(position).getState()) {
+//                case Constant.BANK_STATUS_NO:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_OK:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_OK_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_APPLYING:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_APPLYING_ACTION);
+//                    break;
+//                case Constant.BANK_STATUS_REJECT:
+//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
+//                    break;
+//            }
         }
     }
 

@@ -10,11 +10,10 @@ import com.google.gson.Gson;
 import com.nine.finance.R;
 import com.nine.finance.activity.BaseActivity;
 import com.nine.finance.adapter.BranchListAdapter;
-import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
-import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.BranchInfo;
 import com.nine.finance.recyclerview.EndLessOnScrollListener;
 import com.nine.finance.recyclerview.MyDecoration;
 import com.nine.finance.utils.NetUtil;
@@ -88,11 +87,10 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
         });
     }
 
-    private List<BankInfo> getData() {
-        List<BankInfo> list = new ArrayList<BankInfo>();
-        BankInfo bankInfo = new BankInfo();
+    private List<BranchInfo> getData() {
+        List<BranchInfo> list = new ArrayList<BranchInfo>();
+        BranchInfo bankInfo = new BranchInfo();
         bankInfo.setBankName("中国银行");
-        bankInfo.setState(Constant.BANK_STATUS_OK);
         for (int i = 0; i < 15; i++) {
             list.add(bankInfo);
         }
@@ -113,12 +111,12 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BankInfo>>> call = api.getApplyBankList(body);
-        call.enqueue(new Callback<BaseModel<List<BankInfo>>>() {
+        Call<BaseModel<List<BranchInfo>>> call = api.getBranchList(body);
+        call.enqueue(new Callback<BaseModel<List<BranchInfo>>>() {
             @Override
-            public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {
+            public void onResponse(Call<BaseModel<List<BranchInfo>>> call, Response<BaseModel<List<BranchInfo>>> response) {
                 if (response != null && response.code() == 200) {
-                    List<BankInfo> list = response.body().content;
+                    List<BranchInfo> list = response.body().content;
                     if (page == 0) {
                         mAdapter.resetData(list);
                     } else {
@@ -129,7 +127,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
             }
 
             @Override
-            public void onFailure(Call<BaseModel<List<BankInfo>>> call, Throwable t) {
+            public void onFailure(Call<BaseModel<List<BranchInfo>>> call, Throwable t) {
 
             }
         });

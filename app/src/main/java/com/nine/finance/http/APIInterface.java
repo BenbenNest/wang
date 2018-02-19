@@ -3,6 +3,7 @@ package com.nine.finance.http;
 import com.nine.finance.model.ApplyBankModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.BranchInfo;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 
@@ -43,6 +44,10 @@ public interface APIInterface {
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<BankInfo>>> getApplyBankList(@Body RequestBody body);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bank/findByUserId")
+    Call<BaseModel<List<BranchInfo>>> getBranchList(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")

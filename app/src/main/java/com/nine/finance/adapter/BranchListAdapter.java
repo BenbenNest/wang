@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
+import com.nine.finance.model.BranchInfo;
 
 import java.util.List;
 
@@ -20,20 +21,20 @@ import java.util.List;
  */
 public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<BankInfo> mList;
+    private List<BranchInfo> mList;
     private Context mContext;
 
-    public BranchListAdapter(Context context, List<BankInfo> list) {
+    public BranchListAdapter(Context context, List<BranchInfo> list) {
         this.mContext = context;
         this.mList = list;
     }
 
-    public void resetData(List<BankInfo> list) {
+    public void resetData(List<BranchInfo> list) {
         mList = list;
         notifyDataSetChanged();
     }
 
-    public void addData(List<BankInfo> list) {
+    public void addData(List<BranchInfo> list) {
         mList.addAll(list);
         notifyDataSetChanged();
     }

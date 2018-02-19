@@ -10,36 +10,37 @@ public class BankInfo implements Serializable {
 
 
     /**
-     * BandId :
-     * BankName :
-     * state : 0
+     * state : null
+     * bankId : 5D3C80C6090146EF90C18C61DB2C5132
+     * bankName : 花旗
      */
 
-    private String BandId;
-    private String BankName;
-    private int state;
+    private String state;
+    private String bankId;
+    private String bankName;
 
-    public String getBandId() {
-        return BandId;
-    }
-
-    public void setBandId(String BandId) {
-        this.BandId = BandId;
-    }
-
-    public String getBankName() {
-        return BankName;
-    }
-
-    public void setBankName(String BankName) {
-        this.BankName = BankName;
-    }
-
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
 }

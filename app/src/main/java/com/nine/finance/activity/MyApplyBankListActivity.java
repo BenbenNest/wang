@@ -11,7 +11,6 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.nine.finance.R;
 import com.nine.finance.adapter.BankCardListAdapter;
-import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BankInfo;
@@ -88,7 +87,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         List<BankInfo> list = new ArrayList<BankInfo>();
         BankInfo bankInfo = new BankInfo();
         bankInfo.setBankName("中国银行");
-        bankInfo.setState(Constant.BANK_STATUS_OK);
+        bankInfo.setState("已申请");
         for (int i = 0; i < 15; i++) {
             list.add(bankInfo);
         }
@@ -100,7 +99,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         List<BankInfo> list = new ArrayList<BankInfo>();
         BankInfo bankInfo = new BankInfo();
         bankInfo.setBankName("中国银行");
-        bankInfo.setState(Constant.BANK_STATUS_OK);
+        bankInfo.setState("已申请");
         for (int i = 0; i < 15; i++) {
             list.add(bankInfo);
         }
