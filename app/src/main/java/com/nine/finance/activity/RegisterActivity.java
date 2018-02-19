@@ -44,7 +44,7 @@ public class RegisterActivity extends BaseActivity {
     CommonInputLayout mContactInputLayout;
     CommonInputLayout mAddressInputLayout;
 
-    String id, pwd, pwdAgain, phone, verifyCode;
+    String id, pwd, pwdAgain, phone, verifyCode, address;
     NoLeakHandler noLeakHandler;
 
     @Override
@@ -85,6 +85,7 @@ public class RegisterActivity extends BaseActivity {
                 pwdAgain = mPasswordAgainInputLayout.getText();
                 phone = mPhoneInputLayout.getText();
                 verifyCode = mVerifyCodeInputLayout.getText();
+                address = mAddressInputLayout.getText();
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(pwd) || TextUtils.isEmpty(pwdAgain) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(verifyCode)) {
                     ToastUtils.showCenter(RegisterActivity.this, "信息填写不完整");
                     return;
@@ -128,10 +129,21 @@ public class RegisterActivity extends BaseActivity {
         }
         Map<String, String> para = new HashMap<>();
 
-//        para.put("password", StringUtil.shaEncrypt(pwdInputLayout.getText()));
-//        para.put("mobile", phone.toString());
-        para.put("name", mIdInputLayout.getText());
-        para.put("password", mPasswordInputLayout.getText());
+//        "IDNum",
+//                "name",
+//                "nickName",
+//                "mobile",
+//                "tel",
+//                "address",
+//                "head",
+//      “password"
+
+        para.put("nickName", "");
+        para.put("mobile", phone);
+        para.put("tel", "");
+        para.put("address", address);
+        para.put("name", id);
+        para.put("password", pwd);
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
