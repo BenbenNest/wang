@@ -1,5 +1,6 @@
 package com.nine.finance.http;
 
+import com.nine.finance.model.ApplyBankModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserLoginData;
@@ -39,8 +40,13 @@ public interface APIInterface {
     Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bankcard/byAll")
+    @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<BankInfo>>> getApplyBankList(@Body RequestBody body);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bank/findByUserId")
+    Call<BaseModel<List<ApplyBankModel>>> getMyApplyBank(@Body RequestBody body);
+
 
 
 //    Integer id；(可以为null)

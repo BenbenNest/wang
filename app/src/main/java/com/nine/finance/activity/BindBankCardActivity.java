@@ -15,7 +15,6 @@ import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.idcard.AuthManager;
-import com.nine.finance.idcard.IDCardScanActivity;
 import com.nine.finance.view.CommonInputLayout;
 
 public class BindBankCardActivity extends BaseActivity implements AuthManager.AuthCallBack {
@@ -29,7 +28,6 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
         init();
     }
 
-
     private void init() {
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         bankcardInputLayout = (CommonInputLayout) findViewById(R.id.bankcard_input_layout);
@@ -41,6 +39,7 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
                 startActivity(BindBankCardActivity.this, ChooseBankTypeActivity.class);
             }
         });
+        findViewById(R.id.bt_scan).setOnClickListener(new BankCardOnclickListener(true));
     }
 
     class BankCardOnclickListener implements View.OnClickListener {
@@ -81,7 +80,6 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
             }
         }
 
-
     }
 
     private static final int REQUEST_SCAN_CODE = 100;
@@ -90,7 +88,7 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
     public void authState(boolean flag) {
         if (true) {
 //            startActivity(IDCardActivity.this, IDCardScanActivity.class);
-            Intent intent = new Intent(this, IDCardScanActivity.class);
+            Intent intent = new Intent(this, BankCardScanActivity.class);
             intent.putExtra("isvertical", true);
             intent.putExtra("isClearShadow", false);
             intent.putExtra("isTextDetect", false);

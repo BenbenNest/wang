@@ -3,14 +3,12 @@ package com.nine.finance.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.nine.finance.R;
 import com.nine.finance.view.CommonButton;
 
-public class EditPersonalInfoActivity extends AppCompatActivity {
+public class EditPersonalInfoActivity extends BaseActivity {
     public static final int STEP_FIRST = 1;
     public static final int STEP_SECOND = 2;
     public static final int STEP_THIRD = 3;
@@ -27,15 +25,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_personal_info);
-        initActionBar();
         init();
-    }
-
-    private void initActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("开户申请");
-        }
     }
 
     private void init() {
@@ -48,7 +38,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
                         IDCardUploadActivity.startActivity(EditPersonalInfoActivity.this);
                         break;
                     case STEP_SECOND:
-                        BankCardScanActivity.startActivity(EditPersonalInfoActivity.this);
+                        startActivity(EditPersonalInfoActivity.this, BankCardScanActivity.class);
                         break;
                     case STEP_THIRD:
                         //提交申请
@@ -68,10 +58,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     public static void setCurrentStep(int step) {
         mCurrentStep = step;
     }
-
 
 }
