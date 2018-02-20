@@ -57,7 +57,7 @@ public class BranchListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyHolder) {
-            final String itemText = mList.get(position).getBankName();
+            final String itemText = mList.get(position).getBranchName();
             MyHolder myHolder = (MyHolder) holder;
             ((MyHolder) holder).tv.setText(itemText);
 //            switch (mList.get(position).getState()) {

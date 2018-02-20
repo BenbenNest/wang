@@ -12,6 +12,7 @@ import com.nine.finance.activity.BaseActivity;
 import com.nine.finance.adapter.BranchListAdapter;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
+import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.BranchInfo;
 import com.nine.finance.recyclerview.EndLessOnScrollListener;
@@ -42,16 +43,18 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
     private String mKey = "";
     private int lastId = 0;
     private int firstPage = 0;
+    private BankInfo mBank;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bank_list);
+        setContentView(R.layout.activity_branch_list);
         init();
     }
 
 
     private void init() {
+        mBank = (BankInfo) getIntent().getSerializableExtra("bank");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
         mSearchView = (SearchView) findViewById(R.id.search_view);
@@ -83,6 +86,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
                 requestData(firstPage);
             }
         });
+        requestData(0);
     }
 
     private List<BranchInfo> getData() {
@@ -101,8 +105,12 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
             return;
         }
         Map<String, String> para = new HashMap<>();
-        para.put("bankId", "");
 
+        para.put("bankId", "");
+        String bankId = "";
+        if (mBank != null) {
+            bankId = mBank.getBankId();
+        }
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
@@ -110,7 +118,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BranchInfo>>> call = api.getBranchList();
+        Call<BaseModel<List<BranchInfo>>> call = api.getBranchList(bankId);
         call.enqueue(new Callback<BaseModel<List<BranchInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BranchInfo>>> call, Response<BaseModel<List<BranchInfo>>> response) {
@@ -131,7 +139,6 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
 
             }
         });
-        requestData(0);
     }
 
     @Override

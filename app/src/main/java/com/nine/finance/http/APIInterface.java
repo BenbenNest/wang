@@ -48,7 +48,7 @@ public interface APIInterface {
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @GET("/account/rest/bank/findBankBranchesInfoAll")
-    Call<BaseModel<List<BranchInfo>>> getBranchList();
+    Call<BaseModel<List<BranchInfo>>> getBranchList(@Query("bankId") String bankId);
 
 
     @Headers({"Content-type:application/json;charset=UTF-8"})

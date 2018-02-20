@@ -16,6 +16,7 @@ import com.nine.finance.app.AppGlobal;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.BankInfo;
+import com.nine.finance.model.BranchInfo;
 
 public class ChooseBankActivity extends BaseActivity {
 
@@ -55,6 +56,7 @@ public class ChooseBankActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseBankActivity.this, BranchListActivity.class);
+                intent.putExtra("bank", mBank);
                 startActivityForResult(intent, REQUEST_CODE_BRANCH);
             }
         });
@@ -74,22 +76,25 @@ public class ChooseBankActivity extends BaseActivity {
         });
     }
 
+    private BankInfo mBank;
+    private BranchInfo mBranch;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_BANK) {
                 if (data != null) {
-                    BankInfo bankInfo = (BankInfo) data.getSerializableExtra("bank");
-                    if (bankInfo != null && mEditBankView != null) {
-                        mEditBankView.setText(bankInfo.getBankName());
+                    mBank = (BankInfo) data.getSerializableExtra("bank");
+                    if (mBank != null && mEditBankView != null) {
+                        mEditBankView.setText(mBank.getBankName());
                     }
                 }
             } else if (requestCode == REQUEST_CODE_BRANCH) {
                 if (data != null) {
-                    BankInfo bankInfo = (BankInfo) data.getSerializableExtra("branch");
-                    if (bankInfo != null && mEditBankView != null) {
-                        mEditBranchView.setText(bankInfo.getBankName());
+                    mBranch = (BranchInfo) data.getSerializableExtra("branch");
+                    if (mBranch != null && mEditBankView != null) {
+                        mEditBranchView.setText(mBranch.getBranchName());
                     }
                 }
             }
