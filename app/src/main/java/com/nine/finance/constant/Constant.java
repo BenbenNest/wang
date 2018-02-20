@@ -37,7 +37,7 @@ public class Constant {
     //    商品详情
     public static final String GOODS_DETAIL = "http://39.106.173.14:8088/apph5/goods_detail.html";
 
-    //    我的订单
+    //    我的订单http://39.106.173.14:8088/apph5/myorder.html
     public static final String MY_ORDRE = "http://39.106.173.14:8088/apph5/myorder.html";
     //    订单详情（下订单）
     public static final String ORDER_DETAIL = "http://39.106.173.14:8088/apph5/submitorder.html";

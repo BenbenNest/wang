@@ -103,6 +103,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
             return;
         }
         Map<String, String> para = new HashMap<>();
+        para.put("bankId", "");
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);

@@ -113,7 +113,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BankInfo>>> call = api.getApplyBankList(body);
+        Call<BaseModel<List<BankInfo>>> call = api.getBankList(body);
         call.enqueue(new Callback<BaseModel<List<BankInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {

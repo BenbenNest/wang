@@ -38,16 +38,28 @@ public interface APIInterface {
     Call<BaseModel<UserInfo>> register(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bankcard/byAll")
-    Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
-
-    @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<BankInfo>>> getApplyBankList(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bank/findByUserId")
+    @POST("/account/rest/bank/findByBankList")
+    Call<BaseModel<List<BankInfo>>> getBankList(@Body RequestBody body);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bank/findBankBranchesInfoAll")
     Call<BaseModel<List<BranchInfo>>> getBranchList(@Body RequestBody body);
+
+
+
+
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/byAll")
+    Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
+
+
+
+
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")
