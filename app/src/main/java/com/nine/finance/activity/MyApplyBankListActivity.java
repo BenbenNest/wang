@@ -11,6 +11,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.nine.finance.R;
 import com.nine.finance.adapter.BankCardListAdapter;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BankInfo;
@@ -37,7 +38,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
     private RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
-    private int lastId=0;
+    private int lastId = 0;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, MyApplyBankListActivity.class);
@@ -68,7 +69,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                requestData(currentPage);
+                requestData(1);
             }
         });
 
@@ -80,7 +81,6 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                 ChooseBankActivity.startActivity(MyApplyBankListActivity.this);
             }
         });
-        test();
     }
 
     private void test() {
@@ -112,6 +112,9 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
             return;
         }
         Map<String, String> para = new HashMap<>();
+        if(AppGlobal.getUserInfo()!=null){
+            para.put("userId",AppGlobal.getUserInfo().getUserId());
+        }
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
@@ -141,7 +144,6 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
             }
         });
     }
-
 
     @Override
     public void onRefresh() {

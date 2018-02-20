@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class UserInfo implements Serializable {
+
     /**
      * token :
      * IDNum :
@@ -31,6 +32,7 @@ public class UserInfo implements Serializable {
 //            "idnum": "string"
 //    }
 
+    private String userId;
     private String token;
     private String idnum;
     private String name;
@@ -40,6 +42,14 @@ public class UserInfo implements Serializable {
     private String address;
     private String head;
     private String state;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getToken() {
         return token;

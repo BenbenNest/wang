@@ -40,4 +40,8 @@ public class AppGlobal {
         return mApplyModel;
     }
 
+    public static UserInfo getUserInfo() {
+        return mUserInfo;
+    }
+
 }
