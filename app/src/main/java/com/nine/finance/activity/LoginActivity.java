@@ -19,7 +19,6 @@ import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserInfo;
-import com.nine.finance.model.UserLoginData;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
 import com.nine.finance.utils.ToastUtils;
@@ -124,7 +123,7 @@ public class LoginActivity extends BaseActivity {
                             UserInfo loginData = response.body().content;
                             loginData.setIDNum(idInputLayout.getText().toString().trim());
                             String token = loginData.getToken();
-                            AppGlobal.mUserLoginData = loginData;
+                            AppGlobal.setUserInfo(loginData);
                             rememberUser();
                             UserManager.saveUserData(getApplicationContext(), loginData);
                             HomeActivity.startActivity(LoginActivity.this);

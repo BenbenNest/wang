@@ -67,15 +67,13 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
         recyclerView.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
-        mAdapter = new BankListAdapter(this, getData());
+        mAdapter = new BankListAdapter(this);
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         recyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                mAdapter.addData(getData());
-                mAdapter.notifyDataSetChanged();
-//                requestData(currentPage);
+//                requestData(1);
             }
         });
         mSearchView.setSearchListener(new View.OnClickListener() {
@@ -85,6 +83,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
                 requestData(firstPage);
             }
         });
+        requestData(0);
     }
 
     private List<BankInfo> getData() {
@@ -113,7 +112,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BankInfo>>> call = api.getBankList(body);
+        Call<BaseModel<List<BankInfo>>> call = api.getBankList();
         call.enqueue(new Callback<BaseModel<List<BankInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {
@@ -125,6 +124,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
                         mAdapter.addData(list);
                     }
                     mAdapter.notifyDataSetChanged();
+                    mRefreshLayout.setRefreshing(false);
                 }
             }
 

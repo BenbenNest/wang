@@ -13,6 +13,7 @@ import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,12 @@ import java.util.List;
  */
 public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<BankInfo> mList;
+    private List<BankInfo> mList = new ArrayList<BankInfo>();
     private Context mContext;
+
+    public BankListAdapter(Context context) {
+        this.mContext = context;
+    }
 
     public BankListAdapter(Context context, List<BankInfo> list) {
         this.mContext = context;

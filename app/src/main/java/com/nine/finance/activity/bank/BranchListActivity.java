@@ -67,14 +67,12 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
         recyclerView.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
-        mAdapter = new BranchListAdapter(this, getData());
+        mAdapter = new BranchListAdapter(this);
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         recyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                mAdapter.addData(getData());
-                mAdapter.notifyDataSetChanged();
 //                requestData(currentPage);
             }
         });
@@ -112,7 +110,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BranchInfo>>> call = api.getBranchList(body);
+        Call<BaseModel<List<BranchInfo>>> call = api.getBranchList();
         call.enqueue(new Callback<BaseModel<List<BranchInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BranchInfo>>> call, Response<BaseModel<List<BranchInfo>>> response) {
@@ -124,6 +122,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
                         mAdapter.addData(list);
                     }
                     mAdapter.notifyDataSetChanged();
+                    mRefreshLayout.setRefreshing(false);
                 }
             }
 
@@ -132,6 +131,7 @@ public class BranchListActivity extends BaseActivity implements SwipeRefreshLayo
 
             }
         });
+        requestData(0);
     }
 
     @Override

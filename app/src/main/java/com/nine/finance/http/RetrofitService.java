@@ -1,11 +1,6 @@
 package com.nine.finance.http;
 
-import com.nine.finance.app.AppGlobal;
-import com.nine.finance.prefs.AppPrefsSource;
-import com.nine.finance.utils.StringUtil;
-
 import java.io.IOException;
-import java.util.Map;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -42,19 +37,21 @@ public class RetrofitService {
                 Request origin = chain.request();
                 Request request;
                 HttpUrl url = origin.url().newBuilder()
-                        .addQueryParameter("app_id", UrlConfig.API.API_ID)
-                        .addQueryParameter("app_ver", AppInfo.versionName)
-                        .addQueryParameter("region", UrlConfig.API.REGION_CN)
-                        .addQueryParameter("lang", UrlConfig.API.LANG_ZH_CN)
+//                        .addQueryParameter("app_id", UrlConfig.API.API_ID)
+//                        .addQueryParameter("app_ver", AppInfo.versionName)
+//                        .addQueryParameter("region", UrlConfig.API.REGION_CN)
+//                        .addQueryParameter("lang", UrlConfig.API.LANG_ZH_CN)
                         .build();
 
-                Map<String, String> userInfo = AppPrefsSource.getInstance().getUserInfo(AppGlobal.getAppContext());
-                if (userInfo != null && StringUtil.isNotEmpty(userInfo.get("access_token"))) {
-                    String authorization = userInfo.get("access_token");
-                    request = origin.newBuilder().addHeader("Authorization", authorization).url(url).build();
-                } else {
-                    request = origin.newBuilder().url(url).build();
-                }
+//                Map<String, String> userInfo = AppPrefsSource.getInstance().getUserInfo(AppGlobal.getAppContext());
+//                if (userInfo != null && StringUtil.isNotEmpty(userInfo.get("access_token"))) {
+//                    String authorization = userInfo.get("access_token");
+//                    request = origin.newBuilder().addHeader("Authorization", authorization).url(url).build();
+//                } else {
+//                    request = origin.newBuilder().url(url).build();
+//                }
+
+                request = origin.newBuilder().url(url).build();
 
                 return chain.proceed(request);
             }

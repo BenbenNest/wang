@@ -15,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by jeremy .
@@ -38,27 +39,21 @@ public interface APIInterface {
     Call<BaseModel<UserInfo>> register(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bank/findByUserId")
-    Call<BaseModel<List<BankInfo>>> getApplyBankList(@Body RequestBody body);
+    @GET("/account/rest/bank/findByUserId")
+    Call<BaseModel<List<BankInfo>>> getApplyBankList(@Query("userId") String userId);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bank/findByBankList")
-    Call<BaseModel<List<BankInfo>>> getBankList(@Body RequestBody body);
+    @GET("/account/rest/bank/findByBankList")
+    Call<BaseModel<List<BankInfo>>> getBankList();
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bank/findBankBranchesInfoAll")
-    Call<BaseModel<List<BranchInfo>>> getBranchList(@Body RequestBody body);
-
-
-
+    @GET("/account/rest/bank/findBankBranchesInfoAll")
+    Call<BaseModel<List<BranchInfo>>> getBranchList();
 
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")
     Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
-
-
-
 
 
     @Headers({"Content-type:application/json;charset=UTF-8"})

@@ -64,7 +64,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         mRececyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRececyclerView.setLayoutManager(mLinearLayoutManager);
-
+        mAdapter = new BankCardListAdapter(this);
         mRececyclerView.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
@@ -81,6 +81,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                 ChooseBankActivity.startActivity(MyApplyBankListActivity.this);
             }
         });
+        requestData(0);
     }
 
     private void test() {
@@ -112,8 +113,8 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
             return;
         }
         Map<String, String> para = new HashMap<>();
-        if(AppGlobal.getUserInfo()!=null){
-            para.put("userId",AppGlobal.getUserInfo().getUserId());
+        if (AppGlobal.getUserInfo() != null) {
+            para.put("userId", AppGlobal.getUserInfo().getUserId());
         }
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
@@ -123,7 +124,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<List<BankInfo>>> call = api.getApplyBankList(body);
+        Call<BaseModel<List<BankInfo>>> call = api.getApplyBankList(AppGlobal.getUserInfo().getUserId());
         call.enqueue(new Callback<BaseModel<List<BankInfo>>>() {
             @Override
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {

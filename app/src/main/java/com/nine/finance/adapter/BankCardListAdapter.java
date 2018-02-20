@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nine.finance.R;
-import com.nine.finance.constant.Constant;
 import com.nine.finance.model.BankInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +20,12 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     //定义一个集合，接收从Activity中传递过来的数据和上下文
-    private List<BankInfo> mList;
+    private List<BankInfo> mList = new ArrayList<>();
     private Context mContext;
+
+    public BankCardListAdapter(Context context) {
+        this.mContext = context;
+    }
 
     public BankCardListAdapter(Context context, List<BankInfo> list) {
         this.mContext = context;

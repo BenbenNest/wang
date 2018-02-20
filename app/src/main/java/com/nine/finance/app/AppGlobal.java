@@ -25,8 +25,6 @@ public class AppGlobal {
 
     public static volatile UserInfo mUserInfo;
 
-    public static volatile UserInfo mUserLoginData;
-
     public static JSONObject mIDCardFront;
 
     public static JSONObject mIDCardBack;
@@ -38,6 +36,10 @@ public class AppGlobal {
             mApplyModel = new ApplyModel();
         }
         return mApplyModel;
+    }
+
+    public static void setUserInfo(UserInfo userInfo) {
+        mUserInfo = userInfo;
     }
 
     public static UserInfo getUserInfo() {

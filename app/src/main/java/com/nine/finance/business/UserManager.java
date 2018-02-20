@@ -21,7 +21,7 @@ public class UserManager {
         if (context != null) {
             UserInfo loginData = UserManager.getUserData(context);
             if (loginData != null && !TextUtils.isEmpty(loginData.getToken())) {
-                AppGlobal.mUserLoginData = loginData;
+                AppGlobal.mUserInfo = loginData;
                 flag = true;
             }
         }
@@ -46,8 +46,8 @@ public class UserManager {
     }
 
     public static void logOut(Context context) {
-        AppGlobal.mUserLoginData.setToken(null);
-        saveUserData(context, AppGlobal.mUserLoginData);
+        AppGlobal.mUserInfo.setToken(null);
+        saveUserData(context, AppGlobal.mUserInfo);
     }
 
     public static void updageLoginInfo() {
