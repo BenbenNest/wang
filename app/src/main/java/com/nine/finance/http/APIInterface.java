@@ -50,6 +50,10 @@ public interface APIInterface {
     @GET("/account/rest/bank/findBankBranchesInfoAll")
     Call<BaseModel<List<BranchInfo>>> getBranchList(@Query("bankId") String bankId);
 
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/creating")
+    Call<BaseModel<String>> applyCard(@Body RequestBody body);
+
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")
@@ -60,9 +64,7 @@ public interface APIInterface {
     @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<ApplyBankModel>>> getMyApplyBank(@Body RequestBody body);
 
-    @Headers({"Content-type:application/json;charset=UTF-8"})
-    @POST("/account/rest/bankcard/creating")
-    Call<BaseModel<String>> applyCard(@Body RequestBody body);
+
 
 //    Integer id；(可以为null)
 //    String name;（必须有）

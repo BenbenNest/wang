@@ -77,7 +77,8 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myHolder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppGlobal.getApplyModel().mBank = mList.get(position);
+//                    AppGlobal.getApplyModel().mBank = mList.get(position);
+                    AppGlobal.getApplyModel().setBankId(mList.get(position).getBankId());
                     Intent intent = new Intent();
                     intent.putExtra("bank", mList.get(position));
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);

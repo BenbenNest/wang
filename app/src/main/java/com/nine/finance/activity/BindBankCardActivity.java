@@ -35,7 +35,7 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppGlobal.getApplyModel().mBankCardNum = bankcardInputLayout.getText().toString().trim();
+                AppGlobal.getApplyModel().setCardNumber(bankcardInputLayout.getText().toString().trim());
                 startActivity(BindBankCardActivity.this, ChooseBankTypeActivity.class);
             }
         });
