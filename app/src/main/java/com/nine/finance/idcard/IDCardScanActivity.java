@@ -328,7 +328,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
      * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
      */
     public void doOCR(final String path) {
-        mBar.setVisibility(View.VISIBLE);
+        showBar(true);
         try {
             String url = "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard";
             RequestParams rParams = new RequestParams();
@@ -341,7 +341,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
             asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
-                    mBar.setVisibility(View.GONE);
+                    showBar(false);
 
                     try {
                         String successStr = new String(responseByte);
@@ -355,7 +355,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
                             String useful_life = jObject.getString("valid_date");
                             info = info + "officeAdress:  " + officeAdress + "\nuseful_life:  " + useful_life;
                         } else {
-                            IDCardActivity.mIsDirect = false;
+                            IDCardActivity.mIsDirect = true;
                             AppGlobal.mIDCardFront = jObject;
                             String address = jObject.getString("address");
                             String birthday = jObject.getString("birthday");
@@ -395,7 +395,7 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
 //                        contentText.setText(contentText.getText().toString() + info);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        mBar.setVisibility(View.GONE);
+                        showBar(false);
                         ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
                     }
                 }
@@ -407,15 +407,28 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
                         Log.w("ceshi", "responseBody==="
                                 + new String(responseBody));
                     }
-                    mBar.setVisibility(View.GONE);
+                    showBar(false);
                     ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
                 }
             });
         } catch (FileNotFoundException e1) {
-            mBar.setVisibility(View.GONE);
+            showBar(false);
             e1.printStackTrace();
             ConUtil.showToast(IDCardScanActivity.this, "识别失败，请重新识别！");
         }
+    }
+
+    private void showBar(final boolean flag) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (flag) {
+                    mBar.setVisibility(View.VISIBLE);
+                } else {
+                    mBar.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     public boolean isEven01(int num) {

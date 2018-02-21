@@ -354,7 +354,7 @@ public class BankCardScanActivity extends Activity implements TextureView.Surfac
                             String useful_life = jObject.getString("valid_date");
                             info = info + "officeAdress:  " + officeAdress + "\nuseful_life:  " + useful_life;
                         } else {
-                            IDCardActivity.mIsDirect = false;
+                            IDCardActivity.mIsDirect = true;
                             AppGlobal.mIDCardFront = jObject;
                             String address = jObject.getString("address");
                             String birthday = jObject.getString("birthday");
