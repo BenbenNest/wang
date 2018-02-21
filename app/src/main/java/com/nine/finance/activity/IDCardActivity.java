@@ -37,15 +37,19 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String path = data.getStringExtra("path");
-        String IDCardInfo = data.getStringExtra("info");
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
-        if (mIsDirect) {
-            AppGlobal.getApplyModel().mIDCardFront = path;
-            mIvDirect.setImageBitmap(bitmap);
-        } else {
-            AppGlobal.getApplyModel().mIDCardBack = path;
-            mIvNonDirect.setImageBitmap(bitmap);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_IDCARDSCAN_CODE) {
+            String path = data.getStringExtra("path");
+            String IDCardInfo = data.getStringExtra("info");
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            if (bitmap != null) {
+                if (mIsDirect) {
+                    AppGlobal.getApplyModel().mIDCardFront = path;
+                    mIvDirect.setImageBitmap(bitmap);
+                } else {
+                    AppGlobal.getApplyModel().mIDCardBack = path;
+                    mIvNonDirect.setImageBitmap(bitmap);
+                }
+            }
         }
     }
 
