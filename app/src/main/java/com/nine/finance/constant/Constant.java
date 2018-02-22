@@ -34,6 +34,8 @@ public class Constant {
 
     //    商品
     public static final String GOODS = "http://39.106.173.14:8088/apph5/goods.html";
+//    public static final String GOODS = "https://beta.occall.com/mvoice_h5/ceshiInfo.html";
+
     //    商品详情
     public static final String GOODS_DETAIL = "http://39.106.173.14:8088/apph5/goods_detail.html";
 

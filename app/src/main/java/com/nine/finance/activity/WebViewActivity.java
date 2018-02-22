@@ -3,13 +3,21 @@ package com.nine.finance.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.nine.finance.R;
+import com.nine.finance.view.CommonHeadView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebViewActivity extends BaseActivity {
 
@@ -21,8 +29,9 @@ public class WebViewActivity extends BaseActivity {
     }
 
     WebView webView;
-
+    CommonHeadView headView;
     WebSettings settings;
+    private List<String> loadHistoryUrls=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +41,44 @@ public class WebViewActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
+                if (loadHistoryUrls.size() > 1) {
+                    //重新加载之前的页面,这里为了让标题也能正常显示
+                    String url = loadHistoryUrls.get(loadHistoryUrls.size() - 2);
+                    loadHistoryUrls.remove(loadHistoryUrls.size() - 1);
+                    if (loadHistoryUrls.size() > 0) {
+                        loadHistoryUrls.remove(loadHistoryUrls.size() - 1);
+                    }
+                    webView.loadUrl(url);
+                    return true;
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     public void onBackPressed() {
         if (webView != null && webView.canGoBack()) {
-            webView.goBack();
+            if (loadHistoryUrls.size() > 1) {
+                //重新加载之前的页面,这里为了让标题也能正常显示
+                String url = loadHistoryUrls.get(loadHistoryUrls.size() - 2);
+                loadHistoryUrls.remove(loadHistoryUrls.size() - 1);
+                if (loadHistoryUrls.size() > 0) {
+                    loadHistoryUrls.remove(loadHistoryUrls.size() - 1);
+                }
+                webView.loadUrl(url);
+            }
+//            webView.goBack();
         } else {
             super.onBackPressed();
         }
     }
 
     private void init() {
+        headView = (CommonHeadView) findViewById(R.id.head_view);
         webView = (WebView) findViewById(R.id.webview);
         settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -60,11 +98,19 @@ public class WebViewActivity extends BaseActivity {
         settings.setSavePassword(false); // 关闭webview的自动保存密码
         settings.setAllowContentAccess(true);
         settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
+        // android 5.0以上默认不支持Mixed Content
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(
+                    WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        }
+
         String url = getIntent().getStringExtra("url");
         webView.loadUrl(url);
 
+
         //设置不用系统浏览器打开,直接显示在当前Webview
         webView.setWebViewClient(new WebViewClient() {
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -80,13 +126,27 @@ public class WebViewActivity extends BaseActivity {
             }
 
             //设置结束加载函数
+
             @Override
             public void onPageFinished(WebView view, String url) {
-//                endLoading.setText("结束加载了");
+                loadHistoryUrls.add(url);
+            }
 
+            @Override
+            public void onReceivedSslError(WebView view,
+                                           SslErrorHandler handler, SslError error) {
+                // TODO Auto-generated method stub
+                // handler.cancel();// Android默认的处理方式
+                handler.proceed();// 接受所有网站的证书
+                // handleMessage(Message msg);// 进行其他处理
             }
 
         });
+
+//        WebChromeClient的bug，按返回键的时候，是不会执行onReceivedTitle这个方法的，所以返回的时候title就不会动态的改变了，后来百度到有方法可以让他动态的改变，那就是自己维护，何为自己维护呢：
+//
+//        就是自己创建一个栈，也就是list，来动态添加，删除你浏览的网页
+
 
 
         //设置WebChromeClient类
@@ -96,7 +156,9 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 System.out.println("标题在这里");
-//                mtitle.setText(title);
+                if (headView != null) {
+                    headView.setTitle(title);
+                }
             }
 
 

@@ -65,6 +65,12 @@ public class CommonHeadView extends RelativeLayout {
         }
     }
 
+    public void setTitle(String title) {
+        if (mTitleView != null) {
+            mTitleView.setText(title);
+        }
+    }
+
     public interface OnBackListener {
         void onBack();
     }
