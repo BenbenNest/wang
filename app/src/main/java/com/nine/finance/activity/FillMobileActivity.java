@@ -44,6 +44,7 @@ public class FillMobileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
+                    code = mVerifyCodeInputLayout.getText();
                     if (TextUtils.isEmpty(code)) {
                         ToastUtils.showCenter(FillMobileActivity.this, "请填写验证码");
                     } else {
