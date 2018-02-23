@@ -6,6 +6,7 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.BranchInfo;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
+import com.nine.finance.model.VerifyCodeModel;
 
 import java.util.List;
 
@@ -54,6 +55,16 @@ public interface APIInterface {
     @POST("/account/rest/bankcard/creating")
     Call<BaseModel<String>> applyCard(@Body RequestBody body);
 
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @GET("/account/rest/sms/sendMessage")
+    Call<BaseModel<VerifyCodeModel>> getVerifyCode(@Query("phone") String phone);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @GET("/account/rest/sms/smsAuth")
+    Call<BaseModel<String>> verifyCode(@Query("phone") String phone, @Query("code") String code);
+
+//    http://39.106.173.14:8088/account/rest/sms/smsAuth?phone=13581665443&code=6261
+
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")
@@ -63,7 +74,6 @@ public interface APIInterface {
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<ApplyBankModel>>> getMyApplyBank(@Body RequestBody body);
-
 
 
 //    Integer id；(可以为null)
