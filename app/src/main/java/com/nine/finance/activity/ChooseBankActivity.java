@@ -24,7 +24,8 @@ public class ChooseBankActivity extends BaseActivity {
     private AppCompatSpinner spinnerAddress;
     private EditText mEditBankView;
     private EditText mEditBranchView;
-
+    private BankInfo mBank;
+    private BranchInfo mBranch;
     private static final int REQUEST_CODE_BANK = 1001;
     private static final int REQUEST_CODE_BRANCH = 1002;
 
@@ -71,13 +72,16 @@ public class ChooseBankActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mBank != null) {
+                    AppGlobal.getApplyModel().setBankId(mBank.getBankId());
+                }
+                if (mBranch != null) {
+//                    AppGlobal.getApplyModel().setBranch
+                }
                 startActivity(ChooseBankActivity.this, BankContractActivity.class);
             }
         });
     }
-
-    private BankInfo mBank;
-    private BranchInfo mBranch;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

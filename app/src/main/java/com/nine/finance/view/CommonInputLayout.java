@@ -77,7 +77,7 @@ public class CommonInputLayout extends LinearLayout {
 
     public String getText() {
         if (mInputText != null) {
-            return mInputText.getText().toString();
+            return mInputText.getText().toString().trim();
         }
         return "";
     }

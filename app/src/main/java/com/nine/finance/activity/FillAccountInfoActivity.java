@@ -58,7 +58,18 @@ public class FillAccountInfoActivity extends BaseActivity {
     }
 
     private void fillApplyInfo() {
-//        AppGlobal.getApplyModel().mIDCardNum = idInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().setId(idInputLayout.getText());
+        AppGlobal.getApplyModel().setAddress(addressInputLayout.getText());
+        AppGlobal.getApplyModel().setDeliveryAddress(addressInputLayout.getText());
+        AppGlobal.getApplyModel().setEthnic("");
+        AppGlobal.getApplyModel().setGender(sexInputLayout.getText());
+        AppGlobal.getApplyModel().setName(nameInputLayout.getText());
+        AppGlobal.getApplyModel().setNationality(nationInputLayout.getText());
+        AppGlobal.getApplyModel().setNativePlace(homeInputLayout.getText());
+        AppGlobal.getApplyModel().setPhone(phoneInputLayout.getText());
+//        AppGlobal.getApplyModel().setUserId(AppGlobal.getUserInfo().getUserId());
+//        AppGlobal.getApplyModel().setBirthday();
+
 //        AppGlobal.getApplyModel().mName = nameInputLayout.getText().toString().trim();
 //        AppGlobal.getApplyModel().mGender = (sexInputLayout.getText().toString().trim().equals("男")) ? 1 : 2;
 //        if (!TextUtils.isEmpty(ageInputLayout.getText().toString().trim())) {

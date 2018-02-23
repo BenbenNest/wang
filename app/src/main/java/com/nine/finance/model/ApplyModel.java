@@ -243,9 +243,31 @@ public class ApplyModel {
 //    public String mPassword;
 
 
+    private String branchId;
+    private String idCardImageFront;
+    private String idCardImageBack;
 
+    public String getBranchId() {
+        return branchId;
+    }
 
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
 
+    public String getIdCardImageFront() {
+        return idCardImageFront;
+    }
 
+    public void setIdCardImageFront(String idCardImageFront) {
+        this.idCardImageFront = idCardImageFront;
+    }
 
+    public String getIdCardImageBack() {
+        return idCardImageBack;
+    }
+
+    public void setIdCardImageBack(String idCardImageBack) {
+        this.idCardImageBack = idCardImageBack;
+    }
 }

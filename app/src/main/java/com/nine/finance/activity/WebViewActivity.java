@@ -21,6 +21,13 @@ import java.util.List;
 
 public class WebViewActivity extends BaseActivity {
 
+//    1. 启用mixed content
+//    在Android5.0中，WebView方面做了些修改，如果你的系统target api为21以上:
+//
+//    系统默认禁止了mixed content和第三方cookie。可以使用setMixedContentMode() 和 setAcceptThirdPartyCookies()以分别启用。
+//    系统现在可以智能选择HTML文档的portion来绘制。这种新特性可以减少内存footprint并改进性能。若要一次性渲染整个HTML文档，可以调用这个方法enableSlowWholeDocumentDraw()
+//    如果你的app的target api低于21:系统允许mixed content和第三方cookie，并且总是一次性渲染整个HTML文档。
+//    在使用WebView的类中添加如下代码：
 
     public static void startActivity(Context context, String title, String url) {
         Intent intent = new Intent(context, WebViewActivity.class);
@@ -107,7 +114,6 @@ public class WebViewActivity extends BaseActivity {
         String url = getIntent().getStringExtra("url");
         webView.loadUrl(url);
 
-
         //设置不用系统浏览器打开,直接显示在当前Webview
         webView.setWebViewClient(new WebViewClient() {
 
@@ -140,6 +146,10 @@ public class WebViewActivity extends BaseActivity {
                 handler.proceed();// 接受所有网站的证书
                 // handleMessage(Message msg);// 进行其他处理
             }
+
+//            注：在重写WebViewClient的onReceivedSslError方法时，注意一定要去除onReceivedSslError方法的super.onReceivedSslError(view, handler, error);，否则设置无效。
+
+
 
         });
 
