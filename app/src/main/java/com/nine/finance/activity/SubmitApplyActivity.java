@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.nine.finance.R;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
@@ -97,22 +98,22 @@ public class SubmitApplyActivity extends BaseActivity {
         para.put("id", "");
         para.put("createDate", "");
         para.put("updateDate", "");
-        para.put("bankId", "");
+        para.put("bankId", AppGlobal.getApplyModel().getBankId());
 
-        para.put("cardNumber", "");
-        para.put("phone", "");
-        para.put("userId", "");
+        para.put("cardNumber", AppGlobal.getApplyModel().getCardNumber());
+        para.put("phone", AppGlobal.getApplyModel().getPhone());
+        para.put("userId", AppGlobal.getUserInfo().getUserId());
         para.put("isAccountAgreement", "");
         para.put("isPlatformAgreement", "");
-        para.put("name", "");
-        para.put("nationality", "");
-        para.put("nativePlace", "");
-        para.put("card", "");
-        para.put("gender", "");
-        para.put("ethnic", "");
-        para.put("birthday", "");
-        para.put("address", "");
-        para.put("deliveryAddress", "");
+        para.put("name", AppGlobal.getApplyModel().getName());
+        para.put("nationality", AppGlobal.getApplyModel().getNationality());
+        para.put("nativePlace", AppGlobal.getApplyModel().getNativePlace());
+        para.put("card", AppGlobal.getApplyModel().getCard());
+        para.put("gender", AppGlobal.getApplyModel().getGender());
+        para.put("ethnic", AppGlobal.getApplyModel().getEthnic());
+        para.put("birthday", AppGlobal.getApplyModel().getBirthday());
+        para.put("address", AppGlobal.getApplyModel().getAddress());
+        para.put("deliveryAddress", AppGlobal.getApplyModel().getDeliveryAddress());
         para.put("status", "");
         para.put("logisticsCompany", "");
         para.put("shipmentNumber", "");
@@ -140,6 +141,8 @@ public class SubmitApplyActivity extends BaseActivity {
                                     startActivity(SubmitApplyActivity.this, HomeActivity.class);
                                 }
                             }, 2000);
+                        } else {
+                            ToastUtils.showCenter(SubmitApplyActivity.this, response.message());
                         }
                     }
                 } catch (Exception e) {
