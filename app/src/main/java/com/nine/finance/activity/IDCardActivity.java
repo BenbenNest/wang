@@ -63,7 +63,6 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             public void onClick(View v) {
                 if (AppGlobal.mIDCardFront == null || AppGlobal.mIDCardBack == null) {
                     ToastUtils.showCenter(IDCardActivity.this, "请完成身份证扫描");
-                    startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
                 } else {
                     startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
                 }

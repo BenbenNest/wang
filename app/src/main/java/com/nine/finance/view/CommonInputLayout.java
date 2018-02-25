@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nine.finance.R;
 
@@ -35,7 +38,6 @@ public class CommonInputLayout extends LinearLayout {
         init(context, attrs);
     }
 
-
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.common_input_layout, this, true);
         mIcon = findViewById(R.id.iv_icon);
@@ -49,6 +51,17 @@ public class CommonInputLayout extends LinearLayout {
 //            boolean isShowPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_show_pwd, false);
             if (mInputText != null) {
                 mInputText.setHint(hint);
+                mInputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_NEXT && actionDone) {
+                            if (onActionDoneListener != null) {
+                                onActionDoneListener.onActionDone();
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
             if (isPwd) {
                 pwdStatus = true;
@@ -86,6 +99,58 @@ public class CommonInputLayout extends LinearLayout {
         if (mInputText != null) {
             mInputText.setText(text);
         }
+    }
+
+
+    OnFocusListener onFocusListener;
+
+    public void setOnFocusListener(OnFocusListener listener) {
+        onFocusListener = listener;
+        if (mInputText != null) {
+            mInputText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        if (onFocusListener != null) {
+                            onFocusListener.onFocusListener();
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    OnActionDoneListener onActionDoneListener;
+
+    public void setOnActionDoneListener(OnActionDoneListener listener) {
+        onActionDoneListener = listener;
+    }
+
+    public void setFocus() {
+        if (mInputText != null) {
+            mInputText.requestFocus();
+            mInputText.requestFocusFromTouch();
+        }
+    }
+
+    public void setActionMode(int mode) {
+        if (mInputText != null) {
+            mInputText.setImeOptions(mode);
+        }
+    }
+
+    boolean actionDone = false;
+
+    public void setActionDone(boolean flag) {
+        actionDone = flag;
+    }
+
+    public interface OnFocusListener {
+        void onFocusListener();
+    }
+
+    public interface OnActionDoneListener {
+        void onActionDone();
     }
 
 }

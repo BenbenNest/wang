@@ -2,6 +2,7 @@ package com.nine.finance.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ScrollView;
 
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
@@ -9,6 +10,7 @@ import com.nine.finance.view.CommonInputLayout;
 
 public class FillAccountInfoActivity extends BaseActivity {
 
+    private ScrollView mScrollView;
     CommonInputLayout idInputLayout;
     CommonInputLayout nameInputLayout;
     CommonInputLayout sexInputLayout;
@@ -33,6 +35,7 @@ public class FillAccountInfoActivity extends BaseActivity {
     }
 
     private void initView() {
+        mScrollView = (ScrollView) findViewById(R.id.scrollView);
         idInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         sexInputLayout = (CommonInputLayout) findViewById(R.id.sex_input_layout);
@@ -47,6 +50,24 @@ public class FillAccountInfoActivity extends BaseActivity {
         postCodeInputLayout = (CommonInputLayout) findViewById(R.id.postcode_input_layout);
         careerInputLayout = (CommonInputLayout) findViewById(R.id.career_input_layout);
         addressInputLayout = (CommonInputLayout) findViewById(R.id.address_input_layout);
+//        addressInputLayout.setActionMode(EditorInfo.IME_ACTION_NEXT);
+        addressInputLayout.setActionDone(true);
+        addressInputLayout.setOnFocusListener(new CommonInputLayout.OnFocusListener() {
+            @Override
+            public void onFocusListener() {
+                if (mScrollView != null) {
+                    mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    addressInputLayout.setOnFocusListener(null);
+                    addressInputLayout.setFocus();
+                }
+            }
+        });
+        addressInputLayout.setOnActionDoneListener(new CommonInputLayout.OnActionDoneListener() {
+            @Override
+            public void onActionDone() {
+                findViewById(R.id.bt_next).performClick();
+            }
+        });
 
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override

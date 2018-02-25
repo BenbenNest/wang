@@ -17,7 +17,9 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/iv_icon"
         android:background="@null"
+        android:imeOptions="actionNext"
         android:maxLines="1"
+        android:singleLine="true"
         android:textColor="@color/public_black_color"
         android:textColorHint="@color/account_login_edit_hint_color"
         android:textSize="@dimen/account_login_edit_tx_size" />
