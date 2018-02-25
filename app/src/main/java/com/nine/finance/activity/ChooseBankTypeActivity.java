@@ -19,7 +19,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
 
     private void init() {
         Spinner spinnerType = (Spinner) findViewById(R.id.spinner_banktype);
-        String[] types = {"储蓄卡", "信用卡"};
+        String[] types = {"储蓄卡"};
         ArrayAdapter<String> adapter;
         adapter = new SpinnerAdapter(this, types);
         //设置下拉列表的风格,simple_spinner_dropdown_item是android系统自带的样式，等会自定义修改
@@ -31,6 +31,8 @@ public class ChooseBankTypeActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ///TODO
+                //调用接口
                 startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
             }
         });

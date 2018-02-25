@@ -5,19 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.nine.finance.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_bg">
-
-        <com.nine.finance.view.CommonHeadView
-            android:id="@+id/head_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            my:bg="@color/public_trans_color"
-            my:title="绑定银行卡" />
-
-    </LinearLayout>
+        my:title="绑定银行卡" />
 
     <LinearLayout
         android:layout_width="match_parent"

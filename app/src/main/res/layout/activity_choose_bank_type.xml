@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             my:input_drawable="@drawable/phone"
-            my:input_hint="手机号：" />
+            my:input_hint="银行卡绑定手机号：" />
 
         <!--<com.jeremy.wang.view.CommonInputLayout-->
         <!--android:id="@+id/address_input_layout"-->
