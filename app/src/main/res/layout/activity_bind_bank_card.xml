@@ -21,7 +21,7 @@
             android:id="@+id/name_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            my:input_drawable="@drawable/phone"
+            my:input_drawable="@drawable/icon_name"
             my:input_hint="持卡人姓名：" />
 
         <RelativeLayout
