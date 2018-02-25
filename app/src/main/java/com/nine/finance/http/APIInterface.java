@@ -4,6 +4,7 @@ import com.nine.finance.model.ApplyBankModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.BranchInfo;
+import com.nine.finance.model.HomeInfo;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 import com.nine.finance.model.VerifyCodeModel;
@@ -63,7 +64,9 @@ public interface APIInterface {
     @GET("/account/rest/sms/smsAuth")
     Call<BaseModel<String>> verifyCode(@Query("phone") String phone, @Query("code") String code);
 
-//    http://39.106.173.14:8088/account/rest/sms/smsAuth?phone=13581665443&code=6261
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @GET("/account/rest/region/getOrigin")
+    Call<BaseModel<List<HomeInfo>>> getHome();
 
 
     @Headers({"Content-type:application/json;charset=UTF-8"})

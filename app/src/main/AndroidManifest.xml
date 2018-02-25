@@ -149,7 +149,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".idcard.IDCardResultActivity" />
         <activity android:name=".activity.bank.BankCardScanActivity" />
-
+        <activity
+            android:name=".activity.HomeListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.nine.finance"

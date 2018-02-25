@@ -78,6 +78,12 @@ public class CommonInputLayout extends LinearLayout {
         }
     }
 
+    public void setEditable(boolean flag) {
+        if (mInputText != null) {
+            mInputText.setEnabled(flag);
+        }
+    }
+
     private void togglePwdState() {
         if (pwdStatus) {
             pwdStatus = false;
