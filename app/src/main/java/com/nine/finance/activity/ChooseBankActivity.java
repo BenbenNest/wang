@@ -73,7 +73,7 @@ public class ChooseBankActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mBank == null || mBranch == null) {
+                if (mBank == null) {
                     ToastUtils.showCenter(ChooseBankActivity.this, "请选择开户银行");
                     return;
                 }

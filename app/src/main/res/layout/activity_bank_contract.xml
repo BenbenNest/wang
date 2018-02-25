@@ -9,17 +9,21 @@
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        my:title="同意银行条款" />
+        my:title="银行条款协议" />
 
-    <WebView
+    <com.nine.finance.view.MyWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/head_view" />
 
     <LinearLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -28,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
             android:text="同意银行条款" />
 
         <com.nine.finance.view.CommonButton
@@ -36,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             my:title="下一步" />
 
     </LinearLayout>
