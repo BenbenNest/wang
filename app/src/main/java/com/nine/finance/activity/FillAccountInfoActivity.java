@@ -121,6 +121,8 @@ public class FillAccountInfoActivity extends BaseActivity {
             idInputLayout.setText(AppGlobal.mIDCardFront.optString("id_card_number"));
             nameInputLayout.setText(AppGlobal.mIDCardFront.optString("name"));
             sexInputLayout.setText(AppGlobal.mIDCardFront.optString("gender"));
+            ageInputLayout.setText(AppGlobal.mIDCardFront.optString("birthday"));
+
 
         }
     }
