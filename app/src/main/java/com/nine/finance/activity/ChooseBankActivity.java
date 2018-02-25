@@ -17,6 +17,7 @@ import com.nine.finance.constant.Constant;
 import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BranchInfo;
+import com.nine.finance.utils.ToastUtils;
 
 public class ChooseBankActivity extends BaseActivity {
 
@@ -72,12 +73,16 @@ public class ChooseBankActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mBank == null || mBranch == null) {
+                    ToastUtils.showCenter(ChooseBankActivity.this, "请选择开户银行");
+                    return;
+                }
                 if (mBank != null) {
                     AppGlobal.getApplyModel().setBankId(mBank.getBankId());
                 }
-                if (mBranch != null) {
+//                if (mBranch != null) {
 //                    AppGlobal.getApplyModel().setBranch
-                }
+//                }
                 startActivity(ChooseBankActivity.this, BankContractActivity.class);
             }
         });

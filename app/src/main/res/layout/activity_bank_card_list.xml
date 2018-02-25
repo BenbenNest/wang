@@ -15,7 +15,7 @@
             android:id="@+id/head_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            my:title="已申请银行" />
+            my:title="已开卡" />
 
         <TextView
             android:id="@+id/bt_create"
