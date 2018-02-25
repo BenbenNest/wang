@@ -50,14 +50,8 @@ public class SubmitApplyActivity extends BaseActivity {
                     return;
                 }
 
-                ToastUtils.showCenter(SubmitApplyActivity.this, "申请成功！");
+                apply();
 
-                noLeakHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(SubmitApplyActivity.this, HomeActivity.class);
-                    }
-                }, 2000);
             }
         });
     }
