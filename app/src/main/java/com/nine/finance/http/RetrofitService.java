@@ -1,5 +1,7 @@
 package com.nine.finance.http;
 
+import com.nine.finance.app.AppGlobal;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -43,16 +45,15 @@ public class RetrofitService {
 //                        .addQueryParameter("lang", UrlConfig.API.LANG_ZH_CN)
                         .build();
 
-//                Map<String, String> userInfo = AppPrefsSource.getInstance().getUserInfo(AppGlobal.getAppContext());
-//                if (userInfo != null && StringUtil.isNotEmpty(userInfo.get("access_token"))) {
-//                    String authorization = userInfo.get("access_token");
-//                    request = origin.newBuilder().addHeader("Authorization", authorization).url(url).build();
-//                } else {
-//                    request = origin.newBuilder().url(url).build();
-//                }
+                Request.Builder requestBuilder;
+                if (AppGlobal.getUserInfo() != null) {
+                    requestBuilder = origin.newBuilder()
+                            .addHeader("auth_token", AppGlobal.getUserInfo().getToken());
+                } else {
+                    requestBuilder = origin.newBuilder();
+                }
 
-                request = origin.newBuilder().url(url).build();
-
+                request = requestBuilder.url(url).build();
                 return chain.proceed(request);
             }
         };
