@@ -5,18 +5,22 @@ import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.BranchInfo;
 import com.nine.finance.model.HomeInfo;
+import com.nine.finance.model.ImageInfo;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.UserLoginData;
 import com.nine.finance.model.VerifyCodeModel;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -25,16 +29,15 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
     /**
-     1. 图片上传
-     2. 4要素认证
-     3. 文本框验证
-     4. 活体和大头贴界面
-     5。验证码60S
-     6。auth_token
+     * 1. 图片上传
+     * 2. 4要素认证
+     * 3. 文本框验证
+     * 4. 活体和大头贴界面
+     * 5。验证码60S
+     * 6。auth_token
      */
 
 //    ip:8080/web/user/login
-
     @Headers({"Content-type:application/json;charset=UTF-8"})
 //    @FormUrlEncoded
     @POST("/account/rest/user/login")
@@ -75,11 +78,14 @@ public interface APIInterface {
     @GET("/account/rest/region/getOrigin")
     Call<BaseModel<List<HomeInfo>>> getHome();
 
+    @Multipart
+//    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/uploadFile")
+    Call<BaseModel<ImageInfo>> uploadFile(@Part MultipartBody.Part body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")
     Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
-
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bank/findByUserId")

@@ -242,10 +242,10 @@ public class ApplyModel {
 //    public int mBankType;
 //    public String mPassword;
 
-
+    //新增
     private String branchId;
-    private String idCardImageFront;
-    private String idCardImageBack;
+    private ImageInfo idCardImageFront;
+    private ImageInfo idCardImageBack;
 
     public String getBranchId() {
         return branchId;
@@ -255,19 +255,19 @@ public class ApplyModel {
         this.branchId = branchId;
     }
 
-    public String getIdCardImageFront() {
+    public ImageInfo getIdCardImageFront() {
         return idCardImageFront;
     }
 
-    public void setIdCardImageFront(String idCardImageFront) {
+    public void setIdCardImageFront(ImageInfo idCardImageFront) {
         this.idCardImageFront = idCardImageFront;
     }
 
-    public String getIdCardImageBack() {
+    public ImageInfo getIdCardImageBack() {
         return idCardImageBack;
     }
 
-    public void setIdCardImageBack(String idCardImageBack) {
+    public void setIdCardImageBack(ImageInfo idCardImageBack) {
         this.idCardImageBack = idCardImageBack;
     }
 }

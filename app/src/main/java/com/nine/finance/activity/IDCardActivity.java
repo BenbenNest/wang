@@ -15,10 +15,25 @@ import android.widget.Toast;
 import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
 import com.nine.finance.app.AppGlobal;
+import com.nine.finance.http.APIInterface;
+import com.nine.finance.http.RetrofitService;
 import com.nine.finance.idcard.AuthManager;
 import com.nine.finance.idcard.IDCardScanActivity;
 import com.nine.finance.idcard.util.Screen;
+import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.ImageInfo;
+import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class IDCardActivity extends BaseActivity implements AuthManager.AuthCallBack {
 
@@ -43,14 +58,49 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             Bitmap bitmap = BitmapFactory.decodeFile(path);
             if (bitmap != null) {
                 if (mIsDirect) {
-                    AppGlobal.getApplyModel().setIdCardImageFront(path);
+//                    AppGlobal.getApplyModel().setIdCardImageFront(path);
                     mIvDirect.setImageBitmap(bitmap);
                 } else {
-                    AppGlobal.getApplyModel().setIdCardImageBack(path);
+//                    AppGlobal.getApplyModel().setIdCardImageBack(path);
                     mIvNonDirect.setImageBitmap(bitmap);
                 }
+                uploadFile(path);
             }
         }
+    }
+
+    public void uploadFile(String path) {
+        if (!NetUtil.isNetworkConnectionActive(IDCardActivity.this)) {
+            ToastUtils.showCenter(IDCardActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        File file = new File(path);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path,requestBody);
+        Call<BaseModel<ImageInfo>> call = api.uploadFile(multiPart);
+        call.enqueue(new Callback<BaseModel<ImageInfo>>() {
+            @Override
+            public void onResponse(Call<BaseModel<ImageInfo>> call, Response<BaseModel<ImageInfo>> response) {
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    ImageInfo imageInfo = response.body().content;
+                    if (AppGlobal.getApplyModel() != null) {
+                        if (mIsDirect) {
+                            AppGlobal.getApplyModel().setIdCardImageFront(imageInfo);
+                        } else {
+                            AppGlobal.getApplyModel().setIdCardImageBack(imageInfo);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<ImageInfo>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void init() {
