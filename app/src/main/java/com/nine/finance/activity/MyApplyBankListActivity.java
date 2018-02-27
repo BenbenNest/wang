@@ -131,7 +131,12 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                 if (response != null && response.code() == 200) {
                     List<BankInfo> list = response.body().content;
                     if (page == 0) {
-                        mAdapter.resetData(list);
+                        if (list == null || list.size() == 0) {
+                            ChooseBankActivity.startActivity(MyApplyBankListActivity.this);
+                            MyApplyBankListActivity.this.finish();
+                        } else {
+                            mAdapter.resetData(list);
+                        }
                     } else {
                         mAdapter.addData(list);
                     }
