@@ -84,6 +84,10 @@ public interface APIInterface {
     Call<BaseModel<ImageInfo>> uploadFile(@Part MultipartBody.Part body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/bankcard/elementsRecognition")
+    Call<BaseModel<String>> elementsRecognition(@Body RequestBody body);
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/byAll")
     Call<BaseModel<UserLoginData>> updateUserInfo(@Body RequestBody body);
 

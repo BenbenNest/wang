@@ -124,18 +124,22 @@ public class FillAccountInfoActivity extends BaseActivity {
                     return;
                 } else {
                     if (!RegexUtils.isMobile(telInputLayout.getText()) && !RegexUtils.isTelephone(telInputLayout.getText())) {
+                        telInputLayout.requestFocus();
                         ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的手机号或者电话号码！");
                         return;
                     }
                     if (!RegexUtils.isMobile(phoneInputLayout.getText()) && !RegexUtils.isTelephone(phoneInputLayout.getText())) {
+                        telInputLayout.requestFocus();
                         ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的手机号或者电话号码！");
                         return;
                     }
                     if (!RegexUtils.isPostCode(postCodeInputLayout.getText())) {
+                        telInputLayout.requestFocus();
                         ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的邮编！");
                         return;
                     }
                     if (!RegexUtils.isEmail(emailInputLayout.getText())) {
+                        telInputLayout.requestFocus();
                         ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的邮箱！");
                         return;
                     }

@@ -65,10 +65,10 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
             public void onClick(View v) {
                 if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
                     phone = mPhoneInputLayout.getText();
-                    if(canGetCode) {
+                    if (canGetCode) {
                         getVerifyCode();
                         mCountDownButton.initTimer();
-                    }else {
+                    } else {
                         ToastUtils.showCenter(FillMobileActivity.this, "请稍后再发！");
                     }
                 } else {
@@ -138,7 +138,7 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
                 if (response != null && response.code() == 200 && response.body() != null && response.body().status != null && response.body().status.equals(BaseModel.SUCCESS)) {
                     startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 } else {
-                    ToastUtils.showCenter(FillMobileActivity.this, response.message());
+                    ToastUtils.showCenter(FillMobileActivity.this, response.body().message);
 //                    startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 }
             }
