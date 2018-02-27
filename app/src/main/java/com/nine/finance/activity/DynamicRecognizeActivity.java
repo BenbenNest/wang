@@ -14,7 +14,8 @@ public class DynamicRecognizeActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(DynamicRecognizeActivity.this, FaceRecognizeActivity.class);
+//                startActivity(DynamicRecognizeActivity.this, FaceRecognizeActivity.class);
+                startActivity(DynamicRecognizeActivity.this, FaceScanActivity.class);
             }
         });
     }

@@ -246,6 +246,8 @@ public class ApplyModel {
     private String branchId;
     private ImageInfo idCardImageFront;
     private ImageInfo idCardImageBack;
+    private ImageInfo bankCardImage;
+    private ImageInfo faceImage;
 
     public String getBranchId() {
         return branchId;
@@ -269,5 +271,21 @@ public class ApplyModel {
 
     public void setIdCardImageBack(ImageInfo idCardImageBack) {
         this.idCardImageBack = idCardImageBack;
+    }
+
+    public ImageInfo getBankCardImage() {
+        return bankCardImage;
+    }
+
+    public void setBankCardImage(ImageInfo bankCardImage) {
+        this.bankCardImage = bankCardImage;
+    }
+
+    public ImageInfo getFaceImage() {
+        return faceImage;
+    }
+
+    public void setFaceImage(ImageInfo faceImage) {
+        this.faceImage = faceImage;
     }
 }

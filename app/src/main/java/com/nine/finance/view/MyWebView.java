@@ -39,7 +39,7 @@ public class MyWebView extends WebView {
         settings.setSupportZoom(false); // 设置支持缩放
         settings.setBuiltInZoomControls(false);
         settings.setAllowFileAccess(true); // 启用WebView访问文件数据
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
         settings.setDatabaseEnabled(true); // 启用数据库缓存
         settings.setDomStorageEnabled(true); // 启用DOM缓存
         settings.setAppCacheEnabled(true); // 启用应用缓存
