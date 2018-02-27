@@ -132,7 +132,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                     List<BankInfo> list = response.body().content;
                     if (page == 0) {
                         if (list == null || list.size() == 0) {
-                            ChooseBankActivity.startActivity(MyApplyBankListActivity.this);
+                            startActivity(MyApplyBankListActivity.this, ChooseBankActivity.class);
                             MyApplyBankListActivity.this.finish();
                         } else {
                             mAdapter.resetData(list);
@@ -156,6 +156,5 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         requestData(0);
         mRefreshLayout.setRefreshing(false);
     }
-
 
 }

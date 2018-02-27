@@ -2,6 +2,7 @@ package com.nine.finance.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,11 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
             BankInfo bankInfo = mList.get(position);
-            final String itemText = bankInfo.getBankName();
-//            ((MyHolder) holder).tv.setText(position + "." + itemText);
+            String itemText = bankInfo.getBankName();
+            if (TextUtils.isEmpty(itemText)) {
+                itemText = "test";
+            }
+            ((MyHolder) holder).tv.setText(position + "." + itemText);
             ((MyHolder) holder).action.setText(bankInfo.getState());
 //            switch (mList.get(position).getState()) {
 //                case Constant.BANK_STATUS_NO:
