@@ -23,6 +23,12 @@ public class RegexUtils {
     public static final String REGEX_MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
 
     /**
+     * 验证电话
+     */
+    public static final String REGEX_TEL = "^(0\\d{2}-\\d{8}(-\\d{1,4})?)|(0\\d{3}-\\d{7,8}(-\\d{1,4})?)$";
+
+
+    /**
      * 正则表达式:验证邮箱
      */
     public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
@@ -78,6 +84,13 @@ public class RegexUtils {
     }
 
     /**
+     * 检验电话号码
+     */
+    public static boolean isTelephone(String tel) {
+        return Pattern.matches(REGEX_TEL, tel);
+    }
+
+    /**
      * 校验邮箱
      *
      * @param email
@@ -127,5 +140,14 @@ public class RegexUtils {
         return Pattern.matches(REGEX_IP_ADDR, ipAddress);
     }
 
+    /**
+     * 匹配中国邮政编码
+     * @param postCode 邮政编码
+     * @return 验证成功返回true，验证失败返回false
+     */
+    public static boolean isPostCode(String postCode){
+        String reg = "[1-9]\\d{5}";
+        return Pattern.matches(reg, postCode);
+    }
 
 }

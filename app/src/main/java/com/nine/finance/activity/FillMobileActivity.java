@@ -14,6 +14,7 @@ import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonInputLayout;
+import com.nine.finance.view.TimeCountDown;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +25,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class FillMobileActivity extends BaseActivity {
+public class FillMobileActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener {
     CommonInputLayout mPhoneInputLayout;
     CommonInputLayout mVerifyCodeInputLayout;
+    TimeCountDown mCountDownButton;
     String phone;
     String code;
+    boolean canGetCode = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class FillMobileActivity extends BaseActivity {
     private void init() {
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
         mVerifyCodeInputLayout = (CommonInputLayout) findViewById(R.id.verify_code_input_layout);
+        mCountDownButton = (TimeCountDown) findViewById(R.id.bt_verify);
+        mCountDownButton.setOnTimerCountDownListener(this);
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +65,23 @@ public class FillMobileActivity extends BaseActivity {
             public void onClick(View v) {
                 if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
                     phone = mPhoneInputLayout.getText();
-                    getVerifyCode();
+                    if(canGetCode) {
+                        getVerifyCode();
+                        mCountDownButton.initTimer();
+                    }else {
+                        ToastUtils.showCenter(FillMobileActivity.this, "请稍后再发！");
+                    }
                 } else {
                     ToastUtils.showCenter(FillMobileActivity.this, "请填写正确的手机号");
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCountDownButton.cancel();
     }
 
     private void getVerifyCode() {
@@ -136,4 +152,23 @@ public class FillMobileActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onCountDownStart() {
+        canGetCode = false;
+    }
+
+    @Override
+    public void onCountDownLoading(int currentCount) {
+
+    }
+
+    @Override
+    public void onCountDownError() {
+
+    }
+
+    @Override
+    public void onCountDownFinish() {
+        canGetCode = true;
+    }
 }

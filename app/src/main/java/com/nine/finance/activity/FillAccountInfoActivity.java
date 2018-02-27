@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.HomeInfo;
+import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonInputLayout;
 
@@ -117,9 +118,27 @@ public class FillAccountInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 fillApplyInfo();
+//                startActivity(FillAccountInfoActivity.this, FillMobileActivity.class);
                 if (!checkInfo()) {
                     ToastUtils.showCenter(FillAccountInfoActivity.this, "请把信息填写完整！");
                     return;
+                } else {
+                    if (!RegexUtils.isMobile(telInputLayout.getText()) && !RegexUtils.isTelephone(telInputLayout.getText())) {
+                        ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的手机号或者电话号码！");
+                        return;
+                    }
+                    if (!RegexUtils.isMobile(phoneInputLayout.getText()) && !RegexUtils.isTelephone(phoneInputLayout.getText())) {
+                        ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的手机号或者电话号码！");
+                        return;
+                    }
+                    if (!RegexUtils.isPostCode(postCodeInputLayout.getText())) {
+                        ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的邮编！");
+                        return;
+                    }
+                    if (!RegexUtils.isEmail(emailInputLayout.getText())) {
+                        ToastUtils.showCenter(FillAccountInfoActivity.this, "请填写正确的邮箱！");
+                        return;
+                    }
                 }
                 startActivity(FillAccountInfoActivity.this, FillMobileActivity.class);
             }
@@ -149,7 +168,6 @@ public class FillAccountInfoActivity extends BaseActivity {
         if (TextUtils.isEmpty(phoneInputLayout.getText())) {
             return false;
         }
-
         if (TextUtils.isEmpty(emailInputLayout.getText())) {
             return false;
         }

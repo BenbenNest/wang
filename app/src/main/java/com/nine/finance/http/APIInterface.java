@@ -29,7 +29,7 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
     /**
-     * 1. 图片上传
+     * 1. 图片上传 OK
      * 2. 4要素认证
      * 3. 文本框验证
      * 4. 活体和大头贴界面
