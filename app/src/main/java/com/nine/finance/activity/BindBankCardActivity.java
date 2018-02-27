@@ -30,6 +30,9 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
 
     private void init() {
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
+        if (AppGlobal.getApplyModel() != null) {
+            nameInputLayout.setText(AppGlobal.getApplyModel().getName());
+        }
 //        nameInputLayout.setText(AppGlobal().getName());
         bankcardInputLayout = (CommonInputLayout) findViewById(R.id.bankcard_input_layout);
         bankcardInputLayout.setOnClickListener(new BankCardOnclickListener(true));

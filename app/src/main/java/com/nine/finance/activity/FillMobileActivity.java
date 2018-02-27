@@ -2,6 +2,7 @@ package com.nine.finance.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -63,16 +64,20 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
         findViewById(R.id.bt_verify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
-                    phone = mPhoneInputLayout.getText();
-                    if (canGetCode) {
-                        getVerifyCode();
-                        mCountDownButton.initTimer();
+                try {
+                    if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
+                        phone = mPhoneInputLayout.getText();
+                        if (canGetCode) {
+                            getVerifyCode();
+                            mCountDownButton.initTimer();
+                        } else {
+                            ToastUtils.showCenter(FillMobileActivity.this, "请稍后再发！");
+                        }
                     } else {
-                        ToastUtils.showCenter(FillMobileActivity.this, "请稍后再发！");
+                        ToastUtils.showCenter(FillMobileActivity.this, "请填写正确的手机号");
                     }
-                } else {
-                    ToastUtils.showCenter(FillMobileActivity.this, "请填写正确的手机号");
+                } catch (Exception e) {
+                    Log.e("jeremy", e.getMessage());
                 }
             }
         });
@@ -102,10 +107,10 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
         call.enqueue(new Callback<BaseModel<VerifyCodeModel>>() {
             @Override
             public void onResponse(Call<BaseModel<VerifyCodeModel>> call, Response<BaseModel<VerifyCodeModel>> response) {
-                if (response != null && response.code() == 200 && response.body() != null) {
+                if (response != null && response.code() == 200 && response.body() != null && response.body().status.equals(BaseModel.SUCCESS)) {
                     VerifyCodeModel data = response.body().content;
                 } else {
-                    ToastUtils.showCenter(FillMobileActivity.this, response.message());
+                    ToastUtils.showCenter(FillMobileActivity.this, response.body().message);
                 }
             }
 
@@ -139,7 +144,7 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
                     startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 } else {
                     ToastUtils.showCenter(FillMobileActivity.this, response.body().message);
-//                    startActivity(FillMobileActivity.this, BindBankCardActivity.class);
+                    startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 }
             }
 

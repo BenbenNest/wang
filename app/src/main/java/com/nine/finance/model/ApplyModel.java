@@ -41,7 +41,7 @@ public class ApplyModel {
     private String name;
     private String nationality;
     private String nativePlace;
-    private String card;
+    private String idCard;
     private String gender;
     private String ethnic;
     private String birthday;
@@ -147,12 +147,12 @@ public class ApplyModel {
         this.nativePlace = nativePlace;
     }
 
-    public String getCard() {
-        return card;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setCard(String card) {
-        this.card = card;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public String getGender() {

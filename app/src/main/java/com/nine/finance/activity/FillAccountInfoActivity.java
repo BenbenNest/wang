@@ -194,7 +194,7 @@ public class FillAccountInfoActivity extends BaseActivity {
     }
 
     private void fillApplyInfo() {
-        AppGlobal.getApplyModel().setId(idInputLayout.getText());
+        AppGlobal.getApplyModel().setIdCard(idInputLayout.getText());
         AppGlobal.getApplyModel().setAddress(addressInputLayout.getText());
         AppGlobal.getApplyModel().setDeliveryAddress(addressInputLayout.getText());
         AppGlobal.getApplyModel().setEthnic("");
