@@ -62,7 +62,7 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (TextUtils.isEmpty(itemText)) {
                 itemText = "test";
             }
-            ((MyHolder) holder).tv.setText(position + "." + itemText);
+            ((MyHolder) holder).tv.setText(itemText);
             ((MyHolder) holder).action.setText(bankInfo.getState());
 //            switch (mList.get(position).getState()) {
 //                case Constant.BANK_STATUS_NO:

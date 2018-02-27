@@ -38,6 +38,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
     private RecyclerView mRececyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BankCardListAdapter mAdapter;
+    private int pageNum = 20;
     private int lastId = 0;
 
     public static void startActivity(Context context) {
@@ -69,11 +70,13 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         mRececyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                requestData(1);
+                if (mAdapter.getItemCount() % pageNum == 0) {
+                    requestData(1);
+                }
             }
         });
 
-
+        mRececyclerView.setAdapter(mAdapter);
         findViewById(R.id.bt_create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +143,6 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
                     } else {
                         mAdapter.addData(list);
                     }
-                    mAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -153,7 +155,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
 
     @Override
     public void onRefresh() {
-        requestData(0);
+//        requestData(0);
         mRefreshLayout.setRefreshing(false);
     }
 
