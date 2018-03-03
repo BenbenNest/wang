@@ -10,14 +10,14 @@ public class VerifyCodeModel {
      * phone : 13581665443
      */
 
-    private int code;
+    private String code;
     private String phone;
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

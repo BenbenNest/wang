@@ -85,7 +85,7 @@ public interface APIInterface {
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("/account/rest/bankcard/elementsRecognition")
-    Call<BaseModel<String>> elementsRecognition(@Body RequestBody body);
+    Call<BaseModel<VerifyCodeModel>> elementsRecognition(@Body RequestBody body);
 //    Call<BaseModel<String>> elementsRecognition(@Query("cardNo") String cardNo,@Query("customerNm") String customerNm,@Query("phoneNo") String phoneNo,@Query("type") String type);
 
 //      para.put("cardNo", AppGlobal.getApplyModel().getCardNumber());
