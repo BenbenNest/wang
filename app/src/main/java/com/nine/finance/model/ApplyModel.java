@@ -248,6 +248,8 @@ public class ApplyModel {
     private ImageInfo idCardImageBack;
     private ImageInfo bankCardImage;
     private ImageInfo faceImage;
+    private ImageInfo shakeImage;
+    private ImageInfo mouthImage;
 
     public String getBranchId() {
         return branchId;
@@ -287,5 +289,21 @@ public class ApplyModel {
 
     public void setFaceImage(ImageInfo faceImage) {
         this.faceImage = faceImage;
+    }
+
+    public ImageInfo getShakeImage() {
+        return shakeImage;
+    }
+
+    public void setShakeImage(ImageInfo shakeImage) {
+        this.shakeImage = shakeImage;
+    }
+
+    public ImageInfo getMouthImage() {
+        return mouthImage;
+    }
+
+    public void setMouthImage(ImageInfo mouthImage) {
+        this.mouthImage = mouthImage;
     }
 }

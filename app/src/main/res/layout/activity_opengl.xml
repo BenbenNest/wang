@@ -1,10 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
-
-
+    android:layout_height="match_parent">
 
 
     <android.opengl.GLSurfaceView
@@ -13,13 +9,12 @@
         android:layout_height="match_parent" />
 
     <TextView
+        android:id="@+id/opengl_layout_targetFaceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="xxxx"
         android:layout_marginTop="200px"
-        android:id="@+id/opengl_layout_targetFaceName"
-        android:visibility="gone"
-        />
+        android:text="xxxx"
+        android:visibility="gone" />
 
 
     <TextView
@@ -59,20 +54,18 @@
         android:id="@+id/opengl_layout_addFaceInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/face_compare_reg"
-        />
+        android:background="@drawable/face_compare_reg" />
 
     <ImageView
+        android:id="@+id/opengl_layout_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/facecompare_blue"
         android:layout_centerInParent="true"
-        android:id="@+id/opengl_layout_icon"
-        android:visibility="gone"
-        />
+        android:src="@drawable/facecompare_blue"
+        android:visibility="gone" />
 
 
     <ProgressBar
@@ -82,16 +75,24 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="17dp" />
+
     <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--&lt;!&ndash;android:src="@drawable/face_compare_reg"&ndash;&gt;-->
-        <!--android:background="@drawable/face_compare_reg"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text = "点击注册"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginBottom="50dp"-->
-        <!--android:id="@+id/opengl_layout_addFaceInfo"-->
-        <!--/>-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&lt;!&ndash;android:src="@drawable/face_compare_reg"&ndash;&gt;-->
+    <!--android:background="@drawable/face_compare_reg"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:text = "点击注册"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_marginBottom="50dp"-->
+    <!--android:id="@+id/opengl_layout_addFaceInfo"-->
+    <!--/>-->
 
 </RelativeLayout>

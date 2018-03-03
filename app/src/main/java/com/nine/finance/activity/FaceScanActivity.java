@@ -30,17 +30,32 @@ import com.megvii.idcard.sdk.IDCard.IDCardQuality;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.face.FaceIndicator;
+import com.nine.finance.http.APIInterface;
+import com.nine.finance.http.RetrofitService;
 import com.nine.finance.idcard.util.ConUtil;
 import com.nine.finance.idcard.util.DialogUtil;
 import com.nine.finance.idcard.util.ICamera;
 import com.nine.finance.idcard.util.Util;
+import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.ImageInfo;
 import com.nine.finance.utils.KeyUtil;
+import com.nine.finance.utils.NetUtil;
+import com.nine.finance.utils.ToastUtils;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FaceScanActivity extends Activity implements TextureView.SurfaceTextureListener, Camera.PreviewCallback {
 
@@ -65,12 +80,31 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_scan);
-
         init();
     }
 
     private void init() {
         facepp = new Facepp();
+//        facepp.getFaceppConfig();
+//        Facepp.FaceppConfig faceppConfig = facepp.getFaceppConfig();
+//        faceppConfig.interval = 30;
+//        faceppConfig.minFaceSize = 40;
+//        faceppConfig.roi_left = mIndicatorView.;
+//        faceppConfig.roi_top = top;
+//        faceppConfig.roi_right = right;
+//        faceppConfig.roi_bottom = bottom;
+//        String[] array = getResources().getStringArray(R.array.trackig_mode_array);
+//        if (trackModel.equals(array[0]))
+//            faceppConfig.detectionMode = Facepp.FaceppConfig.DETECTION_MODE_TRACKING_FAST;
+//        else if (trackModel.equals(array[1]))
+//            faceppConfig.detectionMode = Facepp.FaceppConfig.DETECTION_MODE_TRACKING_ROBUST;
+//        else if (trackModel.equals(array[2])) {
+//            faceppConfig.detectionMode = Facepp.FaceppConfig.MG_FPP_DETECTIONMODE_TRACK_RECT;
+//            isShowFaceRect = true;
+//        }
+//        facepp.setFaceppConfig(faceppConfig);
+
+
         mIdCard = new IDCard();
         mIdCard.init(this, Util.readModel(this));
         setClear = getIntent().getFloatExtra("clear", 0.8f);
@@ -199,8 +233,13 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         mHasSurface = true;
         doPreview();
-
         mICamera.actionDetect(this);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isSuccess = false;
+            }
+        }, 2000);
     }
 
     @Override
@@ -219,12 +258,19 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
 
     }
 
-    boolean isSuccess = false;
+    boolean isSuccess = true;
     private Facepp facepp;
+    private boolean firstFace = false;
+    private boolean isShakeHead = false;
+    private boolean openMouth = false;
+    private boolean openEye = false;
+
+    private void setSuccess(boolean flag) {
+        isSuccess = flag;
+    }
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        if (data == null) return;
         if (isSuccess) return;
         //检测操作放到主线程，防止贴点延迟
         int width = mICamera.cameraWidth;
@@ -234,7 +280,52 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
             Facepp.Face face = faces[0];
             isSuccess = true;
 
-//            Camera.Parameters parameters = camera.getParameters();
+            String errorStr = "";
+            errorStr = "请摇头";
+
+
+            print(errorStr, "", "");
+            Bitmap bitmap = ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
+                    mIsVertical);
+            String path = ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
+//            String path = com.nine.finance.idcard.util.ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
+
+            doOCR(path);
+        }
+    }
+
+    public void uploadFile(String path) {
+        if (!NetUtil.isNetworkConnectionActive(FaceScanActivity.this)) {
+            ToastUtils.showCenter(FaceScanActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        File file = new File(path);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path, requestBody);
+        Call<BaseModel<ImageInfo>> call = api.uploadFile(multiPart);
+        call.enqueue(new Callback<BaseModel<ImageInfo>>() {
+            @Override
+            public void onResponse(Call<BaseModel<ImageInfo>> call, Response<BaseModel<ImageInfo>> response) {
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    ImageInfo imageInfo = response.body().content;
+                    if (AppGlobal.getApplyModel() != null) {
+                        AppGlobal.getApplyModel().setFaceImage(imageInfo);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<ImageInfo>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void saveBitmap() {
+        //            Camera.Parameters parameters = camera.getParameters();
 //            width = parameters.getPreviewSize().width;
 //            height = parameters.getPreviewSize().height;
 //            byte[] imageData = RotaterUtil.rotate(data, width, height, 90);
@@ -261,15 +352,6 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
 //            options.inSampleSize = 1;
 //            options.inPreferredConfig = Bitmap.Config.RGB_565;
 //            bitmap = BitmapFactory.decodeByteArray(jpegData, 0, jpegData.length, options);
-
-
-            Bitmap bitmap = ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
-                    mIsVertical);
-            String path = ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
-//            String path = com.nine.finance.idcard.util.ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
-
-            doOCR(path);
-        }
     }
 
     public void onPreviewFrame2(final byte[] data, Camera camera) {
@@ -343,10 +425,10 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
             public void run() {
                 errorType.setText(errorStr);
                 verticalType.setText(errorStr);
-                if (mIsDebug) {
-                    fps.setText(fpsStr);
-                    fps_1.setText(fps_1Str);
-                }
+//                if (mIsDebug) {
+//                    fps.setText(fpsStr);
+//                    fps_1.setText(fps_1Str);
+//                }
             }
         });
     }
@@ -385,7 +467,7 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     /**
      * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
      */
-    public void doOCR(final String path) {
+    public void doOCR2(final String path) {
         showBar(true);
         try {
             String url = "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard";
@@ -473,6 +555,67 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
             showBar(false);
             e1.printStackTrace();
             ConUtil.showToast(FaceScanActivity.this, "识别失败，请重新识别！");
+        }
+    }
+
+    /**
+     * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
+     */
+//    public static final
+    public void doOCR(final String path) {
+        showBar(true);
+        try {
+            String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
+            RequestParams rParams = new RequestParams();
+            Log.w("ceshi", "Util.API_OCRKEY===" + Util.API_SECRET + ", Util.API_OCRSECRET===" + Util.API_SECRET);
+            rParams.put("api_key", KeyUtil.API_KEY);
+            rParams.put("api_secret", KeyUtil.API_SECRET);
+            rParams.put("image_file", new File(path));
+            rParams.put("return_landmark", 2);
+            AsyncHttpClient asyncHttpclient = new AsyncHttpClient();
+            asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
+                    showBar(false);
+
+                    try {
+                        String successStr = new String(responseByte);
+                        Log.w("ceshi", "ocr  onSuccess: " + successStr);
+                        String info = "";
+                        JSONObject jObject = new JSONObject(successStr);
+                        if (jObject != null) {
+                            JSONArray faces = jObject.getJSONArray("faces");
+                            if (faces == null || faces.length() == 0) {
+                                isSuccess = false;
+                                return;
+                            } else {
+                                uploadFile(path);
+                            }
+                        }
+//                        contentText.setText(contentText.getText().toString() + info);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showBar(false);
+                        com.nine.finance.idcard.util.ConUtil.showToast(FaceScanActivity.this, "识别失败，请重新识别！");
+                        isSuccess = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    if (responseBody != null) {
+                        Log.w("ceshi", "responseBody===" + new String(responseBody));
+                    }
+                    showBar(false);
+                    com.nine.finance.idcard.util.ConUtil.showToast(FaceScanActivity.this, "识别失败，请重新识别！");
+                    isSuccess = false;
+                }
+            });
+        } catch (FileNotFoundException e1) {
+            showBar(false);
+            e1.printStackTrace();
+            com.nine.finance.idcard.util.ConUtil.showToast(FaceScanActivity.this, "识别失败，请重新识别！");
+            isSuccess = false;
         }
     }
 

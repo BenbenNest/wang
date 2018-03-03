@@ -36,6 +36,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.megvii.facepp.sdk.Facepp;
 import com.nine.finance.R;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.face.bean.FaceActionInfo;
 import com.nine.finance.face.bean.FeatureInfo;
 import com.nine.finance.face.facecompare.FaceCompareManager;
@@ -50,9 +51,15 @@ import com.nine.finance.face.util.OpenGLUtil;
 import com.nine.finance.face.util.PointsMatrix;
 import com.nine.finance.face.util.Screen;
 import com.nine.finance.face.util.SensorEventUtil;
+import com.nine.finance.http.APIInterface;
+import com.nine.finance.http.RetrofitService;
 import com.nine.finance.idcard.util.RotaterUtil;
 import com.nine.finance.idcard.util.Util;
+import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.ImageInfo;
 import com.nine.finance.utils.KeyUtil;
+import com.nine.finance.utils.NetUtil;
+import com.nine.finance.utils.ToastUtils;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -67,6 +74,14 @@ import java.util.HashMap;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class OpenglActivity extends Activity
         implements PreviewCallback, Renderer, SurfaceTexture.OnFrameAvailableListener {
@@ -125,6 +140,7 @@ public class OpenglActivity extends Activity
         context.startActivityForResult(new Intent(context, OpenglActivity.class).putExtra("FaceAction", faceActionInfo), 101);
     }
 
+    private TextView mTipView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +248,10 @@ public class OpenglActivity extends Activity
         imgIcon = (ImageView) findViewById(R.id.opengl_layout_icon);
 
         mBar = (ProgressBar) findViewById(R.id.result_bar);
+        mTipView = (TextView) findViewById(R.id.tv_tip);
+        setTipText();
+
+        lastTime = System.currentTimeMillis();
     }
 
 
@@ -344,6 +364,53 @@ public class OpenglActivity extends Activity
         }
     }
 
+    public void uploadFile(String path) {
+        if (!NetUtil.isNetworkConnectionActive(OpenglActivity.this)) {
+            ToastUtils.showCenter(OpenglActivity.this, getResources().getString(R.string.net_not_connect));
+            setSuccess(false);
+            return;
+        }
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        File file = new File(path);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path, requestBody);
+        Call<BaseModel<ImageInfo>> call = api.uploadFile(multiPart);
+        call.enqueue(new Callback<BaseModel<ImageInfo>>() {
+            @Override
+            public void onResponse(Call<BaseModel<ImageInfo>> call, Response<BaseModel<ImageInfo>> response) {
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    ImageInfo imageInfo = response.body().content;
+                    if (AppGlobal.getApplyModel().getFaceImage() == null) {
+                        AppGlobal.getApplyModel().setFaceImage(imageInfo);
+                        setSuccess(false);
+                    } else if (AppGlobal.getApplyModel().getShakeImage() == null) {
+                        AppGlobal.getApplyModel().setShakeImage(imageInfo);
+                        setSuccess(false);
+                    } else if (AppGlobal.getApplyModel().getMouthImage() == null) {
+                        AppGlobal.getApplyModel().setMouthImage(imageInfo);
+                        setSuccess(true);
+                    }
+                    setTipText();
+//                    mHandler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+////                            ToastUtils.showCenter(OpenglActivity.this, "恭喜，活体验证通过");
+//                        }
+//                    }, 1000);
+
+                } else {
+                    setSuccess(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<ImageInfo>> call, Throwable t) {
+                setSuccess(false);
+            }
+        });
+    }
 
     /**
      * 画绿色框
@@ -385,10 +452,66 @@ public class OpenglActivity extends Activity
         });
     }
 
-    /**
-     * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
-     */
-//    public static final
+    JSONObject faceObject = null;
+    JSONObject shakeObject = null;
+    JSONObject mouthObject = null;
+    String TAG = "jeremy";
+
+    private boolean checkShake(JSONObject object) {
+        JSONObject faceMarker = faceObject.optJSONObject("landmark");
+        JSONObject contour_left1 = faceMarker.optJSONObject("contour_left1");
+        Log.d(TAG, "contour_left1:" + contour_left1.toString());
+        JSONObject contour_right1 = faceMarker.optJSONObject("contour_right1");
+        Log.d(TAG, "contour_right1:" + contour_right1.toString());
+        int faceSpace = Math.abs(contour_left1.optInt("x") - contour_right1.optInt("x"));
+        faceMarker = object.optJSONObject("landmark");
+        contour_left1 = faceMarker.optJSONObject("contour_left1");
+        Log.d(TAG, "contour_left1:" + contour_left1.toString());
+        contour_right1 = faceMarker.optJSONObject("contour_right1");
+        Log.d(TAG, "contour_right1:" + contour_right1.toString());
+        int shakeSpace = Math.abs(contour_left1.optInt("x") - contour_right1.optInt("x"));
+        if (Math.abs(faceSpace - shakeSpace) > 30) {
+            shakeObject = object;
+            return true;
+        }
+        Log.d(TAG, "Math.abs(faceSpace - shakeSpace)=" + Math.abs(faceSpace - shakeSpace));
+
+        return false;
+    }
+
+    private boolean checkMouth(JSONObject object) {
+        JSONObject faceMarker = faceObject.optJSONObject("landmark");
+        JSONObject mouth_upper_lip_top = faceMarker.optJSONObject("mouth_upper_lip_top");
+        Log.d(TAG, "mouth_upper_lip_top:" + mouth_upper_lip_top.toString());
+        JSONObject mouth_lower_lip_bottom = faceMarker.optJSONObject("mouth_lower_lip_bottom");
+        Log.d(TAG, "mouth_lower_lip_top:" + mouth_lower_lip_bottom.toString());
+        int faceSpace = Math.abs(mouth_upper_lip_top.optInt("y") - mouth_lower_lip_bottom.optInt("y"));
+        faceMarker = object.optJSONObject("landmark");
+        mouth_upper_lip_top = faceMarker.optJSONObject("mouth_upper_lip_top");
+        Log.d(TAG, "mouth_upper_lip_top:" + mouth_upper_lip_top.toString());
+        mouth_lower_lip_bottom = faceMarker.optJSONObject("mouth_lower_lip_bottom");
+        Log.d(TAG, "mouth_lower_lip_bottom:" + mouth_lower_lip_bottom.toString());
+        int shakeSpace = Math.abs(mouth_upper_lip_top.optInt("y") - mouth_lower_lip_bottom.optInt("y"));
+        if (Math.abs(faceSpace - shakeSpace) > 8) {
+            shakeObject = object;
+            return true;
+        }
+        Log.d(TAG, "Math.abs(faceSpace - shakeSpace)=" + Math.abs(faceSpace - shakeSpace));
+
+        return false;
+    }
+
+    private void setSuccess(final boolean flag) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                isSuccess = flag;
+            }
+        });
+    }
+
+    private long lastTime;
+
     public void doOCR(final String path) {
         showBar(true);
         try {
@@ -413,10 +536,25 @@ public class OpenglActivity extends Activity
                         if (jObject != null) {
                             JSONArray faces = jObject.getJSONArray("faces");
                             if (faces == null || faces.length() == 0) {
-                                isSuccess = false;
+                                setSuccess(false);
                                 return;
                             } else {
-
+                                if (AppGlobal.getApplyModel().getFaceImage() == null) {
+                                    faceObject = faces.getJSONObject(0);
+                                    uploadFile(path);
+                                } else if (AppGlobal.getApplyModel().getShakeImage() == null) {
+                                    if (checkShake(faces.getJSONObject(0))) {
+                                        uploadFile(path);
+                                    } else {
+                                        setSuccess(false);
+                                    }
+                                } else if (AppGlobal.getApplyModel().getMouthImage() == null) {
+                                    if (checkMouth(faces.getJSONObject(0))) {
+                                        uploadFile(path);
+                                    } else {
+                                        setSuccess(false);
+                                    }
+                                }
                             }
                         }
 //                        contentText.setText(contentText.getText().toString() + info);
@@ -424,7 +562,7 @@ public class OpenglActivity extends Activity
                         e.printStackTrace();
                         showBar(false);
                         com.nine.finance.idcard.util.ConUtil.showToast(OpenglActivity.this, "识别失败，请重新识别！");
-                        isSuccess = false;
+                        setSuccess(false);
                     }
                 }
 
@@ -435,19 +573,33 @@ public class OpenglActivity extends Activity
                     }
                     showBar(false);
                     com.nine.finance.idcard.util.ConUtil.showToast(OpenglActivity.this, "识别失败，请重新识别！");
-                    isSuccess = false;
+                    setSuccess(false);
                 }
             });
         } catch (FileNotFoundException e1) {
             showBar(false);
             e1.printStackTrace();
             com.nine.finance.idcard.util.ConUtil.showToast(OpenglActivity.this, "识别失败，请重新识别！");
-            isSuccess = false;
+            setSuccess(false);
+        }
+    }
+
+    private void setTipText() {
+        if (mTipView == null) return;
+        if (AppGlobal.getApplyModel().getFaceImage() == null) {
+            mTipView.setText("人脸检测中...");
+        } else if (AppGlobal.getApplyModel().getShakeImage() == null) {
+            mTipView.setText("请摇头...");
+        } else if (AppGlobal.getApplyModel().getMouthImage() == null) {
+            mTipView.setText("请张嘴...");
+        } else {
+            mTipView.setText("活体验证通过");
         }
     }
 
     @Override
     public void onPreviewFrame(final byte[] data, final Camera camera) {
+        setTipText();
         if (isSuccess) return;
         //检测操作放到主线程，防止贴点延迟
         int width = mICamera.cameraWidth;
@@ -455,7 +607,7 @@ public class OpenglActivity extends Activity
         final Facepp.Face[] faces = facepp.detect(data, width, height, Facepp.IMAGEMODE_NV21);
         if (faces != null && faces.length > 0) {
             Facepp.Face face = faces[0];
-            isSuccess = true;
+            setSuccess(true);
 
             Camera.Parameters parameters = camera.getParameters();
             width = parameters.getPreviewSize().width;
@@ -466,7 +618,7 @@ public class OpenglActivity extends Activity
 
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             if (!yuv.compressToJpeg(new Rect(0, 0, width, height), 100, out)) {
-                isSuccess = false;
+                setSuccess(false);
                 return;
             }
 
@@ -488,56 +640,12 @@ public class OpenglActivity extends Activity
 //
             String path = com.nine.finance.idcard.util.ConUtil.saveBitmap(OpenglActivity.this, bitmap);
 
-            doOCR(path);
-
-//            mHandler.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    long actionDetectTme = System.currentTimeMillis();
-//                    IDCardDetect iCardDetect = mIdCard.detect(data, width, height, IDCard.IMAGEMODE_NV21);
-//                    final long DetectTme = System.currentTimeMillis() - actionDetectTme;
-//                    final float in_bound = iCardDetect.inBound;
-//                    final float is_idcard = iCardDetect.isIdcard;
-//                    final float clear = iCardDetect.clear;
-//                    String errorStr = "";
-//
-//                    if (clear < setClear)
-//                        errorStr = "请点击屏幕对焦";
-//                    else if (in_bound < setBound)
-//                        errorStr = "请将身份证对准引导框";
-//
-//                    String fps_1Str = "";
-//
-//                    if (in_bound >= setBound && is_idcard >= setIdcard && clear >= setClear) {
-//                        long actionQualityTme = System.currentTimeMillis();
-//                        Log.w("ceshi", "faculaPass===" + faculaPass);
-//                        final IDCardQuality idCardQuality = mIdCard.CalculateQuality(faculaPass);
-//                        drawFaculae(idCardQuality);
-//                        final long idCardQualityTme = System.currentTimeMillis() - actionQualityTme;
-//
-//                        fps_1Str = "\nIdCardQualityTme: " + idCardQualityTme + "\nisfaculaePass: "
-//                                + idCardQuality.isfaculaePass + "\nfaculaeLenth: " + idCardQuality.faculaes.length
-//                                + "\nShadowLenth: " + idCardQuality.Shadows.length;
-//                        if (!idCardQuality.isfaculaePass)
-//                            errorStr = "有光斑";
-//                        if (idCardQuality.isfaculaePass && idCardQuality.isShadowPass) {
-//                            Bitmap bitmap = com.nine.finance.idcard.util.ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
-//                                    mIsVertical);
-//                            String path = com.nine.finance.idcard.util.ConUtil.saveBitmap(IDCardScanActivity.this, bitmap);
-////                        enterToResult(path, idCardQuality, clear, is_idcard, in_bound);
-//                            doOCR(path);
-//                        } else
-//                            isSuccess = false;
-//                    } else {
-//                        drawFaculae(null);
-//                        isSuccess = false;
-//                    }
-//
-//                    String fpsStr = "\nin_bound: " + in_bound + "\nis_idcard: " + is_idcard + "\nclear: " + clear
-//                            + "\nDetectTme: " + DetectTme;
-//                    print(errorStr, fpsStr, fps_1Str);
-//                }
-//            });
+            if (System.currentTimeMillis() - lastTime > 3 * 1000) {
+                lastTime = System.currentTimeMillis();
+                doOCR(path);
+            } else {
+                setSuccess(false);
+            }
         }
     }
 
