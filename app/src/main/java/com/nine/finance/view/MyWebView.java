@@ -3,7 +3,6 @@ package com.nine.finance.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -30,27 +29,27 @@ public class MyWebView extends WebView {
     private void init() {
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setSupportMultipleWindows(true);
+//        settings.setSupportMultipleWindows(true);
         settings.setDomStorageEnabled(true);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        settings.setPluginState(WebSettings.PluginState.ON); // 设置插件支持
-        settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setSupportZoom(false); // 设置支持缩放
-        settings.setBuiltInZoomControls(false);
-        settings.setAllowFileAccess(true); // 启用WebView访问文件数据
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
-        settings.setDatabaseEnabled(true); // 启用数据库缓存
-        settings.setDomStorageEnabled(true); // 启用DOM缓存
-        settings.setAppCacheEnabled(true); // 启用应用缓存
-        settings.setSavePassword(false); // 关闭webview的自动保存密码
-        settings.setAllowContentAccess(true);
-        settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
+//        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+//        settings.setPluginState(WebSettings.PluginState.ON); // 设置插件支持
+//        settings.setUseWideViewPort(true);
+//        settings.setLoadWithOverviewMode(true);
+//        settings.setSupportZoom(false); // 设置支持缩放
+//        settings.setBuiltInZoomControls(false);
+//        settings.setAllowFileAccess(true); // 启用WebView访问文件数据
+//        settings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
+//        settings.setDatabaseEnabled(true); // 启用数据库缓存
+//        settings.setDomStorageEnabled(true); // 启用DOM缓存
+//        settings.setAppCacheEnabled(true); // 启用应用缓存
+//        settings.setSavePassword(false); // 关闭webview的自动保存密码
+//        settings.setAllowContentAccess(true);
+//        settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
         // android 5.0以上默认不支持Mixed Content
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(
-                    WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            settings.setMixedContentMode(
+//                    WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+//        }
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         setWebViewClient(new WebViewClient() {
@@ -84,7 +83,6 @@ public class MyWebView extends WebView {
             }
 
 //            注：在重写WebViewClient的onReceivedSslError方法时，注意一定要去除onReceivedSslError方法的super.onReceivedSslError(view, handler, error);，否则设置无效。
-
 
         });
 

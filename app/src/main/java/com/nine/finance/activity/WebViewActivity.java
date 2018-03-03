@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 
 import com.nine.finance.R;
 import com.nine.finance.view.CommonHeadView;
+import com.nine.finance.view.MyWebView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class WebViewActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    WebView webView;
+    MyWebView webView;
     CommonHeadView headView;
     WebSettings settings;
     private List<String> loadHistoryUrls=new ArrayList<>();
@@ -86,7 +87,7 @@ public class WebViewActivity extends BaseActivity {
 
     private void init() {
         headView = (CommonHeadView) findViewById(R.id.head_view);
-        webView = (WebView) findViewById(R.id.webview);
+        webView = (MyWebView) findViewById(R.id.webview);
         settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportMultipleWindows(true);
@@ -105,7 +106,7 @@ public class WebViewActivity extends BaseActivity {
         settings.setSavePassword(false); // 关闭webview的自动保存密码
         settings.setAllowContentAccess(true);
         settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
-        // android 5.0以上默认不支持Mixed Content
+//         android 5.0以上默认不支持Mixed Content
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(
                     WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
@@ -154,7 +155,6 @@ public class WebViewActivity extends BaseActivity {
         });
 
 //        WebChromeClient的bug，按返回键的时候，是不会执行onReceivedTitle这个方法的，所以返回的时候title就不会动态的改变了，后来百度到有方法可以让他动态的改变，那就是自己维护，何为自己维护呢：
-//
 //        就是自己创建一个栈，也就是list，来动态添加，删除你浏览的网页
 
 

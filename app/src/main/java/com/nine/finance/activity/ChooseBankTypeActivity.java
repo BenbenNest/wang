@@ -13,7 +13,6 @@ import com.nine.finance.app.AppGlobal;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
-import com.nine.finance.model.VerifyCodeModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 
@@ -60,29 +59,32 @@ public class ChooseBankTypeActivity extends BaseActivity {
             return;
         }
         Map<String, String> para = new HashMap<>();
+        if (AppGlobal.getApplyModel() != null) {
+//            para.put("cardNo", AppGlobal.getApplyModel().getCardNumber());//6227000011120044185
+//            para.put("customerNm", AppGlobal.getApplyModel().getName());//王龙鹤
+//            para.put("phoneNo", AppGlobal.getApplyModel().getPhone());//15001334852
+//            para.put("type", AppGlobal.getApplyModel().getIdCard());//230404198309060519
+            para.put("cardNo", "6227000011120044185");//6227000011120044185
+            para.put("customerNm", "test");//王龙鹤
+            para.put("phoneNo", "15001334852");//15001334852
+            para.put("type", "230404198309060519");//230404198309060519
+        }
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
-        if (AppGlobal.getApplyModel() != null) {
-            para.put("cardNo", AppGlobal.getApplyModel().getCardNumber());
-            para.put("customerNm", AppGlobal.getApplyModel().getName());
-            para.put("phoneNo", AppGlobal.getApplyModel().getPhone());
-            para.put("type", AppGlobal.getApplyModel().getIdCard());
-        }
 
         Gson gson = new Gson();
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-//        Call<BaseModel<String>> call = api.elementsRecognition(AppGlobal.getApplyModel().getCardNumber(), AppGlobal.getApplyModel().getName(), AppGlobal.getApplyModel().getPhone(), AppGlobal.getApplyModel().getIdCard());
-        Call<BaseModel<VerifyCodeModel>> call = api.elementsRecognition(body);
+        Call<BaseModel<String>> call = api.elementsRecognition(body);
 
-        call.enqueue(new Callback<BaseModel<VerifyCodeModel>>() {
+        call.enqueue(new Callback<BaseModel<String>>() {
             @Override
-            public void onResponse(Call<BaseModel<VerifyCodeModel>> call, Response<BaseModel<VerifyCodeModel>> response) {
+            public void onResponse(Call<BaseModel<String>> call, Response<BaseModel<String>> response) {
                 Log.d("jeremy", response.message() + "-----" + response.body().message);
                 if (response != null && response.code() == 200 && response.body() != null && response.body().status.equals(BaseModel.SUCCESS)) {
-                    VerifyCodeModel model = response.body().content;
+                    String model = response.body().content;
                     startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
                 } else {
                     ToastUtils.showCenter(ChooseBankTypeActivity.this, "填写信息没有通过银行验证，请重新检查");
@@ -91,7 +93,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseModel<VerifyCodeModel>> call, Throwable t) {
+            public void onFailure(Call<BaseModel<String>> call, Throwable t) {
                 Log.d("jeremy", t.getMessage());
                 ToastUtils.showCenter(ChooseBankTypeActivity.this, "请求失败，请重试！");
 //                startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
