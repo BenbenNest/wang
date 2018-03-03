@@ -40,4 +40,7 @@
     <dimen name="public_fellow_contact_phone_margin_top">6dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="activity_title_hight">70dp</dimen>
+    <dimen name="editItem_textSzie0">20sp</dimen>
+
 </resources>

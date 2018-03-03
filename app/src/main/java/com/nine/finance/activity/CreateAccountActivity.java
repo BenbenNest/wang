@@ -24,7 +24,7 @@ public class CreateAccountActivity extends BaseActivity {
         btAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(CreateAccountActivity.this, FaceScanActivity.class);
+                startActivity(CreateAccountActivity.this, FaceScanActivityOld.class);
             }
         });
     }

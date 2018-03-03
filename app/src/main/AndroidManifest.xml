@@ -63,7 +63,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FaceScanActivity"
+            android:name=".activity.FaceScanActivityOld"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
