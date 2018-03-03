@@ -63,9 +63,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FaceScanActivityOld"
+            android:name=".activity.FaceScanActivity"
+            android:hardwareAccelerated="true"
+            android:label="@string/title_activity_idcard_scan"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.EditPersonalInfoActivity"
             android:launchMode="singleTask"
@@ -157,6 +159,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".face.OpenglActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

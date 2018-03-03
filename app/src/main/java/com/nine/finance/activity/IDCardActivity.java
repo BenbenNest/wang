@@ -18,7 +18,6 @@ import com.nine.finance.app.AppGlobal;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.idcard.AuthManager;
-import com.nine.finance.idcard.IDCardScanActivity;
 import com.nine.finance.idcard.util.Screen;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
@@ -79,7 +78,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
 
         File file = new File(path);
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path,requestBody);
+        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path, requestBody);
         Call<BaseModel<ImageInfo>> call = api.uploadFile(multiPart);
         call.enqueue(new Callback<BaseModel<ImageInfo>>() {
             @Override
@@ -143,7 +142,8 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                     }
                 });
             } else {
-                startActivity(IDCardActivity.this, IDCardScanActivity.class);
+//                startActivity(IDCardActivity.this, IDCardScanActivity.class);
+                startActivity(IDCardActivity.this, FaceScanActivity.class);
             }
         }
     }
@@ -153,16 +153,17 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
     @Override
     public void authState(boolean flag) {
         if (true) {
-//            startActivity(IDCardActivity.this, IDCardScanActivity.class);
-            Intent intent = new Intent(this, IDCardScanActivity.class);
-            intent.putExtra("isvertical", true);
-            intent.putExtra("isClearShadow", false);
-            intent.putExtra("isTextDetect", false);
-            intent.putExtra("isDebug", false);
-            intent.putExtra("bound", 0.8);
-            intent.putExtra("idcard", 0.1);
-            intent.putExtra("clear", 0.8);
-            startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
+//            OpenglActivity.startActivity(IDCardActivity.this);
+            startActivity(IDCardActivity.this, FaceScanActivity.class);
+//            Intent intent = new Intent(this, IDCardScanActivity.class);
+//            intent.putExtra("isvertical", true);
+//            intent.putExtra("isClearShadow", false);
+//            intent.putExtra("isTextDetect", false);
+//            intent.putExtra("isDebug", false);
+//            intent.putExtra("bound", 0.8);
+//            intent.putExtra("idcard", 0.1);
+//            intent.putExtra("clear", 0.8);
+//            startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
         }
     }
 }

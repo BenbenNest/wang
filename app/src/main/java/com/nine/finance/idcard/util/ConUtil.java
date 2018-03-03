@@ -214,7 +214,7 @@ public class ConUtil {
 			}
 		}
 		// String bitmapFileName = System.currentTimeMillis() + ".jpg";
-		String bitmapFileName = System.currentTimeMillis() + "";
+		String bitmapFileName = System.currentTimeMillis() + ".jpg";
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(mediaStorageDir + "/" + bitmapFileName);

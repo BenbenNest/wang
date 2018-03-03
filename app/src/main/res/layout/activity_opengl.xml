@@ -75,7 +75,12 @@
         />
 
 
-
+    <ProgressBar
+        android:id="@+id/result_bar"
+        android:layout_width="25dip"
+        android:layout_height="25dip"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <!--<ImageButton-->
         <!--android:layout_width="wrap_content"-->

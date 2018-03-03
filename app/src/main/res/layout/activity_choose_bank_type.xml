@@ -9,7 +9,6 @@
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        my:bg="@color/public_trans_color"
         my:title="绑定银行卡" />
 
     <LinearLayout
