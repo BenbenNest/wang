@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.nine.finance.idcard.util.IDCardIndicator
+    <com.nine.finance.face.FaceIndicator
         android:id="@+id/idcardscan_layout_indicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

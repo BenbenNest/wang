@@ -22,16 +22,17 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.megvii.facepp.sdk.Facepp;
 import com.megvii.idcard.sdk.IDCard;
 import com.megvii.idcard.sdk.IDCard.IDCardConfig;
 import com.megvii.idcard.sdk.IDCard.IDCardDetect;
 import com.megvii.idcard.sdk.IDCard.IDCardQuality;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
+import com.nine.finance.face.FaceIndicator;
 import com.nine.finance.idcard.util.ConUtil;
 import com.nine.finance.idcard.util.DialogUtil;
 import com.nine.finance.idcard.util.ICamera;
-import com.nine.finance.idcard.util.IDCardIndicator;
 import com.nine.finance.idcard.util.Util;
 import com.nine.finance.utils.KeyUtil;
 
@@ -46,7 +47,7 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     private TextureView textureView;
     private DialogUtil mDialogUtil;
     private ICamera mICamera;// 照相机工具类
-    private IDCardIndicator mIndicatorView;
+    private FaceIndicator mIndicatorView;
     private boolean mIsVertical = false, mIsDebug = false, isTextDetect = false, isClearShadow = false;
     private float faculaPass;// 光斑敏感度
     private TextView fps, fps_1;
@@ -63,12 +64,13 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.idcardscan_layout);
+        setContentView(R.layout.activity_face_scan);
 
         init();
     }
 
     private void init() {
+        facepp = new Facepp();
         mIdCard = new IDCard();
         mIdCard.init(this, Util.readModel(this));
         setClear = getIntent().getFloatExtra("clear", 0.8f);
@@ -86,6 +88,7 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
         mICamera = new ICamera(mIsVertical);
+        mICamera.setCamera(1);
         mDialogUtil = new DialogUtil(this);
         textureView = (TextureView) findViewById(R.id.idcardscan_layout_surface);
         textureView.setSurfaceTextureListener(this);
@@ -102,7 +105,7 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
         fps_1.setVisibility(View.VISIBLE);
         errorType = (TextView) findViewById(R.id.idcardscan_layout_error_type);
         verticalType = (TextView) findViewById(R.id.idcardscan_layout_verticalerror_type);
-        mIndicatorView = (IDCardIndicator) findViewById(R.id.idcardscan_layout_indicator);
+        mIndicatorView = (FaceIndicator) findViewById(R.id.idcardscan_layout_indicator);
         mBar = (ProgressBar) findViewById(R.id.result_bar);
         if (mIsVertical) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -143,6 +146,12 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     protected void onDestroy() {
         super.onDestroy();
         mDialogUtil.onDestory();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                facepp.release();
+            }
+        });
     }
 
     int width;
@@ -211,9 +220,59 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     }
 
     boolean isSuccess = false;
+    private Facepp facepp;
 
     @Override
-    public void onPreviewFrame(final byte[] data, Camera camera) {
+    public void onPreviewFrame(byte[] data, Camera camera) {
+        if (data == null) return;
+        if (isSuccess) return;
+        //检测操作放到主线程，防止贴点延迟
+        int width = mICamera.cameraWidth;
+        int height = mICamera.cameraHeight;
+        final Facepp.Face[] faces = facepp.detect(data, width, height, Facepp.IMAGEMODE_NV21);
+        if (faces != null && faces.length > 0) {
+            Facepp.Face face = faces[0];
+            isSuccess = true;
+
+//            Camera.Parameters parameters = camera.getParameters();
+//            width = parameters.getPreviewSize().width;
+//            height = parameters.getPreviewSize().height;
+//            byte[] imageData = RotaterUtil.rotate(data, width, height, 90);
+//
+//            YuvImage yuv = new YuvImage(imageData, ImageFormat.NV21, width, height, null);
+//
+//            ByteArrayOutputStream out = new ByteArrayOutputStream();
+//            if (!yuv.compressToJpeg(new Rect(0, 0, width, height), 100, out)) {
+//                isSuccess = false;
+//                return;
+//            }
+//
+//            byte[] bytes = out.toByteArray();
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//
+//            //
+//
+//            YuvImage image = new YuvImage(data, ImageFormat.NV21, width, height, null);            //ImageFormat.NV21  640 480
+//            ByteArrayOutputStream outputSteam = new ByteArrayOutputStream();
+//            image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), 70, outputSteam); // 将NV21格式图片，以质量70压缩成Jpeg，并得到JPEG数据流
+//            byte[] jpegData = outputSteam.toByteArray();                                                //从outputSteam得到byte数据
+//
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inSampleSize = 1;
+//            options.inPreferredConfig = Bitmap.Config.RGB_565;
+//            bitmap = BitmapFactory.decodeByteArray(jpegData, 0, jpegData.length, options);
+
+
+            Bitmap bitmap = ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
+                    mIsVertical);
+            String path = ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
+//            String path = com.nine.finance.idcard.util.ConUtil.saveBitmap(FaceScanActivity.this, bitmap);
+
+            doOCR(path);
+        }
+    }
+
+    public void onPreviewFrame2(final byte[] data, Camera camera) {
         if (isSuccess)
             return;
         isSuccess = true;
