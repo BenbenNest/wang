@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nine.finance.R;
-import com.nine.finance.app.AppGlobal;
-import com.nine.finance.model.HomeInfo;
 import com.nine.finance.model.HomeInfo;
 
 import java.util.ArrayList;
@@ -79,7 +77,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
 //                    AppGlobal.getApplyModel().mBank = mList.get(position);
-                    AppGlobal.getApplyModel().setBankId(mList.get(position).getId());
+//                    AppGlobal.getApplyModel().setBankId(mList.get(position).getId());
                     Intent intent = new Intent();
                     intent.putExtra("home", mList.get(position));
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
