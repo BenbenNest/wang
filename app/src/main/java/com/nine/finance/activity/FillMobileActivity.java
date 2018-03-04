@@ -86,7 +86,9 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mCountDownButton.cancel();
+        if (mCountDownButton != null) {
+            mCountDownButton.cancel();
+        }
     }
 
     private void getVerifyCode() {
