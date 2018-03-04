@@ -114,10 +114,10 @@ public class OpenglActivity extends Activity
     private boolean isSurfaceCreated;
 
     private FaceActionInfo faceActionInfo;
-    private ImageView imgIcon;
 
     private MediaHelper mMediaHelper;
     private ProgressBar mBar;
+    private ImageView mIvState;
 
 
     public static void startActivity(Activity context) {
@@ -245,10 +245,9 @@ public class OpenglActivity extends Activity
             btnAddFeature.setVisibility(View.GONE);
         }
 
-        imgIcon = (ImageView) findViewById(R.id.opengl_layout_icon);
-
         mBar = (ProgressBar) findViewById(R.id.result_bar);
         mTipView = (TextView) findViewById(R.id.tv_tip);
+        mIvState = (ImageView) findViewById(R.id.opengl_image);
         setTipText();
 
         lastTime = System.currentTimeMillis();
@@ -588,12 +587,16 @@ public class OpenglActivity extends Activity
         if (mTipView == null) return;
         if (AppGlobal.getApplyModel().getFaceImage() == null) {
             mTipView.setText("人脸检测中...");
+            mTipView.setBackgroundResource(R.drawable.dynamic_check_face);
         } else if (AppGlobal.getApplyModel().getShakeImage() == null) {
             mTipView.setText("请摇头...");
+            mTipView.setBackgroundResource(R.drawable.dynamic_check_shake);
         } else if (AppGlobal.getApplyModel().getMouthImage() == null) {
             mTipView.setText("请张嘴...");
+            mTipView.setBackgroundResource(R.drawable.dynamic_check_mouth);
         } else {
             mTipView.setText("活体验证通过");
+            mTipView.setBackgroundResource(R.drawable.dynamic_check_face);
         }
     }
 

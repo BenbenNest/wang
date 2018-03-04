@@ -1,10 +1,14 @@
 package com.nine.finance.business;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import com.google.gson.reflect.TypeToken;
 import com.nine.finance.app.AppGlobal;
+import com.nine.finance.http.ServiceHttpConfig;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.utils.GsonCore;
 import com.nine.finance.utils.PreferenceUtils;
@@ -32,6 +36,21 @@ public class UserManager {
         if (context != null && data != null) {
             String loginfo = GsonCore.toJson(data);
             PreferenceUtils.saveData(context, KEY_LOGIN_INFO, loginfo);
+            saveUserCookie(context, data);
+        }
+    }
+
+    public static void saveUserCookie(Context context, UserInfo data) {
+        CookieSyncManager.createInstance(context);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        String url = ServiceHttpConfig.getHost();
+        cookieManager.setCookie(url, "UserId=" + data.getUserId());
+        cookieManager.setCookie(url, "Token=" + data.getToken());
+        if (Build.VERSION.SDK_INT < 21) {
+            CookieSyncManager.getInstance().sync();
+        } else {
+            CookieManager.getInstance().flush();
         }
     }
 

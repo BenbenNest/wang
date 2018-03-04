@@ -122,13 +122,12 @@ public class LoginActivity extends BaseActivity {
                         if (BaseModel.SUCCESS.equals(response.body().status)) {
                             UserInfo loginData = response.body().content;
                             loginData.setIDNum(idInputLayout.getText().toString().trim());
-                            String token = loginData.getToken();
                             AppGlobal.setUserInfo(loginData);
                             rememberUser();
                             UserManager.saveUserData(getApplicationContext(), loginData);
                             HomeActivity.startActivity(LoginActivity.this);
                         } else {
-                            ToastUtils.showCenter(LoginActivity.this, response.message());
+                            ToastUtils.showCenter(LoginActivity.this, response.body().message);
                         }
                     }//http://39.106.173.14:8088/account/rest/account/user/login
                 } catch (Exception e) {

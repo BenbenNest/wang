@@ -61,14 +61,14 @@ public class ChooseBankTypeActivity extends BaseActivity {
         }
         Map<String, String> para = new HashMap<>();
         if (AppGlobal.getApplyModel() != null) {
-//            para.put("cardNo", AppGlobal.getApplyModel().getCardNumber());//6227000011120044185
-//            para.put("customerNm", AppGlobal.getApplyModel().getName());//王龙鹤
-//            para.put("phoneNo", AppGlobal.getApplyModel().getPhone());//15001334852
-//            para.put("type", AppGlobal.getApplyModel().getIdCard());//230404198309060519
-            para.put("cardNo", "6227000011120044185");//6227000011120044185
-            para.put("customerNm", "test");//王龙鹤
-            para.put("phoneNo", "15001334852");//15001334852
-            para.put("type", "230404198309060519");//230404198309060519
+            para.put("cardNo", AppGlobal.getApplyModel().getCardNumber());//6227000011120044185
+            para.put("customerNm", AppGlobal.getApplyModel().getName());//王龙鹤
+            para.put("phoneNo", AppGlobal.getApplyModel().getPhone());//15001334852
+            para.put("certifId", AppGlobal.getApplyModel().getIdCard());//230404198309060519
+//            para.put("cardNo", "6227000011120044185");//6227000011120044185
+//            para.put("customerNm", "test");//王龙鹤
+//            para.put("phoneNo", "15001334852");//15001334852
+//            para.put("certifId", "230404198309060519");//230404198309060519
         }
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
@@ -89,7 +89,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
                     startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
                 } else {
                     ToastUtils.showCenter(ChooseBankTypeActivity.this, "填写信息没有通过银行验证，请重新检查");
-//                    startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
+                    startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
                 }
             }
 
