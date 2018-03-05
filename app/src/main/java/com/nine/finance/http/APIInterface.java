@@ -51,7 +51,7 @@ public interface APIInterface {
     Call<BaseModel<UserInfo>> register(@Body RequestBody body);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
-    @GET("/account/rest/bank/findByUserId")
+    @GET("/account/rest/bankcard/findByUserId")
     Call<BaseModel<List<BankInfo>>> getApplyBankList(@Query("userId") String userId);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
