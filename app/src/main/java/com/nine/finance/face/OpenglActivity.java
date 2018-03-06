@@ -140,33 +140,33 @@ public class OpenglActivity extends Activity implements PreviewCallback, Rendere
 
 
     private void init() {
-//        if (android.os.Build.MODEL.equals("PLK-AL10"))
-//            printTime = 50;
-//
-//        faceActionInfo = (FaceActionInfo) getIntent().getSerializableExtra("FaceAction");
-//
-//        isStartRecorder = faceActionInfo.isStartRecorder;
-//        is3DPose = faceActionInfo.is3DPose;
-//        isDebug = faceActionInfo.isdebug;
-//        isROIDetect = faceActionInfo.isROIDetect;
-//        is106Points = faceActionInfo.is106Points;
-//        isBackCamera = faceActionInfo.isBackCamera;
-//        isFaceProperty = faceActionInfo.isFaceProperty;
-//        isOneFaceTrackig = faceActionInfo.isOneFaceTrackig;
-//        isFaceCompare = faceActionInfo.isFaceCompare;
-//        trackModel = faceActionInfo.trackModel;
-//
-//        min_face_size = faceActionInfo.faceSize;
-//        detection_interval = faceActionInfo.interval;
-//        resolutionMap = faceActionInfo.resolutionMap;
-//
-//        facepp = new Facepp();
-//
-//        sensorUtil = new SensorEventUtil(this);
-//
-//        mHandlerThread.start();
-//        mHandler = new Handler(mHandlerThread.getLooper());
-//
+        if (android.os.Build.MODEL.equals("PLK-AL10"))
+            printTime = 50;
+
+        faceActionInfo = (FaceActionInfo) getIntent().getSerializableExtra("FaceAction");
+
+        isStartRecorder = faceActionInfo.isStartRecorder;
+        is3DPose = faceActionInfo.is3DPose;
+        isDebug = faceActionInfo.isdebug;
+        isROIDetect = faceActionInfo.isROIDetect;
+        is106Points = faceActionInfo.is106Points;
+        isBackCamera = faceActionInfo.isBackCamera;
+        isFaceProperty = faceActionInfo.isFaceProperty;
+        isOneFaceTrackig = faceActionInfo.isOneFaceTrackig;
+        isFaceCompare = faceActionInfo.isFaceCompare;
+        trackModel = faceActionInfo.trackModel;
+
+        min_face_size = faceActionInfo.faceSize;
+        detection_interval = faceActionInfo.interval;
+        resolutionMap = faceActionInfo.resolutionMap;
+
+        facepp = new Facepp();
+
+        sensorUtil = new SensorEventUtil(this);
+
+        mHandlerThread.start();
+        mHandler = new Handler(mHandlerThread.getLooper());
+
         mGlSurfaceView = (GLSurfaceView) findViewById(R.id.opengl_layout_surfaceview);
         mGlSurfaceView.setEGLContextClientVersion(2);// 创建一个OpenGL ES 2.0
 //        // context
@@ -180,49 +180,49 @@ public class OpenglActivity extends Activity implements PreviewCallback, Rendere
 //                autoFocus();
             }
         });
-//
-//        mICamera = new ICamera();
-//        mDialogUtil = new DialogUtil(this);
-//        debugInfoText = (TextView) findViewById(R.id.opengl_layout_debugInfotext);
-//        AttriButetext = (TextView) findViewById(R.id.opengl_layout_AttriButetext);
-//        debugPrinttext = (TextView) findViewById(R.id.opengl_layout_debugPrinttext);
-//        if (isDebug)
-//            debugInfoText.setVisibility(View.VISIBLE);
-//        else
-//            debugInfoText.setVisibility(View.INVISIBLE);
-//
-//        btnAddFeature = (ImageButton) findViewById(R.id.opengl_layout_addFaceInfo);
-//        btnAddFeature.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // 保存feature数据
-//                if (mICamera == null || mICamera.mCamera == null) {
-//                    return;
-//                }
+
+        mICamera = new ICamera();
+        mDialogUtil = new DialogUtil(this);
+        debugInfoText = (TextView) findViewById(R.id.opengl_layout_debugInfotext);
+        AttriButetext = (TextView) findViewById(R.id.opengl_layout_AttriButetext);
+        debugPrinttext = (TextView) findViewById(R.id.opengl_layout_debugPrinttext);
+        if (isDebug)
+            debugInfoText.setVisibility(View.VISIBLE);
+        else
+            debugInfoText.setVisibility(View.INVISIBLE);
+
+        btnAddFeature = (ImageButton) findViewById(R.id.opengl_layout_addFaceInfo);
+        btnAddFeature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // 保存feature数据
+                if (mICamera == null || mICamera.mCamera == null) {
+                    return;
+                }
 //                if (compareFaces == null || compareFaces.length <= 0 || carmeraImgData == null) {
 //                    Toast.makeText(OpenglActivity.this, "当前未检测到人脸", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
-//
-////                Log.e("xie","xie rect"+compareFaces[0].rect.top+"bottom"+compareFaces[0].rect.bottom+newestFeature);
-//
+
+//                Log.e("xie","xie rect"+compareFaces[0].rect.top+"bottom"+compareFaces[0].rect.bottom+newestFeature);
+
 //                FaceCompareManager.instance().startActivity(OpenglActivity.this, compareFaces, mICamera, carmeraImgData, isBackCamera, faceActionInfo);
-//            }
-//        });
-//
-//        featureTargetText = (TextView) findViewById(R.id.opengl_layout_targetFaceName);
-//        if (isFaceCompare) {
-//            btnAddFeature.setVisibility(View.VISIBLE);
-//        } else {
-//            btnAddFeature.setVisibility(View.GONE);
-//        }
-//
-//        mBar = (ProgressBar) findViewById(R.id.result_bar);
-//        mTipView = (TextView) findViewById(R.id.tv_tip);
-//        mIvState = (ImageView) findViewById(R.id.opengl_image);
+            }
+        });
+
+        featureTargetText = (TextView) findViewById(R.id.opengl_layout_targetFaceName);
+        if (isFaceCompare) {
+            btnAddFeature.setVisibility(View.VISIBLE);
+        } else {
+            btnAddFeature.setVisibility(View.GONE);
+        }
+
+        mBar = (ProgressBar) findViewById(R.id.result_bar);
+        mTipView = (TextView) findViewById(R.id.tv_tip);
+        mIvState = (ImageView) findViewById(R.id.opengl_image);
 //        setTipText();
-//
+
 //        lastTime = System.currentTimeMillis();
     }
 //
