@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
 import com.nine.finance.app.AppGlobal;
+import com.nine.finance.face.OpenglActivity;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.idcard.AuthManager;
@@ -154,7 +155,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
     @Override
     public void authState(boolean flag) {
         if (true) {
-//            OpenglActivity.startActivity(IDCardActivity.this);
+            OpenglActivity.startActivity(IDCardActivity.this);
 //            startActivity(IDCardActivity.this, OpenglActivity.class);
             Intent intent = new Intent(this, IDCardScanActivity.class);
             intent.putExtra("isvertical", true);
@@ -164,7 +165,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             intent.putExtra("bound", 0.8);
             intent.putExtra("idcard", 0.1);
             intent.putExtra("clear", 0.8);
-            startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
+//            startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
         }
     }
 }

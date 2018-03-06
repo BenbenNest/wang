@@ -18,6 +18,7 @@ public class BankInfo implements Serializable {
     private String state;
     private String bankId;
     private String bankName;
+    private String cardNum;
 
     public String getState() {
         return state;
@@ -43,4 +44,11 @@ public class BankInfo implements Serializable {
         this.bankName = bankName;
     }
 
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
 }
