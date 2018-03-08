@@ -17,6 +17,9 @@ import com.nine.finance.R;
 
 public class PersonalInfoRow extends RelativeLayout {
 
+    TextView title;
+    TextView action;
+
     public PersonalInfoRow(Context context) {
         super(context);
         init(context, null);
@@ -34,8 +37,8 @@ public class PersonalInfoRow extends RelativeLayout {
             int icon = typedArray.getResourceId(R.styleable.PersonalInfoRow_icon, 0);
             ImageView imageView = (ImageView) findViewById(R.id.icon);
             imageView.setImageResource(icon);
-            TextView title = (TextView) findViewById(R.id.title);
-            TextView action = (TextView) findViewById(R.id.action);
+            title = (TextView) findViewById(R.id.title);
+            action = (TextView) findViewById(R.id.action);
             String sTitle = typedArray.getString(R.styleable.PersonalInfoRow_title);
             title.setText(sTitle);
             String sAction = typedArray.getString(R.styleable.PersonalInfoRow_action);
@@ -43,7 +46,10 @@ public class PersonalInfoRow extends RelativeLayout {
         }
     }
 
-
-
+    public void setText(String text) {
+        if (text != null) {
+            action.setText(text);
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.nine.finance.business;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
@@ -33,10 +34,14 @@ public class UserManager {
     }
 
     public static void saveUserData(Context context, UserInfo data) {
-        if (context != null && data != null) {
-            String loginfo = GsonCore.toJson(data);
-            PreferenceUtils.saveData(context, KEY_LOGIN_INFO, loginfo);
-            saveUserCookie(context, data);
+        if (context != null) {
+            if (data != null) {
+                String loginfo = GsonCore.toJson(data);
+                PreferenceUtils.saveData(context, KEY_LOGIN_INFO, loginfo);
+                saveUserCookie(context, data);
+            } else {
+                PreferenceUtils.saveData(context, KEY_LOGIN_INFO, "");
+            }
         }
     }
 
@@ -58,15 +63,22 @@ public class UserManager {
         UserInfo data = null;
         if (context != null) {
             String loginfo = PreferenceUtils.getData(context, KEY_LOGIN_INFO, "").toString();
-            data = GsonCore.fromJson(loginfo, new TypeToken<UserInfo>() {
-            }.getType());
+            if (TextUtils.isEmpty(loginfo)) {
+                data = null;
+            } else {
+                data = GsonCore.fromJson(loginfo, new TypeToken<UserInfo>() {
+                }.getType());
+            }
         }
         return data;
     }
 
     public static void logOut(Context context) {
-        AppGlobal.mUserInfo.setToken(null);
-        saveUserData(context, AppGlobal.mUserInfo);
+        if (AppGlobal.getUserInfo() != null) {
+            AppGlobal.setUserInfo(null);
+            saveUserData(context, null);
+        }
+        ((Activity) context).finish();
     }
 
     public static void updageLoginInfo() {

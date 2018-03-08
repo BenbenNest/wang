@@ -25,7 +25,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-//        startActivity(HomeActivity.this, IDCardActivity.class);
+//        startActivity(HomeActivity.this, PersonalInfoActivity.class);
     }
 
     private void init() {

@@ -29,29 +29,74 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_height="wrap_content">
 
-        <com.nine.finance.view.PersonalInfoRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            my:action="已完成"
-            my:icon="@drawable/account_login_phone_number_icon"
-            my:title="头像" />
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        <com.nine.finance.view.PersonalInfoRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            my:action="14401-43180401-4"
-            my:icon="@drawable/account_login_phone_number_icon"
-            my:title="身份证号" />
+            <com.nine.finance.view.PersonalInfoRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:action="已完成"
+                my:icon="@drawable/icon_name"
+                my:title="头像" />
 
-    </LinearLayout>
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_id"
+                my:title="身份证号" />
+
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_name"
+                my:title="姓名" />
+
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_name"
+                my:title="昵称" />
+
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_tel"
+                my:title="手机号" />
+
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_tel"
+                my:title="电话" />
+
+            <com.nine.finance.view.PersonalInfoRow
+                android:id="@+id/info_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:icon="@drawable/icon_address"
+                my:title="地址" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.nine.finance.view.CommonButton
         android:id="@+id/bt_logout"
