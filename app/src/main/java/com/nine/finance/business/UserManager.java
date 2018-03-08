@@ -33,6 +33,13 @@ public class UserManager {
         return flag;
     }
 
+    public static UserInfo getUserInfo(Context context) {
+        UserInfo userInfo = null;
+        userInfo = UserManager.getUserData(context);
+        AppGlobal.setUserInfo(userInfo);
+        return userInfo;
+    }
+
     public static void saveUserData(Context context, UserInfo data) {
         if (context != null) {
             if (data != null) {

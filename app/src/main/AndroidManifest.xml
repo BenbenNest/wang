@@ -161,7 +161,6 @@
             android:name=".activity.HomeListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".face.OpenglActivity"
             android:launchMode="singleTask"
@@ -176,6 +175,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".activity.AvatarActivity"></activity>
     </application>
 
 </manifest>

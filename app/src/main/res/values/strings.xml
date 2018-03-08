@@ -53,9 +53,6 @@
     <string name="title_activity_idcard_scan">IDCardScanActivity</string>
 
 
-
-
-
     <string name="record">录像</string>
     <string name="pose_3d">3D模型</string>
     <string name="debug">调试信息</string>

@@ -1,8 +1,10 @@
 package com.nine.finance.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
@@ -11,6 +13,7 @@ import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CircleAvatarView;
 import com.nine.finance.view.CommonButton;
 import com.nine.finance.view.PersonalInfoRow;
 
@@ -21,6 +24,7 @@ import retrofit2.Retrofit;
 
 public class PersonalInfoActivity extends BaseActivity {
 
+    CircleAvatarView avatarView;
     PersonalInfoRow idInfoView;
     PersonalInfoRow nameInfoView;
     PersonalInfoRow nickNameInfoView;
@@ -29,6 +33,7 @@ public class PersonalInfoActivity extends BaseActivity {
     PersonalInfoRow addressInfoView;
 
     CommonButton btLogout;
+    static final int request_code = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class PersonalInfoActivity extends BaseActivity {
     }
 
     private void init() {
+        avatarView = (CircleAvatarView) findViewById(R.id.info_avatar);
         idInfoView = (PersonalInfoRow) findViewById(R.id.info_id);
         nameInfoView = (PersonalInfoRow) findViewById(R.id.info_name);
         nickNameInfoView = (PersonalInfoRow) findViewById(R.id.info_nick_name);
@@ -58,6 +64,26 @@ public class PersonalInfoActivity extends BaseActivity {
             phoneInfoView.setText(AppGlobal.getUserInfo().getMobile());
             telInfoView.setText(AppGlobal.getUserInfo().getTel());
             addressInfoView.setText(AppGlobal.getUserInfo().getAddress());
+            Glide.with(PersonalInfoActivity.this).load(AppGlobal.getUserInfo().getHead()).into(avatarView);
+        }
+        avatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AvatarActivity.startActivityForResult(PersonalInfoActivity.this, request_code);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == requestCode) {
+                if (data != null) {
+                    String path = data.getStringExtra("path");
+                    Glide.with(PersonalInfoActivity.this).load(path).into(avatarView);
+                }
+            }
         }
     }
 

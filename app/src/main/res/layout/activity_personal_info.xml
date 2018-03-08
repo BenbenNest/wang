@@ -5,29 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <com.nine.finance.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_bg">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:text="首页"
-            android:textColor="@color/public_white_color"
-            android:textSize="17dp"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/iv_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/logo" />
-
-    </RelativeLayout>
+        my:title="个人信息" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,13 +21,12 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <com.nine.finance.view.PersonalInfoRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                my:action="已完成"
-                my:icon="@drawable/icon_name"
-                my:title="头像" />
+            <com.nine.finance.view.CircleAvatarView
+                android:id="@+id/info_avatar"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/default_avatar" />
 
             <com.nine.finance.view.PersonalInfoRow
                 android:id="@+id/info_id"
@@ -95,14 +76,14 @@
                 my:icon="@drawable/icon_address"
                 my:title="地址" />
 
+            <com.nine.finance.view.CommonButton
+                android:id="@+id/bt_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                my:title="退出" />
+
         </LinearLayout>
     </ScrollView>
-
-    <com.nine.finance.view.CommonButton
-        android:id="@+id/bt_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        my:title="退出" />
 
 </LinearLayout>

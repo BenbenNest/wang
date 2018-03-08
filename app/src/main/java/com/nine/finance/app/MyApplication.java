@@ -2,6 +2,7 @@ package com.nine.finance.app;
 
 import android.app.Application;
 
+import com.nine.finance.business.UserManager;
 import com.nine.finance.http.AppInfo;
 import com.nine.finance.utils.CrashHandler;
 
@@ -17,6 +18,7 @@ public class MyApplication extends Application {
         CrashHandler.getInstance(getApplicationContext()).init();
         AppGlobal.setAppContext(this);
         AppInfo.init(this);
+        UserManager.getUserInfo(getApplicationContext());
     }
 
 

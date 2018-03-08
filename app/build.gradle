@@ -57,7 +57,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-
 //    compile "com.android.support:appcompat-v7:${SupportLibraryVersion}"
 //    compile(name: 'MGFaceppSDK-0.5.0', ext: 'aar')
     //compile(name:'MGLicenseManagerSDK-0.3.0', ext:'aar')
