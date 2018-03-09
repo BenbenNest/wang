@@ -26,6 +26,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         init();
 //        startActivity(HomeActivity.this, PersonalInfoActivity.class);
+//        FaceActivity.startActivity(HomeActivity.this);
     }
 
     private void init() {
