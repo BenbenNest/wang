@@ -15,7 +15,8 @@ public class VerifyCodeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                OpenglActivity.startActivity(VerifyCodeActivity.this);
-                startActivity(VerifyCodeActivity.this, SubmitApplyActivity.class);
+//                startActivity(VerifyCodeActivity.this, SubmitApplyActivity.class);
+                FaceActivity.startActivity(VerifyCodeActivity.this);
             }
         });
 

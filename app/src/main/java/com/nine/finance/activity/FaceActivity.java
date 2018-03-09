@@ -113,6 +113,17 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
                 FaceActivity.this.finish();
             }
         });
+
+        findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(filepath)) {
+                    ToastUtils.showCenter(FaceActivity.this,"请拍照");
+                } else {
+                    startActivity(FaceActivity.this, SubmitApplyActivity.class);
+                }
+            }
+        });
     }
 
     /**
