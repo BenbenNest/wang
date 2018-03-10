@@ -18,6 +18,8 @@ public class BankInfo implements Serializable {
     private String state;
     private String bankId;
     private String bankName;
+    private String logo;
+    private String background;
 
     public String getState() {
         return state;
@@ -43,4 +45,19 @@ public class BankInfo implements Serializable {
         this.bankName = bankName;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
 }

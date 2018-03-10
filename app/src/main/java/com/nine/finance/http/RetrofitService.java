@@ -48,7 +48,8 @@ public class RetrofitService {
                 Request.Builder requestBuilder;
                 if (AppGlobal.getUserInfo() != null) {
                     requestBuilder = origin.newBuilder()
-                            .addHeader("token", AppGlobal.getUserInfo().getToken());
+                            .addHeader("token", AppGlobal.getUserInfo().getToken())
+                            .addHeader("userId", AppGlobal.getUserInfo().getUserId());
                 } else {
                     requestBuilder = origin.newBuilder();
                 }

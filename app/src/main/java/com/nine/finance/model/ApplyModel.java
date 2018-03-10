@@ -50,6 +50,7 @@ public class ApplyModel {
     private String status = "";
     private String logisticsCompany = "";
     private String shipmentNumber = "";
+    private String use = "";
 
     public String getId() {
         return id;
@@ -219,7 +220,15 @@ public class ApplyModel {
         this.shipmentNumber = shipmentNumber;
     }
 
-//    public BankInfo mBank;
+    public String getUse() {
+        return use;
+    }
+
+    public void setUse(String use) {
+        this.use = use;
+    }
+
+    //    public BankInfo mBank;
 //    public BranchInfo mBankBranch;
 //    public String mIDCardFront;
 //    public String mIDCardBack;

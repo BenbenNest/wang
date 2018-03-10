@@ -5,9 +5,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 
 import com.nine.finance.R;
+import com.nine.finance.adapter.SpinnerAdapter;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.HomeInfo;
 import com.nine.finance.utils.RegexUtils;
@@ -17,6 +21,7 @@ import com.nine.finance.view.CommonInputLayout;
 public class FillAccountInfoActivity extends BaseActivity {
 
     private ScrollView mScrollView;
+    Spinner spinner;
     CommonInputLayout idInputLayout;
     CommonInputLayout nameInputLayout;
     CommonInputLayout sexInputLayout;
@@ -147,6 +152,38 @@ public class FillAccountInfoActivity extends BaseActivity {
                 startActivity(FillAccountInfoActivity.this, FillMobileActivity.class);
             }
         });
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+        final String[] uses = {"理财", "消费", "结算"};
+        AppGlobal.getApplyModel().setUse(uses[0]);
+        ArrayAdapter<String> adapter;
+        adapter = new SpinnerAdapter(this, uses);
+        //设置下拉列表的风格,simple_spinner_dropdown_item是android系统自带的样式，等会自定义修改
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //将adapter 添加到spinner中
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                AppGlobal.getApplyModel().setUse(uses[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //使用数组形式操作
+        class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//            text.setText("我的名字是："+name[arg2]);
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        }
+
     }
 
     private boolean checkInfo() {
@@ -237,8 +274,6 @@ public class FillAccountInfoActivity extends BaseActivity {
             nameInputLayout.setText(AppGlobal.mIDCardFront.optString("name"));
             sexInputLayout.setText(AppGlobal.mIDCardFront.optString("gender"));
             ageInputLayout.setText(AppGlobal.mIDCardFront.optString("birthday"));
-
-
         }
     }
 

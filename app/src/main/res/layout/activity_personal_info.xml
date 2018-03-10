@@ -9,7 +9,31 @@
         android:id="@+id/head_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         my:title="个人信息" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/head_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="个人信息"
+            android:textColor="@color/public_white_color"
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+        <com.nine.finance.view.CircleAvatarView
+            android:id="@+id/info_avatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,12 +44,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp">
-
-            <com.nine.finance.view.CircleAvatarView
-                android:id="@+id/info_avatar"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal" />
 
             <com.nine.finance.view.PersonalInfoRow
                 android:id="@+id/info_id"
@@ -79,6 +97,7 @@
                 android:id="@+id/bt_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
                 android:layout_marginTop="20dp"
                 my:title="提交" />
 

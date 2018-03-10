@@ -274,6 +274,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
 //        para.put("status", "");
             para.put("logisticsCompany", "");
             para.put("shipmentNumber", "");
+            para.put("use", AppGlobal.getApplyModel().getUse());
 
             if (AppGlobal.getApplyModel().getIdCardImageFront() != null) {
                 para.put("cardFrontPic", AppGlobal.getApplyModel().getIdCardImageFront().getFileName());

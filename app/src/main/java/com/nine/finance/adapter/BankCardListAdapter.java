@@ -1,14 +1,22 @@
 package com.nine.finance.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
 
 import java.util.ArrayList;
@@ -55,7 +63,7 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
             BankInfo bankInfo = mList.get(position);
             String itemText = bankInfo.getBankName();
@@ -63,33 +71,37 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 itemText = "test";
             }
             ((MyHolder) holder).tv.setText(itemText);
-            ((MyHolder) holder).action.setText(bankInfo.getState());
-//            switch (mList.get(position).getState()) {
-//                case Constant.BANK_STATUS_NO:
-//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_NO_ACTION);
-//                    break;
-//                case Constant.BANK_STATUS_OK:
-//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_OK_ACTION);
-//                    break;
-//                case Constant.BANK_STATUS_APPLYING:
-//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_APPLYING_ACTION);
-//                    break;
-//                case Constant.BANK_STATUS_REJECT:
-//                    ((MyHolder) holder).action.setText(Constant.BANK_STATUS_REJECT_ACTION);
-//                    break;
-//            }
+            if (!TextUtils.isEmpty(bankInfo.getLogo())) {
+                Glide.with(mContext).load(AppGlobal.getUserInfo().getHead()).into(((MyHolder) holder).iv);
+            }
+            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
+                Glide.with(mContext)
+                        .load(bankInfo.getBackground())
+                        .asBitmap()
+                        .into(new SimpleTarget<Bitmap>(180, 180) {
+                            @Override
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                Drawable drawable = new BitmapDrawable(resource);
+//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                ((MyHolder) holder).root.setBackground(drawable);
+//                                }
+                            }
+                        });
+            }
+            ((MyHolder) holder).tv.setText(itemText);
         }
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-
+        View root;
+        ImageView iv;
         TextView tv;
-        TextView action;
 
         public MyHolder(View itemView) {
             super(itemView);
+            root = itemView.findViewById(R.id.root);
+            iv = (ImageView) itemView.findViewById(R.id.logo);
             tv = (TextView) itemView.findViewById(R.id.bank_name);
-            action = (TextView) itemView.findViewById(R.id.bt_action);
         }
     }
 }
