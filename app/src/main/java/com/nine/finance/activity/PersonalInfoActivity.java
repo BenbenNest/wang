@@ -15,6 +15,7 @@ import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.utils.NetUtil;
+import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CircleAvatarView;
 import com.nine.finance.view.CommonButton;
@@ -114,6 +115,10 @@ public class PersonalInfoActivity extends BaseActivity {
             ToastUtils.showCenter(this, "信息修改失败！");
             return;
         }
+        if (!RegexUtils.isMobile(phoneInfoView.getText().toString().trim())) {
+            ToastUtils.showCenter(this, "请填写正确的手机号！");
+            return;
+        }
         Map<String, String> para = new HashMap<>();
 
 //        {
@@ -134,15 +139,15 @@ public class PersonalInfoActivity extends BaseActivity {
 
         para.put("id", AppGlobal.getUserInfo().getUserId());
         para.put("username", AppGlobal.getUserInfo().getName());
-        para.put("nationality", AppGlobal.getUserInfo().getNationality());
-        para.put("inativePlaced", AppGlobal.getUserInfo().getInativePlaced());
-        para.put("gender", AppGlobal.getUserInfo().getGender());
-        para.put("ethnic", AppGlobal.getUserInfo().getEthnic());
-        para.put("birthday", AppGlobal.getUserInfo().getBirthday());
-        para.put("address", AppGlobal.getUserInfo().getAddress());
-        para.put("phone", AppGlobal.getUserInfo().getMobile());
-        para.put("tel", AppGlobal.getUserInfo().getTel());
-        para.put("card", AppGlobal.getUserInfo().getIDNum());
+//        para.put("nationality", AppGlobal.getUserInfo().getNationality());
+//        para.put("nativePlace", AppGlobal.getUserInfo().getInativePlaced());
+//        para.put("gender", AppGlobal.getUserInfo().getGender());
+//        para.put("ethnic", AppGlobal.getUserInfo().getEthnic());
+//        para.put("birthday", AppGlobal.getUserInfo().getBirthday());
+        para.put("address", addressInfoView.getText().toString().trim());
+        para.put("phone", phoneInfoView.getText().toString().trim());
+//        para.put("tel", AppGlobal.getUserInfo().getTel());
+//        para.put("card", AppGlobal.getUserInfo().getIDNum());
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
@@ -171,7 +176,6 @@ public class PersonalInfoActivity extends BaseActivity {
                     Log.d("", e.getMessage());
                     ToastUtils.showCenter(PersonalInfoActivity.this, e.getMessage());
                 }
-
             }
 
             @Override

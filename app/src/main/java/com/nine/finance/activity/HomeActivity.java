@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.nine.finance.R;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.view.BusinessRectView;
+import com.nine.finance.view.CircleAvatarView;
 
 import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
@@ -18,6 +21,7 @@ import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 public class HomeActivity extends BaseActivity {
 
     BusinessRectView accountRectView;
+    CircleAvatarView avatarView;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -41,6 +45,9 @@ public class HomeActivity extends BaseActivity {
         if (!PermissionUtils.checkSDPermission(HomeActivity.this)) {
             PermissionUtils.requestSDAndCameraPermission(HomeActivity.this);
         }
+        if (UserManager.checkLogin(this) && avatarView != null) {
+            Glide.with(HomeActivity.this).load(AppGlobal.getUserInfo().getHead()).into(avatarView);
+        }
     }
 
     @Override
@@ -60,6 +67,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
+        avatarView = (CircleAvatarView) findViewById(R.id.iv_head);
         initListener();
         accountRectView = (BusinessRectView) findViewById(R.id.create_account);
         accountRectView.setOnClickListener(new View.OnClickListener() {
