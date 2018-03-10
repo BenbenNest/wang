@@ -16,6 +16,7 @@ import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.HomeInfo;
 import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.CommonInputLayout;
 
 public class FillAccountInfoActivity extends BaseActivity {
@@ -61,7 +62,8 @@ public class FillAccountInfoActivity extends BaseActivity {
     }
 
     private void initView() {
-        if(commonHeadView!=null) {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step4);
         }
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
@@ -97,6 +99,7 @@ public class FillAccountInfoActivity extends BaseActivity {
             }
         });
         phoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
+        phoneInputLayout.requestFocus();
         emailInputLayout = (CommonInputLayout) findViewById(R.id.email_input_layout);
         telInputLayout = (CommonInputLayout) findViewById(R.id.tel_input_layout);
         useInputLayout = (CommonInputLayout) findViewById(R.id.use_input_layout);
@@ -157,7 +160,7 @@ public class FillAccountInfoActivity extends BaseActivity {
         });
 
         spinner = (Spinner) findViewById(R.id.spinner);
-        final String[] uses = {"理财", "消费", "结算"};
+        final String[] uses = {"开户用途", "理财", "消费", "结算"};
         AppGlobal.getApplyModel().setUse(uses[0]);
         ArrayAdapter<String> adapter;
         adapter = new SpinnerAdapter(this, uses);
@@ -168,7 +171,11 @@ public class FillAccountInfoActivity extends BaseActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AppGlobal.getApplyModel().setUse(uses[position]);
+                if (position > 0) {
+                    AppGlobal.getApplyModel().setUse(uses[position]);
+                } else {
+                    AppGlobal.getApplyModel().setUse("");
+                }
             }
 
             @Override
@@ -176,16 +183,6 @@ public class FillAccountInfoActivity extends BaseActivity {
 
             }
         });
-
-        //使用数组形式操作
-        class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//            text.setText("我的名字是："+name[arg2]);
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        }
 
     }
 
@@ -218,7 +215,7 @@ public class FillAccountInfoActivity extends BaseActivity {
         if (TextUtils.isEmpty(telInputLayout.getText())) {
             return false;
         }
-        if (TextUtils.isEmpty(useInputLayout.getText())) {
+        if (TextUtils.isEmpty(AppGlobal.getApplyModel().getUse())) {
             return false;
         }
         if (TextUtils.isEmpty(postCodeInputLayout.getText())) {

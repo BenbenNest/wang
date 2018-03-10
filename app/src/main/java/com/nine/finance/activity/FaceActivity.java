@@ -26,6 +26,7 @@ import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 
 import java.io.File;
 import java.util.HashMap;
@@ -67,6 +68,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_face);
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if(commonHeadView!=null) {
             commonHeadView.setStep(R.drawable.step9);
         }

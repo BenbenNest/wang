@@ -18,6 +18,7 @@ import com.nine.finance.model.ApplyModel;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BranchInfo;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 
 public class ChooseBankActivity extends BaseActivity {
 
@@ -46,7 +47,8 @@ public class ChooseBankActivity extends BaseActivity {
     private void init() {
         AppGlobal.mApplyModel = new ApplyModel();
 //        testSpinner();
-        if(commonHeadView!=null) {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step1);
         }
         mEditBankView = (EditText) findViewById(R.id.et_bank);

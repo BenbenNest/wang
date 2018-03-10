@@ -30,7 +30,6 @@ public class BaseActivity extends Activity implements CommonHeadView.OnBackListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         noLeakHandler = new NoLeakHandler(this);
-
     }
 
     @Override
@@ -77,9 +76,9 @@ public class BaseActivity extends Activity implements CommonHeadView.OnBackListe
                         new String[]{permission},
                         1);
             }
-        }else{
+        } else {
             onPermissionListener.onClick(true);
-            Log.d("BaseActivity", "2"+ContextCompat.checkSelfPermission(this,
+            Log.d("BaseActivity", "2" + ContextCompat.checkSelfPermission(this,
                     permission));
         }
     }
@@ -102,5 +101,6 @@ public class BaseActivity extends Activity implements CommonHeadView.OnBackListe
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 
 }

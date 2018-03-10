@@ -13,6 +13,7 @@ import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.CommonInputLayout;
 
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class SubmitApplyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_apply);
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step10);
         }

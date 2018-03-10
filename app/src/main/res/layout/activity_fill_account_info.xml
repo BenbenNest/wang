@@ -60,18 +60,18 @@
                 my:input_hint="国籍" />
 
             <com.nine.finance.view.CommonInputLayout
-                android:id="@+id/home_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                my:input_drawable="@drawable/icon_home"
-                my:input_hint="籍贯" />
-
-            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/icon_tel"
                 my:input_hint="联系电话" />
+
+            <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/home_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/icon_home"
+                my:input_hint="籍贯" />
 
             <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/email_input_layout"
@@ -112,14 +112,15 @@
                     android:layout_marginLeft="10dp"
                     android:text="开户用途"
                     android:textColor="#e6e6e6"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:visibility="gone" />
 
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginLeft="100dp" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
 
             <View

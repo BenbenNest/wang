@@ -39,7 +39,7 @@ public class WebViewActivity extends BaseActivity {
     MyWebView webView;
     CommonHeadView headView;
     WebSettings settings;
-    private List<String> loadHistoryUrls=new ArrayList<>();
+    private List<String> loadHistoryUrls = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,11 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
+                if (url.contains("native_start_bank")) {
+                    startActivity(WebViewActivity.this, ChooseBankActivity.class);
+                } else {
+                    view.loadUrl(url);
+                }
                 return true;
             }
 
@@ -151,12 +155,10 @@ public class WebViewActivity extends BaseActivity {
 //            注：在重写WebViewClient的onReceivedSslError方法时，注意一定要去除onReceivedSslError方法的super.onReceivedSslError(view, handler, error);，否则设置无效。
 
 
-
         });
 
 //        WebChromeClient的bug，按返回键的时候，是不会执行onReceivedTitle这个方法的，所以返回的时候title就不会动态的改变了，后来百度到有方法可以让他动态的改变，那就是自己维护，何为自己维护呢：
 //        就是自己创建一个栈，也就是list，来动态添加，删除你浏览的网页
-
 
 
         //设置WebChromeClient类

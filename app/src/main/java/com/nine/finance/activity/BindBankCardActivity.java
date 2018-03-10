@@ -15,6 +15,7 @@ import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.idcard.AuthManager;
+import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.CommonInputLayout;
 
 public class BindBankCardActivity extends BaseActivity implements AuthManager.AuthCallBack {
@@ -29,6 +30,7 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
     }
 
     private void init() {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if(commonHeadView!=null) {
             commonHeadView.setStep(R.drawable.step6);
         }

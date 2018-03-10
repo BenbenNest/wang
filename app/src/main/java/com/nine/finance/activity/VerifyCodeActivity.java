@@ -6,6 +6,7 @@ import android.view.View;
 import com.nine.finance.R;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
+import com.nine.finance.view.CommonHeadView;
 
 import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
@@ -15,7 +16,8 @@ public class VerifyCodeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_code);
-        if(commonHeadView!=null) {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step8);
         }
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
@@ -26,7 +28,7 @@ public class VerifyCodeActivity extends BaseActivity {
 //                FaceActivity.startActivity(VerifyCodeActivity.this);
                 if (!PermissionUtils.checkSDPermission(VerifyCodeActivity.this)) {
                     PermissionUtils.requestSDAndCameraPermission(VerifyCodeActivity.this);
-                }else {
+                } else {
                     FaceActivity.startActivity(VerifyCodeActivity.this);
                 }
             }

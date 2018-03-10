@@ -16,6 +16,7 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.VerifyCodeModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
     }
 
     private void init() {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if(commonHeadView!=null) {
             commonHeadView.setStep(R.drawable.step7);
         }

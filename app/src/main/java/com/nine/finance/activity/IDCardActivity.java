@@ -24,6 +24,7 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 
 import java.io.File;
 
@@ -104,6 +105,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
     }
 
     private void init() {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if(commonHeadView!=null) {
             commonHeadView.setStep(R.drawable.step3);
         }

@@ -14,6 +14,7 @@ import com.nine.finance.model.VerifyCodeModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.CommonInputLayout;
 import com.nine.finance.view.TimeCountDown;
 
@@ -42,6 +43,7 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
     }
 
     private void init() {
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if(commonHeadView!=null) {
             commonHeadView.setStep(R.drawable.step5);
         }
