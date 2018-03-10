@@ -26,6 +26,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
+                android:scaleType="center"
                 android:src="@drawable/default_avatar" />
 
             <com.nine.finance.view.PersonalInfoRow
@@ -77,11 +78,11 @@
                 my:title="地址" />
 
             <com.nine.finance.view.CommonButton
-                android:id="@+id/bt_logout"
+                android:id="@+id/bt_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                my:title="退出" />
+                my:title="提交" />
 
         </LinearLayout>
     </ScrollView>

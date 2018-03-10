@@ -76,7 +76,11 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.iv_head).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(HomeActivity.this, PersonalInfoActivity.class);
+                if (UserManager.checkLogin(HomeActivity.this)) {
+                    startActivity(HomeActivity.this, PersonalInfoActivity.class);
+                } else {
+                    LoginActivity.startActivity(HomeActivity.this);
+                }
             }
         });
     }

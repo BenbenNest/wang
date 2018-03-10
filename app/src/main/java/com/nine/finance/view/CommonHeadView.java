@@ -19,7 +19,9 @@ import com.nine.finance.activity.FlowActivity;
 public class CommonHeadView extends RelativeLayout {
     ImageView mBackView;
     TextView mTitleView;
+    TextView mActionView;
     OnBackListener onBackListener;
+    OnActionListener onActionListener;
 
     public CommonHeadView(Context context) {
         super(context);
@@ -40,6 +42,7 @@ public class CommonHeadView extends RelativeLayout {
         RelativeLayout root = (RelativeLayout) findViewById(R.id.root);
         mTitleView = (TextView) findViewById(R.id.tv_title);
         mBackView = (ImageView) findViewById(R.id.iv_back);
+        mActionView = (TextView) findViewById(R.id.tv_action);
         if (attrs != null) {
             TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.CommonHeadView);
             int bgResId = typedArray.getResourceId(R.styleable.CommonHeadView_bg, 0);
@@ -62,6 +65,14 @@ public class CommonHeadView extends RelativeLayout {
                     FlowActivity.startActivity(context);
                 }
             });
+            mActionView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mActionView != null) {
+                        onActionListener.onAction();
+                    }
+                }
+            });
         }
     }
 
@@ -71,8 +82,19 @@ public class CommonHeadView extends RelativeLayout {
         }
     }
 
+    public void setAction(String text, OnActionListener listener) {
+        onActionListener = listener;
+        if (mActionView != null) {
+            mActionView.setText(text);
+        }
+    }
+
     public interface OnBackListener {
         void onBack();
+    }
+
+    public interface OnActionListener {
+        void onAction();
     }
 
 }
