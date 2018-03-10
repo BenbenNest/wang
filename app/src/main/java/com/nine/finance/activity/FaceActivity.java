@@ -20,6 +20,8 @@ import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
+import com.nine.finance.permission.PermissionDialogUtils;
+import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 
@@ -32,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
 public class FaceActivity extends BaseActivity implements OnCaptureCallback {
 
@@ -59,7 +63,6 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_face);
-
         this.surfaceview = (MaskSurfaceView) findViewById(R.id.surface_view);
         this.imageView = (ImageView) findViewById(R.id.image_view);
         btn_capture = (Button) findViewById(R.id.btn_capture);
@@ -74,10 +77,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         btn_capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn_capture.setEnabled(false);
-                btn_ok.setEnabled(true);
-                btn_recapture.setEnabled(true);
-                CameraHelper.getInstance().tackPicture(FaceActivity.this);
+                takePhoto();
             }
         });
 
@@ -118,12 +118,40 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(filepath)) {
-                    ToastUtils.showCenter(FaceActivity.this,"请拍照");
+                    ToastUtils.showCenter(FaceActivity.this, "请拍照");
                 } else {
                     startActivity(FaceActivity.this, SubmitApplyActivity.class);
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (REQUEST_CODE_CAMERA == requestCode) {
+            if (!PermissionUtils.checkSDPermission(this) && !PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showSDAndCameraPermissionDialog(this);
+            } else if (!PermissionUtils.checkSDPermission(this)) {
+                PermissionDialogUtils.showSDPermissionDialog(this);
+            } else if (!PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showCameraPermissionDialog(this);
+            } else {
+                takePhoto();
+            }
+        }
+    }
+
+    private void takePhoto() {
+        btn_capture.setEnabled(false);
+        btn_ok.setEnabled(true);
+        btn_recapture.setEnabled(true);
+        CameraHelper.getInstance().tackPicture(FaceActivity.this);
     }
 
     /**

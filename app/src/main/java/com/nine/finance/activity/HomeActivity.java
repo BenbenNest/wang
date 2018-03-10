@@ -8,7 +8,11 @@ import android.view.View;
 import com.nine.finance.R;
 import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
+import com.nine.finance.permission.PermissionDialogUtils;
+import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.view.BusinessRectView;
+
+import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
 
 public class HomeActivity extends BaseActivity {
@@ -27,6 +31,31 @@ public class HomeActivity extends BaseActivity {
         init();
 //        startActivity(HomeActivity.this, PersonalInfoActivity.class);
 //        FaceActivity.startActivity(HomeActivity.this);
+//        startActivity(HomeActivity.this, VerifyCodeActivity.class);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!PermissionUtils.checkSDPermission(HomeActivity.this)) {
+            PermissionUtils.requestSDAndCameraPermission(HomeActivity.this);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (REQUEST_CODE_CAMERA == requestCode) {
+            if (!PermissionUtils.checkSDPermission(this) && !PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showSDAndCameraPermissionDialog(this);
+            } else if (!PermissionUtils.checkSDPermission(this)) {
+                PermissionDialogUtils.showSDPermissionDialog(this);
+            } else if (!PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showCameraPermissionDialog(this);
+            } else {
+//                takePhoto();
+            }
+        }
     }
 
     private void init() {
@@ -87,4 +116,6 @@ public class HomeActivity extends BaseActivity {
             }
         });
     }
+
+
 }

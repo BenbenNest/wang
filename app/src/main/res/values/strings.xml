@@ -26,6 +26,17 @@
     <string name="xlistview_header_hint_loading">loading...</string>
     <string name="xlistview_header_hint_have_bottom_line">I hava the bottom line</string>
 
+    <!-- permission -->
+    <string name="permissions">权限</string>
+    <string name="permission_reminder">提示</string>
+    <string name="permissions_SD">请在设置中开启文件读取权限</string>
+    <string name="permissions_CAMERA">请在设置中开启相机权限</string>
+    <string name="permissions_SD_CAMERA">请在设置中开启文件读取和相机权限</string>
+    <string name="permissions_need">“虎啸”已被禁止使用部分权限，请在设置中开启权限</string>
+    <string name="camera_permission_need">“虎啸”已被禁止使用相机权限，请在设置中开启权限</string>
+    <string name="camera_external_storage_permission_need">“虎啸”已被禁止使用权限，请在设置中开启权限</string>
+    <string name="camera_permission_forbidden_reminder">无法获取摄像头数据，请检查是否已经打开摄像头权限。</string>
+
 
     <!-- update -->
     <string name="app_update">版本更新</string>
