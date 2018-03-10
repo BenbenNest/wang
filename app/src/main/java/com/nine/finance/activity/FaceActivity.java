@@ -306,7 +306,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
                                 noLeakHandler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        startActivity(FaceActivity.this, HomeActivity.class);
+                                        startActivity(FaceActivity.this, SubmitApplyActivity.class);
                                     }
                                 }, 2000);
                             } else {
