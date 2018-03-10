@@ -24,6 +24,7 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
+import com.nine.finance.utils.DisplayUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonHeadView;
@@ -57,6 +58,8 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
 
     //	拍照后得到的保存的文件路径
     private String filepath;
+    private int faceWidth = 250;
+    private int faceHeight = 300;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, FaceActivity.class);
@@ -69,7 +72,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_face);
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
-        if(commonHeadView!=null) {
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step9);
         }
         this.surfaceview = (MaskSurfaceView) findViewById(R.id.surface_view);
@@ -80,7 +83,9 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
 //		设置矩形区域大小
-        this.surfaceview.setMaskSize(800, 800);
+        int width = DisplayUtils.dp2px(FaceActivity.this, faceWidth);
+        int height = DisplayUtils.dp2px(FaceActivity.this, faceHeight);
+        this.surfaceview.setMaskSize(width, height);
 
 //		拍照
         btn_capture.setOnClickListener(new View.OnClickListener() {
