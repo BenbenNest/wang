@@ -2,6 +2,7 @@ package com.nine.finance.http;
 
 import com.nine.finance.model.ApplyBankModel;
 import com.nine.finance.model.BankInfo;
+import com.nine.finance.model.BankIntroContract;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.BranchInfo;
 import com.nine.finance.model.HomeInfo;
@@ -61,6 +62,10 @@ public interface APIInterface {
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @GET("/account/rest/bank/findByBankList")
     Call<BaseModel<List<BankInfo>>> getBankList();
+
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @GET("/account/rest/bank/getgAreementByBankId")
+    Call<BaseModel<BankIntroContract>> getBankIntroOrContract(@Query("bankId") String bankId);
 
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @GET("/account/rest/bank/findBankBranchesInfoAll")

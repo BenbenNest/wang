@@ -13,12 +13,27 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.gson.Gson;
 import com.nine.finance.R;
+import com.nine.finance.http.APIInterface;
+import com.nine.finance.http.RetrofitService;
+import com.nine.finance.model.BankIntroContract;
+import com.nine.finance.model.BaseModel;
+import com.nine.finance.utils.NetUtil;
+import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.MyWebView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class WebViewActivity extends BaseActivity {
 
@@ -30,22 +45,40 @@ public class WebViewActivity extends BaseActivity {
 //    如果你的app的target api低于21:系统允许mixed content和第三方cookie，并且总是一次性渲染整个HTML文档。
 //    在使用WebView的类中添加如下代码：
 
-    public static void startActivity(Context context, String title, String url) {
+    public static void startActivity(Context context, int type, String title, String url, String bankId) {
         Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra("type", type);
         intent.putExtra("url", url);
+        intent.putExtra("bankId", bankId);
         context.startActivity(intent);
     }
 
+    public static final int WEB_TYPE_INTRO = 1;
+    public static final int WEB_TYPE_CONTRACT = 2;
+    int type;
     MyWebView webView;
     CommonHeadView headView;
     WebSettings settings;
     private List<String> loadHistoryUrls = new ArrayList<>();
+    String url;
+    String bankId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        initData();
         init();
+        loadUrl();
+    }
+
+    private void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            type = intent.getIntExtra("type", 0);
+            url = intent.getStringExtra("url");
+            bankId = intent.getStringExtra("bankId");
+        }
     }
 
     @Override
@@ -85,6 +118,55 @@ public class WebViewActivity extends BaseActivity {
         }
     }
 
+    private void loadUrl() {
+        if (webView != null) {
+            if (type == WEB_TYPE_INTRO || type == WEB_TYPE_CONTRACT) {
+//                webView.loadData();
+                getContent();
+            } else {
+                webView.loadUrl(url);
+            }
+        }
+    }
+
+    private void getContent() {
+        if (!NetUtil.isNetworkConnectionActive(WebViewActivity.this)) {
+            ToastUtils.showCenter(WebViewActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Map<String, String> para = new HashMap<>();
+
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        Gson gson = new Gson();
+        String strEntity = gson.toJson(para);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+        Call<BaseModel<BankIntroContract>> call = api.getBankIntroOrContract(bankId);
+        call.enqueue(new Callback<BaseModel<BankIntroContract>>() {
+            @Override
+            public void onResponse(Call<BaseModel<BankIntroContract>> call, Response<BaseModel<BankIntroContract>> response) {
+                if (response != null && response.code() == 200 && response.body() != null && response.body().content != null) {
+                    BankIntroContract introContract = response.body().content;
+                    if (webView != null) {
+//                        webView.loadData(htmlData, "text/html", "UTF -8");//API提供的标准用法，无法解决乱码问题
+                        if (type == WEB_TYPE_INTRO) {
+                            webView.loadData(introContract.getIntroduceStr(), "text/html; charset=UTF-8", null);//这种写法可以正确解码
+                        } else if (type == WEB_TYPE_CONTRACT) {
+                            webView.loadData(introContract.getAgreementStr(), "text/html; charset=UTF-8", null);//这种写法可以正确解码
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<BankIntroContract>> call, Throwable t) {
+                webView.loadData(t.getMessage(), "text/html; charset=UTF-8", null);
+            }
+        });
+    }
+
     private void init() {
         headView = (CommonHeadView) findViewById(R.id.head_view);
         webView = (MyWebView) findViewById(R.id.webview);
@@ -111,9 +193,7 @@ public class WebViewActivity extends BaseActivity {
             settings.setMixedContentMode(
                     WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         }
-
-        String url = getIntent().getStringExtra("url");
-        webView.loadUrl(url);
+        webView.getSettings().setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         webView.setWebViewClient(new WebViewClient() {

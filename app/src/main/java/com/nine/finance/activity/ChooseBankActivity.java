@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nine.finance.R;
 import com.nine.finance.activity.bank.BankListActivity;
@@ -27,6 +28,7 @@ public class ChooseBankActivity extends BaseActivity {
     private AppCompatSpinner spinnerAddress;
     private EditText mEditBankView;
     private EditText mEditBranchView;
+    private TextView mTvIntro;
     private BankInfo mBank;
     private BranchInfo mBranch;
     private static final int REQUEST_CODE_BANK = 1001;
@@ -51,6 +53,7 @@ public class ChooseBankActivity extends BaseActivity {
         if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step1);
         }
+        mTvIntro = (TextView) findViewById(R.id.tv_intro);
         mEditBankView = (EditText) findViewById(R.id.et_bank);
         mEditBankView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +76,9 @@ public class ChooseBankActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                startActivity(ChooseBankActivity.this, BankIntroActivity.class);
-                WebViewActivity.startActivity(ChooseBankActivity.this, "银行介绍", Constant.BANK_INTRO);
+                if (mBank != null) {
+                    WebViewActivity.startActivity(ChooseBankActivity.this, WebViewActivity.WEB_TYPE_INTRO, "银行介绍", Constant.BANK_INTRO, mBank.getBankId());
+                }
             }
         });
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
@@ -89,7 +94,8 @@ public class ChooseBankActivity extends BaseActivity {
 //                if (mBranch != null) {
 //                    AppGlobal.getApplyModel().setBranch
 //                }
-                startActivity(ChooseBankActivity.this, BankContractActivity.class);
+                BankContractActivity.startActivity(ChooseBankActivity.this, mBank.getBankId());
+//                startActivity(ChooseBankActivity.this, BankContractActivity.class, mBank.getBankId());
             }
         });
     }
@@ -103,6 +109,7 @@ public class ChooseBankActivity extends BaseActivity {
                     mBank = (BankInfo) data.getSerializableExtra("bank");
                     if (mBank != null && mEditBankView != null) {
                         mEditBankView.setText(mBank.getBankName());
+                        mTvIntro.setVisibility(View.VISIBLE);
                     }
                 }
             } else if (requestCode == REQUEST_CODE_BRANCH) {

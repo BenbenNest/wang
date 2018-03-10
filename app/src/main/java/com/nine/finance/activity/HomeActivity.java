@@ -111,20 +111,20 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.iv_goods).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebViewActivity.startActivity(HomeActivity.this, "商品", Constant.GOODS);
+                WebViewActivity.startActivity(HomeActivity.this, 0, "商品", Constant.GOODS, "");
             }
         });
         findViewById(R.id.iv_product).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebViewActivity.startActivity(HomeActivity.this, "理财产品", Constant.FINANCE_PRODUCT);
+                WebViewActivity.startActivity(HomeActivity.this, 0, "理财产品", Constant.FINANCE_PRODUCT, "");
             }
         });
         findViewById(R.id.iv_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (UserManager.checkLogin(HomeActivity.this)) {
-                    WebViewActivity.startActivity(HomeActivity.this, "我的订单", Constant.MY_ORDRE);
+                    WebViewActivity.startActivity(HomeActivity.this, 0, "我的订单", Constant.MY_ORDRE, "");
                 } else {
                     LoginActivity.startActivity(HomeActivity.this);
                 }

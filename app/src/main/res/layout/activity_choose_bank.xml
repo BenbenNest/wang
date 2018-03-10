@@ -86,7 +86,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="银行介绍" />
+            android:text="银行介绍"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
