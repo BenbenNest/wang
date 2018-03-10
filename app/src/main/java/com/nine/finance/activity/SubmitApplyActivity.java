@@ -35,6 +35,7 @@ public class SubmitApplyActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(SubmitApplyActivity.this, HomeActivity.class);
+                finish();
             }
         });
 
