@@ -5,25 +5,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.nine.finance.view.CommonHeadView
+        android:id="@+id/head_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_bg">
+        my:title="申请成功" />
 
-        <com.nine.finance.view.CommonHeadView
-            android:id="@+id/head_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            my:bg="@color/public_trans_color"
-            my:title="提交申请" />
+    <ImageView
+        android:id="@+id/iv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/submit_success" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="提交信息成功" />
+
+    <com.nine.finance.view.CommonButton
+        android:id="@+id/bt_ok"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        my:title="知道了" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:visibility="gone">
 
         <com.nine.finance.view.CommonInputLayout
             android:id="@+id/password_input_layout"
@@ -42,12 +60,12 @@
             my:input_pwd="true" />
     </LinearLayout>
 
-
     <com.nine.finance.view.CommonButton
         android:id="@+id/bt_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         my:title="提交申请" />
 
 </LinearLayout>

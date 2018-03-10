@@ -31,6 +31,12 @@ public class SubmitApplyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_apply);
 
+        findViewById(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(SubmitApplyActivity.this, HomeActivity.class);
+            }
+        });
 
         findViewById(R.id.bt_submit).setOnClickListener(new View.OnClickListener() {
             @Override

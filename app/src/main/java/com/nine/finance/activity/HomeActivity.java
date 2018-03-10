@@ -32,6 +32,7 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this, PersonalInfoActivity.class);
 //        FaceActivity.startActivity(HomeActivity.this);
 //        startActivity(HomeActivity.this, VerifyCodeActivity.class);
+        startActivity(HomeActivity.this, SubmitApplyActivity.class);
     }
 
     @Override
