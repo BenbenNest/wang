@@ -20,7 +20,8 @@ public class RegexUtils {
     /**
      * 正则表达式:验证手机号
      */
-    public static final String REGEX_MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+//    public static final String REGEX_MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+    public static final String REGEX_MOBILE = "^\\d{15}$";
 
     /**
      * 验证电话

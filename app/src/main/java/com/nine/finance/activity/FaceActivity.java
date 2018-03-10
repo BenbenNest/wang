@@ -287,7 +287,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
                     try {
                         if (response != null || response.body() != null) {
                             if (BaseModel.SUCCESS.equals(response.body().status)) {
-                                ToastUtils.showCenter(FaceActivity.this, "申请成功！");
+//                                ToastUtils.showCenter(FaceActivity.this, "申请成功！");
                                 noLeakHandler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {

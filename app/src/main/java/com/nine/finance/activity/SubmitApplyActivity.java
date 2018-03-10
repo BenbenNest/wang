@@ -38,8 +38,7 @@ public class SubmitApplyActivity extends BaseActivity {
         findViewById(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(SubmitApplyActivity.this, HomeActivity.class);
-                finish();
+                goHome();
             }
         });
 
@@ -65,6 +64,17 @@ public class SubmitApplyActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        goHome();
+    }
+
+    private void goHome() {
+        startActivity(SubmitApplyActivity.this, HomeActivity.class);
+        finish();
     }
 
     private void apply() {
