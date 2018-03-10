@@ -261,16 +261,16 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
 
 
             if (AppGlobal.getApplyModel().getIdCardImageFront() != null) {
-                para.put("cardFrontPic", AppGlobal.getApplyModel().getIdCardImageFront().getFileName());
+                para.put("cardFrontPic", AppGlobal.getApplyModel().getIdCardImageFront().getFileUrl());
             }
             if (AppGlobal.getApplyModel().getIdCardImageBack() != null) {
-                para.put("cardFollowingPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileName());
+                para.put("cardFollowingPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileUrl());
             }
             if (AppGlobal.getApplyModel().getBankCardImage() != null) {
-                para.put("bankCardPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileName());
+                para.put("bankCardPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileUrl());
             }
             if (AppGlobal.getApplyModel().getFaceImage() != null) {
-                para.put("headPic", AppGlobal.getApplyModel().getFaceImage().getFileName());
+                para.put("headPic", AppGlobal.getApplyModel().getFaceImage().getFileUrl());
             }
 
             Retrofit retrofit = new RetrofitService().getRetrofit();
