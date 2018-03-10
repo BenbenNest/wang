@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
@@ -215,9 +216,9 @@ public class FillAccountInfoActivity extends BaseActivity {
         if (TextUtils.isEmpty(telInputLayout.getText())) {
             return false;
         }
-        if (TextUtils.isEmpty(AppGlobal.getApplyModel().getUse())) {
-            return false;
-        }
+//        if (TextUtils.isEmpty(AppGlobal.getApplyModel().getUse())) {
+//            return false;
+//        }
         if (TextUtils.isEmpty(postCodeInputLayout.getText())) {
             return false;
         }
@@ -246,7 +247,16 @@ public class FillAccountInfoActivity extends BaseActivity {
         AppGlobal.getApplyModel().setTel(telInputLayout.getText());
         AppGlobal.getApplyModel().setPostCode(postCodeInputLayout.getText());
         AppGlobal.getApplyModel().setCareer(careerInputLayout.getText());
-//        AppGlobal.getApplyModel().mCareer = careerInputLayout.getText().toString().trim();
+        RadioButton rdFinance = (RadioButton) findViewById(R.id.rd_finance);
+        RadioButton rdConsume = (RadioButton) findViewById(R.id.rd_consume);
+        RadioButton rdSettleAccount = (RadioButton) findViewById(R.id.rd_settle_account);
+        if (rdFinance.isChecked()) {
+            AppGlobal.getApplyModel().setUse(rdFinance.getText().toString());
+        } else if (rdConsume.isChecked()) {
+            AppGlobal.getApplyModel().setUse(rdConsume.getText().toString());
+        } else {
+            AppGlobal.getApplyModel().setUse(rdSettleAccount.getText().toString());
+        }
     }
 
     private void init() {

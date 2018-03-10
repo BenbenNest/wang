@@ -110,17 +110,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="开户用途"
-                    android:textColor="#e6e6e6"
+                    android:hint="开户用户"
                     android:textSize="18dp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_finance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="理财" />
+
+                    <RadioButton
+                        android:id="@+id/rd_consume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="消费" />
+
+                    <RadioButton
+                        android:id="@+id/rd_settle_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="结算" />
+
+                </RadioGroup>
 
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <View
