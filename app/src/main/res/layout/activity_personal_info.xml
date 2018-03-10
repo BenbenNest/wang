@@ -25,9 +25,7 @@
                 android:id="@+id/info_avatar"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="center"
-                android:src="@drawable/default_avatar" />
+                android:layout_gravity="center_horizontal" />
 
             <com.nine.finance.view.PersonalInfoRow
                 android:id="@+id/info_id"

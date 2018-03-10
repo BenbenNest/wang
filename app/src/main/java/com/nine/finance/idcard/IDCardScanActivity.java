@@ -377,9 +377,13 @@ public class IDCardScanActivity extends Activity implements TextureView.SurfaceT
                             AppGlobal.mIDCardFront = jObject;
                             String address = jObject.getString("address");
                             String birthday = jObject.getString("birthday");
+                            AppGlobal.getApplyModel().setBirthday(birthday);
                             String gender = jObject.getString("gender");
+                            AppGlobal.getApplyModel().setGender(gender);
                             String id_card_number = jObject.getString("id_card_number");
+                            AppGlobal.getApplyModel().setIdCard(id_card_number);
                             String name = jObject.getString("name");
+                            AppGlobal.getApplyModel().setName(name);
                             Log.w("ceshi", "doOCR+++idCardBean.id_card_number===" + id_card_number + ", idCardBean.name===" + name);
                             String race = jObject.getString("race");
                             String side = jObject.getString("side");

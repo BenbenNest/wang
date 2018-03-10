@@ -29,27 +29,27 @@ public class ApplyModel {
      * shipmentNumber : string
      */
 
-    private String id;
-    private String createDate;
-    private String updateDate;
-    private String bankId;
-    private String cardNumber;
-    private String phone;
-    private String userId;
-    private String isAccountAgreement;
-    private String isPlatformAgreement;
-    private String name;
-    private String nationality;
-    private String nativePlace;
-    private String idCard;
-    private String gender;
-    private String ethnic;
-    private String birthday;
-    private String address;
-    private String deliveryAddress;
-    private String status;
-    private String logisticsCompany;
-    private String shipmentNumber;
+    private String id = "";
+    private String createDate = "";
+    private String updateDate = "";
+    private String bankId = "";
+    private String cardNumber = "";
+    private String phone = "";
+    private String userId = "";
+    private String isAccountAgreement = "";
+    private String isPlatformAgreement = "";
+    private String name = "";
+    private String nationality = "";
+    private String nativePlace = "";
+    private String idCard = "";
+    private String gender = "";
+    private String ethnic = "";
+    private String birthday = "";
+    private String address = "";
+    private String deliveryAddress = "";
+    private String status = "";
+    private String logisticsCompany = "";
+    private String shipmentNumber = "";
 
     public String getId() {
         return id;

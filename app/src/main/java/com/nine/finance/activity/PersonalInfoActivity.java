@@ -53,6 +53,7 @@ public class PersonalInfoActivity extends BaseActivity {
 
     private void init() {
         avatarView = (CircleAvatarView) findViewById(R.id.info_avatar);
+        avatarView.setImageResource(R.drawable.head_default);
         idInfoView = (PersonalInfoRow) findViewById(R.id.info_id);
         nameInfoView = (PersonalInfoRow) findViewById(R.id.info_name);
         nickNameInfoView = (PersonalInfoRow) findViewById(R.id.info_nick_name);
@@ -146,7 +147,7 @@ public class PersonalInfoActivity extends BaseActivity {
 //        para.put("birthday", AppGlobal.getUserInfo().getBirthday());
         para.put("address", addressInfoView.getText().toString().trim());
         para.put("phone", phoneInfoView.getText().toString().trim());
-//        para.put("tel", AppGlobal.getUserInfo().getTel());
+        para.put("tel", AppGlobal.getUserInfo().getTel());
 //        para.put("card", AppGlobal.getUserInfo().getIDNum());
 
         Retrofit retrofit = new RetrofitService().getRetrofit();

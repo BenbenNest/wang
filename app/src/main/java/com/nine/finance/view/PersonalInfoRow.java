@@ -60,4 +60,10 @@ public class PersonalInfoRow extends RelativeLayout {
         return "";
     }
 
+    public void setEditable(boolean flag) {
+        if (action != null) {
+            action.setEnabled(flag);
+        }
+    }
+
 }

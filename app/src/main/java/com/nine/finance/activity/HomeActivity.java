@@ -68,6 +68,7 @@ public class HomeActivity extends BaseActivity {
 
     private void init() {
         avatarView = (CircleAvatarView) findViewById(R.id.iv_head);
+        avatarView.setImageResource(R.drawable.head_default);
         initListener();
         accountRectView = (BusinessRectView) findViewById(R.id.create_account);
         accountRectView.setOnClickListener(new View.OnClickListener() {

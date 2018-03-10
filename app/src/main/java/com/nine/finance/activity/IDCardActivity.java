@@ -114,6 +114,8 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                 if (AppGlobal.mIDCardFront == null || AppGlobal.mIDCardBack == null) {
                     ToastUtils.showCenter(IDCardActivity.this, "请完成身份证扫描");
 //                    startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
+                } else if (AppGlobal.getApplyModel().getIdCard().equals(AppGlobal.getUserInfo().getIDNum())) {
+                    ToastUtils.showCenter(IDCardActivity.this, "该身份证和注册时使用的身份证信息不一致!");
                 } else {
                     startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
                 }
