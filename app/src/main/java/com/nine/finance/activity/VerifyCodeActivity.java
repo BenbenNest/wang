@@ -15,6 +15,9 @@ public class VerifyCodeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_code);
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step8);
+        }
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

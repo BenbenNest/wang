@@ -29,6 +29,9 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
     }
 
     private void init() {
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step6);
+        }
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         if (AppGlobal.getApplyModel() != null) {
             nameInputLayout.setText(AppGlobal.getApplyModel().getName());

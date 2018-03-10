@@ -42,6 +42,9 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
     }
 
     private void init() {
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step5);
+        }
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
         mVerifyCodeInputLayout = (CommonInputLayout) findViewById(R.id.verify_code_input_layout);
         mCountDownButton = (TimeCountDown) findViewById(R.id.bt_verify);

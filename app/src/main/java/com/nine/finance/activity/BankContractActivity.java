@@ -22,7 +22,9 @@ public class BankContractActivity extends BaseActivity {
     }
 
     private void init() {
-        headView = (CommonHeadView) findViewById(R.id.head_view);
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step2);
+        }
         webView = (MyWebView) findViewById(R.id.webview);
         webView.loadUrl(Constant.BANK_CONTRACT);
 

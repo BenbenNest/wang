@@ -36,6 +36,9 @@ public class ChooseBankTypeActivity extends BaseActivity {
     }
 
     private void init() {
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step7);
+        }
         Spinner spinnerType = (Spinner) findViewById(R.id.spinner_banktype);
         String[] types = {"储蓄卡"};
         ArrayAdapter<String> adapter;

@@ -30,7 +30,9 @@ public class SubmitApplyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_apply);
-
+        if (commonHeadView != null) {
+            commonHeadView.setStep(R.drawable.step10);
+        }
         findViewById(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

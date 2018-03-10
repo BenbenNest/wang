@@ -67,6 +67,9 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_face);
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step9);
+        }
         this.surfaceview = (MaskSurfaceView) findViewById(R.id.surface_view);
         this.imageView = (ImageView) findViewById(R.id.image_view);
         btn_capture = (Button) findViewById(R.id.btn_capture);

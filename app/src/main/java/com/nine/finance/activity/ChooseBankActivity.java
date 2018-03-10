@@ -21,6 +21,7 @@ import com.nine.finance.utils.ToastUtils;
 
 public class ChooseBankActivity extends BaseActivity {
 
+
     private AppCompatSpinner spinnerBank;
     private AppCompatSpinner spinnerAddress;
     private EditText mEditBankView;
@@ -45,6 +46,9 @@ public class ChooseBankActivity extends BaseActivity {
     private void init() {
         AppGlobal.mApplyModel = new ApplyModel();
 //        testSpinner();
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step1);
+        }
         mEditBankView = (EditText) findViewById(R.id.et_bank);
         mEditBankView.setOnClickListener(new View.OnClickListener() {
             @Override

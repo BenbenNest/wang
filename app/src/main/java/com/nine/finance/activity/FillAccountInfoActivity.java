@@ -61,6 +61,9 @@ public class FillAccountInfoActivity extends BaseActivity {
     }
 
     private void initView() {
+        if(commonHeadView!=null) {
+            commonHeadView.setStep(R.drawable.step4);
+        }
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
         idInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
