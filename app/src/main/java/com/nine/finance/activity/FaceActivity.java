@@ -225,34 +225,8 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         }
         Map<String, String> para = new HashMap<>();
 
-//        "id": "5D3C80C6090146EF90C18C61DB2C5136",
-//                "createDate": "2016-08-01 12:24:36",
-//                "updateDate": "2016-08-01 12:24:36",
-//                "bankId": "string",
-//                "cardNumber": "string",
-//                "phone": "string",
-//                "userId": "string",
-//                "isAccountAgreement": "string",
-//                "isPlatformAgreement": "string",
-//                "name": "string",
-//                "nationality": "string",
-//                "nativePlace": "string",
-//                "card": "string",
-//                "gender": "string",
-//                "ethnic": "string",
-//                "birthday": "1987-08-01",
-//                "address": "string",
-//                "deliveryAddress": "string",
-//                "status": "string",
-//                "logisticsCompany": "string",
-//                "shipmentNumber": "string",
-//                "cardFrontPic": "string",
-//                "cardFollowingPic": "string",
-//                "bankCardPic": "string",
-//                "headPic": "string"
-
         if (AppGlobal.getApplyModel() != null) {
-            para.put("id", "");
+//            para.put("id", "");
 //        para.put("createDate", "");
 //        para.put("updateDate", "");
             para.put("bankId", AppGlobal.getApplyModel().getBankId());
@@ -275,6 +249,11 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
             para.put("logisticsCompany", "");
             para.put("shipmentNumber", "");
             para.put("use", AppGlobal.getApplyModel().getUse());
+            para.put("email", AppGlobal.getApplyModel().getEmail());
+            para.put("tel", AppGlobal.getApplyModel().getTel());
+            para.put("postCode", AppGlobal.getApplyModel().getPostCode());
+            para.put("career", AppGlobal.getApplyModel().getCareer());
+
 
             if (AppGlobal.getApplyModel().getIdCardImageFront() != null) {
                 para.put("cardFrontPic", AppGlobal.getApplyModel().getIdCardImageFront().getFileName());

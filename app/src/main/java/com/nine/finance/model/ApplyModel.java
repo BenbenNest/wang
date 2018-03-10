@@ -51,6 +51,10 @@ public class ApplyModel {
     private String logisticsCompany = "";
     private String shipmentNumber = "";
     private String use = "";
+    private String email = "";
+    private String tel = "";
+    private String postCode = "";
+    private String career = "";
 
     public String getId() {
         return id;
@@ -226,6 +230,38 @@ public class ApplyModel {
 
     public void setUse(String use) {
         this.use = use;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getCareer() {
+        return career;
+    }
+
+    public void setCareer(String career) {
+        this.career = career;
     }
 
     //    public BankInfo mBank;

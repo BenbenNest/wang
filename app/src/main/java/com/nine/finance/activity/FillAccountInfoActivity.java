@@ -241,22 +241,12 @@ public class FillAccountInfoActivity extends BaseActivity {
         AppGlobal.getApplyModel().setNativePlace(homeInputLayout.getText());
         AppGlobal.getApplyModel().setPhone(phoneInputLayout.getText());
 //        AppGlobal.getApplyModel().setUserId(AppGlobal.getUserInfo().getUserId());
-//        AppGlobal.getApplyModel().setBirthday();
-
-//        AppGlobal.getApplyModel().mName = nameInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mGender = (sexInputLayout.getText().toString().trim().equals("男")) ? 1 : 2;
-//        if (!TextUtils.isEmpty(ageInputLayout.getText().toString().trim())) {
-//            AppGlobal.getApplyModel().mAge = Integer.valueOf(ageInputLayout.getText().toString().trim());
-//        }
-//        AppGlobal.getApplyModel().mNation = nationInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mHomeTown = homeInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mPhoneNum = phoneInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mEmail = emailInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mTelNum = telInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mAccountUse = useInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mPostCode = postCodeInputLayout.getText().toString().trim();
+        AppGlobal.getApplyModel().setBirthday(AppGlobal.getUserInfo().getBirthday());
+        AppGlobal.getApplyModel().setEmail(emailInputLayout.getText());
+        AppGlobal.getApplyModel().setTel(telInputLayout.getText());
+        AppGlobal.getApplyModel().setPostCode(postCodeInputLayout.getText());
+        AppGlobal.getApplyModel().setCareer(careerInputLayout.getText());
 //        AppGlobal.getApplyModel().mCareer = careerInputLayout.getText().toString().trim();
-//        AppGlobal.getApplyModel().mAddress = addressInputLayout.getText().toString().trim();
     }
 
     private void init() {
