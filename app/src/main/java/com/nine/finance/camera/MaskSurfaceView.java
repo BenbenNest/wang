@@ -112,11 +112,11 @@ public class MaskSurfaceView extends FrameLayout{
 				return;
 			}
 			
-			if((height>width&&maskHeight<maskWidth) || (height<width&&maskHeight>maskWidth)){
-				int temp = maskHeight;
-				maskHeight = maskWidth;
-				maskWidth = temp;
-			}
+//			if((height>width&&maskHeight<maskWidth) || (height<width&&maskHeight>maskWidth)){
+//				int temp = maskHeight;
+//				maskHeight = maskWidth;
+//				maskWidth = temp;
+//			}
 			
 			int h = Math.abs((height-maskHeight)/2);
 			int w = Math.abs((width-maskWidth)/2);

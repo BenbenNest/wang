@@ -1,427 +1,326 @@
 package com.nine.finance.activity.bank;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.RectF;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.megvii.idcard.sdk.IDCard;
-import com.megvii.idcard.sdk.IDCard.IDCardConfig;
-import com.megvii.idcard.sdk.IDCard.IDCardDetect;
-import com.megvii.idcard.sdk.IDCard.IDCardQuality;
+import com.google.gson.Gson;
 import com.nine.finance.R;
-import com.nine.finance.activity.IDCardActivity;
+import com.nine.finance.activity.BaseActivity;
+import com.nine.finance.activity.FaceActivity;
+import com.nine.finance.activity.SubmitApplyActivity;
 import com.nine.finance.app.AppGlobal;
-import com.nine.finance.idcard.util.ConUtil;
-import com.nine.finance.idcard.util.DialogUtil;
-import com.nine.finance.idcard.util.ICamera;
-import com.nine.finance.idcard.util.IDCardIndicator;
-import com.nine.finance.idcard.util.Util;
-import com.nine.finance.utils.KeyUtil;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
+import com.nine.finance.camera.CameraHelper;
+import com.nine.finance.camera.MaskSurfaceView;
+import com.nine.finance.camera.OnCaptureCallback;
+import com.nine.finance.http.APIInterface;
+import com.nine.finance.http.RetrofitService;
+import com.nine.finance.model.BaseModel;
+import com.nine.finance.model.ImageInfo;
+import com.nine.finance.permission.PermissionDialogUtils;
+import com.nine.finance.permission.PermissionUtils;
+import com.nine.finance.utils.DisplayUtils;
+import com.nine.finance.utils.NetUtil;
+import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BankCardScanActivity extends Activity implements TextureView.SurfaceTextureListener, Camera.PreviewCallback {
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
-    private TextureView textureView;
-    private DialogUtil mDialogUtil;
-    private ICamera mICamera;// 照相机工具类
-    private IDCardIndicator mIndicatorView;
-    private boolean mIsVertical = false, mIsDebug = false, isTextDetect = false, isClearShadow = false;
-    private float faculaPass;// 光斑敏感度
-    private TextView fps, fps_1;
-    private TextView errorType, verticalType;
-    private IDCard mIdCard;
-    private HandlerThread mHandlerThread = new HandlerThread("hhh");
-    private Handler mHandler;
-    private ImageView image;
-    private float setClear = 0.8f, setIdcard = -1f, setBound = 0.8f;
-    private RelativeLayout barRel;
-    private ProgressBar mBar;
+import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
+public class BankCardScanActivity extends BaseActivity implements OnCaptureCallback {
+
+    private MaskSurfaceView surfaceview;
+    private ImageView imageView;
+    //	拍照
+    private Button btn_capture;
+    //	重拍
+    private Button btn_recapture;
+    //	取消
+    private Button btn_cancel;
+    //	确认
+    private Button btn_ok;
+
+    //	拍照后得到的保存的文件路径
+    private String filepath;
+    private int faceWidth = 300;
+    private int faceHeight = 200;
+//    private float IDCARD_RATIO = 856.0f / 540.0f;
+
+
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, FaceActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.idcardscan_layout);
-        init();
-    }
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.setContentView(R.layout.activity_bank_card_scan2);
+        commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
+        if (commonHeadView != null) {
+            commonHeadView.setStep(R.drawable.step9);
+        }
+        this.surfaceview = (MaskSurfaceView) findViewById(R.id.surface_view);
+        this.imageView = (ImageView) findViewById(R.id.image_view);
+        btn_capture = (Button) findViewById(R.id.btn_capture);
+        btn_recapture = (Button) findViewById(R.id.btn_recapture);
+        btn_ok = (Button) findViewById(R.id.btn_ok);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
-    private void init() {
-        mIdCard = new IDCard();
-        mIdCard.init(this, Util.readModel(this));
-        setClear = getIntent().getFloatExtra("clear", 0.8f);
-        setIdcard = getIntent().getFloatExtra("idcard", -1);
-        setIdcard = 0.1f;
-        setBound = getIntent().getFloatExtra("bound", 0.8f);
-        faculaPass = getIntent().getFloatExtra("faculaPass", 0.3f);
-        mIsVertical = getIntent().getBooleanExtra("isvertical", false);
-        mIsDebug = getIntent().getBooleanExtra("isDebug", false);
-        isTextDetect = getIntent().getBooleanExtra("isTextDetect", false);
-        isClearShadow = getIntent().getBooleanExtra("isClearShadow", false);
-        Log.w("ceshi", "setClear==" + setClear + ", setIdcard==" + setIdcard + ", setBound==" + setBound);
-        Log.w("ceshi", "mIsVertical==" + mIsVertical + ", mIsDebug==" + mIsDebug + ", isTextDetect==" + isTextDetect);
-        image = (ImageView) findViewById(R.id.image);
-        mHandlerThread.start();
-        mHandler = new Handler(mHandlerThread.getLooper());
-        mICamera = new ICamera(mIsVertical);
-        mDialogUtil = new DialogUtil(this);
-        textureView = (TextureView) findViewById(R.id.idcardscan_layout_surface);
-        textureView.setSurfaceTextureListener(this);
-        textureView.setOnClickListener(new OnClickListener() {
+//		设置矩形区域大小
+        int width = DisplayUtils.dp2px(BankCardScanActivity.this, faceWidth);
+        int height = DisplayUtils.dp2px(BankCardScanActivity.this, faceHeight);
+        this.surfaceview.setMaskSize(width, height);
+
+//		拍照
+        btn_capture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mICamera.autoFocus();
+            public void onClick(View view) {
+                takePhoto();
             }
         });
-        barRel = (RelativeLayout) findViewById(R.id.idcard_layout_barRel);
-        fps = (TextView) findViewById(R.id.idcardscan_layout_fps);
-        fps.setVisibility(View.VISIBLE);
-        fps_1 = (TextView) findViewById(R.id.idcardscan_layout_fps_1);
-        fps_1.setVisibility(View.VISIBLE);
-        errorType = (TextView) findViewById(R.id.idcardscan_layout_error_type);
-        verticalType = (TextView) findViewById(R.id.idcardscan_layout_verticalerror_type);
-        mIndicatorView = (IDCardIndicator) findViewById(R.id.idcardscan_layout_indicator);
-        mBar = (ProgressBar) findViewById(R.id.result_bar);
-        if (mIsVertical) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            verticalType.setVisibility(View.VISIBLE);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            errorType.setVisibility(View.VISIBLE);
-        }
+
+//		重拍
+        btn_recapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_capture.setEnabled(true);
+                btn_ok.setEnabled(false);
+                btn_recapture.setEnabled(false);
+                imageView.setVisibility(View.GONE);
+                surfaceview.setVisibility(View.VISIBLE);
+                deleteFile();
+                CameraHelper.getInstance().startPreview();
+            }
+        });
+
+//		确认
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (!TextUtils.isEmpty(filepath)) {
+                    uploadFile(filepath);
+                }
+            }
+        });
+
+//		取消
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                deleteFile();
+                BankCardScanActivity.this.finish();
+            }
+        });
+
+        findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(filepath)) {
+                    ToastUtils.showCenter(BankCardScanActivity.this, "请拍照");
+                } else {
+                    apply();
+//                    startActivity(FaceActivity.this, SubmitApplyActivity.class);
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Camera mCamera = mICamera.openCamera(this);
-        if (mCamera != null) {
-            RelativeLayout.LayoutParams layout_params = mICamera.getLayoutParam(this);
-            textureView.setLayoutParams(layout_params);
-            mIndicatorView.setLayoutParams(layout_params);
+    }
 
-        } else {
-            mDialogUtil.showDialog("打开摄像头失败");
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (REQUEST_CODE_CAMERA == requestCode) {
+            if (!PermissionUtils.checkSDPermission(this) && !PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showSDAndCameraPermissionDialog(this);
+            } else if (!PermissionUtils.checkSDPermission(this)) {
+                PermissionDialogUtils.showSDPermissionDialog(this);
+            } else if (!PermissionUtils.checkCameraPermission(this)) {
+                PermissionDialogUtils.showCameraPermissionDialog(this);
+            } else {
+                takePhoto();
+            }
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mICamera.closeCamera();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mIdCard.release();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mDialogUtil.onDestory();
-    }
-
-    int width;
-    int height;
-    int orientation = 0;
-
-    private void doPreview() {
-        if (!mHasSurface)
-            return;
-
-        mICamera.startPreview(textureView.getSurfaceTexture());
-
-        IDCardConfig idCardConfig = mIdCard.getFaceppConfig();
-
-        RectF rectF = mIndicatorView.getPosition();
-        width = mICamera.cameraWidth;
-        height = mICamera.cameraHeight;
-
-        int left = (int) (width * rectF.left);
-        int top = (int) (height * rectF.top);
-        int right = (int) (width * rectF.right);
-        int bottom = (int) (height * rectF.bottom);
-        if (mIsVertical) {
-            left = (int) (width * rectF.top);
-            top = (int) (height * rectF.left);
-            right = (int) (width * rectF.bottom);
-            bottom = (int) (height * rectF.right);
-            orientation = 180 - mICamera.orientation;
-        }
-
-        idCardConfig.orientation = orientation;
-        idCardConfig.shadowAreaTh = 500;
-        idCardConfig.faculaAreaTh = 500;
-        idCardConfig.roi_left = left;
-        idCardConfig.roi_top = top;
-        idCardConfig.roi_right = right;
-        idCardConfig.roi_bottom = bottom;
-
-        mIdCard.setFaceppConfig(idCardConfig);
-    }
-
-    private boolean mHasSurface = false;
-
-    @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        mHasSurface = true;
-        doPreview();
-
-        mICamera.actionDetect(this);
-    }
-
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-    }
-
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        mHasSurface = false;
-        return false;
-    }
-
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-    }
-
-    boolean isSuccess = false;
-
-    @Override
-    public void onPreviewFrame(final byte[] data, Camera camera) {
-        if (isSuccess)
-            return;
-        isSuccess = true;
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                long actionDetectTme = System.currentTimeMillis();
-                IDCardDetect iCardDetect = mIdCard.detect(data, width, height, IDCard.IMAGEMODE_NV21);
-                final long DetectTme = System.currentTimeMillis() - actionDetectTme;
-                final float in_bound = iCardDetect.inBound;
-                final float is_idcard = iCardDetect.isIdcard;
-                final float clear = iCardDetect.clear;
-                String errorStr = "";
-
-                if (clear < setClear)
-                    errorStr = "请点击屏幕对焦";
-                else if (in_bound < setBound)
-                    errorStr = "请将身份证对准引导框";
-
-                String fps_1Str = "";
-
-                if (in_bound >= setBound && is_idcard >= setIdcard && clear >= setClear) {
-                    long actionQualityTme = System.currentTimeMillis();
-                    Log.w("ceshi", "faculaPass===" + faculaPass);
-                    final IDCardQuality idCardQuality = mIdCard.CalculateQuality(faculaPass);
-                    drawFaculae(idCardQuality);
-                    final long idCardQualityTme = System.currentTimeMillis() - actionQualityTme;
-
-                    fps_1Str = "\nIdCardQualityTme: " + idCardQualityTme + "\nisfaculaePass: "
-                            + idCardQuality.isfaculaePass + "\nfaculaeLenth: " + idCardQuality.faculaes.length
-                            + "\nShadowLenth: " + idCardQuality.Shadows.length;
-                    if (!idCardQuality.isfaculaePass)
-                        errorStr = "有光斑";
-                    if (idCardQuality.isfaculaePass && idCardQuality.isShadowPass) {
-                        Bitmap bitmap = ConUtil.cutImage(mIndicatorView.getPosition(), data, mICamera.mCamera,
-                                mIsVertical);
-                        String path = ConUtil.saveBitmap(BankCardScanActivity.this, bitmap);
-//                        enterToResult(path, idCardQuality, clear, is_idcard, in_bound);
-                        doOCR(path);
-                    } else
-                        isSuccess = false;
-                } else {
-                    drawFaculae(null);
-                    isSuccess = false;
-                }
-
-                String fpsStr = "\nin_bound: " + in_bound + "\nis_idcard: " + is_idcard + "\nclear: " + clear
-                        + "\nDetectTme: " + DetectTme;
-                print(errorStr, fpsStr, fps_1Str);
-            }
-        });
-    }
-
-    private void drawFaculae(final IDCardQuality idCardQuality) {
-        if (!mIsDebug)
-            return;
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mIndicatorView.setiCardQuality(idCardQuality);
-            }
-        });
-    }
-
-    private void print(final String errorStr, final String fpsStr, final String fps_1Str) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                errorType.setText(errorStr);
-                verticalType.setText(errorStr);
-                if (mIsDebug) {
-                    fps.setText(fpsStr);
-                    fps_1.setText(fps_1Str);
-                }
-            }
-        });
-    }
-
-    private void enterToResult(String path, IDCardQuality iCardQuality, float clear, float is_idcard, float in_bound) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                barRel.setVisibility(View.VISIBLE);
-                errorType.setText("");
-                verticalType.setText("");
-            }
-        });
-//        Intent intent = new Intent(this, IDCardResultActivity.class);
-        Intent intent = new Intent();
-        intent.putExtra("iCardQuality", iCardQuality);
-        intent.putExtra("path", path);
-        intent.putExtra("clear", clear);
-        intent.putExtra("is_idcard", is_idcard);
-        intent.putExtra("in_bound", in_bound);
-        intent.putExtra("isClearShadow", isClearShadow);
-        intent.putExtra("isTextDetect", isTextDetect);
-//        startActivity(intent);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-    private void enterToResult(String path, String info) {
-        Intent intent = new Intent();
-        intent.putExtra("path", path);
-        intent.putExtra("info", info);
-        setResult(RESULT_OK, intent);
-        finish();
+    private void takePhoto() {
+        btn_capture.setEnabled(false);
+        btn_ok.setEnabled(true);
+        btn_recapture.setEnabled(true);
+        CameraHelper.getInstance().tackPicture(BankCardScanActivity.this);
     }
 
     /**
-     * 对身份证照片做ocr，然后发现是正面照片，那么利用 face/extract 接口进行人脸检测，如果是背面，直接弹出对话框
+     * 删除图片文件呢
      */
-    public void doOCR(final String path) {
-        mBar.setVisibility(View.VISIBLE);
-        try {
-            String url = "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard";
-            RequestParams rParams = new RequestParams();
-            Log.w("ceshi", "Util.API_OCRKEY===" + Util.API_SECRET + ", Util.API_OCRSECRET===" + Util.API_SECRET);
-            rParams.put("api_key", KeyUtil.API_KEY);
-            rParams.put("api_secret", KeyUtil.API_SECRET);
-            rParams.put("image_file", new File(path));
-            rParams.put("legality", 1 + "");
-            AsyncHttpClient asyncHttpclient = new AsyncHttpClient();
-            asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
+    private void deleteFile() {
+        if (this.filepath == null || this.filepath.equals("")) {
+            return;
+        }
+        File f = new File(this.filepath);
+        if (f.exists()) {
+            f.delete();
+        }
+    }
+
+    public void uploadFile(String path) {
+        if (!NetUtil.isNetworkConnectionActive(BankCardScanActivity.this)) {
+            ToastUtils.showCenter(BankCardScanActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        File file = new File(path);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multiPart = MultipartBody.Part.createFormData("file", path, requestBody);
+        Call<BaseModel<ImageInfo>> call = api.uploadFile(multiPart);
+        call.enqueue(new Callback<BaseModel<ImageInfo>>() {
+            @Override
+            public void onResponse(Call<BaseModel<ImageInfo>> call, Response<BaseModel<ImageInfo>> response) {
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    ImageInfo imageInfo = response.body().content;
+                    AppGlobal.getApplyModel().setFaceImage(imageInfo);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<ImageInfo>> call, Throwable t) {
+                ToastUtils.showCenter(BankCardScanActivity.this, t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onCapture(boolean success, String filepath) {
+        this.filepath = filepath;
+        String message = "拍照成功";
+        if (!success) {
+            message = "拍照失败";
+            CameraHelper.getInstance().startPreview();
+            this.imageView.setVisibility(View.GONE);
+            this.surfaceview.setVisibility(View.VISIBLE);
+        } else {
+            this.imageView.setVisibility(View.VISIBLE);
+            this.surfaceview.setVisibility(View.GONE);
+            this.imageView.setImageBitmap(BitmapFactory.decodeFile(filepath));
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void apply() {
+        if (!NetUtil.isNetworkConnectionActive(BankCardScanActivity.this)) {
+            ToastUtils.showCenter(BankCardScanActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Map<String, String> para = new HashMap<>();
+
+        if (AppGlobal.getApplyModel() != null) {
+//            para.put("id", "");
+//        para.put("createDate", "");
+//        para.put("updateDate", "");
+            para.put("bankId", AppGlobal.getApplyModel().getBankId());
+
+            para.put("cardNumber", AppGlobal.getApplyModel().getCardNumber());
+            para.put("phone", AppGlobal.getApplyModel().getPhone());
+            para.put("userId", AppGlobal.getUserInfo().getUserId());
+//        para.put("isAccountAgreement", "");
+//        para.put("isPlatformAgreement", "");
+            para.put("name", AppGlobal.getApplyModel().getName());
+            para.put("nationality", AppGlobal.getApplyModel().getNationality());
+            para.put("nativePlace", AppGlobal.getApplyModel().getNativePlace());
+            para.put("card", AppGlobal.getApplyModel().getCardNumber());
+            para.put("gender", AppGlobal.getApplyModel().getGender());
+            para.put("ethnic", AppGlobal.getApplyModel().getEthnic());
+            para.put("birthday", AppGlobal.getApplyModel().getBirthday());
+            para.put("address", AppGlobal.getApplyModel().getAddress());
+            para.put("deliveryAddress", AppGlobal.getApplyModel().getDeliveryAddress());
+//        para.put("status", "");
+            para.put("logisticsCompany", "");
+            para.put("shipmentNumber", "");
+            para.put("use", AppGlobal.getApplyModel().getUse());
+            para.put("email", AppGlobal.getApplyModel().getEmail());
+            para.put("tel", AppGlobal.getApplyModel().getTel());
+            para.put("postCode", AppGlobal.getApplyModel().getPostCode());
+            para.put("career", AppGlobal.getApplyModel().getCareer());
+
+
+            if (AppGlobal.getApplyModel().getIdCardImageFront() != null) {
+                para.put("cardFrontPic", AppGlobal.getApplyModel().getIdCardImageFront().getFileUrl());
+            }
+            if (AppGlobal.getApplyModel().getIdCardImageBack() != null) {
+                para.put("cardFollowingPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileUrl());
+            }
+            if (AppGlobal.getApplyModel().getBankCardImage() != null) {
+                para.put("bankCardPic", AppGlobal.getApplyModel().getIdCardImageBack().getFileUrl());
+            }
+            if (AppGlobal.getApplyModel().getFaceImage() != null) {
+                para.put("headPic", AppGlobal.getApplyModel().getFaceImage().getFileUrl());
+            }
+
+            Retrofit retrofit = new RetrofitService().getRetrofit();
+            APIInterface api = retrofit.create(APIInterface.class);
+
+            Gson gson = new Gson();
+            String strEntity = gson.toJson(para);
+            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+            Call<BaseModel<String>> call = api.applyCard(body);
+            call.enqueue(new Callback<BaseModel<String>>() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
-                    mBar.setVisibility(View.GONE);
-
+                public void onResponse(Call<BaseModel<String>> call, Response<BaseModel<String>> response) {
                     try {
-                        String successStr = new String(responseByte);
-                        Log.w("ceshi", "ocr  onSuccess: " + successStr);
-                        String info = "";
-                        JSONObject jObject = new JSONObject(successStr).getJSONArray("cards").getJSONObject(0);
-                        if ("back".equals(jObject.getString("side"))) {
-                            IDCardActivity.mIsDirect = false;
-                            AppGlobal.mIDCardBack = jObject;
-                            String officeAdress = jObject.getString("issued_by");
-                            String useful_life = jObject.getString("valid_date");
-                            info = info + "officeAdress:  " + officeAdress + "\nuseful_life:  " + useful_life;
-                        } else {
-                            IDCardActivity.mIsDirect = true;
-                            AppGlobal.mIDCardFront = jObject;
-                            String address = jObject.getString("address");
-                            String birthday = jObject.getString("birthday");
-                            String gender = jObject.getString("gender");
-                            String id_card_number = jObject.getString("id_card_number");
-                            String name = jObject.getString("name");
-                            Log.w("ceshi", "doOCR+++idCardBean.id_card_number===" + id_card_number + ", idCardBean.name===" + name);
-                            String race = jObject.getString("race");
-                            String side = jObject.getString("side");
-                            JSONObject legalityObject = jObject.getJSONObject("legality");
-
-                            info = info + "name:  " + name
-                                    + "\nid_card_number:  " + id_card_number
-                                    + "\ngender:  " + gender + "\nrace:  "
-                                    + race + "\nbirthday:  " + birthday
-                                    + "\naddress:  " + address;
-
-                            String checkError = "\n";
-                            try {
-                                float edited = Float.parseFloat(legalityObject.getString("Edited"));
-                                float ID_Photo = Float.parseFloat(legalityObject
-                                        .getString("ID Photo"));
-                                float Photocopy = Float.parseFloat(legalityObject.getString("Photocopy"));
-                                float Screen = Float.parseFloat(legalityObject.getString("Screen"));
-                                float Temporary_ID_Photo = Float.parseFloat(legalityObject.getString("Temporary ID Photo"));
-                                checkError = checkError + "\nedited:  "
-                                        + edited + "\nID_Photo:  " + ID_Photo
-                                        + "\nPhotocopy:  " + Photocopy
-                                        + "\nScreen:  " + Screen
-                                        + "\nTemporary_ID_Photo:  "
-                                        + Temporary_ID_Photo;
-                            } catch (Exception e) {
+                        if (response != null || response.body() != null) {
+                            if (BaseModel.SUCCESS.equals(response.body().status)) {
+//                                ToastUtils.showCenter(FaceActivity.this, "申请成功！");
+                                noLeakHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(BankCardScanActivity.this, SubmitApplyActivity.class);
+                                    }
+                                }, 2000);
+                            } else {
+                                ToastUtils.showCenter(BankCardScanActivity.this, response.message());
                             }
-                            info = info + checkError;
                         }
-                        enterToResult(path, successStr);
-//                        contentText.setText(contentText.getText().toString() + info);
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        mBar.setVisibility(View.GONE);
-                        ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
+                        Log.d("", e.getMessage());
+                        ToastUtils.showCenter(BankCardScanActivity.this, e.getMessage());
                     }
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers,
-                                      byte[] responseBody, Throwable error) {
-                    if (responseBody != null) {
-                        Log.w("ceshi", "responseBody==="
-                                + new String(responseBody));
-                    }
-                    mBar.setVisibility(View.GONE);
-                    ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
+                public void onFailure(Call<BaseModel<String>> call, Throwable t) {
+                    Log.d("", t.getMessage());
+                    ToastUtils.showCenter(BankCardScanActivity.this, t.getMessage());
                 }
             });
-        } catch (FileNotFoundException e1) {
-            mBar.setVisibility(View.GONE);
-            e1.printStackTrace();
-            ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
         }
     }
 
-    public boolean isEven01(int num) {
-        if (num % 2 == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

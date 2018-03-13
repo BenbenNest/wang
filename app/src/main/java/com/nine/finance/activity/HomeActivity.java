@@ -39,6 +39,7 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this, SubmitApplyActivity.class);
 //        startActivity(HomeActivity.this, FillAccountInfoActivity.class);
 //        startActivity(HomeActivity.this,BindBankCardActivity.class);
+        startActivity(HomeActivity.this, com.nine.finance.activity.bank.BankCardScanActivity.class);
     }
 
     @Override

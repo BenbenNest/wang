@@ -17,14 +17,14 @@ import com.nine.finance.thread.NoLeakHandler;
 import com.nine.finance.view.CommonHeadView;
 
 public class BaseActivity extends Activity implements CommonHeadView.OnBackListener {
-    CommonHeadView commonHeadView;
+    public CommonHeadView commonHeadView;
 
     public static void startActivity(Context context, Class cls) {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
 
-    NoLeakHandler noLeakHandler;
+    public NoLeakHandler noLeakHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

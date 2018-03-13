@@ -189,7 +189,7 @@
         <activity android:name=".activity.AvatarActivity" />
         <activity
             android:name=".activity.FaceActivity"
-            android:configChanges="keyboardHidden|orientation"></activity>
+            android:configChanges="keyboardHidden|orientation" />
     </application>
 
 </manifest>
