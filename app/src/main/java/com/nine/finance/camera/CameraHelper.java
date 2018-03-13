@@ -46,6 +46,7 @@ public class CameraHelper {
 
     //	闪光灯模式(default：自动)
     private String flashlightStatus = Parameters.FLASH_MODE_ON;
+    private int cameraType = 1;
 
     public enum Flashlight {
         AUTO, ON, OFF
@@ -121,12 +122,12 @@ public class CameraHelper {
      * @param screenWidth  屏幕宽度
      * @param screenHeight 屏幕高度
      */
-    public void openCamera(SurfaceHolder holder, int format, int width, int height, int screenWidth, int screenHeight) {
+    public void openCamera(SurfaceHolder holder, int format, int width, int height, int screenWidth, int screenHeight, int camera) {
         if (this.camera != null) {
             this.camera.release();
         }
-
-        this.camera = Camera.open(1);
+        cameraType = camera;
+        this.camera = Camera.open(camera);
         this.initParameters(holder, format, width, height, screenWidth, screenHeight);
         this.startPreview();
     }
@@ -341,7 +342,11 @@ public class CameraHelper {
 //			竖屏旋转照片
             Matrix matrix = new Matrix();
             matrix.reset();
-            matrix.setRotate(270);
+            if (cameraType == 0) {
+                matrix.setRotate(90);
+            } else {
+                matrix.setRotate(270);
+            }
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         }
 

@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nine.finance.R;
 import com.nine.finance.activity.BaseActivity;
 import com.nine.finance.activity.FaceActivity;
@@ -23,16 +26,24 @@ import com.nine.finance.camera.MaskSurfaceView;
 import com.nine.finance.camera.OnCaptureCallback;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
+import com.nine.finance.idcard.util.ConUtil;
+import com.nine.finance.idcard.util.Util;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.DisplayUtils;
+import com.nine.finance.utils.KeyUtil;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonHeadView;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,6 +102,7 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
         int width = DisplayUtils.dp2px(BankCardScanActivity.this, faceWidth);
         int height = DisplayUtils.dp2px(BankCardScanActivity.this, faceHeight);
         this.surfaceview.setMaskSize(width, height);
+        this.surfaceview.setCameraType(0);
 
 //		拍照
         btn_capture.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +130,9 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                doOCR(filepath);
                 if (!TextUtils.isEmpty(filepath)) {
-                    uploadFile(filepath);
+//                    uploadFile(filepath);
                 }
             }
         });
@@ -320,6 +333,60 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
                     ToastUtils.showCenter(BankCardScanActivity.this, t.getMessage());
                 }
             });
+        }
+    }
+
+    public void doOCR(final String path) {
+//        showBar(true);
+        try {
+            String url = "https://api-cn.faceplusplus.com/cardpp/beta/ocrbankcard";
+            RequestParams rParams = new RequestParams();
+            Log.w("ceshi", "Util.API_OCRKEY===" + Util.API_SECRET + ", Util.API_OCRSECRET===" + Util.API_SECRET);
+            rParams.put("api_key", KeyUtil.API_KEY);
+            rParams.put("api_secret", KeyUtil.API_SECRET);
+            rParams.put("image_file", new File(path));
+            rParams.put("legality", 1 + "");
+            AsyncHttpClient asyncHttpclient = new AsyncHttpClient();
+            asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
+//                    showBar(false);
+                    try {
+                        String successStr = new String(responseByte);
+                        JSONObject jObject = new JSONObject(successStr);
+                        JSONArray array = jObject.optJSONArray("bank_cards");
+                        if (array != null && array.length() > 0) {
+                            JSONObject card = array.getJSONObject(0);
+                            String cardNum = card.optString("number");
+                            Intent intent = new Intent();
+                            intent.putExtra("num", cardNum);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
+                        }
+//                        contentText.setText(contentText.getText().toString() + info);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+//                        showBar(false);
+                        ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers,
+                                      byte[] responseBody, Throwable error) {
+                    if (responseBody != null) {
+                        Log.w("ceshi", "responseBody===" + new String(responseBody));
+                    }
+//                    showBar(false);
+                    ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
+                }
+            });
+        } catch (FileNotFoundException e1) {
+//            showBar(false);
+            e1.printStackTrace();
+            ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
         }
     }
 
