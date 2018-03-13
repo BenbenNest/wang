@@ -55,7 +55,9 @@ public class PersonalInfoActivity extends BaseActivity {
         avatarView = (CircleAvatarView) findViewById(R.id.info_avatar);
         avatarView.setImageResource(R.drawable.head_default);
         idInfoView = (PersonalInfoRow) findViewById(R.id.info_id);
+        idInfoView.setEditable(false);
         nameInfoView = (PersonalInfoRow) findViewById(R.id.info_name);
+        nameInfoView.setEditable(false);
         nickNameInfoView = (PersonalInfoRow) findViewById(R.id.info_nick_name);
         phoneInfoView = (PersonalInfoRow) findViewById(R.id.info_mobile);
         telInfoView = (PersonalInfoRow) findViewById(R.id.info_tel);
@@ -165,9 +167,10 @@ public class PersonalInfoActivity extends BaseActivity {
                     if (response != null || response.body() != null) {
                         if (BaseModel.SUCCESS.equals(response.body().status)) {
                             UserInfo loginData = response.body().content;
-                            fillUserinfo(loginData);
                             AppGlobal.setUserInfo(loginData);
+                            fillUserinfo(loginData);
                             UserManager.saveUserData(getApplicationContext(), loginData);
+                            ToastUtils.showCenter(PersonalInfoActivity.this,"信息修改成功！");
 //                        String token = response.body().data.access_token;
 //                        getUserMessage(response.body().data, token, uiCallback);
 //                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
