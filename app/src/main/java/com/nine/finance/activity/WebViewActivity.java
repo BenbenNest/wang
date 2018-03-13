@@ -200,7 +200,8 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("native_start_bank")) {
+//                start_nativie=1&bankid=XXXX
+                if (url.contains("start_nativie")) {
                     startActivity(WebViewActivity.this, ChooseBankActivity.class);
                 } else {
                     view.loadUrl(url);
