@@ -12,6 +12,7 @@ import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
+import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.BusinessRectView;
 import com.nine.finance.view.CircleAvatarView;
 
@@ -39,7 +40,18 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this, SubmitApplyActivity.class);
 //        startActivity(HomeActivity.this, FillAccountInfoActivity.class);
 //        startActivity(HomeActivity.this,BindBankCardActivity.class);
-        startActivity(HomeActivity.this, com.nine.finance.activity.bank.BankCardScanActivity.class);
+//        com.nine.finance.activity.bank.BankCardScanActivity.startActivityForResult(HomeActivity.this, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            String num = data.getStringExtra("num");
+            if (num != null) {
+                ToastUtils.showCenter(HomeActivity.this, "卡号：" + num);
+            }
+        }
     }
 
     @Override

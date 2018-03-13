@@ -2,8 +2,6 @@ package com.nine.finance.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -31,7 +29,7 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
 
     private void init() {
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
-        if(commonHeadView!=null) {
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step6);
         }
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
@@ -64,7 +62,8 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
                     @Override
                     public void onClick(boolean bln) {
                         if (bln) {
-                            AuthManager.checkIDCardAuthState(BindBankCardActivity.this, BindBankCardActivity.this);
+                            com.nine.finance.activity.bank.BankCardScanActivity.startActivityForResult(BindBankCardActivity.this, REQUEST_SCAN_CODE);
+//                            AuthManager.checkIDCardAuthState(BindBankCardActivity.this, BindBankCardActivity.this);
                         } else {
                             Toast.makeText(BindBankCardActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
                             ActivityCompat.requestPermissions(BindBankCardActivity.this,
@@ -83,9 +82,10 @@ public class BindBankCardActivity extends BaseActivity implements AuthManager.Au
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_SCAN_CODE && data != null) {
-                String path = data.getStringExtra("path");
-                String IDCardInfo = data.getStringExtra("info");
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                String bankCardNum = data.getStringExtra("num");
+                if (bankcardInputLayout != null && bankCardNum != null) {
+                    bankcardInputLayout.setText(bankCardNum);
+                }
             }
         }
 

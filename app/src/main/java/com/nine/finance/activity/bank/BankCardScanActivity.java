@@ -1,6 +1,6 @@
 package com.nine.finance.activity.bank;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nine.finance.R;
 import com.nine.finance.activity.BaseActivity;
-import com.nine.finance.activity.FaceActivity;
 import com.nine.finance.activity.SubmitApplyActivity;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.camera.CameraHelper;
@@ -77,9 +76,9 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
 //    private float IDCARD_RATIO = 856.0f / 540.0f;
 
 
-    public static void startActivity(Context context) {
-        Intent intent = new Intent(context, FaceActivity.class);
-        context.startActivity(intent);
+    public static void startActivityForResult(Activity context, int requestCode) {
+        Intent intent = new Intent(context, BankCardScanActivity.class);
+        context.startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -152,7 +151,8 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
                 if (TextUtils.isEmpty(filepath)) {
                     ToastUtils.showCenter(BankCardScanActivity.this, "请拍照");
                 } else {
-                    apply();
+                    uploadFile(filepath);
+//                    apply();
 //                    startActivity(FaceActivity.this, SubmitApplyActivity.class);
                 }
             }
@@ -217,7 +217,11 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
             public void onResponse(Call<BaseModel<ImageInfo>> call, Response<BaseModel<ImageInfo>> response) {
                 if (response != null && response.code() == 200 && response.body() != null) {
                     ImageInfo imageInfo = response.body().content;
-                    AppGlobal.getApplyModel().setFaceImage(imageInfo);
+                    AppGlobal.getApplyModel().setBankCardImage(imageInfo);
+                    Intent intent = new Intent();
+                    intent.putExtra("num", bankCardNum);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
 
@@ -244,7 +248,6 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
 
     private void apply() {
         if (!NetUtil.isNetworkConnectionActive(BankCardScanActivity.this)) {
@@ -336,6 +339,8 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
         }
     }
 
+    String bankCardNum;
+
     public void doOCR(final String path) {
 //        showBar(true);
         try {
@@ -357,11 +362,7 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
                         JSONArray array = jObject.optJSONArray("bank_cards");
                         if (array != null && array.length() > 0) {
                             JSONObject card = array.getJSONObject(0);
-                            String cardNum = card.optString("number");
-                            Intent intent = new Intent();
-                            intent.putExtra("num", cardNum);
-                            setResult(RESULT_OK, intent);
-                            finish();
+                            bankCardNum = card.optString("number");
                         } else {
                             ConUtil.showToast(BankCardScanActivity.this, "识别失败，请重新识别！");
                         }
