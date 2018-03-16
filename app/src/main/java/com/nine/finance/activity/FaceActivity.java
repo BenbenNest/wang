@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.camera.CameraHelper;
@@ -20,14 +23,20 @@ import com.nine.finance.camera.MaskSurfaceView;
 import com.nine.finance.camera.OnCaptureCallback;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
+import com.nine.finance.idcard.util.ConUtil;
+import com.nine.finance.idcard.util.Util;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.DisplayUtils;
+import com.nine.finance.utils.KeyUtil;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonHeadView;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.HashMap;
@@ -134,7 +143,7 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
                 if (TextUtils.isEmpty(filepath)) {
                     ToastUtils.showCenter(FaceActivity.this, "请拍照");
                 } else {
-                    apply();
+                    faceCompare();
 //                    startActivity(FaceActivity.this, SubmitApplyActivity.class);
                 }
             }
@@ -227,6 +236,51 @@ public class FaceActivity extends BaseActivity implements OnCaptureCallback {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    private void faceCompare() {
+//        https://api-cn.faceplusplus.com/facepp/v3/compare
+        String url = "https://api-cn.faceplusplus.com/facepp/v3/compare";
+        RequestParams rParams = new RequestParams();
+        Log.w("ceshi", "Util.API_OCRKEY===" + Util.API_SECRET + ", Util.API_OCRSECRET===" + Util.API_SECRET);
+        rParams.put("api_key", KeyUtil.API_KEY);
+        rParams.put("api_secret", KeyUtil.API_SECRET);
+        String idCardPath = AppGlobal.getApplyModel().getIdCardImageFront().getFileUrl();
+        String facePath = AppGlobal.getApplyModel().getFaceImage().getFileUrl();
+        rParams.put("image_url1", idCardPath);
+        rParams.put("image_url2", facePath);
+        rParams.put("legality", 1 + "");
+        AsyncHttpClient asyncHttpclient = new AsyncHttpClient();
+        asyncHttpclient.post(url, rParams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseByte) {
+//                    showBar(false);
+                try {
+                    String successStr = new String(responseByte);
+                    JSONObject jObject = new JSONObject(successStr);
+                    double confidence=jObject.optDouble("confidence",0);
+                    if (confidence > 0) {
+                        apply();
+                    } else {
+                        ConUtil.showToast(FaceActivity.this, "人证合一验证失败！");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                        showBar(false);
+                    ConUtil.showToast(FaceActivity.this, "人证合一验证失败！");
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers,
+                                  byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    Log.w("ceshi", "responseBody===" + new String(responseBody));
+                }
+//                    showBar(false);
+                ConUtil.showToast(FaceActivity.this, "人证合一验证失败！");
+            }
+        });
+
+    }
 
     private void apply() {
         if (!NetUtil.isNetworkConnectionActive(FaceActivity.this)) {
