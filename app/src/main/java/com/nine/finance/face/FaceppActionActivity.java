@@ -23,7 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.megvii.facepp.sdk.Facepp;
 import com.nine.finance.R;
 import com.nine.finance.face.bean.FaceActionInfo;
 import com.nine.finance.face.util.ConUtil;
@@ -324,11 +323,11 @@ public class FaceppActionActivity extends Activity implements OnClickListener {
             onclickImageItem(5, isBackCamera);
             getCameraSizeList();
         } else if (ID == R.id.landmark_imageitem_6) {
-            if (!Facepp.getAbility(ConUtil.getFileContent(this, R
-                    .raw.megviifacepp_0_5_2_model)).contains(Facepp.Ability.AGEGENDER)) {
-                ConUtil.showToast(this, getResources().getString(R.string.detector));
-                return;
-            }
+//            if (!Facepp.getAbility(ConUtil.getFileContent(this, R
+//                    .raw.megviifacepp_0_5_2_model)).contains(Facepp.Ability.AGEGENDER)) {
+//                ConUtil.showToast(this, getResources().getString(R.string.detector));
+//                return;
+//            }
 
             isFaceProperty = !isFaceProperty;
             onclickImageItem(6, isFaceProperty);

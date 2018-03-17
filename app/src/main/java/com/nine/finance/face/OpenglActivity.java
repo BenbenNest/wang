@@ -315,7 +315,8 @@ public class OpenglActivity extends Activity
                 bottom = height - top;
             }
 
-            String errorCode = facepp.init(this, ConUtil.getFileContent(this, R.raw.megviifacepp_0_5_2_model), isOneFaceTrackig ? 1 : 0);
+//            String errorCode = facepp.init(this, ConUtil.getFileContent(this, R.raw.megviifacepp_0_5_2_model), isOneFaceTrackig ? 1 : 0);
+            String errorCode = facepp.init(this, ConUtil.getFileContent(this, R.raw.megviiidcard_0_3_0_model), isOneFaceTrackig ? 1 : 0);
 
             //sdk内部其他api已经处理好，可以不判断
             if (errorCode != null) {

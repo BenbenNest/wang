@@ -43,8 +43,8 @@ public class LoadingActivity extends Activity {
         WarrantyText = (TextView) findViewById(R.id.loading_layout_WarrantyText);
         WarrantyBar = (ProgressBar) findViewById(R.id.loading_layout_WarrantyBar);
         againWarrantyBtn = (Button) findViewById(R.id.loading_layout_againWarrantyBtn);
-        String authTime0 = ConUtil.getFormatterDate(Facepp.getApiExpirationMillis(this, ConUtil.getFileContent(this, R
-                .raw.megviifacepp_0_5_2_model)));
+//        String authTime0 = ConUtil.getFormatterDate(Facepp.getApiExpirationMillis(this, ConUtil.getFileContent(this, R
+//                .raw.megviifacepp_0_5_2_model)));
     }
 
     @Override
@@ -74,7 +74,8 @@ public class LoadingActivity extends Activity {
     }
 
     private void network() {
-        int type = Facepp.getSDKAuthType(ConUtil.getFileContent(this, R.raw.megviifacepp_0_5_2_model));
+//        int type = Facepp.getSDKAuthType(ConUtil.getFileContent(this, R.raw.megviifacepp_0_5_2_model));
+        int type =1;
 		if ( type == 2) {// 非联网授权
 			authState(true,0,"");
 			return;
