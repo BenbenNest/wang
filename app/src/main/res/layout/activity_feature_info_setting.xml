@@ -26,7 +26,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/navigate_bar"
         android:id="@+id/featureinfo_layout_natigate"
         android:layout_alignParentBottom="true"
         >

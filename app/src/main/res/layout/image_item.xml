@@ -16,8 +16,7 @@
             android:clickable="false"
             android:focusable="false"
             android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:src="@drawable/debug_blue" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/image_item_text"

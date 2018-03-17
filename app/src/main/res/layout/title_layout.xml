@@ -17,7 +17,6 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:paddingBottom="12dip"
-            android:background="@drawable/bg_return_select"
             android:clickable="true"
             android:focusable="true" >
 
@@ -28,8 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dip"
                 android:clickable="false"
-                android:focusable="false"
-                android:src="@drawable/retunimage" />
+                android:focusable="false" />
 
             <TextView
                 android:id="@+id/title_layout_leftText"

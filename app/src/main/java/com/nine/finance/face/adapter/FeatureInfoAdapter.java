@@ -70,8 +70,8 @@ public class FeatureInfoAdapter extends BaseAdapter {
         FeatureInfo info = mData.get(position);
         holder.textUserName.setText(info.title);
         FeatureInfoSettingActivity.ModifFeatureInfo modifFeatureInfo = mItemSelectStatusArr[position];
-        if (modifFeatureInfo.isSelected) holder.imgSelectStatus.setImageResource(R.drawable.check);
-        else holder.imgSelectStatus.setImageResource(R.drawable.uncheck);
+//        if (modifFeatureInfo.isSelected) holder.imgSelectStatus.setImageResource(R.drawable.check);
+//        else holder.imgSelectStatus.setImageResource(R.drawable.uncheck);
 
         // 显示头像
         if (info.imgFilePath != null){
@@ -105,11 +105,11 @@ public class FeatureInfoAdapter extends BaseAdapter {
             String check = (String) imageView.getTag();
             if (check.equals("0")){
                 v.setTag("1");
-                imageView.setImageResource(R.drawable.check);
+//                imageView.setImageResource(R.drawable.check);
                 mItemSelectStatusArr[pos].isSelected = true;
             }else if (check.equals("1")){
                 v.setTag("0");
-                imageView.setImageResource(R.drawable.uncheck);
+//                imageView.setImageResource(R.drawable.uncheck);
                 mItemSelectStatusArr[pos].isSelected = false;
             }
         }

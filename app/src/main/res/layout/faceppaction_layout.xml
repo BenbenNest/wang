@@ -30,7 +30,6 @@
         android:layout_marginBottom="64dip"
         android:layout_marginLeft="35dip"
         android:layout_marginRight="35dip"
-        android:background="@drawable/bg_buttonblue_select"
         android:text="检测人脸"
         android:textColor="#ffffffff"
         android:textSize="22sp"

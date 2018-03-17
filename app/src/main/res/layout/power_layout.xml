@@ -20,7 +20,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dip"
         android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/power" />
+        android:scaleType="centerCrop" />
 
 </RelativeLayout>

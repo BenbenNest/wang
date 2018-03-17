@@ -24,7 +24,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:onClick="login"
             android:text="@string/login"

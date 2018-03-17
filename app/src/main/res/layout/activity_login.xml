@@ -20,7 +20,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_login"
         android:orientation="vertical"
         android:padding="25dp">
 
