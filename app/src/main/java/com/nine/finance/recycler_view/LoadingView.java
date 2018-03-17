@@ -5,8 +5,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.nine.finance.R;
-
 
 /**
  * Created by benbennest on 16/8/24.
@@ -28,7 +26,6 @@ public class LoadingView extends ImageView {
     }
 
     public void init() {
-        setImageResource(R.drawable.loading_anim);
         setScaleType(ScaleType.FIT_XY);
     }
 
