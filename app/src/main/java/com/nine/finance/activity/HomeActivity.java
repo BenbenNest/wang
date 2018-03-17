@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.nine.finance.R;
+import com.nine.finance.activity.bank.BankListActivity;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
@@ -42,7 +43,7 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this,BindBankCardActivity.class);
 //        com.nine.finance.activity.bank.BankCardScanActivity.startActivityForResult(HomeActivity.this, 100);
 //        startActivity(HomeActivity.this,FillAccountInfoActivity.class);
-//        startActivity(HomeActivity.this, BankListActivity.class);
+        startActivity(HomeActivity.this, BankListActivity.class);
     }
 
     @Override

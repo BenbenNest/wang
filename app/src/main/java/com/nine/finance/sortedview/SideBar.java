@@ -85,7 +85,6 @@ public class SideBar extends View {
         switch (action) {
             case MotionEvent.ACTION_UP:
                 setBackgroundDrawable(new ColorDrawable(0x00000000));
-                choose = -1;//
                 invalidate();
                 if (mTextDialog != null) {
                     mTextDialog.setVisibility(View.INVISIBLE);
