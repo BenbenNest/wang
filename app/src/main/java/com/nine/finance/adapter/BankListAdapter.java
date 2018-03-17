@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
+import com.nine.finance.sortedview.CharacterParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +29,21 @@ import java.util.List;
 /**
  * Created by jeremy
  */
-public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
 
     private List<BankInfo> mList = new ArrayList<BankInfo>();
     private Context mContext;
+    CharacterParser characterParser;
+
 
     public BankListAdapter(Context context) {
-        this.mContext = context;
+        this(context, new ArrayList<BankInfo>());
     }
 
     public BankListAdapter(Context context, List<BankInfo> list) {
         this.mContext = context;
         this.mList = list;
+        characterParser = CharacterParser.getInstance();
     }
 
     public void resetData(List<BankInfo> list) {
@@ -104,6 +109,39 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((BankListAdapter.MyHolder) holder).tv.setText(itemText);
 
         }
+    }
+
+    @Override
+    public Object[] getSections() {
+        return null;
+    }
+
+    @Override
+    public int getPositionForSection(int sectionIndex) {
+        for (int i = 0; i < mList.size(); i++) {
+            String sortStr = getSortLetters(mList.get(i).getBankName());
+            char firstChar = sortStr.toUpperCase().charAt(0);
+            if (firstChar == sectionIndex) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String getSortLetters(String name) {
+        String pinyin = characterParser.getSelling(name);
+        String sortString = pinyin.substring(0, 1).toUpperCase();
+        // 正则表达式，判断首字母是否是英文字母
+        if (sortString.matches("[A-Z]")) {
+            return sortString.toUpperCase();
+        } else {
+            return "#";
+        }
+    }
+
+    @Override
+    public int getSectionForPosition(int position) {
+        return getSortLetters(mList.get(position).getBankName()).charAt(0);
     }
 
     class MyHolder extends RecyclerView.ViewHolder {

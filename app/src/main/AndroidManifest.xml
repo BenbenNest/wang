@@ -149,6 +149,7 @@
         <activity
             android:name=".activity.bank.BankListActivity"
             android:launchMode="singleTask"
+            android:windowSoftInputMode = "adjustNothing"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.bank.BranchListActivity"

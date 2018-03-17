@@ -17,11 +17,15 @@ import com.nine.finance.model.BankInfo;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.recyclerview.EndLessOnScrollListener;
 import com.nine.finance.recyclerview.MyDecoration;
+import com.nine.finance.sortedview.CharacterParser;
+import com.nine.finance.sortedview.PinyinComparator;
+import com.nine.finance.sortedview.SideBar;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.SearchView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +46,9 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
     private String mKey = "";
     private int lastId = 0;
     private int firstPage = 0;
+    private SideBar sideBar;
+    private CharacterParser characterParser;
+    private PinyinComparator pinyinComparator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,25 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
 
 
     private void init() {
+        //实例化汉字转拼音类
+        characterParser = CharacterParser.getInstance();
+
+        pinyinComparator = new PinyinComparator();
+
+        sideBar = (SideBar) findViewById(R.id.sidrbar);
+        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                ToastUtils.showCenter(BankListActivity.this, s);
+                //该字母首次出现的位置
+                int position = mAdapter.getPositionForSection(s.charAt(0));
+                if (position != -1) {
+                    recyclerView.scrollToPosition(position);
+                }
+            }
+        });
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
         mSearchView = (SearchView) findViewById(R.id.search_view);
@@ -118,11 +144,16 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {
                 if (response != null && response.code() == 200) {
                     List<BankInfo> list = response.body().content;
-                    if (page == 0) {
-                        mAdapter.resetData(list);
-                    } else {
-                        mAdapter.addData(list);
-                    }
+//                    if (page == 0) {
+//                        mAdapter.resetData(list);
+//                    } else {
+//                        mAdapter.addData(list);
+//                    }
+//                    for (int i = 0; i < 5; i++) {
+//                        list.addAll(list);
+//                    }
+                    Collections.sort(list, pinyinComparator);
+                    mAdapter.resetData(list);
                     mAdapter.notifyDataSetChanged();
                     mRefreshLayout.setRefreshing(false);
                 }
