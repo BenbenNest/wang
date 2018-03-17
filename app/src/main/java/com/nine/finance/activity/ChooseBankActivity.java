@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,13 @@ public class ChooseBankActivity extends BaseActivity {
     private static final int REQUEST_CODE_BANK = 1001;
     private static final int REQUEST_CODE_BRANCH = 1002;
 
+    public static void startActivity(Context context, String bankId, String bankName) {
+        Intent intent = new Intent(context, ChooseBankActivity.class);
+        intent.putExtra("id", bankId);
+        intent.putExtra("name", bankName);
+        context.startActivity(intent);
+    }
+
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ChooseBankActivity.class);
         context.startActivity(intent);
@@ -44,6 +52,18 @@ public class ChooseBankActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_bank);
         init();
+        initData();
+    }
+
+    private void initData() {
+        String bankId = getIntent().getStringExtra("id");
+        String bankName = getIntent().getStringExtra("name");
+        if (!TextUtils.isEmpty(bankId) || !TextUtils.isEmpty(bankName)) {
+            mBank = new BankInfo();
+            mBank.setBankId(bankId);
+            mBank.setBankName(bankName);
+            mEditBankView.setText(bankName);
+        }
     }
 
     private void init() {

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -202,7 +203,23 @@ public class WebViewActivity extends BaseActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                start_nativie=1&bankid=XXXX
                 if (url.contains("start_nativie")) {
-                    startActivity(WebViewActivity.this, ChooseBankActivity.class);
+                    String arr[] = url.split("&");
+                    String bankId = "";
+                    String bankName = "";
+                    for (String s : arr) {
+                        if (s.contains("bankid")) {
+                            bankId = s.substring(s.lastIndexOf("=") + 1);
+                        }
+                        if (s.contains("bankName")) {
+                            bankName = s.substring(s.lastIndexOf("=") + 1);
+                        }
+                    }
+                    if (TextUtils.isEmpty(bankId) || TextUtils.isEmpty(bankName)) {
+                        ToastUtils.showCenter(WebViewActivity.this,"需要正确的银行ID和Name");
+                    } else {
+                        ChooseBankActivity.startActivity(WebViewActivity.this, bankId, bankName);
+                    }
+//                    startActivity(WebViewActivity.this, ChooseBankActivity.class);
                 } else {
                     view.loadUrl(url);
                 }

@@ -43,6 +43,13 @@ public class HomeActivity extends BaseActivity {
 //        com.nine.finance.activity.bank.BankCardScanActivity.startActivityForResult(HomeActivity.this, 100);
 //        startActivity(HomeActivity.this,FillAccountInfoActivity.class);
 //        startActivity(HomeActivity.this, BankListActivity.class);
+        test();
+    }
+
+    public void test() {
+        String s = "bankid=asfadsfdasfdsaf";
+        String result = s.substring(s.lastIndexOf("="));
+        System.out.print(result);
     }
 
     @Override
