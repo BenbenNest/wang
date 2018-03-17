@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.nine.finance.R;
 import com.nine.finance.api.OnBooleanListener;
@@ -30,6 +31,7 @@ public class BaseActivity extends Activity implements CommonHeadView.OnBackListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         noLeakHandler = new NoLeakHandler(this);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @Override
