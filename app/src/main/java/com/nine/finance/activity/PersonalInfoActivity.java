@@ -43,6 +43,7 @@ public class PersonalInfoActivity extends BaseActivity {
 
     CommonButton btSubmit;
     static final int request_code = 100;
+    private String head = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +103,8 @@ public class PersonalInfoActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == requestCode) {
                 if (data != null) {
-                    String path = data.getStringExtra("path");
-                    Glide.with(PersonalInfoActivity.this).load(path).into(avatarView);
+                    head = data.getStringExtra("path");
+                    Glide.with(PersonalInfoActivity.this).load(head).into(avatarView);
                 }
             }
         }
@@ -150,6 +151,7 @@ public class PersonalInfoActivity extends BaseActivity {
         para.put("address", addressInfoView.getText().toString().trim());
         para.put("phone", phoneInfoView.getText().toString().trim());
         para.put("tel", AppGlobal.getUserInfo().getTel());
+        para.put("head", head);
 //        para.put("card", AppGlobal.getUserInfo().getIDNum());
 
         Retrofit retrofit = new RetrofitService().getRetrofit();
@@ -170,7 +172,7 @@ public class PersonalInfoActivity extends BaseActivity {
                             AppGlobal.setUserInfo(loginData);
                             fillUserinfo(loginData);
                             UserManager.saveUserData(getApplicationContext(), loginData);
-                            ToastUtils.showCenter(PersonalInfoActivity.this,"信息修改成功！");
+                            ToastUtils.showCenter(PersonalInfoActivity.this, "信息修改成功！");
 //                        String token = response.body().data.access_token;
 //                        getUserMessage(response.body().data, token, uiCallback);
 //                        SharedPreferenceUtils.getInstance(FellowAppEnv.getAppContext()).saveMessage("token", token);
