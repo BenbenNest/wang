@@ -145,6 +145,7 @@ public class RegisterActivity extends BaseActivity {
         para.put("name", id);
         para.put("password", pwd);
         para.put("card", id);
+        para.put("username", id);
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
