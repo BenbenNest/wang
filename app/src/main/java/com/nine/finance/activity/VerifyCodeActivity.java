@@ -11,6 +11,7 @@ import com.nine.finance.view.CommonHeadView;
 import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
 public class VerifyCodeActivity extends BaseActivity {
+    static final int request_code = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,8 @@ public class VerifyCodeActivity extends BaseActivity {
                 if (!PermissionUtils.checkSDPermission(VerifyCodeActivity.this)) {
                     PermissionUtils.requestSDAndCameraPermission(VerifyCodeActivity.this);
                 } else {
-                    FaceActivity.startActivity(VerifyCodeActivity.this);
+//                    FaceActivity.startActivity(VerifyCodeActivity.this);
+                    FacePicActivity.startActivity(VerifyCodeActivity.this);
                 }
             }
         });
@@ -46,7 +48,8 @@ public class VerifyCodeActivity extends BaseActivity {
             } else if (!PermissionUtils.checkCameraPermission(this)) {
                 PermissionDialogUtils.showCameraPermissionDialog(this);
             } else {
-                FaceActivity.startActivity(VerifyCodeActivity.this);
+//                FaceActivity.startActivity(VerifyCodeActivity.this);
+                FacePicActivity.startActivity(VerifyCodeActivity.this);
             }
         }
     }

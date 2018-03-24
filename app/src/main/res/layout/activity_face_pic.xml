@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/iv_face"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp" />
+
+    <com.nine.finance.view.CommonButton
+        android:id="@+id/bt_recapture"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_next"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        my:title="重拍" />
+
+    <com.nine.finance.view.CommonButton
+        android:id="@+id/bt_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        my:title="提交" />
+
+</RelativeLayout>

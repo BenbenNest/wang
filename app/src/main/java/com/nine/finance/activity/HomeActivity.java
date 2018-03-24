@@ -36,7 +36,7 @@ public class HomeActivity extends BaseActivity {
         init();
 //        startActivity(HomeActivity.this, PersonalInfoActivity.class);
 //        FaceActivity.startActivity(HomeActivity.this);
-//        startActivity(HomeActivity.this, VerifyCodeActivity.class);
+        startActivity(HomeActivity.this, VerifyCodeActivity.class);
 //        startActivity(HomeActivity.this, SubmitApplyActivity.class);
 //        startActivity(HomeActivity.this, FillAccountInfoActivity.class);
 //        startActivity(HomeActivity.this,BindBankCardActivity.class);
