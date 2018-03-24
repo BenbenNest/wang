@@ -192,6 +192,8 @@
             android:name=".activity.FaceActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name=".activity.FacePicActivity" />
+        <activity android:name=".password.ForgetPasswordActivity" />
+        <activity android:name=".password.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

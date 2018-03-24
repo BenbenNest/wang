@@ -206,6 +206,7 @@ public class PersonalInfoActivity extends BaseActivity {
                 if (response != null || response.body() != null && response.body().content) {
                     UserManager.logOut(PersonalInfoActivity.this);
                     startActivity(PersonalInfoActivity.this, HomeActivity.class);
+                    PersonalInfoActivity.this.finish();
                 } else {
                     ToastUtils.showCenter(PersonalInfoActivity.this, response.message());
                 }
