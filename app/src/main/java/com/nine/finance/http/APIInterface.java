@@ -110,6 +110,9 @@ public interface APIInterface {
     @POST("/account/rest/bank/findByUserId")
     Call<BaseModel<List<ApplyBankModel>>> getMyApplyBank(@Body RequestBody body);
 
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST("/account/rest/user/forgetPassword")
+    Call<BaseModel<String>> forgetPassword(@Body RequestBody body);
 
 //    Integer id；(可以为null)
 //    String name;（必须有）

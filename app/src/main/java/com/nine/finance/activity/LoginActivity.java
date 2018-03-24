@@ -19,6 +19,7 @@ import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserInfo;
+import com.nine.finance.password.ForgetPasswordActivity;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
 import com.nine.finance.utils.ToastUtils;
@@ -87,7 +88,12 @@ public class LoginActivity extends BaseActivity {
                 }
 //                HomeActivity.startActivity(LoginActivity.this);
                 login();
-
+            }
+        });
+        findViewById(R.id.bt_forget).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(LoginActivity.this, ForgetPasswordActivity.class);
             }
         });
     }

@@ -44,7 +44,7 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
 
     private void init() {
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
-        if(commonHeadView!=null) {
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step5);
         }
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
@@ -151,14 +151,12 @@ public class FillMobileActivity extends BaseActivity implements TimeCountDown.On
                     startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 } else {
                     ToastUtils.showCenter(FillMobileActivity.this, response.body().message);
-                    startActivity(FillMobileActivity.this, BindBankCardActivity.class);
                 }
             }
 
             @Override
             public void onFailure(Call<BaseModel<String>> call, Throwable t) {
                 ToastUtils.showCenter(FillMobileActivity.this, t.getMessage());
-                startActivity(FillMobileActivity.this, BindBankCardActivity.class);
             }
         });
     }
