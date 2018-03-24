@@ -142,7 +142,7 @@ public class PersonalInfoActivity extends BaseActivity {
 //        }
 
         para.put("id", AppGlobal.getUserInfo().getUserId());
-        para.put("username", AppGlobal.getUserInfo().getName());
+        para.put("name", AppGlobal.getUserInfo().getName());
 //        para.put("nationality", AppGlobal.getUserInfo().getNationality());
 //        para.put("nativePlace", AppGlobal.getUserInfo().getInativePlaced());
 //        para.put("gender", AppGlobal.getUserInfo().getGender());

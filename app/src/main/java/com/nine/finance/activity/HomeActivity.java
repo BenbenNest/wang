@@ -10,7 +10,6 @@ import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
-import com.nine.finance.password.ForgetPasswordActivity;
 import com.nine.finance.permission.PermissionDialogUtils;
 import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.ToastUtils;
@@ -45,8 +44,8 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this,FillAccountInfoActivity.class);
 //        startActivity(HomeActivity.this, BankListActivity.class);
 //        startActivity(HomeActivity.this, FillMobileActivity.class);
-        startActivity(HomeActivity.this, ForgetPasswordActivity.class);
-        test();
+//        startActivity(HomeActivity.this, ForgetPasswordActivity.class);
+//        test();
     }
 
     public void test() {

@@ -76,7 +76,8 @@ public class ResetPasswordActivity extends BaseActivity {
         String strEntity = gson.toJson(para);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
 
-        Call<BaseModel<String>> call = api.forgetPassword(body);
+//        Call<BaseModel<String>> call = api.forgetPassword(body);
+        Call<BaseModel<String>> call = api.forgetPassword(phone, code, password, "4");
         call.enqueue(new Callback<BaseModel<String>>() {
             @Override
             public void onResponse(Call<BaseModel<String>> call, Response<BaseModel<String>> response) {

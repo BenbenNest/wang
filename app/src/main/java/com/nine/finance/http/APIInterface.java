@@ -114,6 +114,10 @@ public interface APIInterface {
     @POST("/account/rest/user/forgetPassword")
     Call<BaseModel<String>> forgetPassword(@Body RequestBody body);
 
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @GET("/account/rest/user/forgetPassword_")
+    Call<BaseModel<String>> forgetPassword(@Query("phone") String phone, @Query("code") String code, @Query("type") String type, @Query("password") String password);
+
 //    Integer id；(可以为null)
 //    String name;（必须有）
 //    String password;(传输前sha1加密)
