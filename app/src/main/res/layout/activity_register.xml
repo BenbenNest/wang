@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
-                my:input_hint="拍摄身份证" />
+                my:input_hint="身份证:" />
 
 
             <com.nine.finance.view.CommonInputLayout
@@ -74,12 +74,25 @@
                 my:input_drawable="@drawable/mobile"
                 my:input_hint="输入手机号" />
 
-            <com.nine.finance.view.CommonInputLayout
-                android:id="@+id/verify_code_input_layout"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                my:input_drawable="@drawable/password"
-                my:input_hint="输入验证码" />
+                android:layout_height="wrap_content">
+
+                <com.nine.finance.view.CommonInputLayout
+                    android:id="@+id/verify_code_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    my:input_drawable="@drawable/icon_code"
+                    my:input_hint="验证码：" />
+
+                <com.nine.finance.view.TimeCountDown
+                    android:id="@+id/bt_verify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="获取验证码" />
+            </RelativeLayout>
 
             <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/contact_input_layout"

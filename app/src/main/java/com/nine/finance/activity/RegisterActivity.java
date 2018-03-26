@@ -19,12 +19,14 @@ import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserInfo;
+import com.nine.finance.model.VerifyCodeModel;
 import com.nine.finance.thread.NoLeakHandler;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.PreferenceUtils;
 import com.nine.finance.utils.RegexUtils;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonInputLayout;
+import com.nine.finance.view.TimeCountDown;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener {
     CommonInputLayout mIdInputLayout;
     CommonInputLayout mPasswordInputLayout;
     CommonInputLayout mPasswordAgainInputLayout;
@@ -43,8 +45,9 @@ public class RegisterActivity extends BaseActivity {
     CommonInputLayout mVerifyCodeInputLayout;
     CommonInputLayout mContactInputLayout;
     CommonInputLayout mAddressInputLayout;
-
-    String id, pwd, pwdAgain, phone, verifyCode, address;
+    TimeCountDown mCountDownButton;
+    boolean canGetCode = true;
+    String id, pwd, pwdAgain, phone, verifyCode, address, code;
     NoLeakHandler noLeakHandler;
 
     @Override
@@ -73,7 +76,60 @@ public class RegisterActivity extends BaseActivity {
         style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_contract)), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_Contract.setText(style);
         initRegisterButton();
+        mCountDownButton = (TimeCountDown) findViewById(R.id.bt_verify);
+        mCountDownButton.setOnTimerCountDownListener(this);
+        findViewById(R.id.bt_verify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (RegexUtils.isMobile(mPhoneInputLayout.getText())) {
+                        phone = mPhoneInputLayout.getText();
+                        if (canGetCode) {
+                            getVerifyCode();
+                            mCountDownButton.initTimer();
+                        } else {
+                            ToastUtils.showCenter(RegisterActivity.this, "请稍后再发！");
+                        }
+                    } else {
+                        ToastUtils.showCenter(RegisterActivity.this, "请填写正确的手机号");
+                    }
+                } catch (Exception e) {
+                    Log.e("jeremy", e.getMessage());
+                }
+            }
+        });
+    }
 
+    private void getVerifyCode() {
+        if (!NetUtil.isNetworkConnectionActive(RegisterActivity.this)) {
+            ToastUtils.showCenter(RegisterActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Map<String, String> para = new HashMap<>();
+        String phone = mPhoneInputLayout.getText();
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        Gson gson = new Gson();
+        String strEntity = gson.toJson(para);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+        Call<BaseModel<VerifyCodeModel>> call = api.getVerifyCode(phone);
+        call.enqueue(new Callback<BaseModel<VerifyCodeModel>>() {
+            @Override
+            public void onResponse(Call<BaseModel<VerifyCodeModel>> call, Response<BaseModel<VerifyCodeModel>> response) {
+                if (response != null && response.code() == 200 && response.body() != null && response.body().status.equals(BaseModel.SUCCESS)) {
+                    VerifyCodeModel data = response.body().content;
+                } else {
+                    ToastUtils.showCenter(RegisterActivity.this, response.body().message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<VerifyCodeModel>> call, Throwable t) {
+                ToastUtils.showCenter(RegisterActivity.this, t.getMessage());
+            }
+        });
     }
 
     private void initRegisterButton() {
@@ -146,6 +202,7 @@ public class RegisterActivity extends BaseActivity {
         para.put("password", pwd);
         para.put("card", id);
         para.put("username", id);
+        para.put("code", verifyCode);
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
@@ -194,4 +251,23 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onCountDownStart() {
+        canGetCode = false;
+    }
+
+    @Override
+    public void onCountDownLoading(int currentCount) {
+
+    }
+
+    @Override
+    public void onCountDownError() {
+
+    }
+
+    @Override
+    public void onCountDownFinish() {
+        canGetCode = true;
+    }
 }
