@@ -51,7 +51,6 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
-
     }
 
     private void initView() {
@@ -71,8 +70,8 @@ public class LoginActivity extends BaseActivity {
         String pwd = PreferenceUtils.getData(LoginActivity.this, Constant.PREFERENCE_ACCOUNT_PWD, "").toString();
         idInputLayout.setText(id);
         pwdInputLayout.setText(pwd);
-        idInputLayout.setText("230404198309060519");
-        pwdInputLayout.setText("123456");
+//        idInputLayout.setText("230404198309060519");
+//        pwdInputLayout.setText("123456");
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

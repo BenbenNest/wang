@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,7 +48,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class FacePicActivity extends BaseActivity implements View.OnClickListener {
+public class FacePicActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mIvFace;
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
@@ -82,7 +84,7 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (photoPath.equals("")) {
+                if (photoPath == null || photoPath.equals("")) {
                     ToastUtils.showCenter(FacePicActivity.this, "请拍照");
                 } else {
                     if (photoPath == null) {
@@ -146,43 +148,49 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 500);
-        intent.putExtra("outputY", 500);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, CROP_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        switch (requestCode) {
-            case CAMERA_REQUEST_CODE:   //调用相机后返回
-                if (resultCode == RESULT_OK) {
-                    //用相机返回的照片去调用剪裁也需要对Uri进行处理
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        Uri contentUri = FileProvider.getUriForFile(FacePicActivity.this, "com.nine.finance", tempFile);
-                        cropPhoto(contentUri);
-                    } else {
-                        cropPhoto(Uri.fromFile(tempFile));
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CAMERA_REQUEST_CODE:   //调用相机后返回
+                    if (resultCode == RESULT_OK) {
+                        //用相机返回的照片去调用剪裁也需要对Uri进行处理
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            Uri contentUri = FileProvider.getUriForFile(FacePicActivity.this, "com.nine.finance", tempFile);
+                            cropPhoto(contentUri);
+                        } else {
+                            cropPhoto(Uri.fromFile(tempFile));
+                        }
                     }
-                }
-                break;
-            case ALBUM_REQUEST_CODE:    //调用相册后返回
-                if (resultCode == RESULT_OK) {
-                    Uri uri = intent.getData();
-                    cropPhoto(uri);
-                }
-                break;
-            case CROP_REQUEST_CODE:     //调用剪裁后返回
-                Bundle bundle = intent.getExtras();
-                if (bundle != null) {
-                    //在这里获得了剪裁后的Bitmap对象，可以用于上传
-                    Bitmap image = bundle.getParcelable("data");
-                    //设置到ImageView上
-                    mIvFace.setImageBitmap(image);
-                    //也可以进行一些保存、压缩等操作后上传
-                    photoPath = saveImage("crop", image);
-                }
-                break;
+                    break;
+                case ALBUM_REQUEST_CODE:    //调用相册后返回
+                    if (resultCode == RESULT_OK) {
+                        Uri uri = intent.getData();
+                        cropPhoto(uri);
+                    }
+                    break;
+                case CROP_REQUEST_CODE:     //调用剪裁后返回
+                    if (intent != null) {
+                        Bundle bundle = intent.getExtras();
+                        if (bundle != null) {
+                            //在这里获得了剪裁后的Bitmap对象，可以用于上传
+                            Bitmap image = bundle.getParcelable("data");
+                            //设置到ImageView上
+                            if (image != null && mIvFace != null) {
+                                mIvFace.setImageBitmap(image);
+                                //也可以进行一些保存、压缩等操作后上传
+                                photoPath = saveImage("crop", image);
+                            }
+                        }
+                    }
+                    break;
+            }
         }
     }
 
@@ -237,7 +245,7 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
                     String successStr = new String(responseByte);
                     JSONObject jObject = new JSONObject(successStr);
                     double confidence = jObject.optDouble("confidence", 0);
-                    if (confidence > 0) {
+                    if (confidence > 75) {
                         apply();
                     } else {
                         ConUtil.showToast(FacePicActivity.this, "人证合一验证失败！");
@@ -327,19 +335,15 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
                         if (response != null || response.body() != null) {
                             if (BaseModel.SUCCESS.equals(response.body().status)) {
 //                                ToastUtils.showCenter(FaceActivity.this, "申请成功！");
-                                noLeakHandler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        startActivity(FacePicActivity.this, SubmitApplyActivity.class);
-                                    }
-                                }, 2000);
+                                Intent intent = new Intent(FacePicActivity.this, SubmitApplyActivity.class);
+                                startActivity(intent);
                             } else {
-                                ToastUtils.showCenter(FacePicActivity.this, response.message());
+                                ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
                             }
                         }
                     } catch (Exception e) {
                         Log.d("", e.getMessage());
-                        ToastUtils.showCenter(FacePicActivity.this, e.getMessage());
+                        ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
                     }
 
                 }
@@ -347,7 +351,7 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
                 @Override
                 public void onFailure(Call<BaseModel<String>> call, Throwable t) {
                     Log.d("", t.getMessage());
-                    ToastUtils.showCenter(FacePicActivity.this, t.getMessage());
+                    ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
                 }
             });
         }
@@ -355,9 +359,13 @@ public class FacePicActivity extends BaseActivity implements View.OnClickListene
 
 
     public String saveImage(String name, Bitmap bmp) {
-        File appDir = new File(Environment.getExternalStorageDirectory().getPath());
+        String root = com.nine.finance.face.util.ConUtil.getSDRootPath();
+        if (TextUtils.isEmpty(root)) {
+            root = Environment.getDataDirectory().getPath();
+        }
+        File appDir = new File(root);
         if (!appDir.exists()) {
-            appDir.mkdir();
+            appDir.mkdirs();
         }
         String fileName = name + ".jpg";
         File file = new File(appDir, fileName);

@@ -215,7 +215,7 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
     public String saveImage(String name, Bitmap bmp) {
         File appDir = new File(Environment.getExternalStorageDirectory().getPath());
         if (!appDir.exists()) {
-            appDir.mkdir();
+            appDir.mkdirs();
         }
         String fileName = name + ".jpg";
         File file = new File(appDir, fileName);

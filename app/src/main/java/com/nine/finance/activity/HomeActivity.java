@@ -35,7 +35,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         init();
 //        startActivity(HomeActivity.this, PersonalInfoActivity.class);
-//        FaceActivity.startActivity(HomeActivity.this);
+//        FacePicActivity.startActivity(HomeActivity.this);
 //        startActivity(HomeActivity.this, VerifyCodeActivity.class);
 //        startActivity(HomeActivity.this, SubmitApplyActivity.class);
 //        startActivity(HomeActivity.this, FillAccountInfoActivity.class);

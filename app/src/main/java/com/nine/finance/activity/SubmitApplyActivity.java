@@ -161,7 +161,6 @@ public class SubmitApplyActivity extends BaseActivity {
                     try {
                         if (response != null || response.body() != null) {
                             if (BaseModel.SUCCESS.equals(response.body().status)) {
-                                ToastUtils.showCenter(SubmitApplyActivity.this, "申请成功！");
                                 noLeakHandler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {

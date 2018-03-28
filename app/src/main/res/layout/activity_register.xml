@@ -50,6 +50,12 @@
                 my:input_drawable="@drawable/idcard"
                 my:input_hint="身份证:" />
 
+            <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/name_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/idcard"
+                my:input_hint="姓名:" />
 
             <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/password_input_layout"

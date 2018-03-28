@@ -39,6 +39,7 @@ import retrofit2.Retrofit;
 
 public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener {
     CommonInputLayout mIdInputLayout;
+    CommonInputLayout mNameInputLayout;
     CommonInputLayout mPasswordInputLayout;
     CommonInputLayout mPasswordAgainInputLayout;
     CommonInputLayout mPhoneInputLayout;
@@ -47,7 +48,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
     CommonInputLayout mAddressInputLayout;
     TimeCountDown mCountDownButton;
     boolean canGetCode = true;
-    String id, pwd, pwdAgain, phone, verifyCode, address, code;
+    String id, name, pwd, pwdAgain, phone, verifyCode, address, code;
     NoLeakHandler noLeakHandler;
 
     @Override
@@ -61,6 +62,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
 
     private void init() {
         mIdInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
+        mNameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         mPasswordInputLayout = (CommonInputLayout) findViewById(R.id.password_input_layout);
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
@@ -119,7 +121,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
             @Override
             public void onResponse(Call<BaseModel<VerifyCodeModel>> call, Response<BaseModel<VerifyCodeModel>> response) {
                 if (response != null && response.code() == 200 && response.body() != null && response.body().status.equals(BaseModel.SUCCESS)) {
-                    VerifyCodeModel data = response.body().content;
+//                    VerifyCodeModel data = response.body().content;
                 } else {
                     ToastUtils.showCenter(RegisterActivity.this, response.body().message);
                 }
@@ -136,13 +138,15 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         findViewById(R.id.bt_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(true)return;
                 id = mIdInputLayout.getText();
+                name = mNameInputLayout.getText();
                 pwd = mPasswordInputLayout.getText();
                 pwdAgain = mPasswordAgainInputLayout.getText();
                 phone = mPhoneInputLayout.getText();
                 verifyCode = mVerifyCodeInputLayout.getText();
                 address = mAddressInputLayout.getText();
-                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(pwd) || TextUtils.isEmpty(pwdAgain) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(verifyCode)) {
+                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd) || TextUtils.isEmpty(pwdAgain) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(verifyCode)) {
                     ToastUtils.showCenter(RegisterActivity.this, "信息填写不完整");
                     return;
                 }
@@ -165,7 +169,6 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                 }
                 saveAccountInfo();
                 register();
-                ToastUtils.showCenter(RegisterActivity.this, "注册成功！");
                 noLeakHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -198,11 +201,21 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         para.put("mobile", phone);
         para.put("tel", "");
         para.put("address", address);
-        para.put("name", id);
+        para.put("name", name);
         para.put("password", pwd);
         para.put("card", id);
         para.put("username", id);
         para.put("code", verifyCode);
+
+//        para.put("nickName", "");
+//        para.put("mobile", "13581665443");
+//        para.put("tel", "");
+//        para.put("address", "asdfasf");
+//        para.put("name", "dasfds");
+//        para.put("password", "123456");
+//        para.put("card", "230404198309060519");
+//        para.put("username", "asfd");
+//        para.put("code", "234");
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
@@ -216,7 +229,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
             @Override
             public void onResponse(Call<BaseModel<UserInfo>> call, Response<BaseModel<UserInfo>> response) {
                 try {
-                    if (response != null || response.body() != null) {
+                    if (response != null || response.body() != null && response.body().status != null) {
                         if (BaseModel.SUCCESS.equals(response.body().status)) {
                             startActivity(RegisterActivity.this, LoginActivity.class);
 //                        String token = response.body().data.access_token;

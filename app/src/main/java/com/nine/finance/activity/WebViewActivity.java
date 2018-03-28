@@ -48,6 +48,7 @@ public class WebViewActivity extends BaseActivity {
 
     public static void startActivity(Context context, int type, String title, String url, String bankId) {
         Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra("title", title);
         intent.putExtra("type", type);
         intent.putExtra("url", url);
         intent.putExtra("bankId", bankId);
@@ -61,7 +62,7 @@ public class WebViewActivity extends BaseActivity {
     CommonHeadView headView;
     WebSettings settings;
     private List<String> loadHistoryUrls = new ArrayList<>();
-    String url;
+    String url, title;
     String bankId;
 
     @Override
@@ -76,6 +77,10 @@ public class WebViewActivity extends BaseActivity {
     private void initData() {
         Intent intent = getIntent();
         if (intent != null) {
+            title = intent.getStringExtra("title");
+            if (headView != null) {
+                headView.setTitle(title);
+            }
             type = intent.getIntExtra("type", 0);
             url = intent.getStringExtra("url");
             bankId = intent.getStringExtra("bankId");
@@ -201,8 +206,8 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                start_nativie=1&bankid=XXXX
-                if (url.contains("start_nativie")) {
+//                native_start_bank=1&bankid=XXXX
+                if (url.contains("native_start_bank")) {
                     String arr[] = url.split("&");
                     String bankId = "";
                     String bankName = "";
@@ -210,12 +215,12 @@ public class WebViewActivity extends BaseActivity {
                         if (s.contains("bankid")) {
                             bankId = s.substring(s.lastIndexOf("=") + 1);
                         }
-                        if (s.contains("bankName")) {
+                        if (s.contains("bankname")) {
                             bankName = s.substring(s.lastIndexOf("=") + 1);
                         }
                     }
                     if (TextUtils.isEmpty(bankId) || TextUtils.isEmpty(bankName)) {
-                        ToastUtils.showCenter(WebViewActivity.this,"需要正确的银行ID和Name");
+                        ToastUtils.showCenter(WebViewActivity.this, "需要正确的银行ID和Name");
                     } else {
                         ChooseBankActivity.startActivity(WebViewActivity.this, bankId, bankName);
                     }

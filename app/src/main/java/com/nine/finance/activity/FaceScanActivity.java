@@ -193,38 +193,43 @@ public class FaceScanActivity extends Activity implements TextureView.SurfaceTex
     int orientation = 0;
 
     private void doPreview() {
-        if (!mHasSurface)
-            return;
+        try {
+            if (!mHasSurface)
+                return;
 
-        mICamera.startPreview(textureView.getSurfaceTexture());
+            mICamera.startPreview(textureView.getSurfaceTexture());
 
-        IDCardConfig idCardConfig = mIdCard.getFaceppConfig();
+            IDCardConfig idCardConfig = mIdCard.getFaceppConfig();
 
-        RectF rectF = mIndicatorView.getPosition();
-        width = mICamera.cameraWidth;
-        height = mICamera.cameraHeight;
+            RectF rectF = mIndicatorView.getPosition();
+            width = mICamera.cameraWidth;
+            height = mICamera.cameraHeight;
 
-        int left = (int) (width * rectF.left);
-        int top = (int) (height * rectF.top);
-        int right = (int) (width * rectF.right);
-        int bottom = (int) (height * rectF.bottom);
-        if (mIsVertical) {
-            left = (int) (width * rectF.top);
-            top = (int) (height * rectF.left);
-            right = (int) (width * rectF.bottom);
-            bottom = (int) (height * rectF.right);
-            orientation = 180 - mICamera.orientation;
+            int left = (int) (width * rectF.left);
+            int top = (int) (height * rectF.top);
+            int right = (int) (width * rectF.right);
+            int bottom = (int) (height * rectF.bottom);
+            if (mIsVertical) {
+                left = (int) (width * rectF.top);
+                top = (int) (height * rectF.left);
+                right = (int) (width * rectF.bottom);
+                bottom = (int) (height * rectF.right);
+                orientation = 180 - mICamera.orientation;
+            }
+
+            idCardConfig.orientation = orientation;
+            idCardConfig.shadowAreaTh = 500;
+            idCardConfig.faculaAreaTh = 500;
+            idCardConfig.roi_left = left;
+            idCardConfig.roi_top = top;
+            idCardConfig.roi_right = right;
+            idCardConfig.roi_bottom = bottom;
+
+            mIdCard.setFaceppConfig(idCardConfig);
+        } catch (Exception e) {
+            Log.d("jeremy", e.getMessage());
+            e.printStackTrace();
         }
-
-        idCardConfig.orientation = orientation;
-        idCardConfig.shadowAreaTh = 500;
-        idCardConfig.faculaAreaTh = 500;
-        idCardConfig.roi_left = left;
-        idCardConfig.roi_top = top;
-        idCardConfig.roi_right = right;
-        idCardConfig.roi_bottom = bottom;
-
-        mIdCard.setFaceppConfig(idCardConfig);
     }
 
     private boolean mHasSurface = false;
