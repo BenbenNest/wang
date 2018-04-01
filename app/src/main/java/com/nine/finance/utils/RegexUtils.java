@@ -143,12 +143,28 @@ public class RegexUtils {
 
     /**
      * 匹配中国邮政编码
+     *
      * @param postCode 邮政编码
      * @return 验证成功返回true，验证失败返回false
      */
-    public static boolean isPostCode(String postCode){
+    public static boolean isPostCode(String postCode) {
         String reg = "[1-9]\\d{5}";
         return Pattern.matches(reg, postCode);
+    }
+
+    public static String getLastOfIDCard(String preCardNum) {
+        int[] x = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
+        char[] y = {'1', '0', 'x', '9', '8', '7', '6', '5', '4', '3', '2'};
+        int sum = 0;
+        for (int i = 0; i < preCardNum.length(); i++) {
+            int n = preCardNum.charAt(i) - 48;
+            sum = sum + n * x[i];
+        }
+        sum = sum % 11;
+        if (sum >= 0 && sum < y.length) {
+            return y[sum] + "";
+        }
+        return "";
     }
 
 }

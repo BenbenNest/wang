@@ -2,9 +2,11 @@ package com.nine.finance.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
@@ -100,7 +102,43 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                 }
             }
         });
+        mIdInputLayout.setOnTextChangeListener(watcher);
     }
+
+    boolean verified = false;
+    TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String text = s.toString().trim();
+            if (verified) {
+                if (text.length() < 17) {
+                    if (verified)
+                        verified = false;
+                }
+            } else {
+                if (text.length() == 17) {
+                    String lastCode = RegexUtils.getLastOfIDCard(text);
+                    if (TextUtils.isEmpty(lastCode)) {
+
+                    } else {
+                        s.append(lastCode);
+                        mIdInputLayout.setText(s.toString());
+                        verified = true;
+                    }
+                }
+            }
+        }
+    };
 
     private void getVerifyCode() {
         if (!NetUtil.isNetworkConnectionActive(RegisterActivity.this)) {
@@ -138,7 +176,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         findViewById(R.id.bt_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true)return;
+                if (true) return;
                 id = mIdInputLayout.getText();
                 name = mNameInputLayout.getText();
                 pwd = mPasswordInputLayout.getText();

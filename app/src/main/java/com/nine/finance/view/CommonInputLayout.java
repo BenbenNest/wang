@@ -3,6 +3,7 @@ package com.nine.finance.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
@@ -130,6 +131,15 @@ public class CommonInputLayout extends LinearLayout {
 
     public void setOnActionDoneListener(OnActionDoneListener listener) {
         onActionDoneListener = listener;
+    }
+
+    TextWatcher textWatcher;
+
+    public void setOnTextChangeListener(TextWatcher watcher) {
+        textWatcher = watcher;
+        if (mInputText != null) {
+            mInputText.addTextChangedListener(watcher);
+        }
     }
 
     public void setFocus() {
