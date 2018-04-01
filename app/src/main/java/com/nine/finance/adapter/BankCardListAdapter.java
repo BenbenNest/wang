@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
-import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
 
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             ((MyHolder) holder).tv.setText(itemText);
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
-                Glide.with(mContext).load(AppGlobal.getUserInfo().getHead()).into(((MyHolder) holder).iv);
+                Glide.with(mContext).load(bankInfo.getLogo()).into(((MyHolder) holder).iv);
             }
             if (!TextUtils.isEmpty(bankInfo.getBackground())) {
                 Glide.with(mContext)

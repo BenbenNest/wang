@@ -19,7 +19,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
-import com.nine.finance.app.AppGlobal;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.sortedview.CharacterParser;
 
@@ -90,7 +89,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
             myHolder.tv.setText(itemText);
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
-                Glide.with(mContext).load(AppGlobal.getUserInfo().getHead()).into(((BankListAdapter.MyHolder) holder).iv);
+                Glide.with(mContext).load(bankInfo.getLogo()).into(((BankListAdapter.MyHolder) holder).iv);
             }
             if (!TextUtils.isEmpty(bankInfo.getBackground())) {
                 Glide.with(mContext)
