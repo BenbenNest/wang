@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity {
         idInputLayout.setText(id);
         pwdInputLayout.setText(pwd);
 //        idInputLayout.setText("230404198309060519");
-//        pwdInputLayout.setText("123456");
+//        pwdInputLayout.setText("1");
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +96,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
 
     private void login() {
         if (!NetUtil.isNetworkConnectionActive(LoginActivity.this)) {
