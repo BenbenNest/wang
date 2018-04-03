@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                my:icon="@drawable/icon_tel"
+                my:icon="@drawable/icon_phone"
                 my:title="手机号" />
 
             <com.nine.finance.view.PersonalInfoRow

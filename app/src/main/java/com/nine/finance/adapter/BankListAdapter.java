@@ -3,9 +3,6 @@ package com.nine.finance.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,8 +13,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
 import com.nine.finance.model.BankInfo;
 import com.nine.finance.sortedview.CharacterParser;
@@ -91,20 +86,20 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
                 Glide.with(mContext).load(bankInfo.getLogo()).into(((BankListAdapter.MyHolder) holder).iv);
             }
-            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
-                Glide.with(mContext)
-                        .load(bankInfo.getBackground())
-                        .asBitmap()
-                        .into(new SimpleTarget<Bitmap>(180, 180) {
-                            @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                Drawable drawable = new BitmapDrawable(resource);
-//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                myHolder.root.setBackground(drawable);
-//                                }
-                            }
-                        });
-            }
+//            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
+//                Glide.with(mContext)
+//                        .load(bankInfo.getBackground())
+//                        .asBitmap()
+//                        .into(new SimpleTarget<Bitmap>(180, 180) {
+//                            @Override
+//                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                                Drawable drawable = new BitmapDrawable(resource);
+////                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                                myHolder.root.setBackground(drawable);
+////                                }
+//                            }
+//                        });
+//            }
             ((BankListAdapter.MyHolder) holder).tv.setText(itemText);
 
         }

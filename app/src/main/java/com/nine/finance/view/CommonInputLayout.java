@@ -49,6 +49,7 @@ public class CommonInputLayout extends LinearLayout {
             mIcon.setBackgroundResource(resId);
             String hint = typedArray.getString(R.styleable.CommonInputLayout_input_hint);
             boolean isPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_input_pwd, false);
+            boolean isScan = typedArray.getBoolean(R.styleable.CommonInputLayout_input_scan, false);
 //            boolean isShowPwd = typedArray.getBoolean(R.styleable.CommonInputLayout_show_pwd, false);
             if (mInputText != null) {
                 mInputText.setHint(hint);
@@ -73,6 +74,18 @@ public class CommonInputLayout extends LinearLayout {
                     @Override
                     public void onClick(View v) {
                         togglePwdState();
+                    }
+                });
+            }
+            if (isScan) {
+                ImageView iv_pwd = (ImageView) findViewById(R.id.bt_action);
+                iv_pwd.setBackgroundResource(R.drawable.scan);
+                iv_pwd.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mOnScanListener != null) {
+                            mOnScanListener.onScan();
+                        }
                     }
                 });
             }
@@ -167,6 +180,16 @@ public class CommonInputLayout extends LinearLayout {
 
     public interface OnActionDoneListener {
         void onActionDone();
+    }
+
+    OnScanListener mOnScanListener;
+
+    public void setOnScanListener(OnScanListener listener) {
+        mOnScanListener = listener;
+    }
+
+    public interface OnScanListener {
+        void onScan();
     }
 
 }

@@ -48,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 my:input_drawable="@drawable/idcard"
-                my:input_hint="身份证:" />
+                my:input_hint="身份证:"
+                my:input_scan="false" />
 
             <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/name_input_layout"

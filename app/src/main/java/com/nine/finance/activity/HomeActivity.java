@@ -46,6 +46,7 @@ public class HomeActivity extends BaseActivity {
 //        startActivity(HomeActivity.this, FillMobileActivity.class);
 //        startActivity(HomeActivity.this, ForgetPasswordActivity.class);
 //        test();
+//        startActivity(HomeActivity.this, RegisterActivity.class);
     }
 
     public void test() {

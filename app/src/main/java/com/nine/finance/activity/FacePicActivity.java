@@ -245,7 +245,7 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
                     String successStr = new String(responseByte);
                     JSONObject jObject = new JSONObject(successStr);
                     double confidence = jObject.optDouble("confidence", 0);
-                    if (confidence > 75) {
+                    if (confidence > 65) {
                         apply();
                     } else {
                         ConUtil.showToast(FacePicActivity.this, "人证合一验证失败！");

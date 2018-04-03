@@ -106,7 +106,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
 
     private void init() {
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
-        if(commonHeadView!=null) {
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step3);
         }
         mIvNonDirect = (ImageView) findViewById(R.id.id_direct_no);
@@ -151,7 +151,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                 });
             } else {
 //                startActivity(IDCardActivity.this, IDCardScanActivity.class);
-                startActivity(IDCardActivity.this, FaceScanActivity.class);
+                authState(true);
             }
         }
     }

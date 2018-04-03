@@ -63,7 +63,7 @@
                 android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                my:input_drawable="@drawable/icon_tel"
+                my:input_drawable="@drawable/icon_phone"
                 my:input_hint="联系电话" />
 
             <com.nine.finance.view.CommonInputLayout
@@ -104,15 +104,16 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_use" />
+                    android:src="@drawable/icon_use"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:hint="开户用户"
+                    android:hint="开户用途"
                     android:textSize="18dp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <RadioGroup
                     android:layout_width="wrap_content"

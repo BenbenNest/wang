@@ -3,17 +3,27 @@
   <component name="issues">
     <option name="index">
       <map>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/nine/finance/activity/LoginActivity.java">
+        <entry key="$PROJECT_DIR$/.gitignore">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/nine/finance/activity/PersonalInfoActivity.java">
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/nine/finance/activity/HomeActivity.java">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="/fragment.java">
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/nine/finance/activity/RegisterActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/nine/finance/view/CommonInputLayout.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/common_input_layout.xml">
           <value>
             <set />
           </value>

@@ -1,7 +1,10 @@
 package com.nine.finance.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,12 +16,18 @@ import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nine.finance.R;
+import com.nine.finance.api.OnBooleanListener;
+import com.nine.finance.app.AppGlobal;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
+import com.nine.finance.idcard.AuthManager;
+import com.nine.finance.idcard.IDCardScanActivity;
+import com.nine.finance.idcard.util.Screen;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.UserInfo;
 import com.nine.finance.model.VerifyCodeModel;
@@ -30,6 +39,8 @@ import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonInputLayout;
 import com.nine.finance.view.TimeCountDown;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener {
+public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener, AuthManager.AuthCallBack, CommonInputLayout.OnScanListener {
     CommonInputLayout mIdInputLayout;
     CommonInputLayout mNameInputLayout;
     CommonInputLayout mPasswordInputLayout;
@@ -51,7 +62,6 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
     TimeCountDown mCountDownButton;
     boolean canGetCode = true;
     String id, name, pwd, pwdAgain, phone, verifyCode, address, code;
-    NoLeakHandler noLeakHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +69,13 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register);
         noLeakHandler = new NoLeakHandler(this);
+        Screen.initialize(this);
         init();
     }
 
     private void init() {
         mIdInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
+        mIdInputLayout.setOnScanListener(this);
         mNameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         mPasswordInputLayout = (CommonInputLayout) findViewById(R.id.password_input_layout);
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
@@ -321,4 +333,79 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
     public void onCountDownFinish() {
         canGetCode = true;
     }
+
+
+    private static final int REQUEST_IDCARDSCAN_CODE = 100;
+
+    @Override
+    public void onScan() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // N以上的申请权限实例
+            Log.d("MainActivity", "进入权限");
+            onPermissionRequests(Manifest.permission.CAMERA, new OnBooleanListener() {
+                @Override
+                public void onClick(boolean bln) {
+                    if (bln) {
+                        AuthManager.checkIDCardAuthState(RegisterActivity.this, RegisterActivity.this);
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
+                        ActivityCompat.requestPermissions(RegisterActivity.this,
+                                new String[]{Manifest.permission.CAMERA}, 10);
+                    }
+                }
+            });
+        } else {
+            authState(true);
+        }
+    }
+
+    @Override
+    public void authState(boolean flag) {
+        if (true) {
+//            OpenglActivity.startActivity(IDCardActivity.this);
+//            startActivity(IDCardActivity.this, OpenglActivity.class);
+            Intent intent = new Intent(this, IDCardScanActivity.class);
+            intent.putExtra("isvertical", true);
+            intent.putExtra("isClearShadow", false);
+            intent.putExtra("isTextDetect", false);
+            intent.putExtra("isDebug", false);
+            intent.putExtra("bound", 0.8);
+            intent.putExtra("idcard", 0.1);
+            intent.putExtra("clear", 0.8);
+            startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_IDCARDSCAN_CODE) {
+            String path = data.getStringExtra("path");
+            String IDCardInfo = data.getStringExtra("info");
+            try {
+                JSONObject jObject = new JSONObject(IDCardInfo).getJSONArray("cards").getJSONObject(0);
+                if ("back".equals(jObject.getString("side"))) {
+                    ToastUtils.showCenter(RegisterActivity.this, "请扫描身份证正面");
+                } else {
+                    String address = jObject.getString("address");
+                    String birthday = jObject.getString("birthday");
+                    AppGlobal.getApplyModel().setBirthday(birthday);
+                    String gender = jObject.getString("gender");
+                    AppGlobal.getApplyModel().setGender(gender);
+                    String id_card_number = jObject.getString("id_card_number");
+                    AppGlobal.getApplyModel().setIdCard(id_card_number);
+                    String name = jObject.getString("name");
+                    AppGlobal.getApplyModel().setName(name);
+                    String race = jObject.getString("race");
+                    String side = jObject.getString("side");
+                    mIdInputLayout.setText(id_card_number);
+                    mNameInputLayout.setText(name);
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+    }
+
+
 }

@@ -5,6 +5,7 @@
         <attr name="input_drawable" format="reference" />
         <attr name="input_hint" format="string" />
         <attr name="input_pwd" format="boolean" />
+        <attr name="input_scan" format="boolean" />
         <!--<attr name="show_pwd" format="boolean"/>-->
     </declare-styleable>
 

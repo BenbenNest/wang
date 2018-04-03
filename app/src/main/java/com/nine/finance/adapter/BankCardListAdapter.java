@@ -1,9 +1,6 @@
 package com.nine.finance.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.nine.finance.R;
 import com.nine.finance.model.BankInfo;
 
@@ -73,20 +68,20 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
                 Glide.with(mContext).load(bankInfo.getLogo()).into(((MyHolder) holder).iv);
             }
-            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
-                Glide.with(mContext)
-                        .load(bankInfo.getBackground())
-                        .asBitmap()
-                        .into(new SimpleTarget<Bitmap>(180, 180) {
-                            @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                Drawable drawable = new BitmapDrawable(resource);
-//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                ((MyHolder) holder).root.setBackground(drawable);
-//                                }
-                            }
-                        });
-            }
+//            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
+//                Glide.with(mContext)
+//                        .load(bankInfo.getBackground())
+//                        .asBitmap()
+//                        .into(new SimpleTarget<Bitmap>(180, 180) {
+//                            @Override
+//                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                                Drawable drawable = new BitmapDrawable(resource);
+////                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                                ((MyHolder) holder).root.setBackground(drawable);
+////                                }
+//                            }
+//                        });
+//            }
             ((MyHolder) holder).tv.setText(itemText);
         }
     }

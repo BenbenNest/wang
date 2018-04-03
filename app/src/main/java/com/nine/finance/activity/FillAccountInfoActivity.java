@@ -69,9 +69,12 @@ public class FillAccountInfoActivity extends BaseActivity {
         }
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
         idInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
+        idInputLayout.setEditable(false);
         nameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
+        nameInputLayout.setEditable(false);
         sexInputLayout = (CommonInputLayout) findViewById(R.id.sex_input_layout);
         ageInputLayout = (CommonInputLayout) findViewById(R.id.age_input_layout);
+        ageInputLayout.setEditable(false);
         nationInputLayout = (CommonInputLayout) findViewById(R.id.nation_input_layout);
         nationInputLayout.setText("中国");
         nationInputLayout.setEditable(false);
