@@ -160,7 +160,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
 
     @Override
     public void authState(boolean flag) {
-        if (true) {
+        if (flag) {
 //            OpenglActivity.startActivity(IDCardActivity.this);
 //            startActivity(IDCardActivity.this, OpenglActivity.class);
             Intent intent = new Intent(this, IDCardScanActivity.class);
@@ -172,6 +172,8 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             intent.putExtra("idcard", 0.1);
             intent.putExtra("clear", 0.8);
             startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
+        } else {
+            ToastUtils.showCenter(IDCardActivity.this,"权限授权失败");
         }
     }
 }
