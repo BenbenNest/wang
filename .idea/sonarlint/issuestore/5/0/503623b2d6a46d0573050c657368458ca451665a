@@ -1,0 +1,9 @@
+
+csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(•Ÿ† 
+fsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï£Þ|
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷î˜‹
+S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(×ö³–úÿÿÿÿ
+^squid:S2583"DChange this condition so that it does not always evaluate to "false"(Ç³Áªýÿÿÿÿ
+bsquid:S1192"HDefine a constant instead of duplicating this literal "image/*" 3 times.(ê…¥ýÿÿÿÿ
+psquid:S00116"URename this field "mHeader_iv" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö Ç·ÿÿÿÿÿ

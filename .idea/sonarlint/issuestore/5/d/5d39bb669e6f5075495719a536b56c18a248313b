@@ -1,0 +1,29 @@
+
+?squid:S2114"%Remove or correct this "addAll" call.(ØÖ¬‹ùÿÿÿÿ
+Hsquid:S1068"3Remove this unused "characterParser" private field.(ÒãÞ¸
+Tsquid:UnusedPrivateMethod",Remove this unused private "getData" method.(Š¸ŒÕýÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ÿ¸äÆÿÿÿÿÿ
+Esquid:S1172"+Remove this unused method parameter "page".(‰¡í˜ûÿÿÿÿ
+isquid:S00116"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üî­üÿÿÿÿ
+ssquid:S1450"^Remove the "characterParser" field and declare it as a local variable in the relevant methods.(ÒãÞ¸
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ôþ¾ýÿÿÿÿ
+bsquid:HiddenFieldCheck"=Rename "position" which hides the field declared at line 117.(¾À‚¹üÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(€¡¤ãýÿÿÿÿ
+Bsquid:S1068"(Remove this unused "mKey" private field.(ÒÈçéùÿÿÿÿ
+psquid:S1450"VRemove the "sideBar" field and declare it as a local variable in the relevant methods.(ÆÖëÔùÿÿÿÿ
+ssquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ä¥Þòýÿÿÿÿ
+_squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(öê)
+Rsquid:S1854"8Remove this useless assignment to local variable "body".(Ž¬›–úÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(²Á§þÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(´”ïË
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(É’Þƒ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¸†°üÿÿÿÿ
+Asquid:S1068"'Remove this unused "TAG" private field.(Üî­üÿÿÿÿ
+Dsquid:S1068"*Remove this unused "lastId" private field.(‰ÙöÃøÿÿÿÿ
+_squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÃƒäJ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ÿ¸äÆÿÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ê“„†
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(½ëÐÆûÿÿÿÿ
+Nsquid:S1172"4Remove this unused method parameter "mRecyclerView".(·ªÕÚþÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ãŒÂÓýÿÿÿÿ
+Csquid:S1481")Remove this unused "body" local variable.(Ž¬›–úÿÿÿÿ

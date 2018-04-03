@@ -150,7 +150,7 @@ public class PersonalInfoActivity extends BaseActivity {
 //        para.put("birthday", AppGlobal.getUserInfo().getBirthday());
         para.put("address", addressInfoView.getText().toString().trim());
         para.put("phone", phoneInfoView.getText().toString().trim());
-        para.put("tel", AppGlobal.getUserInfo().getTel());
+        para.put("tel", telInfoView.getText());
         para.put("head", head);
 //        para.put("card", AppGlobal.getUserInfo().getIDNum());
 

@@ -1,0 +1,14 @@
+
+Isquid:S1481"/Remove this unused "IDCardInfo" local variable.(™£òÙüÿÿÿÿ
+_squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÉËƒ`
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ä’‹‚ÿÿÿÿÿ
+†"squid:ClassVariableVisibilityCheck"UMake mIsDirect a static final constant or non-public and provide accessors if needed.(±¡‹Ëúÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(•ıÍ
+Xsquid:S1854">Remove this useless assignment to local variable "IDCardInfo".(™£òÙüÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(êÛĞİ
+Isquid:S1444"/Make this "public static mIsDirect" field final(±¡‹Ëúÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¤¶â
+Lsquid:S2589"7Remove this expression which always evaluates to "true"(Ç¿½ú
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Œ°™ıûÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™£òÙüÿÿÿÿ
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(×ù¾Ç

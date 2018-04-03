@@ -1,0 +1,12 @@
+
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô¿§°8µ×ºÉ¨,
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¬ï©„şÿÿÿÿ8ë¨ºÉ¨,
+Ksquid:S2696"6Make the enclosing method "static" or remove this set.(µ“Ê­
+Dsquid:S1066"/Merge this if statement with the enclosing one.(§õàî
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡é††8¼É¨,
+Ksquid:S2696"6Make the enclosing method "static" or remove this set.(µ“Ê­
+Dsquid:S1066"/Merge this if statement with the enclosing one.(äáƒ
+bsquid:S2259"HA "NullPointerException" could be thrown; "mInputText" is nullable here.(Şıûéüÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÛÁæ»
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô¿§°
+Ksquid:S2696"6Make the enclosing method "static" or remove this set.(İ»éÀ

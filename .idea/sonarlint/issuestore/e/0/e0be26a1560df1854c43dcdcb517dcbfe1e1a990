@@ -1,0 +1,32 @@
+
+Tsquid:CallToDeprecatedMethod".Remove this use of "Header"; it is deprecated.(è®æ¥
+csquid:S4042"IUse "java.nio.Files#delete" here for better messages on error conditions.(é‘‚©úÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(áÒÃ°ÿÿÿÿÿ
+Ysquid:CallToDeprecatedMethod".Remove this use of "Header"; it is deprecated.(Áœ›Íüÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ô«Îíüÿÿÿÿ
+=squid:S1185"(Remove this method to simply inherit it.(Ù«µ§
+gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(ÇÑÃø
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ôø‡
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
+[squid:S2259"FA "NullPointerException" could be thrown; "response" is nullable here.(€ªÁ†
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ýˆ…Ôøÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¼ùÀš
+Msquid:UnusedPrivateMethod"*Remove this unused private "apply" method.(ÇÑÃø
+ssquid:S00116"XRename this field "btn_recapture" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßíÉ»ýÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
+gsquid:S00116"QRename this field "btn_ok" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ø²è
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¦¯´”üÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(Âþÿâûÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ö—‹¯
+nsquid:S1450"YRemove the "btn_cancel" field and declare it as a local variable in the relevant methods.(‘ÊË°
+qsquid:S00116"VRename this field "btn_capture" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰ð™Õøÿÿÿÿ
+|squid:S1192"bDefine a constant instead of duplicating this literal "è¯†åˆ«å¤±è´¥ï¼Œè¯·é‡æ–°è¯†åˆ«ï¼" 4 times.(ºÒÕòüÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(æÔŸÇýÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¹Â÷ßûÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(†ùÒ£
+ksquid:S00116"URename this field "btn_cancel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘ÊË°
+T
+squid:S899";Do something with the "boolean" value returned by "delete".(é‘‚©úÿÿÿÿ
