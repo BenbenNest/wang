@@ -8,4 +8,4 @@
 /captures
 .externalNativeBuild
 /.idea/sonarlint
-/.idea
+/.idea/sonarIssues.xml

@@ -373,7 +373,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
             intent.putExtra("clear", 0.8);
             startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
         } else {
-            ToastUtils.showCenter(IDCardActivity.this, "权限授权失败");
+            ToastUtils.showCenter(RegisterActivity.this, "权限授权失败");
         }
     }
 
