@@ -52,7 +52,7 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(mContext).inflate(R.layout.bank_list_item_layout, parent, false);
+        View layout = LayoutInflater.from(mContext).inflate(R.layout.bank_state_item_layout, parent, false);
         return new MyHolder(layout);
     }
 
@@ -67,6 +67,11 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((MyHolder) holder).tv.setText(itemText);
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
                 Glide.with(mContext).load(bankInfo.getLogo()).into(((MyHolder) holder).iv);
+            }
+            if (!TextUtils.isEmpty(bankInfo.getState())) {
+                ((MyHolder) holder).tvState.setText(bankInfo.getState());
+            }else {
+//                ((MyHolder) holder).tvState.setText("null");
             }
 //            if (!TextUtils.isEmpty(bankInfo.getBackground())) {
 //                Glide.with(mContext)
@@ -90,12 +95,14 @@ public class BankCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         View root;
         ImageView iv;
         TextView tv;
+        TextView tvState;
 
         public MyHolder(View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.root);
             iv = (ImageView) itemView.findViewById(R.id.logo);
             tv = (TextView) itemView.findViewById(R.id.bank_name);
+            tvState = (TextView) itemView.findViewById(R.id.tv_state);
         }
     }
 }

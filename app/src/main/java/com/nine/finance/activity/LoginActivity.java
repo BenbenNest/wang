@@ -70,8 +70,8 @@ public class LoginActivity extends BaseActivity {
         String pwd = PreferenceUtils.getData(LoginActivity.this, Constant.PREFERENCE_ACCOUNT_PWD, "").toString();
         idInputLayout.setText(id);
         pwdInputLayout.setText(pwd);
-//        idInputLayout.setText("230404198309060519");
-//        pwdInputLayout.setText("1");
+        idInputLayout.setText("230404198309060519");
+        pwdInputLayout.setText("1");
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
