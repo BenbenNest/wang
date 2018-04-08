@@ -220,6 +220,7 @@ public class BankCardScanActivity extends BaseActivity implements OnCaptureCallb
                     AppGlobal.getApplyModel().setBankCardImage(imageInfo);
                     Intent intent = new Intent();
                     intent.putExtra("num", bankCardNum);
+
                     setResult(RESULT_OK, intent);
                     finish();
                 }

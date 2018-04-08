@@ -2,6 +2,7 @@ package com.nine.finance.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -49,6 +50,12 @@ public class SearchView extends LinearLayout {
 //                btAction.setImageResource(resId);
 //            }
 //        }
+    }
+
+    public void setOnTextChangeLitener(TextWatcher textWatcher) {
+        if (etContent != null) {
+            etContent.addTextChangedListener(textWatcher);
+        }
     }
 
     public void setSearchListener(OnClickListener onClickListener) {

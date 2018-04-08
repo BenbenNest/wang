@@ -204,6 +204,10 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                     ToastUtils.showCenter(RegisterActivity.this, "密码输入不一致");
                     return;
                 }
+                if (id.length() != 18) {
+                    ToastUtils.showCenter(RegisterActivity.this, "身份证位数不正确");
+                    return;
+                }
                 if (!RegexUtils.isIDCard(id)) {
                     ToastUtils.showCenter(RegisterActivity.this, "身份证号码错误");
                     return;

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -49,6 +51,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
     private SideBar sideBar;
     private CharacterParser characterParser;
     private PinyinComparator pinyinComparator;
+    List<BankInfo> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
         mSearchView = (SearchView) findViewById(R.id.search_view);
+
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setColorSchemeResources(
                 R.color.colorRed,
@@ -110,6 +114,33 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
                 requestData(firstPage);
             }
         });
+
+        mSearchView.setOnTextChangeLitener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for (int i = 0; i < list.size(); i++) {
+                    BankInfo bankInfo = list.get(i);
+                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString())) {
+                        if (mLinearLayoutManager != null) {
+                            mLinearLayoutManager.scrollToPositionWithOffset(i, 0);
+                            mLinearLayoutManager.setStackFromEnd(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
         requestData(0);
     }
 
@@ -207,7 +238,11 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
             @Override
             public void onResponse(Call<BaseModel<List<BankInfo>>> call, Response<BaseModel<List<BankInfo>>> response) {
                 if (response != null && response.code() == 200) {
-                    List<BankInfo> list = response.body().content;
+                    list.clear();
+                    list = response.body().content;
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
 //                    if (page == 0) {
 //                        mAdapter.resetData(list);
 //                    } else {

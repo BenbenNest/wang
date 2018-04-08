@@ -85,7 +85,8 @@
         <activity
             android:name=".activity.MyApplyBankListActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.ChooseBankActivity"
             android:launchMode="singleTask"
@@ -150,7 +151,7 @@
             android:name=".activity.bank.BankListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.bank.BranchListActivity"
             android:launchMode="singleTask"
@@ -187,13 +188,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.AvatarActivity" />
+        <activity android:name=".activity.AvatarActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".activity.FaceActivity"
+            android:launchMode="singleTask"
             android:configChanges="keyboardHidden|orientation" />
-        <activity android:name=".activity.FacePicActivity" />
-        <activity android:name=".password.ForgetPasswordActivity" />
-        <activity android:name=".password.ResetPasswordActivity"></activity>
+        <activity android:name=".activity.FacePicActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".password.ForgetPasswordActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".password.ResetPasswordActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
