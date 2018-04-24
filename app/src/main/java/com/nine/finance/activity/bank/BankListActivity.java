@@ -251,7 +251,6 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
 //                    for (int i = 0; i < 5; i++) {
 //                        list.addAll(list);
 //                    }
-                    list.addAll(list);
                     Collections.sort(list, pinyinComparator);
                     mAdapter.resetData(list);
                     mAdapter.notifyDataSetChanged();
