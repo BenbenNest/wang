@@ -150,8 +150,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
                     }
                 });
             } else {
-//                startActivity(IDCardActivity.this, IDCardScanActivity.class);
-                authState(true);
+                AuthManager.checkIDCardAuthState(IDCardActivity.this, IDCardActivity.this);
             }
         }
     }
