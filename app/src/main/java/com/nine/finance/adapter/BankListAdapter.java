@@ -73,6 +73,7 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                    AppGlobal.getApplyModel().setBankId(mList.get(position).getBankId());
                     Intent intent = new Intent();
                     intent.putExtra("bank", bankInfo);
+                    intent.putExtra("bank_name", bankInfo.getBankName());
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
                     ((Activity) mContext).finish();
                 }

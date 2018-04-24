@@ -127,8 +127,9 @@ public class ChooseBankActivity extends BaseActivity {
             if (requestCode == REQUEST_CODE_BANK) {
                 if (data != null) {
                     mBank = (BankInfo) data.getSerializableExtra("bank");
+                    String bankName = data.getStringExtra("bank_name");
                     if (mBank != null && mEditBankView != null) {
-                        mEditBankView.setText(mBank.getBankName());
+                        mEditBankView.setText(bankName);
                         mTvIntro.setVisibility(View.VISIBLE);
                     }
                 }
