@@ -20,9 +20,9 @@ import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BankIntroContract;
 import com.nine.finance.model.BaseModel;
+import com.nine.finance.utils.LogUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
-import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.MyWebView;
 
 import java.util.ArrayList;
@@ -48,7 +48,8 @@ public class WebViewActivity extends BaseActivity {
 
     public static void startActivity(Context context, int type, String title, String url, String bankId) {
         Intent intent = new Intent(context, WebViewActivity.class);
-        intent.putExtra("title", title);
+        intent.putExtra("headTitle", title);
+        LogUtils.log("startActivity headTitle =" + title);
         intent.putExtra("type", type);
         intent.putExtra("url", url);
         intent.putExtra("bankId", bankId);
@@ -59,10 +60,9 @@ public class WebViewActivity extends BaseActivity {
     public static final int WEB_TYPE_CONTRACT = 2;
     int type;
     MyWebView webView;
-    CommonHeadView headView;
     WebSettings settings;
     private List<String> loadHistoryUrls = new ArrayList<>();
-    String url, title;
+    String url, headTitle;
     String bankId;
 
     @Override
@@ -74,13 +74,19 @@ public class WebViewActivity extends BaseActivity {
         loadUrl();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (commonHeadView != null) {
+            commonHeadView.setTitle(headTitle);
+        }
+    }
+
     private void initData() {
         Intent intent = getIntent();
         if (intent != null) {
-            title = intent.getStringExtra("title");
-            if (headView != null) {
-                headView.setTitle(title);
-            }
+            headTitle = intent.getStringExtra("headTitle");
+            LogUtils.log("initData headTitle =" + headTitle);
             type = intent.getIntExtra("type", 0);
             url = intent.getStringExtra("url");
             bankId = intent.getStringExtra("bankId");
@@ -174,7 +180,6 @@ public class WebViewActivity extends BaseActivity {
     }
 
     private void init() {
-        headView = (CommonHeadView) findViewById(R.id.head_view);
         webView = (MyWebView) findViewById(R.id.webview);
         settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -193,13 +198,15 @@ public class WebViewActivity extends BaseActivity {
         settings.setAppCacheEnabled(true); // 启用应用缓存
         settings.setSavePassword(false); // 关闭webview的自动保存密码
         settings.setAllowContentAccess(true);
-        settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+            settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
+        }
 //         android 5.0以上默认不支持Mixed Content
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(
                     WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         }
-        webView.getSettings().setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
+        webView.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         webView.setWebViewClient(new WebViewClient() {
@@ -270,9 +277,11 @@ public class WebViewActivity extends BaseActivity {
             //获取网站标题
             @Override
             public void onReceivedTitle(WebView view, String title) {
-                System.out.println("标题在这里");
-                if (headView != null) {
-                    headView.setTitle(title);
+                LogUtils.log(title);
+                if (TextUtils.isEmpty(headTitle)) {
+                    if (commonHeadView != null) {
+                        commonHeadView.setTitle(title);
+                    }
                 }
             }
 
