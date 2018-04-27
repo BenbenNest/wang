@@ -53,6 +53,7 @@ import retrofit2.Retrofit;
 public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTimerCountDownListener, AuthManager.AuthCallBack, CommonInputLayout.OnScanListener {
     CommonInputLayout mIdInputLayout;
     CommonInputLayout mNameInputLayout;
+    CommonInputLayout mAgeInputLayout;
     CommonInputLayout mPasswordInputLayout;
     CommonInputLayout mPasswordAgainInputLayout;
     CommonInputLayout mPhoneInputLayout;
@@ -61,7 +62,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
     CommonInputLayout mAddressInputLayout;
     TimeCountDown mCountDownButton;
     boolean canGetCode = true;
-    String id, name, pwd, pwdAgain, phone, verifyCode, address, code;
+    String id, name, birthday, pwd, pwdAgain, phone, verifyCode, address, code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         mIdInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         mIdInputLayout.setOnScanListener(this);
         mNameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
+        mAgeInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
         mPasswordInputLayout = (CommonInputLayout) findViewById(R.id.password_input_layout);
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
@@ -190,6 +192,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
             public void onClick(View v) {
                 id = mIdInputLayout.getText();
                 name = mNameInputLayout.getText();
+                birthday = mAgeInputLayout.getText();
                 pwd = mPasswordInputLayout.getText();
                 pwdAgain = mPasswordAgainInputLayout.getText();
                 phone = mPhoneInputLayout.getText();
@@ -209,6 +212,10 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                 }
                 if (!RegexUtils.isIDCard(id)) {
                     ToastUtils.showCenter(RegisterActivity.this, "身份证号码错误");
+                    return;
+                }
+                if (TextUtils.isEmpty(mAgeInputLayout.getText())) {
+                    ToastUtils.showCenter(RegisterActivity.this, "请填写生日");
                     return;
                 }
                 if (!RegexUtils.isMobile(phone)) {
@@ -255,6 +262,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         para.put("tel", "");
         para.put("address", address);
         para.put("name", name);
+        para.put("birthday", birthday);
         para.put("password", pwd);
         para.put("card", id);
         para.put("username", id);
@@ -392,7 +400,8 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                     ToastUtils.showCenter(RegisterActivity.this, "请扫描身份证正面");
                 } else {
                     String address = jObject.getString("address");
-                    String birthday = jObject.getString("birthday");
+                    birthday = jObject.getString("birthday");
+                    mAgeInputLayout.setText(birthday);
                     AppGlobal.getApplyModel().setBirthday(birthday);
                     String gender = jObject.getString("gender");
                     AppGlobal.getApplyModel().setGender(gender);

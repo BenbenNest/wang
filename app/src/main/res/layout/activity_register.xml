@@ -59,6 +59,13 @@
                 my:input_hint="姓名:" />
 
             <com.nine.finance.view.CommonInputLayout
+                android:id="@+id/age_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                my:input_drawable="@drawable/icon_birthday"
+                my:input_hint="出生日期" />
+
+            <com.nine.finance.view.CommonInputLayout
                 android:id="@+id/password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
