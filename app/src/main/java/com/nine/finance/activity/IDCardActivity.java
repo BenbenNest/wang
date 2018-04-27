@@ -118,7 +118,11 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             public void onClick(View v) {
                 if (AppGlobal.mIDCardFront == null || AppGlobal.mIDCardBack == null) {
                     ToastUtils.showCenter(IDCardActivity.this, "请完成身份证扫描");
+                } else if (AppGlobal.getApplyModel().getIdCardImageFront() == null) {
+                    ToastUtils.showCenter(IDCardActivity.this, "身份证正面上传失败");
 //                    startActivity(IDCardActivity.this, FillAccountInfoActivity.class);
+                } else if (AppGlobal.getApplyModel().getIdCardImageBack() == null) {
+                    ToastUtils.showCenter(IDCardActivity.this, "身份证反面上传失败");
                 } else if (!AppGlobal.getApplyModel().getIdCard().equals(AppGlobal.getUserInfo().getIDNum())) {
                     ToastUtils.showCenter(IDCardActivity.this, "该身份证和注册时使用的身份证信息不一致!");
                 } else {
@@ -172,7 +176,7 @@ public class IDCardActivity extends BaseActivity implements AuthManager.AuthCall
             intent.putExtra("clear", 0.8);
             startActivityForResult(intent, REQUEST_IDCARDSCAN_CODE);
         } else {
-            ToastUtils.showCenter(IDCardActivity.this,"权限授权失败");
+            ToastUtils.showCenter(IDCardActivity.this, "权限授权失败");
         }
     }
 }
