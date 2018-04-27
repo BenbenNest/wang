@@ -111,7 +111,7 @@ public class SubmitApplyActivity extends BaseActivity {
 //                "headPic": "string"
 
         if (AppGlobal.getApplyModel() != null) {
-            para.put("id", "");
+//            para.put("id", "");
 //        para.put("createDate", "");
 //        para.put("updateDate", "");
             para.put("bankId", AppGlobal.getApplyModel().getBankId());
@@ -124,7 +124,7 @@ public class SubmitApplyActivity extends BaseActivity {
             para.put("name", AppGlobal.getApplyModel().getName());
             para.put("nationality", AppGlobal.getApplyModel().getNationality());
             para.put("nativePlace", AppGlobal.getApplyModel().getNativePlace());
-            para.put("card", AppGlobal.getApplyModel().getCardNumber());
+            para.put("card", AppGlobal.getUserInfo().getIDNum());
             para.put("gender", AppGlobal.getApplyModel().getGender());
             para.put("ethnic", AppGlobal.getApplyModel().getEthnic());
             para.put("birthday", AppGlobal.getApplyModel().getBirthday());

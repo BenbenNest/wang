@@ -188,7 +188,6 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         findViewById(R.id.bt_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (true) return;
                 id = mIdInputLayout.getText();
                 name = mNameInputLayout.getText();
                 pwd = mPasswordInputLayout.getText();

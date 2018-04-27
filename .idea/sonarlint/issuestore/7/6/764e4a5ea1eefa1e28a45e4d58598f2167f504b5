@@ -1,23 +1,0 @@
-
-qsquid:S1192"\Define a constant instead of duplicating this literal "äººè¯åˆä¸€éªŒè¯å¤±è´¥ï¼" 3 times.(÷™ª
-bsquid:S1192"HDefine a constant instead of duplicating this literal "image/*" 3 times.(ê…¥ıÿÿÿÿ
-`squid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ºÖ
-^squid:S2583"DChange this condition so that it does not always evaluate to "false"(Ç³Áªıÿÿÿÿ
-=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(¬¸Á
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(İˆ…Ôøÿÿÿÿ
-Ysquid:CallToDeprecatedMethod".Remove this use of "Header"; it is deprecated.(Áœ›Íüÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
-[squid:UnusedPrivateMethod"3Remove this unused private "getPicFromAlbm" method.(éÕ¯³şÿÿÿÿ
-csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(õüÑÒ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(æÔŸÇıÿÿÿÿ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ö—‹¯
-[squid:S2259"FA "NullPointerException" could be thrown; "response" is nullable here.(€ªÁ†
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(ÇÑÃø
-S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(×ö³–úÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¦¯´”üÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ö³¿ûÿÿÿÿ
-=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-Tsquid:CallToDeprecatedMethod".Remove this use of "Header"; it is deprecated.(è®æ¥
-psquid:S1192"VDefine a constant instead of duplicating this literal "å››è¦ç´ è®¤è¯å¤±è´¥" 3 times.(ÈŒÀšıÿÿÿÿ

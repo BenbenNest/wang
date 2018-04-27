@@ -155,7 +155,7 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
 
     @Override
     public void onRefresh() {
-//        requestData(0);
+        requestData(0);
         mRefreshLayout.setRefreshing(false);
     }
 

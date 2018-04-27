@@ -28,6 +28,7 @@ import com.nine.finance.idcard.util.Util;
 import com.nine.finance.model.BaseModel;
 import com.nine.finance.model.ImageInfo;
 import com.nine.finance.utils.KeyUtil;
+import com.nine.finance.utils.LogUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 
@@ -200,6 +201,10 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
             ToastUtils.showCenter(FacePicActivity.this, getResources().getString(R.string.net_not_connect));
             return;
         }
+        if (path != null) {
+            LogUtils.log("FacePicActivity uploadFile path=" + path);
+        }
+//        ToastUtils.showCenter(FacePicActivity.this, path);
         Retrofit retrofit = new RetrofitService().getRetrofit();
         APIInterface api = retrofit.create(APIInterface.class);
 
@@ -214,6 +219,9 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
                     ImageInfo imageInfo = response.body().content;
                     AppGlobal.getApplyModel().setFaceImage(imageInfo);
                     faceCompare();
+                } else {
+                    ToastUtils.showCenter(FacePicActivity.this, "大头贴上传失败");
+                    LogUtils.log("大头贴上传失败");
                 }
             }
 
@@ -225,6 +233,18 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void faceCompare() {
+        if (AppGlobal.getApplyModel() == null) {
+            ToastUtils.showCenter(FacePicActivity.this, "申请信息丢失，请重新填写！");
+            return;
+        }
+        if (AppGlobal.getApplyModel().getFaceImage() == null) {
+            ToastUtils.showCenter(FacePicActivity.this, "大头贴上传失败，请重新上传");
+            return;
+        }
+        if (AppGlobal.getApplyModel().getIdCardImageFront() == null) {
+            ToastUtils.showCenter(FacePicActivity.this, "身份证上传失败，请重新上传");
+            return;
+        }
 //        https://api-cn.faceplusplus.com/facepp/v3/compare
         String url = "https://api-cn.faceplusplus.com/facepp/v3/compare";
         RequestParams rParams = new RequestParams();
@@ -291,7 +311,7 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
             para.put("name", AppGlobal.getApplyModel().getName());
             para.put("nationality", AppGlobal.getApplyModel().getNationality());
             para.put("nativePlace", AppGlobal.getApplyModel().getNativePlace());
-            para.put("card", AppGlobal.getApplyModel().getCardNumber());
+            para.put("card", AppGlobal.getUserInfo().getIDNum());
             para.put("gender", AppGlobal.getApplyModel().getGender());
             para.put("ethnic", AppGlobal.getApplyModel().getEthnic());
             para.put("birthday", AppGlobal.getApplyModel().getBirthday());
@@ -338,12 +358,14 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
                                 Intent intent = new Intent(FacePicActivity.this, SubmitApplyActivity.class);
                                 startActivity(intent);
                             } else {
-                                ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
+                                ToastUtils.showCenter(FacePicActivity.this, "申请开户失败");
+//                                ToastUtils.showCenter(FacePicActivity.this, "申请开户失败 status="+response.body().status);
                             }
                         }
                     } catch (Exception e) {
                         Log.d("", e.getMessage());
-                        ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
+                        ToastUtils.showCenter(FacePicActivity.this, "申请开户失败");
+//                        ToastUtils.showCenter(FacePicActivity.this, "申请开户失败 message="+e.getMessage());
                     }
 
                 }
@@ -351,7 +373,8 @@ public class FacePicActivity extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void onFailure(Call<BaseModel<String>> call, Throwable t) {
                     Log.d("", t.getMessage());
-                    ToastUtils.showCenter(FacePicActivity.this, "四要素认证失败");
+                    ToastUtils.showCenter(FacePicActivity.this, "申请开户失败");
+//                    ToastUtils.showCenter(FacePicActivity.this, "申请开户失败 t="+t.getMessage());
                 }
             });
         }

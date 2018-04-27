@@ -1,6 +1,7 @@
 package com.nine.finance.idcard;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.megvii.idcard.sdk.IDCard;
@@ -16,7 +17,7 @@ public class AuthManager {
 
     private static String TAG = "AuthManager";
 
-    public static void checkIDCardAuthState(Context context, final AuthCallBack authCallBack) {
+    public static void checkIDCardAuthState(final Context context, final AuthCallBack authCallBack) {
 
         final LicenseManager licenseManager = new LicenseManager(context);
         licenseManager.setExpirationMillis(IDCard.getApiExpication(context) * 1000);
@@ -24,7 +25,7 @@ public class AuthManager {
 
         String uuid = ConUtil.getUUIDString(context);
         long apiName = IDCard.getApiName();
-        String content = licenseManager.getContext(uuid, LicenseManager.DURATION_365DAYS, apiName);
+        final String content = licenseManager.getContext(uuid, LicenseManager.DURATION_365DAYS, apiName);
 
         String errorStr = licenseManager.getLastError();
         Log.w("ceshi", "getContent++++errorStr===" + errorStr);
@@ -40,6 +41,10 @@ public class AuthManager {
                     @Override
                     public void onFailed(int i, byte[] bytes) {
                         Log.d(TAG, "IDCard onFailed :" + new String(bytes));
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("authmanager", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("auth", false);
+                        editor.commit();
                         authCallBack.authState(false);
                     }
                 });

@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -60,7 +58,6 @@ public class WebViewActivity extends BaseActivity {
     public static final int WEB_TYPE_CONTRACT = 2;
     int type;
     MyWebView webView;
-    WebSettings settings;
     private List<String> loadHistoryUrls = new ArrayList<>();
     String url, headTitle;
     String bankId;
@@ -181,32 +178,32 @@ public class WebViewActivity extends BaseActivity {
 
     private void init() {
         webView = (MyWebView) findViewById(R.id.webview);
-        settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setSupportMultipleWindows(true);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        settings.setPluginState(WebSettings.PluginState.ON); // 设置插件支持
-        settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setSupportZoom(false); // 设置支持缩放
-        settings.setBuiltInZoomControls(false);
-        settings.setAllowFileAccess(true); // 启用WebView访问文件数据
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
-        settings.setDatabaseEnabled(true); // 启用数据库缓存
-        settings.setDomStorageEnabled(true); // 启用DOM缓存
-        settings.setAppCacheEnabled(true); // 启用应用缓存
-        settings.setSavePassword(false); // 关闭webview的自动保存密码
-        settings.setAllowContentAccess(true);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-            settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
-        }
-//         android 5.0以上默认不支持Mixed Content
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(
-                    WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        }
-        webView.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
+//        settings = webView.getSettings();
+//        settings.setJavaScriptEnabled(true);
+//        settings.setSupportMultipleWindows(true);
+//        settings.setDomStorageEnabled(true);
+//        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+//        settings.setPluginState(WebSettings.PluginState.ON); // 设置插件支持
+//        settings.setUseWideViewPort(false);
+//        settings.setLoadWithOverviewMode(true);
+//        settings.setSupportZoom(false); // 设置支持缩放
+//        settings.setBuiltInZoomControls(false);
+//        settings.setAllowFileAccess(true); // 启用WebView访问文件数据
+//        settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 设置默认缓存模式，根据cache-control决定是否从网络上取数据。
+//        settings.setDatabaseEnabled(true); // 启用数据库缓存
+//        settings.setDomStorageEnabled(true); // 启用DOM缓存
+//        settings.setAppCacheEnabled(true); // 启用应用缓存
+//        settings.setSavePassword(false); // 关闭webview的自动保存密码
+//        settings.setAllowContentAccess(true);
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+//            settings.setAllowUniversalAccessFromFileURLs(true); //允许跨域
+//        }
+////         android 5.0以上默认不支持Mixed Content
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            settings.setMixedContentMode(
+//                    WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+//        }
+//        webView.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         webView.setWebViewClient(new WebViewClient() {

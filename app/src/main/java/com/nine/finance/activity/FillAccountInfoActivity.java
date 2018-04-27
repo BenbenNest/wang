@@ -245,7 +245,7 @@ public class FillAccountInfoActivity extends BaseActivity {
         AppGlobal.getApplyModel().setNativePlace(homeInputLayout.getText());
         AppGlobal.getApplyModel().setPhone(phoneInputLayout.getText());
 //        AppGlobal.getApplyModel().setUserId(AppGlobal.getUserInfo().getUserId());
-        AppGlobal.getApplyModel().setBirthday(AppGlobal.getUserInfo().getBirthday());
+//        AppGlobal.getApplyModel().setBirthday(AppGlobal.getUserInfo().getBirthday());
         AppGlobal.getApplyModel().setEmail(emailInputLayout.getText());
         AppGlobal.getApplyModel().setTel(telInputLayout.getText());
         AppGlobal.getApplyModel().setPostCode(postCodeInputLayout.getText());

@@ -1,12 +1,0 @@
-
-qsquid:S00116"VRename this field "bt_register" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÔŒœÜøÿÿÿÿ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ºáÈÐ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ºáÈÐ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Þ°ûâ
-Rsquid:S2589"8Remove this expression which always evaluates to "false"(°€ÿÙùÿÿÿÿ
-isquid:S00116"SRename this field "bt_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ôúˆ¾
-Vsquid:S1858"A"getText" returns a string, there's no need to call "toString()".(¬ŽÂÃ
-Rsquid:S2589"8Remove this expression which always evaluates to "false"(°€ÿÙùÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(â×¤ªýÿÿÿÿ
-[squid:S1858"A"getText" returns a string, there's no need to call "toString()".(í…”×ûÿÿÿÿ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ºáÈÐ

@@ -128,16 +128,21 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
 
             @Override
             public void afterTextChanged(Editable s) {
+                List<BankInfo> changeList = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) {
                     BankInfo bankInfo = list.get(i);
-                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString())) {
-                        if (mLinearLayoutManager != null) {
-                            mLinearLayoutManager.scrollToPositionWithOffset(i, 0);
-                            mLinearLayoutManager.setStackFromEnd(true);
-                            break;
-                        }
+//                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString())) {
+//                        if (mLinearLayoutManager != null) {
+//                            mLinearLayoutManager.scrollToPositionWithOffset(i, 0);
+//                            mLinearLayoutManager.setStackFromEnd(true);
+//                            break;
+//                        }
+//                    }
+                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString()) || bankInfo.getBankName().contains(s.toString())) {
+                        changeList.add(bankInfo);
                     }
                 }
+                mAdapter.resetData(changeList);
             }
         });
 

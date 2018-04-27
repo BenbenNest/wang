@@ -93,7 +93,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
                     VerifyCodeModel model = response.body().content;
                     startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
                 } else {
-                    ToastUtils.showCenter(ChooseBankTypeActivity.this, "填写信息没有通过银行验证，请重新检查");
+//                    ToastUtils.showCenter(ChooseBankTypeActivity.this, "填写信息没有通过银行验证，请重新检查");
                     startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
                 }
             }

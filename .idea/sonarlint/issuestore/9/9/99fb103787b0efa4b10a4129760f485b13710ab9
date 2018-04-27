@@ -1,44 +1,0 @@
-
-esquid:HiddenFieldCheck"9Rename "phone" which hides the field declared at line 63.(ŠÉ‚¶ùÿÿÿÿ8¬×ŠÉ¨,
-gsquid:S2259"FA "NullPointerException" could be thrown; "response" is nullable here.(âÌ²Èüÿÿÿÿ8¬×ŠÉ¨,
-Ksquid:S1066"/Merge this if statement with the enclosing one.(¹®ùŸ8¬×ŠÉ¨,
-Ysquid:S1854"8Remove this useless assignment to local variable "race".(áªÚâøÿÿÿÿ8³ô•É¨,
-dsquid:HiddenFieldCheck"8Rename "name" which hides the field declared at line 63.(¤Í²Æøÿÿÿÿ8ŽÉ”É¨,
-Ssquid:S2589"7Remove this expression which always evaluates to "true"(¤×õ–8¬×ŠÉ¨,
-?squid:S1659"#Declare "phone" on a separate line.(ä±é¶8¬×ŠÉ¨,
-Dsquid:S1659"(Declare "verifyCode" on a separate line.(ä±é¶8¬×ŠÉ¨,
-Ysquid:S1854"8Remove this useless assignment to local variable "body".(Ž¬›–úÿÿÿÿ8¬×ŠÉ¨,
->squid:S1659""Declare "code" on a separate line.(ä±é¶8¬×ŠÉ¨,
-Ksquid:S00108")Either remove or fill this block of code.(²«¢¦øÿÿÿÿ8¬×ŠÉ¨,
->squid:S1659""Declare "name" on a separate line.(ä±é¶8¬×ŠÉ¨,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ž½ý8¬×ŠÉ¨,
-Bsquid:S1659"&Declare "pwdAgain" on a separate line.(ä±é¶8¬×ŠÉ¨,
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ü¬–ºüÿÿÿÿ8¬×ŠÉ¨,
-Jsquid:S1481")Remove this unused "body" local variable.(Ž¬›–úÿÿÿÿ8¬×ŠÉ¨,
-Asquid:S1659"%Declare "address" on a separate line.(ä±é¶8¬×ŠÉ¨,
-fsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¢Æè_8¬×ŠÉ¨,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™£òÙüÿÿÿÿ8¬×ŠÉ¨,
-Hsquid:S1481",Remove this unused "address" local variable.(Û¡šß8³ô•É¨,
-hsquid:S3027"LPut single-quotes around 'ã€Š' to use the faster "lastIndexOf(char)" method.(ášì8¬×ŠÉ¨,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Âø©Ë8¬×ŠÉ¨,
-Tsquid:S1854"8Remove this useless assignment to local variable "side".(ò®ÞÚ8ŽÉ”É¨,
-Ssquid:S2589"7Remove this expression which always evaluates to "true"(Ç¿½ú8¬×ŠÉ¨,
-Jsquid:S1481")Remove this unused "race" local variable.(áªÚâøÿÿÿÿ8³ô•É¨,
-Ksquid:S1066"/Merge this if statement with the enclosing one.(¤×õ–8¬×ŠÉ¨,
-^squid:HiddenFieldCheck"7Rename "pwd" which hides the field declared at line 63.(ãÈãé8¬×ŠÉ¨,
-Wsquid:S1854";Remove this useless assignment to local variable "address".(Û¡šß8³ô•É¨,
-Ssquid:S2589"7Remove this expression which always evaluates to "true"(ãê ‘8¬×ŠÉ¨,
-Fsquid:S00108")Either remove or fill this block of code.(”ý¾8òš—É¨,
-Tsquid:S1854"8Remove this useless assignment to local variable "path".(¥šûŸ8¬×ŠÉ¨,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ã²æñ8¬×ŠÉ¨,
-bsquid:S2259"FA "NullPointerException" could be thrown; "response" is nullable here.(¯Äù±8¬×ŠÉ¨,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Œ°™ýûÿÿÿÿ8¬×ŠÉ¨,
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ê¥¾àûÿÿÿÿ8¬×ŠÉ¨,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«û³±8¬×ŠÉ¨,
-Esquid:S1481")Remove this unused "path" local variable.(¥šûŸ8¬×ŠÉ¨,
-bsquid:HiddenFieldCheck";Rename "address" which hides the field declared at line 63.(Û¡šß8ŽÉ”É¨,
-bsquid:HiddenFieldCheck"6Rename "id" which hides the field declared at line 63.(à¨Íêûÿÿÿÿ8¬×ŠÉ¨,
-Esquid:S1481")Remove this unused "side" local variable.(ò®ÞÚ8ŽÉ”É¨,
-=squid:S1659"!Declare "pwd" on a separate line.(ä±é¶8¬×ŠÉ¨,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õØÎÎûÿÿÿÿ8¬×ŠÉ¨,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÔ¼Ûüÿÿÿÿ8ŽÉ”É¨,
