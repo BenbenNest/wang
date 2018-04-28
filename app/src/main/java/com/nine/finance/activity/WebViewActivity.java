@@ -23,6 +23,7 @@ import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.MyWebView;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -130,7 +131,6 @@ public class WebViewActivity extends BaseActivity {
     private void loadUrl() {
         if (webView != null) {
             if (type == WEB_TYPE_INTRO || type == WEB_TYPE_CONTRACT) {
-//                webView.loadData();
                 getContent();
             } else {
                 webView.loadUrl(url);
@@ -221,6 +221,7 @@ public class WebViewActivity extends BaseActivity {
                         }
                         if (s.contains("bankname")) {
                             bankName = s.substring(s.lastIndexOf("=") + 1);
+                            bankName = URLDecoder.decode(bankName);
                         }
                     }
                     if (TextUtils.isEmpty(bankId) || TextUtils.isEmpty(bankName)) {
