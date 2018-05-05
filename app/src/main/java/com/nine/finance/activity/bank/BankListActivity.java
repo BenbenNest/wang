@@ -134,9 +134,9 @@ public class BankListActivity extends Activity implements SwipeRefreshLayout.OnR
 //                            break;
 //                        }
 //                    }
-                    String pinyin = characterParser.getSelling(bankInfo.getBankName());
-                    String sortString = pinyin.substring(0, 1).toUpperCase();
-                    if (pinyin.equals(s.toString()) || pinyin.startsWith(s.toString())) {
+//                    String pinyin = characterParser.getSelling(date[i]);
+//                    String sortString = pinyin.substring(0, 1).toUpperCase();
+                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString()) || bankInfo.getBankName().contains(s.toString())) {
                         changeList.add(bankInfo);
                     }
                 }
