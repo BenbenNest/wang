@@ -58,11 +58,12 @@ public class ChooseBankActivity extends BaseActivity {
     private void initData() {
         String bankId = getIntent().getStringExtra("id");
         String bankName = getIntent().getStringExtra("name");
-        if (!TextUtils.isEmpty(bankId) || !TextUtils.isEmpty(bankName)) {
+        if (!TextUtils.isEmpty(bankId) && !TextUtils.isEmpty(bankName)) {
             mBank = new BankInfo();
             mBank.setBankId(bankId);
             mBank.setBankName(bankName);
             mEditBankView.setText(bankName);
+            mTvIntro.setVisibility(View.VISIBLE);
         }
     }
 
