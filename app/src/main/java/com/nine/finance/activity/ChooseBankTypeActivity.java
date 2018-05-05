@@ -38,7 +38,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
 
     private void init() {
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
-        if(commonHeadView!=null) {
+        if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step7);
         }
         Spinner spinnerType = (Spinner) findViewById(R.id.spinner_banktype);
@@ -60,6 +60,8 @@ public class ChooseBankTypeActivity extends BaseActivity {
     }
 
     private void verify() {
+        startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
+        if (true) return;
         if (!NetUtil.isNetworkConnectionActive(ChooseBankTypeActivity.this)) {
             ToastUtils.showCenter(ChooseBankTypeActivity.this, getResources().getString(R.string.net_not_connect));
             return;
