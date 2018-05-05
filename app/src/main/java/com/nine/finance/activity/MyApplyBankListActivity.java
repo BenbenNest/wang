@@ -53,6 +53,12 @@ public class MyApplyBankListActivity extends BaseActivity implements SwipeRefres
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestData(0);
+    }
+
     private void init() {
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
         mRefreshLayout.setOnRefreshListener(this);

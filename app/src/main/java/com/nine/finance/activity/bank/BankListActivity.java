@@ -60,6 +60,11 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestData(0);
+    }
 
     private void init() {
         //实例化汉字转拼音类
