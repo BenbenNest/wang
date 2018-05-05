@@ -3,7 +3,6 @@ package com.nine.finance.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -94,14 +93,14 @@ public class FillAccountInfoActivity extends BaseActivity {
                 startActivityForResult(intent, REQUEST_CODE_HOME);
             }
         });
-        homeInputLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(FillAccountInfoActivity.this, HomeListActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_HOME);
-                return true;
-            }
-        });
+//        homeInputLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Intent intent = new Intent(FillAccountInfoActivity.this, HomeListActivity.class);
+//                startActivityForResult(intent, REQUEST_CODE_HOME);
+//                return true;
+//            }
+//        });
         phoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
         phoneInputLayout.requestFocus();
         emailInputLayout = (CommonInputLayout) findViewById(R.id.email_input_layout);
