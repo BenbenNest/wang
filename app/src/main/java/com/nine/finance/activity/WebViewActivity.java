@@ -45,23 +45,25 @@ public class WebViewActivity extends BaseActivity {
 //    如果你的app的target api低于21:系统允许mixed content和第三方cookie，并且总是一次性渲染整个HTML文档。
 //    在使用WebView的类中添加如下代码：
 
-    public static void startActivity(Context context, int type, String title, String url, String bankId) {
+    public static void startActivity(Context context, int ty, String title, String url, String id) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra("headTitle", title);
         LogUtils.log("startActivity headTitle =" + title);
-        intent.putExtra("type", type);
+        intent.putExtra("type", ty);
         intent.putExtra("url", url);
-        intent.putExtra("bankId", bankId);
+        intent.putExtra("bankId", id);
+        bankId = id;
+        type=ty;
         context.startActivity(intent);
     }
 
     public static final int WEB_TYPE_INTRO = 1;
     public static final int WEB_TYPE_CONTRACT = 2;
-    int type;
+    static int type;
     MyWebView webView;
     private List<String> loadHistoryUrls = new ArrayList<>();
     String url, headTitle;
-    String bankId;
+    static String bankId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class WebViewActivity extends BaseActivity {
         if (commonHeadView != null) {
             commonHeadView.setTitle(headTitle);
         }
+//        initData();
+        loadUrl();
     }
 
     private void initData() {
@@ -87,7 +91,7 @@ public class WebViewActivity extends BaseActivity {
             LogUtils.log("initData headTitle =" + headTitle);
             type = intent.getIntExtra("type", 0);
             url = intent.getStringExtra("url");
-            bankId = intent.getStringExtra("bankId");
+//            bankId = intent.getStringExtra("bankId");
         }
     }
 
