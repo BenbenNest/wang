@@ -36,6 +36,7 @@ public class PersonalInfoActivity extends BaseActivity {
     CircleAvatarView avatarView;
     PersonalInfoRow idInfoView;
     PersonalInfoRow nameInfoView;
+    PersonalInfoRow ageInfoView;
     PersonalInfoRow nickNameInfoView;
     PersonalInfoRow phoneInfoView;
     PersonalInfoRow telInfoView;
@@ -59,6 +60,8 @@ public class PersonalInfoActivity extends BaseActivity {
         idInfoView.setEditable(false);
         nameInfoView = (PersonalInfoRow) findViewById(R.id.info_name);
         nameInfoView.setEditable(false);
+        ageInfoView = (PersonalInfoRow) findViewById(R.id.info_age);
+        ageInfoView.setEditable(false);
         nickNameInfoView = (PersonalInfoRow) findViewById(R.id.info_nick_name);
         phoneInfoView = (PersonalInfoRow) findViewById(R.id.info_mobile);
         telInfoView = (PersonalInfoRow) findViewById(R.id.info_tel);
@@ -90,6 +93,7 @@ public class PersonalInfoActivity extends BaseActivity {
             idInfoView.setText(AppGlobal.getUserInfo().getIDNum());
             nameInfoView.setText(AppGlobal.getUserInfo().getName());
             nickNameInfoView.setText(AppGlobal.getUserInfo().getNickName());
+            ageInfoView.setText(AppGlobal.getUserInfo().getBirthday());
             phoneInfoView.setText(AppGlobal.getUserInfo().getMobile());
             telInfoView.setText(AppGlobal.getUserInfo().getTel());
             addressInfoView.setText(AppGlobal.getUserInfo().getAddress());

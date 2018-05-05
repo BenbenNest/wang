@@ -78,7 +78,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
         mIdInputLayout = (CommonInputLayout) findViewById(R.id.id_input_layout);
         mIdInputLayout.setOnScanListener(this);
         mNameInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
-        mAgeInputLayout = (CommonInputLayout) findViewById(R.id.name_input_layout);
+        mAgeInputLayout = (CommonInputLayout) findViewById(R.id.age_input_layout);
         mPasswordInputLayout = (CommonInputLayout) findViewById(R.id.password_input_layout);
         mPasswordAgainInputLayout = (CommonInputLayout) findViewById(R.id.password_again_input_layout);
         mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.phone_input_layout);
@@ -258,8 +258,8 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
 //      “password"
 
         para.put("nickName", "");
-        para.put("mobile", phone);
-        para.put("tel", "");
+        para.put("phone", phone);
+        para.put("tel", mContactInputLayout.getText());
         para.put("address", address);
         para.put("name", name);
         para.put("birthday", birthday);
@@ -413,6 +413,7 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                     String side = jObject.getString("side");
                     mIdInputLayout.setText(id_card_number);
                     mNameInputLayout.setText(name);
+                    mAgeInputLayout.setText(birthday);
                 }
             } catch (Exception e) {
 
