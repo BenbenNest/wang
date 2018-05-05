@@ -33,7 +33,7 @@ public class SubmitApplyActivity extends BaseActivity {
         setContentView(R.layout.activity_submit_apply);
         commonHeadView = (CommonHeadView) findViewById(R.id.head_view);
         if (commonHeadView != null) {
-            commonHeadView.setStep(R.drawable.step10);
+            commonHeadView.setStep(R.drawable.step9);
         }
         findViewById(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {
             @Override
