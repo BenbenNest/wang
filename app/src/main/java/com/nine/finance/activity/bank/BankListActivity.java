@@ -1,5 +1,6 @@
 package com.nine.finance.activity.bank;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,6 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.nine.finance.R;
-import com.nine.finance.activity.BaseActivity;
 import com.nine.finance.activity.MyApplyBankListActivity;
 import com.nine.finance.adapter.BankListAdapter;
 import com.nine.finance.http.APIInterface;
@@ -38,9 +38,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class BankListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class BankListActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener {
     private String TAG = MyApplyBankListActivity.class.getSimpleName();
-    private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView recyclerView;
     private SearchView mSearchView;
     private LinearLayoutManager mLinearLayoutManager;
@@ -88,15 +87,7 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
         });
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.layout_swipe_refresh);
         mSearchView = (SearchView) findViewById(R.id.search_view);
-
-        mRefreshLayout.setOnRefreshListener(this);
-        mRefreshLayout.setColorSchemeResources(
-                R.color.colorRed,
-                R.color.colorYellow,
-                R.color.colorGreen
-        );
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(this);
@@ -143,7 +134,9 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
 //                            break;
 //                        }
 //                    }
-                    if (bankInfo.getBankName().equals(s.toString()) || bankInfo.getBankName().startsWith(s.toString()) || bankInfo.getBankName().contains(s.toString())) {
+                    String pinyin = characterParser.getSelling(bankInfo.getBankName());
+                    String sortString = pinyin.substring(0, 1).toUpperCase();
+                    if (pinyin.equals(s.toString()) || pinyin.startsWith(s.toString())) {
                         changeList.add(bankInfo);
                     }
                 }
@@ -261,10 +254,20 @@ public class BankListActivity extends BaseActivity implements SwipeRefreshLayout
 //                    for (int i = 0; i < 5; i++) {
 //                        list.addAll(list);
 //                    }
+                    for (int i = 0; i < list.size(); i++) {
+                        String pinyin = characterParser.getSelling(list.get(i).getBankName());
+                        String sortString = pinyin.substring(0, 1).toUpperCase();
+
+                        // 正则表达式，判断首字母是否是英文字母
+                        if (sortString.matches("[A-Z]")) {
+                            list.get(i).setSortLetters(sortString.toUpperCase());
+                        } else {
+                            list.get(i).setSortLetters("#");
+                        }
+                    }
                     Collections.sort(list, pinyinComparator);
                     mAdapter.resetData(list);
                     mAdapter.notifyDataSetChanged();
-                    mRefreshLayout.setRefreshing(false);
                 }
             }
 

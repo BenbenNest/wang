@@ -83,6 +83,18 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (TextUtils.isEmpty(itemText)) {
                 itemText = "test";
             }
+
+            //根据position获取分类的首字母的Char ascii值
+            int section = getSectionForPosition(position);
+
+            //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
+            if (position == getPositionForSection(section)) {
+                ((MyHolder) holder).tvLetter.setVisibility(View.VISIBLE);
+                ((MyHolder) holder).tvLetter.setText(bankInfo.getSortLetters());
+            } else {
+                ((MyHolder) holder).tvLetter.setVisibility(View.GONE);
+            }
+
             myHolder.tv.setText(itemText);
             if (!TextUtils.isEmpty(bankInfo.getLogo())) {
                 Glide.with(mContext).load(bankInfo.getLogo()).into(((BankListAdapter.MyHolder) holder).iv);
@@ -143,12 +155,14 @@ public class BankListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         View root;
         ImageView iv;
         TextView tv;
+        TextView tvLetter;
 
         public MyHolder(View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.root);
             iv = (ImageView) itemView.findViewById(R.id.logo);
             tv = (TextView) itemView.findViewById(R.id.bank_name);
+            tvLetter = (TextView) itemView.findViewById(R.id.catalog);
         }
     }
 }
