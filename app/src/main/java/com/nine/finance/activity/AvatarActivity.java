@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class AvatarActivity extends AppCompatActivity implements View.OnClickListener {
+public class AvatarActivity extends BaseActivity implements View.OnClickListener {
     private ImageView mHeader_iv;
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
