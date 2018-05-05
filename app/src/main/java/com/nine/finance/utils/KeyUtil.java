@@ -12,10 +12,10 @@ public class KeyUtil {
 //    public static String API_KEY;
 //    public static String API_SECRET;
 
-    public static String API_KEY = "y50eGwdGy3mFAzJsniPaCuS3TNICGMk8";
-    public static String API_SECRET = "0Xu9ibqi4dC7z4rYCRSZlR52PiytIlFw";
-//    public static String API_KEY = "O4B2QX6jHyv89w5uBGFogJSSM-miS3HX";
-//    public static String API_SECRET = "TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v";//TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v
+//    public static String API_KEY = "y50eGwdGy3mFAzJsniPaCuS3TNICGMk8";
+//    public static String API_SECRET = "0Xu9ibqi4dC7z4rYCRSZlR52PiytIlFw";
+    public static String API_KEY = "O4B2QX6jHyv89w5uBGFogJSSM-miS3HX";
+    public static String API_SECRET = "TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v";//TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v
 
     public static boolean isReadKey(Context context) {
         InputStream inputStream = null;

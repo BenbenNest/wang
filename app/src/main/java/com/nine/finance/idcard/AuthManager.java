@@ -31,7 +31,7 @@ public class AuthManager {
         Log.w("ceshi", "getContent++++errorStr===" + errorStr);
         licenseManager.setAuthTimeBufferMillis(0);
         licenseManager.takeLicenseFromNetwork(uuid, KeyUtil.API_KEY, KeyUtil.API_SECRET, apiName,
-                LicenseManager.DURATION_30DAYS, "IDCard", "1", true, new LicenseManager.TakeLicenseCallback() {
+                LicenseManager.DURATION_30DAYS, "IDCard", LicenseManager.DURATION_30DAYS + "", true, new LicenseManager.TakeLicenseCallback() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG, "IDCard onSuccess");
