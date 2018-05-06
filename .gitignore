@@ -10,4 +10,5 @@
 /.idea/sonarlint
 /.idea/sonarIssues.xml
 /.idea
-/app
+/app/key.jks
+/app/release

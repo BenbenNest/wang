@@ -49,7 +49,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(mContext).inflate(R.layout.bank_list_item_layout, parent, false);
+        View layout = LayoutInflater.from(mContext).inflate(R.layout.home_list_item_layout, parent, false);
         return new MyHolder(layout);
     }
 
