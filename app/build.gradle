@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.nine.finance"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -57,7 +57,7 @@ dependencies {
 //    compile 'com.github.FacePlusPlus:MegviiLicMgr-Android-SDK:0.3.0'
 //    compile 'com.loopj.android:android-async-http:1.4.9'
 
-
+    compile 'com.coldmoqiuli:banners:1.0.1'
     implementation 'com.android.support:design:26.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
 //    compile fileTree(include: ['*.jar'], dir: 'libs')

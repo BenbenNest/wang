@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.nine.finance.R;
-import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
 import com.nine.finance.constant.Constant;
 import com.nine.finance.permission.PermissionDialogUtils;
@@ -15,6 +15,10 @@ import com.nine.finance.permission.PermissionUtils;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.BusinessRectView;
 import com.nine.finance.view.CircleAvatarView;
+import com.oragee.banners.BannerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.nine.finance.permission.Permissions.REQUEST_CODE_CAMERA;
 
@@ -23,6 +27,9 @@ public class HomeActivity extends BaseActivity {
 
     BusinessRectView accountRectView;
     CircleAvatarView avatarView;
+    BannerView bannerView;
+    private int[] imgs = {R.drawable.lunbo_image1,R.drawable.lunbo_image2,R.drawable.lunbo_image3};
+    private List<View> viewList;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -72,9 +79,9 @@ public class HomeActivity extends BaseActivity {
         if (!PermissionUtils.checkSDPermission(HomeActivity.this)) {
             PermissionUtils.requestSDAndCameraPermission(HomeActivity.this);
         }
-        if (UserManager.checkLogin(this) && avatarView != null) {
-            Glide.with(HomeActivity.this).load(AppGlobal.getUserInfo().getHead()).into(avatarView);
-        }
+//        if (UserManager.checkLogin(this) && avatarView != null) {
+//            Glide.with(HomeActivity.this).load(AppGlobal.getUserInfo().getHead()).into(avatarView);
+//        }
     }
 
     @Override
@@ -94,6 +101,18 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
+        viewList = new ArrayList<View>();
+        for (int i = 0; i < imgs.length; i++) {
+            ImageView image = new ImageView(this);
+            image.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            //设置显示格式
+            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            image.setImageResource(imgs[i]);
+            viewList.add(image);
+        }
+        bannerView = (BannerView) findViewById(R.id.banner);
+        bannerView.setViewList(viewList);
+        bannerView.startLoop(true);
         avatarView = (CircleAvatarView) findViewById(R.id.iv_head);
         avatarView.setImageResource(R.drawable.head_default);
         initListener();
@@ -119,6 +138,7 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
+        avatarView.setImageResource(R.drawable.logo_icon);
     }
 
     private void initListener() {
