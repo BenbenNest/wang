@@ -1,10 +1,12 @@
 package com.nine.finance.constant;
 
+
 /**
  * Created by jeremy
  */
 
 public class Constant {
+    public static String host = "http://www.jzlonging.com";
 
     public static final String PREFERENCE_ACCOUNT_ID = "preference_account_id";
     public static final String PREFERENCE_ACCOUNT_PWD = "preference_account_pwd";
@@ -24,30 +26,29 @@ public class Constant {
 
     public static final String APPSERICT = "9a429afaf2044c51b0cc3cda8cfd5a89";
 
-
     //    银行条款协议
-    public static final String BANK_CONTRACT = "http://39.106.173.14:8088/apph5/bank_agreement.html";
+    public static final String BANK_CONTRACT = host + "/apph5/bank_agreement.html";
     //    开户银行介绍
-    public static final String BANK_INTRO = "http://39.106.173.14:8088/apph5/bank_introduce.html";
+    public static final String BANK_INTRO = host + "/apph5/bank_introduce.html";
     //    龙吟注册协议
-    public static final String CONTRACT = "http://39.106.173.14:8088/apph5/longling_agreement.html";
+    public static final String CONTRACT = host + "/apph5/longling_agreement.html";
 
     //    商品
-    public static final String GOODS = "http://39.106.173.14:8088/apph5/goods.html";
+    public static final String GOODS = host + "/apph5/goods.html";
 //    public static final String GOODS = "https://beta.occall.com/mvoice_h5/ceshiInfo.html";
 
     //    商品详情
-    public static final String GOODS_DETAIL = "http://39.106.173.14:8088/apph5/goods_detail.html";
+    public static final String GOODS_DETAIL = host + "/apph5/goods_detail.html";
 
     //    我的订单http://39.106.173.14:8088/apph5/myorder.html
-    public static final String MY_ORDRE = "http://39.106.173.14:8088/apph5/myorder.html";
+    public static final String MY_ORDRE = host + "/apph5/myorder.html";
     //    订单详情（下订单）
-    public static final String ORDER_DETAIL = "http://39.106.173.14:8088/apph5/submitorder.html";
+    public static final String ORDER_DETAIL = host + "/apph5/submitorder.html";
 
     //    理财产品
-    public static final String FINANCE_PRODUCT = "http://39.106.173.14:8088/apph5/product.html";
+    public static final String FINANCE_PRODUCT = host + "/apph5/product.html";
 
     //    产品详情
-    public static final String FINANCE_PRODUCT_DETAIL = "http://39.106.173.14:8088/apph5/product_detail.html";
+    public static final String FINANCE_PRODUCT_DETAIL = host + "/apph5/product_detail.html";
 
 }

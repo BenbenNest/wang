@@ -3,9 +3,11 @@ package com.nine.finance.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nine.finance.R;
 import com.nine.finance.business.UserManager;
@@ -28,7 +30,8 @@ public class HomeActivity extends BaseActivity {
     BusinessRectView accountRectView;
     CircleAvatarView avatarView;
     BannerView bannerView;
-    private int[] imgs = {R.drawable.lunbo_image1,R.drawable.lunbo_image2,R.drawable.lunbo_image3};
+    private int[] imgs = {R.drawable.lunbo_image1, R.drawable.lunbo_image2, R.drawable.lunbo_image3};
+    private String[] titles = {"卓越  创新  专注  共嬴", "科技改变金融世界", "拢银天下，福笑人生"};
     private List<View> viewList;
 
     public static void startActivity(Context context) {
@@ -108,8 +111,21 @@ public class HomeActivity extends BaseActivity {
             //设置显示格式
             image.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image.setImageResource(imgs[i]);
-            viewList.add(image);
+//            viewList.add(image);
         }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+
+        for (int i = 0; i < imgs.length; i++) {
+            View lunbo = layoutInflater.inflate(R.layout.lunbo_item, null);
+            ImageView imageView = (ImageView) lunbo.findViewById(R.id.iv_lunbo);
+            TextView textView = (TextView) lunbo.findViewById(R.id.tv_lunbo);
+            imageView.setImageResource(imgs[i]);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            textView.setText(titles[i]);
+            viewList.add(lunbo);
+        }
+
         bannerView = (BannerView) findViewById(R.id.banner);
         bannerView.setViewList(viewList);
         bannerView.startLoop(true);
