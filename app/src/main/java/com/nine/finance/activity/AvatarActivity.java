@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.nine.finance.R;
 import com.nine.finance.app.AppGlobal;
 import com.nine.finance.business.UserManager;
@@ -81,6 +83,9 @@ public class AvatarActivity extends BaseActivity implements View.OnClickListener
 
             }
         });
+        if (!TextUtils.isEmpty(AppGlobal.getUserInfo().getHead())) {
+            Glide.with(AvatarActivity.this).load(AppGlobal.getUserInfo().getHead()).into(mHeader_iv);
+        }
     }
 
     @Override
@@ -170,7 +175,9 @@ public class AvatarActivity extends BaseActivity implements View.OnClickListener
                     //在这里获得了剪裁后的Bitmap对象，可以用于上传
                     Bitmap image = bundle.getParcelable("data");
                     //设置到ImageView上
-                    mHeader_iv.setImageBitmap(image);
+                    if (image != null) {
+                        mHeader_iv.setImageBitmap(image);
+                    }
                     //也可以进行一些保存、压缩等操作后上传
                     photoPath = saveImage("crop", image);
                 }
