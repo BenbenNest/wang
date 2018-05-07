@@ -154,7 +154,7 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-        avatarView.setImageResource(R.drawable.logo_icon);
+        avatarView.setImageResource(R.drawable.logo);
     }
 
     private void initListener() {
