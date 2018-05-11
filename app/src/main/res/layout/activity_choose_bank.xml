@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:editable="false"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:singleLine="true" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_bank"
