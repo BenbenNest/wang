@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class KeyUtil {
+    public static String WX_AppID = "wx682e64b34038ff07";
+    public static String WX_AppSecret = "39ecf20b43174ccb2ec3e4fd42d77d37";
 
 //    public static String API_KEY;
 //    public static String API_SECRET;
 
-//    public static String API_KEY = "y50eGwdGy3mFAzJsniPaCuS3TNICGMk8";
+    //    public static String API_KEY = "y50eGwdGy3mFAzJsniPaCuS3TNICGMk8";
 //    public static String API_SECRET = "0Xu9ibqi4dC7z4rYCRSZlR52PiytIlFw";
     public static String API_KEY = "O4B2QX6jHyv89w5uBGFogJSSM-miS3HX";
     public static String API_SECRET = "TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v";//TGO2GLNc9gapbfzN0_zLDhpJg_5hvQ5v

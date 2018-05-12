@@ -2,6 +2,7 @@ package com.nine.finance.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.nine.finance.view.BusinessRectView;
 import com.nine.finance.view.CircleAvatarView;
 import com.oragee.banners.BannerView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +62,55 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void test() {
-        String s = "bankid=asfadsfdasfdsaf";
-        String result = s.substring(s.lastIndexOf("="));
-        System.out.print(result);
+//        String s = "bankid=asfadsfdasfdsaf";
+//        String result = s.substring(s.lastIndexOf("="));
+//        System.out.print(result);
+
+//        WXTextObject textObject = new WXTextObject();
+//        textObject.text = "dasfsadfdsaf";
+//        WXMediaMessage msg = new WXMediaMessage();
+//        msg.mediaObject = textObject;
+//        msg.description = "dsfasdf";
+//        SendMessageToWX.Req req = new SendMessageToWX.Req();
+//        req.transaction = String.valueOf(System.currentTimeMillis());
+//        req.message = msg;
+//        if (MyApplication.getWXAPI() != null) {
+//            Log.d("jeremy", "wxsendreq");
+//            System.out.print("wxsendreq");
+//            MyApplication.getWXAPI().sendReq(req);
+//        }
+
+//        if (MyApplication.getWXAPI() != null) {
+//            WXWebpageObject webpage = new WXWebpageObject();
+//            webpage.webpageUrl = "http://www.baidu.com";
+//            WXMediaMessage msg = new WXMediaMessage(webpage);
+//            msg.title = "baidu";
+//            msg.description = "baidu";
+////            Bitmap thumb = BitmapFactory.decodeResource(getResources(), );
+////            msg.thumbData = bmpToByteArray(thumb, true);
+//            SendMessageToWX.Req req = new SendMessageToWX.Req();
+//            req.transaction = String.valueOf(System.currentTimeMillis());
+//            req.message = msg;
+////            req.scene = SendMessageToWX.Req.WXSceneSession;
+//            MyApplication.getWXAPI().sendReq(req);
+//        }
+    }
+
+    public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        if (needRecycle) {
+            bmp.recycle();
+        }
+
+        byte[] result = output.toByteArray();
+        try {
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
@@ -171,6 +219,7 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.iv_account).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                test();
                 if (UserManager.checkLogin(HomeActivity.this)) {
                     MyApplyBankListActivity.startActivity(HomeActivity.this);
                 } else {

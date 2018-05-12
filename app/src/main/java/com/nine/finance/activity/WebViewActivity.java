@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.google.gson.Gson;
 import com.nine.finance.R;
+import com.nine.finance.app.MyApplication;
 import com.nine.finance.http.APIInterface;
 import com.nine.finance.http.RetrofitService;
 import com.nine.finance.model.BankIntroContract;
@@ -21,7 +22,11 @@ import com.nine.finance.model.BaseModel;
 import com.nine.finance.utils.LogUtils;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
+import com.nine.finance.view.CommonHeadView;
 import com.nine.finance.view.MyWebView;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -53,7 +58,7 @@ public class WebViewActivity extends BaseActivity {
         intent.putExtra("url", url);
         intent.putExtra("bankId", id);
         bankId = id;
-        type=ty;
+        type = ty;
         context.startActivity(intent);
     }
 
@@ -213,7 +218,7 @@ public class WebViewActivity extends BaseActivity {
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(WebView view, final String url) {
 //                native_start_bank=1&bankid=XXXX
                 if (url.contains("native_start_bank")) {
                     String arr[] = url.split("&");
@@ -235,6 +240,38 @@ public class WebViewActivity extends BaseActivity {
                     }
 //                    startActivity(WebViewActivity.this, ChooseBankActivity.class);
                 } else {
+                    if (url.contains("share_title")) {
+//                        ToastUtils.showCenter(WebViewActivity.this,"dfasfasfsafa");
+                        commonHeadView.setAction("分享", new CommonHeadView.OnActionListener() {
+                            @Override
+                            public void onAction() {
+                                if (MyApplication.getWXAPI() != null) {
+                                    WXWebpageObject webpage = new WXWebpageObject();
+                                    webpage.webpageUrl = url;
+                                    WXMediaMessage msg = new WXMediaMessage(webpage);
+                                    String arr[] = url.split("&");
+                                    String title = "";
+                                    for (String s : arr) {
+                                        if (s.contains("share_title")) {
+                                            title = s.substring(s.lastIndexOf("=") + 1);
+                                            title = URLDecoder.decode(title);
+                                        }
+                                    }
+                                    msg.title = title;
+                                    msg.description = title;
+//            Bitmap thumb = BitmapFactory.decodeResource(getResources(), );
+//            msg.thumbData = bmpToByteArray(thumb, true);
+                                    SendMessageToWX.Req req = new SendMessageToWX.Req();
+                                    req.transaction = String.valueOf(System.currentTimeMillis());
+                                    req.message = msg;
+//            req.scene = SendMessageToWX.Req.WXSceneSession;
+                                    MyApplication.getWXAPI().sendReq(req);
+                                }
+                            }
+                        });
+                    } else {
+                        commonHeadView.setAction("", null);
+                    }
                     view.loadUrl(url);
                 }
                 return true;

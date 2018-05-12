@@ -178,3 +178,13 @@
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
 -keep class com.nine.finance.**{*;}
+
+-keep class com.tencent.mm.opensdk.** {*;}
+
+-keep class com.tencent.wxop.** {*;}
+
+-keep class com.tencent.mm.sdk.** {*;}
+
+
+
+
