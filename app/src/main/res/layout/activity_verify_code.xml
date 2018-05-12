@@ -26,7 +26,7 @@
         android:padding="20dp">
 
         <com.nine.finance.view.CommonInputLayout
-            android:id="@+id/address_input_layout"
+            android:id="@+id/code_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             my:input_drawable="@drawable/password"

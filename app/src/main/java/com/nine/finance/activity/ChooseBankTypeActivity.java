@@ -1,5 +1,6 @@
 package com.nine.finance.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.nine.finance.model.VerifyCodeModel;
 import com.nine.finance.utils.NetUtil;
 import com.nine.finance.utils.ToastUtils;
 import com.nine.finance.view.CommonHeadView;
+import com.nine.finance.view.CommonInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ChooseBankTypeActivity extends BaseActivity {
+    CommonInputLayout mPhoneInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class ChooseBankTypeActivity extends BaseActivity {
         if (commonHeadView != null) {
             commonHeadView.setStep(R.drawable.step7);
         }
+        mPhoneInputLayout = (CommonInputLayout) findViewById(R.id.contact_input_layout);
         Spinner spinnerType = (Spinner) findViewById(R.id.spinner_banktype);
         String[] types = {"储蓄卡"};
         ArrayAdapter<String> adapter;
@@ -54,13 +58,50 @@ public class ChooseBankTypeActivity extends BaseActivity {
         findViewById(R.id.bt_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verify();
+                getVerifyCode();
+//                verify();
+            }
+        });
+    }
+
+    private void getVerifyCode() {
+        if (!NetUtil.isNetworkConnectionActive(ChooseBankTypeActivity.this)) {
+            ToastUtils.showCenter(ChooseBankTypeActivity.this, getResources().getString(R.string.net_not_connect));
+            return;
+        }
+        Map<String, String> para = new HashMap<>();
+        String phone = mPhoneInputLayout.getText();
+        Retrofit retrofit = new RetrofitService().getRetrofit();
+        APIInterface api = retrofit.create(APIInterface.class);
+
+        Gson gson = new Gson();
+        String strEntity = gson.toJson(para);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), strEntity);
+
+        Call<BaseModel<VerifyCodeModel>> call = api.getVerifyCode(phone);
+        call.enqueue(new Callback<BaseModel<VerifyCodeModel>>() {
+            @Override
+            public void onResponse(Call<BaseModel<VerifyCodeModel>> call, Response<BaseModel<VerifyCodeModel>> response) {
+                if (response != null && response.code() == 200 && response.body() != null && response.body().status.equals(BaseModel.SUCCESS)) {
+                    verify();
+//                    VerifyCodeModel data = response.body().content;
+                } else {
+                    ToastUtils.showCenter(ChooseBankTypeActivity.this, response.body().message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<VerifyCodeModel>> call, Throwable t) {
+                ToastUtils.showCenter(ChooseBankTypeActivity.this, t.getMessage());
             }
         });
     }
 
     private void verify() {
-        startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
+        Intent intent = new Intent(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
+        intent.putExtra("phone", mPhoneInputLayout.getText());
+        startActivity(intent);
+//        startActivity(ChooseBankTypeActivity.this, VerifyCodeActivity.class);
         if (true) return;
         if (!NetUtil.isNetworkConnectionActive(ChooseBankTypeActivity.this)) {
             ToastUtils.showCenter(ChooseBankTypeActivity.this, getResources().getString(R.string.net_not_connect));
