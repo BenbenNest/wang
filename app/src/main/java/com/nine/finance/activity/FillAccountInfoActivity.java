@@ -88,9 +88,11 @@ public class FillAccountInfoActivity extends BaseActivity {
 //        });
         homeInputLayout.setOnFocusListener(new CommonInputLayout.OnFocusListener() {
             @Override
-            public void onFocusListener() {
-                Intent intent = new Intent(FillAccountInfoActivity.this, HomeListActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_HOME);
+            public void onFocusListener(boolean hasFocus) {
+                if (hasFocus) {
+                    Intent intent = new Intent(FillAccountInfoActivity.this, HomeListActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE_HOME);
+                }
             }
         });
 //        homeInputLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -113,11 +115,13 @@ public class FillAccountInfoActivity extends BaseActivity {
         addressInputLayout.setActionDone(true);
         addressInputLayout.setOnFocusListener(new CommonInputLayout.OnFocusListener() {
             @Override
-            public void onFocusListener() {
-                if (mScrollView != null) {
-                    mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                    addressInputLayout.setOnFocusListener(null);
-                    addressInputLayout.setFocus();
+            public void onFocusListener(boolean hasFocus) {
+                if (hasFocus) {
+                    if (mScrollView != null) {
+                        mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                        addressInputLayout.setOnFocusListener(null);
+                        addressInputLayout.setFocus();
+                    }
                 }
             }
         });

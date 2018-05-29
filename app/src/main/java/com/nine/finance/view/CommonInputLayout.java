@@ -130,10 +130,8 @@ public class CommonInputLayout extends LinearLayout {
             mInputText.setOnFocusChangeListener(new OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        if (onFocusListener != null) {
-                            onFocusListener.onFocusListener();
-                        }
+                    if (onFocusListener != null) {
+                        onFocusListener.onFocusListener(hasFocus);
                     }
                 }
             });
@@ -157,8 +155,13 @@ public class CommonInputLayout extends LinearLayout {
 
     public void setFocus() {
         if (mInputText != null) {
-            mInputText.requestFocus();
-            mInputText.requestFocusFromTouch();
+            mInputText.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mInputText.requestFocus();
+                    mInputText.requestFocusFromTouch();
+                }
+            }, 500);
         }
     }
 
@@ -175,7 +178,7 @@ public class CommonInputLayout extends LinearLayout {
     }
 
     public interface OnFocusListener {
-        void onFocusListener();
+        void onFocusListener(boolean focus);
     }
 
     public interface OnActionDoneListener {

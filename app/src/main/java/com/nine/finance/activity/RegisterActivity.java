@@ -116,7 +116,33 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
                 }
             }
         });
-        mIdInputLayout.setOnTextChangeListener(watcher);
+//        mIdInputLayout.setOnTextChangeListener(watcher);
+        mIdInputLayout.setOnFocusListener(new CommonInputLayout.OnFocusListener() {
+            @Override
+            public void onFocusListener(boolean focus) {
+                Log.e("onFocusChange", "onFocusChange:" + focus);
+                if (!focus) {
+                    if (!checkID(mIdInputLayout.getText())) {
+                        ToastUtils.showCenter(RegisterActivity.this, "身份证号码错误");
+                        mIdInputLayout.setFocus();
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean checkID(String num) {
+        boolean flag = false;
+        if (RegexUtils.isIDCard(num)) {
+            String id_17 = num.substring(0, 17);
+            String lastCode = RegexUtils.getLastOfIDCard(id_17);
+            Log.e("checkID", "num=" + num + ";id_17:" + id_17 + "lastcode=" + lastCode);
+            if ((id_17 + lastCode).equals(num)) {
+                flag = true;
+                Log.e("checkID", "true");
+            }
+        }
+        return flag;
     }
 
     boolean verified = false;
@@ -421,6 +447,5 @@ public class RegisterActivity extends BaseActivity implements TimeCountDown.OnTi
 
         }
     }
-
 
 }
